@@ -1,4 +1,4 @@
-query CategoriesList($gender: String){
+query CategoriesList($gender: ProductGender){
   categories(gender: $gender){
     name
   }

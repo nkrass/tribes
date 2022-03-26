@@ -1,12 +1,10 @@
 import { Inject, Injectable } from '@angular/core';
 import { BaseCookieService } from '../../shared/storage/services/base-cookie.service';
-import { switchMap, map, pluck, Observable, tap, BehaviorSubject, of, Subject, distinctUntilChanged, catchError} from 'rxjs';
-import { environment } from '../../../../src/environments/environment';
-import { AnalyticsService } from 'app/shared/analytics.service';
-import { CartGQL, CartItems, CartQuery, CartStatus, CreateCartGQL, CreateCartMutation, ProductQuery, UpdateCartGQL, UpdateCartInput, UpdateCartMutation } from 'gql/types';
+import { switchMap, map, pluck, Observable, BehaviorSubject, Subject, distinctUntilChanged, catchError} from 'rxjs';
 import { RxState } from '@rx-angular/state';
-import { AppGlobalState, APP_GLOBAL_STATE } from 'app/app-global.state';
-import { BaseLocalStorage } from 'app/shared/storage/storages/base-local.storage';
+import { CartGQL, CartQuery, CartStatus, CreateCartGQL, UpdateCartGQL } from '@tribes/data-access';
+import { AppGlobalState, APP_GLOBAL_STATE } from '../../app-global.state';
+import { AnalyticsService } from '../../shared/analytics.service';
 
 const CART_ID = '_3bs_cart_id'
 
@@ -14,14 +12,14 @@ const CART_ID = '_3bs_cart_id'
 export class CartService {
   // Init and generate some fixtures
   readonly cart$ = this.globalState.select('cart')  //new BehaviorSubject<Cart>(new Cart([]));
-  public cartShow$ = new BehaviorSubject<boolean>(false);
+  private readonly cartShow$ = new BehaviorSubject<boolean>(false);
   private readonly user$ = this.globalState.select('user')
 
   private cartId$ = new BehaviorSubject(this.getCartIdFromCookies())
   private updateCard$ = new Subject<CartQuery['cart']>()
   constructor(
     private cookieStorage: BaseCookieService, 
-    private localStorage: BaseLocalStorage,
+    // private localStorage: BaseLocalStorage,
     private analytics: AnalyticsService,
     private readonly cartGql: CartGQL,
     private readonly createCartGql: CreateCartGQL,
@@ -46,7 +44,7 @@ export class CartService {
           price: item.price,
           currency: item.currency || "RUB"
         }
-      }).filter(item => (item.quantity!>0)),
+      }).filter(item => item.quantity && item.quantity > 0 ),
       status: cart.status || CartStatus.Open
     }}).pipe(
       pluck('data', 'updateCart'), 
@@ -70,27 +68,27 @@ export class CartService {
     const newCart = {
       ...cart, 
       cartItems: newCartItems, 
-      totalItemsCount: newCartItems.reduce((acc, item) => acc + item.quantity!, 0),
-      totalAmount: newCartItems.reduce((acc, item) => acc + item.quantity! * item.price!, 0)}
+      totalItemsCount: newCartItems.reduce((acc, item) => acc + (item.quantity as number), 0),
+      totalAmount: newCartItems.reduce((acc, item) => acc + (item.quantity as number) * (item.price as number), 0)}
     this.updateCard$.next(newCart)
   }
   public deleteItems(barcodes: CartQuery['cart']['cartItems'][0]['barcode'][]){
     const cart = this.globalState.get('cart');
-    const newCartItems = cart.cartItems.filter(item => !barcodes.map(b => b?.barcode).includes(item.barcode?.barcode!)).filter(item => (item.quantity!>0))
+    const newCartItems = cart.cartItems.filter(item => !barcodes.map(b => b?.barcode).includes(item.barcode?.barcode)).filter(item => ((item.quantity as number) >0))
     const newCart = {
       ...cart, 
       cartItems: newCartItems, 
-      totalItemsCount: newCartItems.reduce((acc, item) => acc + item.quantity!, 0),
-      totalAmount: newCartItems.reduce((acc, item) => acc + item.quantity! * item.price!, 0)
+      totalItemsCount: newCartItems.reduce((acc, item) => acc + (item.quantity as number), 0),
+      totalAmount: newCartItems.reduce((acc, item) => acc + (item.quantity as number) * (item.price as number), 0)
     }
     this.updateCard$.next(newCart)
   }
   public addItems(cartItems: CartQuery['cart']['cartItems']){
-    let cart = this.globalState.get('cart');
+    const cart = this.globalState.get('cart');
     ///cartItems is Sealed, so create new
     const newCartItems: CartQuery['cart']['cartItems'] = []
     const newQuantities: CartQuery['cart']['cartItems'] = []
-    for (let cartItem of cartItems) {
+    for (const cartItem of cartItems) {
       //icrease quantity if already in the cart
       cart.cartItems.map(item => {
         if (item.barcode?.barcode === cartItem?.barcode?.barcode) {
@@ -108,22 +106,15 @@ export class CartService {
     const newCart = {
       ...cart, 
       cartItems: newItems, 
-      totalAmount: newItems.reduce((acc, item) => acc + item.quantity! * item.price!, 0),
-      totalItemsCount: newItems.reduce((acc, item) => acc + item.quantity!, 0)
+      totalAmount: newItems.reduce((acc, item) => acc + (item.quantity as number)* (item.price as number), 0),
+      totalItemsCount: newItems.reduce((acc, item) => acc + (item.quantity as number), 0)
     }
     this.updateCard$.next(newCart)
   }
   public clearCart(status: CartStatus){
-    let cart = this.globalState.get('cart');
+    const cart = this.globalState.get('cart');
     const newCart = {...cart, status}
-    this.updateCard$.next(newCart)
-    // this.updateCartGql.mutate({input: {
-    //   status: status,
-    //   id: this.globalState.get('cart').id,
-    // }}).pipe(switchMap(cart => 
-    //   of(this.cartId$.next(null))
-    // ))
-    
+    this.updateCard$.next(newCart)   
   }
   private getCartIdFromCookies(){
     const id = this.cookieStorage.get(CART_ID)
@@ -155,78 +146,4 @@ export class CartService {
   public setCartIdCookie(cartId?: CartQuery['cart']['id']){
     this.cookieStorage.put(CART_ID, cartId || '', { path: '/' })
   }
-
-
-  // public addItem(item:) {
-  //   this.analytics.addToCart([item])
-  //   //get cart and mutate it
-  //   cart.addItem(item)
-  //   //save cart to storage
-  //   this.saveCart(cart)
-  //   //update cart
-  //   this.globalState.set({cart})
-  // }
-
-  // addItemsToCart(barcodes: string[]){
-  //   const input = barcodes.map(barcode => ({ barcode }))
-  //   const fetchBarcodes$ = this.cartBarcodessGql.watch({ input }).valueChanges.pipe(
-  //     pluck('data', 'cartBarcodes'),
-  //     map((barcodes) => barcodes.map(barcode => ({ barcode, amount: 1 }))
-  //   ))
-  //   this.globalState.connect('cart', fetchBarcodes$, (state, items) => {
-  //     for (const item of items){
-  //       const existingItemsIncreased = state.cart.items.filter(p => p.barcode === item.barcode).map(i => { return { amount: i.amount + 1, barcode: i.barcode } })
-  //       const newItems = 
-  //     }
-      
-  //     for (const barcode of barcodes) {
-  //       const existingItems = state.cart.cartItems.filter(i => i.barcode.barcode === barcode.barcode)
-  //       existingItems.forEach(i => i.amount += 1)
-  //       const newBarcodes = barcodes.filter(b => !existingItems.map(i=> i.barcode).includes(b.barcode))
-  //       const newItems = newBarcodes.map(b => ({ barcode: b, amount: 1}))
-  //       state.cart.items = [...existingItems, ...newItems]
-  //       return state
-  //     }
-      
-  //   })
-    
-  // }
-
-  // public addItems(cart: Cart, items: CartItem[]) {
-  //   this.analytics.addToCart(items)
-  //   items.forEach((cartItem) => {
-  //     cart.addItem(cartItem);
-  //   });
-  //   //save cart to storage
-  //   this.saveCart(cart)
-  //   //update cart
-  //   this.globalState.set({cart})
-  // }
-
-  // public removeItem(cart: Cart, item: CartItem) {
-  //   this.analytics.removeFromCart([item])
-  //   cart.removeItem(item)
-  //   //save cart to storage
-  //   this.saveCart(cart)
-  //   //update cart
-  //   this.globalState.set({cart})
-  //   // this.messageService.add('Удалено из корзины: ' + item.product.title);
-  // }
-
-  // public updateItemAmount(cart: Cart, item: CartItem, newAmount: number) {
-  //   cart.updateItemAmount(item, newAmount)
-  //   //save cart to storage
-  //   this.saveCart(cart)
-  //   //update cart
-  //   // this.cart$.next(cart)
-  //   this.globalState.set({cart})
-  // }
-
-  // public clearCart(cart: Cart) {
-  //   cart.clearCart()
-  //   this.cookieStorage.remove(COOKIE_KEY)
-  //   //update cart
-  //   // this.cart$.next(cart)
-  //   this.globalState.set({cart})
-  // }
 }

@@ -91,7 +91,8 @@ export class ProductService {
     return results;
   }
   async findByFilter(filter: FilterProductInput) {
-    let { limit, all, category, gender, color, priceMin, priceMax, inStock = true, sku, skuFamily, wildberriesId } = filter;
+    const { limit, category, gender, color, priceMin, priceMax, inStock = true, sku, skuFamily, wildberriesId } = filter;
+    let { all } = filter;
     const standardIndexes = (sku || skuFamily || wildberriesId)
     //Dynamodb supports only one Index at a time, so we need to distinguish which one to use in each case
     const filterObject: { [string: string]: string|number|undefined }= {
@@ -104,7 +105,7 @@ export class ProductService {
       category:             !(standardIndexes || gender || color) && category || undefined,
       gender:               !(standardIndexes || category || color) && gender || undefined,
     }
-    const queryObj: {[string: string]: {}} = {}
+    const queryObj: {[string: string]: unknown} = {}
     for (const prop in omitBy(filterObject, isNil)) {
       queryObj[prop] = { 'eq': filterObject[prop] }
     }

@@ -4,7 +4,7 @@ import { resizedImgUrl } from '../../../../api/utils';
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
-  selector: 'app-gender-filter',
+  selector: 'tribes-gender-filter',
   templateUrl: './gender-filter.component.html',
   styleUrls: ['./gender-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

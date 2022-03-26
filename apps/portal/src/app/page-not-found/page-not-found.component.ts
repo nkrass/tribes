@@ -7,7 +7,7 @@ import { Request} from "express"
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
-  selector: 'app-page-not-found',
+  selector: 'tribes-page-not-found',
   templateUrl: './page-not-found.component.html',
   styleUrls: ['./page-not-found.component.scss']
 })

@@ -26,7 +26,7 @@
                 <a class="border dark">{{item.amount}}</a>
                 <a class="dark" (click)="increaseAmount(item)">+</a> </div>
               <div class="col-6 col-sm-6 col-md-3" *ngIf="!showDistributor">
-                <app-price class="card-text h6" [product]="item.product" [count]="item.amount"></app-price>
+                <tribes-price class="card-text h6" [product]="item.product" [count]="item.amount"></tribes-price>
               </div>
               <div class="col-2 col-sm-2 col-md-1 p-0" *ngIf="!showDistributor">
                 <span class="close" (click)="removeItem($event, item)">&#10005;</span>

@@ -9,24 +9,28 @@ import { takeUntil } from 'rxjs';
 import { environment } from '../../../../src/environments/environment'
 import { NavigationService } from '../../../app/shared/navigation.service';
 import { CartService } from '../../../app/cart/shared/cart.service';
-import { AppGlobalState, APP_GLOBAL_STATE } from 'app/app-global.state';
+import { AppGlobalState, APP_GLOBAL_STATE } from '../../app-global.state';
 import { RxState } from '@rx-angular/state';
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
-  selector: 'app-header',
+  selector: 'tribes-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HeaderComponent implements OnInit, OnDestroy {
   public staticAssetsUrl: string = staticAssetsUrl
-  private readonly unsubscribe$ = new Subject();
-  public isCollapsed: boolean = true
-  public canNavigateBack$ = this.navigation.canNavigateBack$
-  public searchVisible: boolean = true
+  
 
+
+  public canNavigateBack$ = this.navigation.canNavigateBack$
+
+  readonly showSearch$ = this.globalState.select('showSearch');
+  readonly showMenu$ = this.globalState.select('showMenu');
   readonly cart$ = this.globalState.select('cart')
+  readonly toggleSearch$ = new Subject<boolean>()
+  readonly toggleMenu$ = new Subject<boolean>()
 
   constructor(
     @Inject(APP_GLOBAL_STATE) private globalState: RxState<AppGlobalState>,
@@ -37,7 +41,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
     private navigation: NavigationService,
     private cartService: CartService
   ) {
-
+    this.globalState.connect('showSearch', this.toggleSearch$.asObservable())
+    this.globalState.connect('showMenu', this.toggleSearch$.asObservable())
   }
   back(): void {
     this.navigation.back()
@@ -47,7 +52,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.offcanvasService.offcanvasNavigationState$.pipe(takeUntil(this.unsubscribe$))
       .subscribe(state => {
         this.isCollapsed = !state.menu_visible;
-        this.searchVisible = state.search_visible
+
         this.cdr.markForCheck();
       })
     // this.authService.user

@@ -1,49 +1,57 @@
 import { Component, OnDestroy, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
-import { combineLatest, pluck, Subject, takeUntil } from 'rxjs';
+import { combineLatest, map, pluck, Subject, takeUntil, zip } from 'rxjs';
 import { HomeSliderImages } from '../models/home-slider-images';
-import { ProductService } from '../products/shared/product.service';
-import { ReviewService } from '../core/shared/review.service';
-import { AuthService } from '../account/shared/auth.service';
 import { HomeSliderImagesService } from './main-slider/home-slider-images.service';
-import { ESortingBehaviour } from '../products/shared/ui.service';
 
 import { WithContext, WebSite} from "schema-dts";
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../src/environments/environment'
-import { resizedImgUrl } from '../../../api/utils';
 import { SEOService, BrandDefaultMeta } from '../../app/shared/seoservice.service';
-import { ProductReview } from '../../../api/components/reviews/review.model';
-import { ProductsListGQL, ProductsListQuery } from 'gql/types';
+import { ProductGender, ProductsListGQL, ProductsListQuery, ReviewsListGQL, ReviewsListQuery } from '@tribes/data-access';
+import { resizedImgUrl } from '../shared/utils/utils.utils';
+import { RxState } from '@rx-angular/state';
 const staticAssetsUrl = environment.staticAssetsUrl
 
+interface HomeComponentState {
+  products: ProductsListQuery['products'];
+  isLoading: boolean;
+  reviews: ReviewsListQuery['reviews'];
+}
 @Component({
-  selector: 'app-home',
+  selector: 'tribes-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [RxState]
 })
 export class HomeComponent implements OnInit, OnDestroy {
   public staticAssetsUrl: string = staticAssetsUrl
   public resizedImgUrl = resizedImgUrl
 
   private readonly unsubscribe$ = new Subject();
-  public products: ProductsListQuery['products'] = [];
   public sliderImages: HomeSliderImages[] = [];
-  public reviews: ProductReview[] = []
   public schema: WithContext<WebSite>;
   public meta = BrandDefaultMeta
 
   constructor(
-    private productService: ProductService,
-    private reviewService: ReviewService,
-    private authService: AuthService,
+    private state: RxState<HomeComponentState>,
     private homeSliderImagesService: HomeSliderImagesService,
     private router: ActivatedRoute,
     private cdr: ChangeDetectorRef,
     private seo: SEOService,
-    private productsGql: ProductsListGQL
+    private productsGql: ProductsListGQL,
+    private reviewsGql: ReviewsListGQL
   ) {
+    this.state.connect('products', zip([
+      this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Women }}).pipe(pluck('data', 'products')),
+      this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Men }}).pipe(pluck('data', 'products'))
+    ]).pipe(
+        map(([products_w, products_m]) => ([...products_w, ...products_m]))
+      )
+    );
+    this.state.connect('reviews', this.reviewsGql.fetch({input: {all: true, limit: 10}}).pipe(pluck('data', 'reviews')));
+    
     const {description, title} = this.router.snapshot.data
     this.schema = {
       '@context': 'https://schema.org',
@@ -87,18 +95,15 @@ export class HomeComponent implements OnInit, OnDestroy {
   
   ngOnInit() {
     combineLatest([
-      this.productsGql.fetch({input: {limit: 6, gender: 'women' }}).pipe(pluck('data', 'products')),
-      this.productsGql.fetch({input: {limit: 6, gender: 'men' }}).pipe(pluck('data', 'products')),
+      this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Women }}).pipe(pluck('data', 'products')),
+      this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Men }}).pipe(pluck('data', 'products')),
       // this.productService.getProducts({page: 1, limit: 12, sort: ESortingBehaviour["date_desc"], by_model: 1}),
       this.homeSliderImagesService.getSliderImages(),
-      this.authService.user,
-      this.reviewService.getReviews(),
       this.seo.currentRouteData$
     ]).pipe(takeUntil(this.unsubscribe$))
-    .subscribe(([products_w, products_m, slides, user, reviews, meta]) => {
-      this.products =  []//[...products_w, ...products_m]
+    .subscribe(([products_w, products_m, slides, meta]) => {
+      this.products =  [...products_w, ...products_m]
       this.sliderImages = slides
-      this.reviews = reviews
       this.meta = meta
       
       this.cdr.markForCheck()

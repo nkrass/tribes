@@ -3,7 +3,7 @@ import { environment } from '../../../../src/environments/environment'
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
-  selector: 'app-section-divider',
+  selector: 'tribes-section-divider',
   templateUrl: './section-divider.component.html',
   styleUrls: ['./section-divider.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -9,7 +9,7 @@ SwiperCore.use([Pagination, Zoom, Navigation, Mousewheel, FreeMode]);
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
-  selector: 'app-reviews-slider',
+  selector: 'tribes-reviews-slider',
   templateUrl: './reviews-slider.component.html',
   styleUrls: [
     './reviews-slider.component.scss'

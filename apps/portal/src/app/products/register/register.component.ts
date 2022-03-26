@@ -22,7 +22,7 @@ interface LocalState {
 }
 
 @Component({
-  selector: 'app-scan-register',
+  selector: 'tribes-scan-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,

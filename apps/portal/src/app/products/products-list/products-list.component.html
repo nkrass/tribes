@@ -49,7 +49,7 @@
       <div class="col-sm-12 col-lg-10 col-xl-10">
         <div class="row" *rxLet="products$ as products">
           <div class="col-6 col-md-4 px-0 bg-white" *ngFor="let product of products">
-            <app-products-list-item [isLoading]="isLoading$ | push" [product]="product"></app-products-list-item>
+            <tribes-products-list-item [isLoading]="isLoading$ | push" [product]="product"></tribes-products-list-item>
           </div>
         </div>
       </div>

@@ -8,7 +8,7 @@ import { OffcanvasService } from '../shared/offcanvas.service';
 import { takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-navigation-off-canvas',
+  selector: 'tribes-navigation-off-canvas',
   templateUrl: './navigation-off-canvas.component.html',
   styleUrls: ['./navigation-off-canvas.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

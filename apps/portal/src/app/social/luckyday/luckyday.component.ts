@@ -8,7 +8,7 @@ const staticAssetsUrl = environment.staticAssetsUrl
 
 
 @Component({
-  selector: 'app-social-luckyday',
+  selector: 'tribes-social-luckyday',
   templateUrl: './luckyday.component.html',
   styleUrls: ['./luckyday.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

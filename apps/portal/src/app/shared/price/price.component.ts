@@ -1,17 +1,15 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { Product } from '../../../../api/components/product/product.model';
 
 @Component({
-  selector: 'app-price',
+  selector: 'tribes-price',
   templateUrl: './price.component.html',
   styleUrls: ['./price.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class PriceComponent {
   // @Input() public product!: Product;
-  @Input() public count: number = 1;
-  @Input() public priceBase: number = 0;
-  @Input() public priceSale: number = 0;
-  @Input() public sku: string = '';
-
+  @Input() public count = 1;
+  @Input() public priceBase = 0;
+  @Input() public priceSale = 0;
+  @Input() public sku = '';
 }

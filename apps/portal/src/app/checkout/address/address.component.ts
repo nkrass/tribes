@@ -18,7 +18,7 @@ import { MessageService } from 'app/messages/message.service';
 import { CartQuery, CartStatus } from 'gql/types';
 
 @Component({
-  selector: 'app-checkout-address',
+  selector: 'tribes-checkout-address',
   templateUrl: './address.component.html',
   styleUrls: ['./address.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

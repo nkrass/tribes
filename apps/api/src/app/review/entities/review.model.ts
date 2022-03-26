@@ -6,7 +6,7 @@ export type ReviewKey = {
   id: string,
 };
 
-@ObjectType({ implements: CreateReviewInput })
+@ObjectType()
 export class Review extends CreateReviewInput {
   @IsUUID()
   @Field(/* istanbul ignore next */ () => String, { nullable: true })

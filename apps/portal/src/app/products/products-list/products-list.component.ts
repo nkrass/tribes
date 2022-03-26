@@ -25,7 +25,7 @@ interface ProductsListState {
 }
 
 @Component({
-  selector: 'app-products',
+  selector: 'tribes-products',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss'],

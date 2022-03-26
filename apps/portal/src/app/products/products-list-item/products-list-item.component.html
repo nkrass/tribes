@@ -40,7 +40,7 @@
         <a class="text-dark text-decoration-none placeholder col-7" *ngIf="!product.title">{{product.title}}</a>
       </h4>
       <p class="card-text text-center" *ngIf="product.priceSale">
-        <app-price [priceSale]="product.priceSale" [sku]="product.sku" [priceBase]="product.priceBase" [count]="1"></app-price>
+        <tribes-price [priceSale]="product.priceSale" [sku]="product.sku" [priceBase]="product.priceBase" [count]="1"></tribes-price>
       </p>
       <span class="placeholder col-4  text-center" *ngIf="!product.priceSale"></span>
       <p class="card-text text-center" *ngIf="product.sizes">

@@ -17,7 +17,7 @@ const staticAssetsUrl = environment.staticAssetsUrl
 // }
 
 @Component({
-  selector: 'app-products-list-item',
+  selector: 'tribes-products-list-item',
   templateUrl: './products-list-item.component.html',
   styleUrls: [
     './products-list-item.component.scss'

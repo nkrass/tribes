@@ -3,7 +3,7 @@ import { environment } from '../../../../src/environments/environment'
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
-  selector: 'app-product-categories',
+  selector: 'tribes-product-categories',
   templateUrl: './product-categories.component.html',
   styleUrls: ['./product-categories.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

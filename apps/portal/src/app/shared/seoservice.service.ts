@@ -4,8 +4,8 @@ import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
 
 import {environment} from "../../../src/environments/environment"
-import { resizedImgUrl } from '../../../api/utils';
 import { ProductQuery } from 'gql/types';
+import { resizedImgUrl } from './utils/utils.utils';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 const resizedImgCover = resizedImgUrl(staticAssetsUrl+"static/img/home/slider-new_year_2.jpg", 1520, 656)
@@ -158,11 +158,11 @@ export class SEOService {
         slogan: 'Для ярких и смелых- tribes',
         logo: staticAssetsUrl + 'static/img/logo/logo_tribes_woodmark.svg',
         material: materials?.map(m => `${m.material} ${m.quantity}`).join(','),
-        category: category!,
+        category: category,
         itemCondition: 'NewCondition',
         model: `${title} ${sku}`,
         manufacturer: 'ООО ТРАЙБС / TRIBES LLC',
-        color: color!,
+        color: color,
         image: { 
           "@type": "ImageObject", 
           url: coverImage!, 

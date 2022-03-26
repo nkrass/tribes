@@ -1,0 +1,5 @@
+query ReviewsList($input: FilterReviewInput!){
+  reviews(input: $input){
+    id, skuFamily, reviewAuthor, reviewText, reviewDate,reviewRating, reviewAnswer, createdAt
+  }
+}

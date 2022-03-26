@@ -4,7 +4,7 @@ import { resizedImgUrl } from '../../../../api/utils';
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
-  selector: 'app-brand-advantages',
+  selector: 'tribes-brand-advantages',
   templateUrl: './brand-advantages.component.html',
   styleUrls: ['./brand-advantages.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

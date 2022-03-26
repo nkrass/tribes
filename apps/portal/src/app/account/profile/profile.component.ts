@@ -8,7 +8,7 @@ import { Subscription, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-profile',
+  selector: 'tribes-profile',
   templateUrl: './profile.component.html',
   styleUrls: ['./profile.component.scss']
 })

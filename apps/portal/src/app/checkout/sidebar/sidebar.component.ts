@@ -7,7 +7,7 @@ import { Subject } from 'rxjs';
 import { CartQuery } from 'gql/types';
 
 @Component({
-  selector: 'app-checkout-sidebar',
+  selector: 'tribes-checkout-sidebar',
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })

@@ -7,7 +7,7 @@ import { CartService } from './cart/shared/cart.service';
 import { AnalyticsService } from './shared/analytics.service';
 
 @Component({
-  selector: 'app-root',
+  selector: 'tribes-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-complete',
+  selector: 'tribes-complete',
   templateUrl: './complete.component.html',
   styleUrls: ['./complete.component.scss']
 })

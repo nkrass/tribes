@@ -71,7 +71,7 @@ export class ReviewService {
       else obj[prop] = { 'contains': (filter as any)[prop] };
     }
     return all? 
-      this.model.query(obj).sort(SortOrder.descending).all() : 
+      this.model.scan().limit(limit).all() : 
       this.model.query(obj).sort(SortOrder.descending).limit(limit).exec();
   }
 }

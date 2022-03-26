@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-policy',
+  selector: 'tribes-policy',
   templateUrl: './policy.component.html',
   styleUrls: ['./policy.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

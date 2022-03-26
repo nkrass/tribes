@@ -2,7 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Promo } from '../../models/promo.model';
 
 @Component({
-  selector: 'app-promo',
+  selector: 'tribes-promo',
   templateUrl: './promo.component.html',
   styleUrls: ['./promo.component.scss']
 })

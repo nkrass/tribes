@@ -7,7 +7,7 @@ import { OrderService } from './orders/shared/order.service';
 import { User } from '../models/user.model';
 
 @Component({
-  selector: 'app-account',
+  selector: 'tribes-account',
   templateUrl: './account.component.html',
   styleUrls: ['./account.component.scss']
 })

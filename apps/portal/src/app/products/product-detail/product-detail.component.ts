@@ -31,7 +31,7 @@ interface ProductState {
 }
 
 @Component({
-  selector: 'app-product-detail',
+  selector: 'tribes-product-detail',
   encapsulation: ViewEncapsulation.None,
   templateUrl: './product-detail.component.html',
   styleUrls: ['./product-detail.component.scss'],

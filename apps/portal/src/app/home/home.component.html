@@ -1,14 +1,14 @@
 <ngx-json-ld [json]="schema"></ngx-json-ld>
 <!-- <section data-nosnippet>
-  <app-main-slider [items]="sliderImages"></app-main-slider>    
+  <tribes-main-slider [items]="sliderImages"></tribes-main-slider>    
 </section> -->
 
 <!-- Aboit brand -->
 <section>
   <!-- <div class="pt-3 mb-3">
-    <app-section-divider  [h]="'h3'" [section]="'Больше своего времени'"></app-section-divider>
+    <tribes-section-divider  [h]="'h3'" [section]="'Больше своего времени'"></tribes-section-divider>
   </div> -->
-  <app-brand-advantages></app-brand-advantages>
+  <tribes-brand-advantages></tribes-brand-advantages>
   <div class="container">
     <div class="row align-items-center justify-content-center">
       <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0">
@@ -37,7 +37,7 @@
             <h4>Откройте для себя последнюю коллекцию TRIBES®</h4>
         </div>
         <div class="row">
-          <app-gender-filter></app-gender-filter>  
+          <tribes-gender-filter></tribes-gender-filter>  
         </div>
       </div>
     </div>
@@ -45,7 +45,7 @@
 </section>
 <!-- New collection WB -->
 <!-- <section class="pt-2 pb-2" data-nosnippet>
-  <app-section-divider [section]="'Заказ новых коллекций'"></app-section-divider>
+  <tribes-section-divider [section]="'Заказ новых коллекций'"></tribes-section-divider>
   <div class="container">
     <div class="row align-items-center justify-content-center">
       <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 px-0">
@@ -77,7 +77,7 @@
             <h4>Новинки</h4>
         </div>
         <div class="row">
-          <app-product-widget  *ngFor="let product of products" [product]="product" class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></app-product-widget>
+          <tribes-product-widget  *ngFor="let product of products" [product]="product" class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></tribes-product-widget>
       </div>
       </div>
     </div>
@@ -93,7 +93,7 @@
             <h4>Отзывы покупателей</h4>
         </div>
         <div class="row">
-          <app-reviews-slider [items]="reviews"></app-reviews-slider>  
+          <tribes-reviews-slider [items]="reviews"></tribes-reviews-slider>  
         </div>
       </div>
     </div>
@@ -149,7 +149,7 @@
             <h4>Категории</h4>
         </div>
         <div class="row">
-          <app-product-categories></app-product-categories>
+          <tribes-product-categories></tribes-product-categories>
         </div>
       </div>
     </div>
@@ -158,7 +158,7 @@
 
 <!-- Delivery -->
 <!-- <section class="pb-2 pt-2" data-nosnippet>
-  <app-section-divider [section]="'Информация о доставке'"></app-section-divider>
+  <tribes-section-divider [section]="'Информация о доставке'"></tribes-section-divider>
   <div class="container">
     <div class="row align-items-center justify-content-center">
       <div class="col-sm-12 col-md-6 col-lg-5 col-xl-5">

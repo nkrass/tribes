@@ -1,17 +1,17 @@
-import { Component, OnInit, OnDestroy, ChangeDetectionStrategy, ChangeDetectorRef, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject, PLATFORM_ID } from '@angular/core';
 import { CartService } from './shared/cart.service';
-import { AnalyticsService } from 'app/shared/analytics.service'
+import { AnalyticsService } from '../shared/analytics.service'
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
-import { AppGlobalState, APP_GLOBAL_STATE } from 'app/app-global.state';
 import { RxState } from '@rx-angular/state';
 import { CartItems, CartQuery, CartStatus } from 'gql/types';
+import { AppGlobalState, APP_GLOBAL_STATE } from '../app-global.state';
 
 interface CartState {
   cart: CartQuery['cart']
 }
 @Component({
-  selector: 'app-cart',
+  selector: 'tribes-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
@@ -33,9 +33,7 @@ export class CartComponent {
     this.analytics.initiateCheckout(this.globalState.get('cart').cartItems)
     this.router.navigate(['/checkout'])
   }
-  goBack() {
-
-  }
+  // goBack() {}
   public onSelectShop(shop: string){
     if (shop === 'mytribes'){
       this.showDistributor = false
@@ -67,7 +65,7 @@ export class CartComponent {
     event.preventDefault();
     event.stopPropagation();
     if (window.confirm("Подтверждаете удаление")) {
-      this.cartService.deleteItems([barcode!])
+      this.cartService.deleteItems([barcode])
     }
   }
 

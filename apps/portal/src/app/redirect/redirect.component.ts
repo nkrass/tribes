@@ -28,7 +28,7 @@ interface ProductState {
 }
 
 @Component({
-  selector: 'app-redirect',
+  selector: 'tribes-redirect',
   templateUrl: './redirect.component.html',
   styleUrls: [
     './redirect.component.scss',

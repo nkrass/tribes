@@ -5,7 +5,7 @@ import { environment } from '../../../../src/environments/environment'
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
-  selector: 'app-about-tribes-brand',
+  selector: 'tribes-about-tribes-brand',
   templateUrl: './about-tribes-brand.component.html',
   styleUrls: ['./about-tribes-brand.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

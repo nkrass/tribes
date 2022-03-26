@@ -16,7 +16,7 @@ import { AnalyticsService } from 'app/shared/analytics.service'
 import { CartQuery, CartStatus } from 'gql/types';
 
 @Component({
-  selector: 'app-checkout-review',
+  selector: 'tribes-checkout-review',
   templateUrl: './review.component.html',
   styleUrls: ['./review.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -7,7 +7,7 @@ import { takeUntil } from 'rxjs';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 
 @Component({
-  selector: 'app-checkout',
+  selector: 'tribes-checkout',
   templateUrl: './checkout.component.html',
   styleUrls: ['./checkout.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

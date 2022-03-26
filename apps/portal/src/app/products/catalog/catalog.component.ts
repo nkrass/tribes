@@ -24,7 +24,7 @@ interface ProductState {
 }
 
 @Component({
-  selector: 'app-catalog',
+  selector: 'tribes-catalog',
   templateUrl: './catalog.component.html',
   styleUrls: [
     './catalog.component.scss'

@@ -9,7 +9,7 @@
 
 
 // @Component({
-//   selector: 'app-navigation-main',
+//   selector: 'tribes-navigation-main',
 //   templateUrl: './navigation-main.component.html',
 //   styleUrls: ['./navigation-main.component.scss'],
 //   changeDetection: ChangeDetectionStrategy.OnPush

@@ -41,7 +41,7 @@ export type Barcode = {
   images?: Maybe<Array<Scalars['String']>>;
   imagesSrc: Array<Scalars['String']>;
   manufactured?: Maybe<Scalars['String']>;
-  materials?: Maybe<Array<Material>>;
+  materials?: Maybe<Array<MaterialType>>;
   nomenclature?: Maybe<Nomenclature>;
   notes?: Maybe<Scalars['String']>;
   priceBase?: Maybe<Scalars['Float']>;
@@ -100,18 +100,6 @@ export type BaseOrder = {
   quantity: Scalars['Float'];
   status: OrderStatus;
   userId: Scalars['String'];
-};
-
-export type BaseReview = {
-  reviewAnswer?: Maybe<Scalars['String']>;
-  reviewAuthor: Scalars['String'];
-  reviewDate: Scalars['Date'];
-  reviewRating: Scalars['Float'];
-  reviewText: Scalars['String'];
-  sku: Scalars['String'];
-  skuFamily: Scalars['String'];
-  userId?: Maybe<Scalars['String']>;
-  visible?: Maybe<Scalars['Boolean']>;
 };
 
 export type Cart = {
@@ -309,7 +297,7 @@ export type FilterCartInput = {
   id?: InputMaybe<Scalars['String']>;
   limit?: InputMaybe<Scalars['Int']>;
   orderId?: InputMaybe<Scalars['String']>;
-  status?: InputMaybe<Scalars['String']>;
+  status?: InputMaybe<CartStatus>;
   userId?: InputMaybe<Scalars['String']>;
 };
 
@@ -365,8 +353,8 @@ export type GetBarcodeInput = {
 };
 
 export type GetCartInput = {
-  id?: InputMaybe<Scalars['ID']>;
-  userId?: InputMaybe<Scalars['ID']>;
+  id?: InputMaybe<Scalars['String']>;
+  userId?: InputMaybe<Scalars['String']>;
 };
 
 export type GetOrderInput = {
@@ -398,15 +386,15 @@ export type LoginAuthInput = {
   password: Scalars['String'];
 };
 
-export type Material = {
-  __typename?: 'Material';
-  material?: Maybe<Scalars['String']>;
-  quantity?: Maybe<Scalars['Float']>;
-};
-
 export type MaterialInput = {
   material?: InputMaybe<Scalars['String']>;
   quantity?: InputMaybe<Scalars['Float']>;
+};
+
+export type MaterialType = {
+  __typename?: 'MaterialType';
+  material?: Maybe<Scalars['String']>;
+  quantity?: Maybe<Scalars['Float']>;
 };
 
 export type Mutation = {
@@ -619,7 +607,7 @@ export type Product = {
   images?: Maybe<Array<Scalars['String']>>;
   imagesSrc: Array<Scalars['String']>;
   manufactured?: Maybe<Scalars['String']>;
-  materials?: Maybe<Array<Material>>;
+  materials?: Maybe<Array<MaterialType>>;
   nomenclature?: Maybe<Nomenclature>;
   notes?: Maybe<Scalars['String']>;
   priceBase?: Maybe<Scalars['Float']>;
@@ -714,13 +702,13 @@ export type QueryCartsArgs = {
 
 
 export type QueryCategoriesArgs = {
-  gender?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<ProductGender>;
 };
 
 
 export type QueryCategoryArgs = {
-  gender?: InputMaybe<Scalars['String']>;
-  name: Scalars['String'];
+  gender?: InputMaybe<ProductGender>;
+  name: ProductCategory;
 };
 
 
@@ -776,7 +764,7 @@ export type RegisterAuthInput = {
   phone?: InputMaybe<Scalars['Int']>;
 };
 
-export type Review = BaseReview & {
+export type Review = {
   __typename?: 'Review';
   count?: Maybe<Scalars['Float']>;
   createdAt?: Maybe<Scalars['Date']>;
@@ -945,7 +933,7 @@ export type CartQueryVariables = Exact<{
 export type CartQuery = { __typename?: 'Query', cart: { __typename?: 'Cart', id: string, userId?: string | null, orderId?: string | null, status: CartStatus, externalUserId?: string | null, totalAmount: number, totalItemsCount: number, createdAt?: any | null, updatedAt?: any | null, cartItems: Array<{ __typename?: 'CartItems', price?: number | null, quantity?: number | null, currency?: string | null, barcode?: { __typename?: 'Barcode', barcode: string, coverImage: string, title?: string | null, sku: string, category?: ProductCategory | null, priceBase?: number | null, priceSale?: number | null, stock: number, size: string } | null }> } };
 
 export type CategoriesListQueryVariables = Exact<{
-  gender?: InputMaybe<Scalars['String']>;
+  gender?: InputMaybe<ProductGender>;
 }>;
 
 
@@ -963,7 +951,7 @@ export type CreateItemMutationVariables = Exact<{
 }>;
 
 
-export type CreateItemMutation = { __typename?: 'Mutation', createItem: { __typename?: 'Item', id: string, productBarcode: string, registered?: boolean | null, barcode?: { __typename?: 'Barcode', barcode: string, stock: number, size: string, product: { __typename?: 'Product', sku?: string | null, title?: string | null, coverImage: string, imagesSrc: Array<string>, videosSrc: Array<string>, description?: string | null, sizes?: string | null, category?: ProductCategory | null, priceBase?: number | null, priceSale?: number | null, reviews?: Array<{ __typename?: 'Review', sku: string, reviewText: string, reviewAuthor: string, reviewRating: number, reviewDate: any, id?: string | null }> | null, variants: Array<{ __typename?: 'Product', sku?: string | null, colorGroup?: string | null, coverImage: string, title?: string | null, priceBase?: number | null, priceSale?: number | null, color?: string | null }>, materials?: Array<{ __typename?: 'Material', material?: string | null, quantity?: number | null }> | null } } | null } };
+export type CreateItemMutation = { __typename?: 'Mutation', createItem: { __typename?: 'Item', id: string, productBarcode: string, registered?: boolean | null, barcode?: { __typename?: 'Barcode', barcode: string, stock: number, size: string, product: { __typename?: 'Product', sku?: string | null, title?: string | null, coverImage: string, imagesSrc: Array<string>, videosSrc: Array<string>, description?: string | null, sizes?: string | null, category?: ProductCategory | null, priceBase?: number | null, priceSale?: number | null, reviews?: Array<{ __typename?: 'Review', sku: string, reviewText: string, reviewAuthor: string, reviewRating: number, reviewDate: any, id?: string | null }> | null, variants: Array<{ __typename?: 'Product', sku?: string | null, colorGroup?: string | null, coverImage: string, title?: string | null, priceBase?: number | null, priceSale?: number | null, color?: string | null }>, materials?: Array<{ __typename?: 'MaterialType', material?: string | null, quantity?: number | null }> | null } } | null } };
 
 export type LoginUserMutationVariables = Exact<{
   input: LoginAuthInput;
@@ -977,14 +965,14 @@ export type ProductQueryVariables = Exact<{
 }>;
 
 
-export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', sku?: string | null, title?: string | null, titleFull?: string | null, description?: string | null, descriptionSeo?: string | null, color?: string | null, colorGroup?: string | null, priceBase?: number | null, priceSale?: number | null, stock?: number | null, status?: ProductStatus | null, category?: ProductCategory | null, gender?: ProductGender | null, tags?: string | null, collection?: string | null, wildberriesId?: number | null, manufactured?: string | null, notes?: string | null, rating?: number | null, createdAt?: any | null, updatedAt?: any | null, coverImage: string, imagesSrc: Array<string>, videosSrc: Array<string>, sizes?: string | null, nomenclature?: { __typename?: 'Nomenclature', tnvd?: string | null } | null, materials?: Array<{ __typename?: 'Material', material?: string | null, quantity?: number | null }> | null, crossSaleProducts?: Array<{ __typename?: 'Product', sku?: string | null, coverImage: string, title?: string | null }> | null, barcodes: Array<{ __typename?: 'Barcode', barcode: string, coverImage: string, title?: string | null, sku: string, category?: ProductCategory | null, priceBase?: number | null, priceSale?: number | null, stock: number, size: string }>, variants: Array<{ __typename?: 'Product', sku?: string | null, colorGroup?: string | null, coverImage: string, title?: string | null, priceBase?: number | null, priceSale?: number | null, color?: string | null }>, reviews?: Array<{ __typename?: 'Review', sku: string, reviewText: string, reviewAuthor: string, reviewRating: number, reviewDate: any, id?: string | null }> | null } };
+export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', sku?: string | null, title?: string | null, titleFull?: string | null, description?: string | null, descriptionSeo?: string | null, color?: string | null, colorGroup?: string | null, priceBase?: number | null, priceSale?: number | null, stock?: number | null, status?: ProductStatus | null, category?: ProductCategory | null, gender?: ProductGender | null, tags?: string | null, collection?: string | null, wildberriesId?: number | null, manufactured?: string | null, notes?: string | null, rating?: number | null, createdAt?: any | null, updatedAt?: any | null, coverImage: string, imagesSrc: Array<string>, videosSrc: Array<string>, sizes?: string | null, nomenclature?: { __typename?: 'Nomenclature', tnvd?: string | null } | null, materials?: Array<{ __typename?: 'MaterialType', material?: string | null, quantity?: number | null }> | null, crossSaleProducts?: Array<{ __typename?: 'Product', sku?: string | null, coverImage: string, title?: string | null }> | null, barcodes: Array<{ __typename?: 'Barcode', barcode: string, coverImage: string, title?: string | null, sku: string, category?: ProductCategory | null, priceBase?: number | null, priceSale?: number | null, stock: number, size: string }>, variants: Array<{ __typename?: 'Product', sku?: string | null, colorGroup?: string | null, coverImage: string, title?: string | null, priceBase?: number | null, priceSale?: number | null, color?: string | null }>, reviews?: Array<{ __typename?: 'Review', sku: string, reviewText: string, reviewAuthor: string, reviewRating: number, reviewDate: any, id?: string | null }> | null } };
 
 export type ProductsListQueryVariables = Exact<{
   input: FilterProductInput;
 }>;
 
 
-export type ProductsListQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', sku?: string | null, skuFamily?: string | null, title?: string | null, titleFull?: string | null, description?: string | null, descriptionSeo?: string | null, color?: string | null, priceBase?: number | null, priceSale?: number | null, stock?: number | null, status?: ProductStatus | null, category?: ProductCategory | null, gender?: ProductGender | null, tags?: string | null, collection?: string | null, videos?: Array<string> | null, wildberriesId?: number | null, crossSale?: Array<string> | null, manufactured?: string | null, notes?: string | null, rating?: number | null, createdAt?: any | null, updatedAt?: any | null, coverImage: string, imagesSrc: Array<string>, sizes?: string | null, nomenclature?: { __typename?: 'Nomenclature', tnvd?: string | null } | null, materials?: Array<{ __typename?: 'Material', material?: string | null, quantity?: number | null }> | null, barcodes: Array<{ __typename?: 'Barcode', size: string, stock: number }> }> };
+export type ProductsListQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', sku?: string | null, skuFamily?: string | null, title?: string | null, titleFull?: string | null, description?: string | null, descriptionSeo?: string | null, color?: string | null, priceBase?: number | null, priceSale?: number | null, stock?: number | null, status?: ProductStatus | null, category?: ProductCategory | null, gender?: ProductGender | null, tags?: string | null, collection?: string | null, videos?: Array<string> | null, wildberriesId?: number | null, crossSale?: Array<string> | null, manufactured?: string | null, notes?: string | null, rating?: number | null, createdAt?: any | null, updatedAt?: any | null, coverImage: string, imagesSrc: Array<string>, sizes?: string | null, nomenclature?: { __typename?: 'Nomenclature', tnvd?: string | null } | null, materials?: Array<{ __typename?: 'MaterialType', material?: string | null, quantity?: number | null }> | null, barcodes: Array<{ __typename?: 'Barcode', size: string, stock: number }> }> };
 
 export type RegisterUserMutationVariables = Exact<{
   input: RegisterAuthInput;
@@ -992,6 +980,13 @@ export type RegisterUserMutationVariables = Exact<{
 
 
 export type RegisterUserMutation = { __typename?: 'Mutation', register: { __typename?: 'Auth', token: string, user?: { __typename?: 'User', id?: string | null, email?: string | null, firstName?: string | null, lastName?: string | null, phone?: string | null, userRole?: UserRole | null, createdAt?: any | null, updatedAt?: any | null } | null } };
+
+export type ReviewsListQueryVariables = Exact<{
+  input: FilterReviewInput;
+}>;
+
+
+export type ReviewsListQuery = { __typename?: 'Query', reviews: Array<{ __typename?: 'Review', id?: string | null, skuFamily: string, reviewAuthor: string, reviewText: string, reviewDate: any, reviewRating: number, reviewAnswer?: string | null, createdAt?: any | null }> };
 
 export type UpdateCartMutationVariables = Exact<{
   input: UpdateCartInput;
@@ -1124,7 +1119,7 @@ export const CartDocument = gql`
     }
   }
 export const CategoriesListDocument = gql`
-    query CategoriesList($gender: String) {
+    query CategoriesList($gender: ProductGender) {
   categories(gender: $gender) {
     name
   }
@@ -1433,6 +1428,31 @@ export const RegisterUserDocument = gql`
       super(apollo);
     }
   }
+export const ReviewsListDocument = gql`
+    query ReviewsList($input: FilterReviewInput!) {
+  reviews(input: $input) {
+    id
+    skuFamily
+    reviewAuthor
+    reviewText
+    reviewDate
+    reviewRating
+    reviewAnswer
+    createdAt
+  }
+}
+    `;
+
+  @Injectable({
+    providedIn: 'root'
+  })
+  export class ReviewsListGQL extends Apollo.Query<ReviewsListQuery, ReviewsListQueryVariables> {
+    document = ReviewsListDocument;
+    
+    constructor(apollo: Apollo.Apollo) {
+      super(apollo);
+    }
+  }
 export const UpdateCartDocument = gql`
     mutation UpdateCart($input: UpdateCartInput!) {
   updateCart(input: $input) {
@@ -1569,18 +1589,6 @@ export type BaseOrderFieldPolicy = {
 	status?: FieldPolicy<any> | FieldReadFunction<any>,
 	userId?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type BaseReviewKeySpecifier = ('reviewAnswer' | 'reviewAuthor' | 'reviewDate' | 'reviewRating' | 'reviewText' | 'sku' | 'skuFamily' | 'userId' | 'visible' | BaseReviewKeySpecifier)[];
-export type BaseReviewFieldPolicy = {
-	reviewAnswer?: FieldPolicy<any> | FieldReadFunction<any>,
-	reviewAuthor?: FieldPolicy<any> | FieldReadFunction<any>,
-	reviewDate?: FieldPolicy<any> | FieldReadFunction<any>,
-	reviewRating?: FieldPolicy<any> | FieldReadFunction<any>,
-	reviewText?: FieldPolicy<any> | FieldReadFunction<any>,
-	sku?: FieldPolicy<any> | FieldReadFunction<any>,
-	skuFamily?: FieldPolicy<any> | FieldReadFunction<any>,
-	userId?: FieldPolicy<any> | FieldReadFunction<any>,
-	visible?: FieldPolicy<any> | FieldReadFunction<any>
-};
 export type CartKeySpecifier = ('cartItems' | 'count' | 'createdAt' | 'externalUserId' | 'id' | 'lastKey' | 'orderId' | 'status' | 'totalAmount' | 'totalItemsCount' | 'updatedAt' | 'userId' | CartKeySpecifier)[];
 export type CartFieldPolicy = {
 	cartItems?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -1638,8 +1646,8 @@ export type ItemFieldPolicy = {
 	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>,
 	userId?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MaterialKeySpecifier = ('material' | 'quantity' | MaterialKeySpecifier)[];
-export type MaterialFieldPolicy = {
+export type MaterialTypeKeySpecifier = ('material' | 'quantity' | MaterialTypeKeySpecifier)[];
+export type MaterialTypeFieldPolicy = {
 	material?: FieldPolicy<any> | FieldReadFunction<any>,
 	quantity?: FieldPolicy<any> | FieldReadFunction<any>
 };
@@ -1801,10 +1809,6 @@ export type StrictTypedTypePolicies = {
 		keyFields?: false | BaseOrderKeySpecifier | (() => undefined | BaseOrderKeySpecifier),
 		fields?: BaseOrderFieldPolicy,
 	},
-	BaseReview?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | BaseReviewKeySpecifier | (() => undefined | BaseReviewKeySpecifier),
-		fields?: BaseReviewFieldPolicy,
-	},
 	Cart?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | CartKeySpecifier | (() => undefined | CartKeySpecifier),
 		fields?: CartFieldPolicy,
@@ -1829,9 +1833,9 @@ export type StrictTypedTypePolicies = {
 		keyFields?: false | ItemKeySpecifier | (() => undefined | ItemKeySpecifier),
 		fields?: ItemFieldPolicy,
 	},
-	Material?: Omit<TypePolicy, "fields" | "keyFields"> & {
-		keyFields?: false | MaterialKeySpecifier | (() => undefined | MaterialKeySpecifier),
-		fields?: MaterialFieldPolicy,
+	MaterialType?: Omit<TypePolicy, "fields" | "keyFields"> & {
+		keyFields?: false | MaterialTypeKeySpecifier | (() => undefined | MaterialTypeKeySpecifier),
+		fields?: MaterialTypeFieldPolicy,
 	},
 	Mutation?: Omit<TypePolicy, "fields" | "keyFields"> & {
 		keyFields?: false | MutationKeySpecifier | (() => undefined | MutationKeySpecifier),

@@ -227,10 +227,10 @@
         
         <div class="testimonial-group">
           <div class="row text-center">
-            <app-rating-stars *ngIf="product.rating > 3" [rating]="product.rating" [size]="'large'"></app-rating-stars> 
+            <tribes-rating-stars *ngIf="product.rating > 3" [rating]="product.rating" [size]="'large'"></tribes-rating-stars> 
             <h2 class="text-normal">{{ product.title }}</h2>
           </div>
-          <app-price class="h3 d-flex justify-content-center" [priceSale]="product.priceSale" [priceBase]="product.priceBase" [count]="1"></app-price>
+          <tribes-price class="h3 d-flex justify-content-center" [priceSale]="product.priceSale" [priceBase]="product.priceBase" [count]="1"></tribes-price>
           <swiper
             [slidesPerView]="7"
             [spaceBetween]="0"
@@ -277,12 +277,12 @@
             <div class="col-md-12 mt-2"></div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8">
               <!-- <div class="padding-top-2x mt-2 hidden-md-up desktop-only"></div> -->
-              <!-- <app-rating-stars [rating]="product.currentRating desktop-only"></app-rating-stars> -->
+              <!-- <tribes-rating-stars [rating]="product.currentRating desktop-only"></tribes-rating-stars> -->
               <!-- <span *ngIf="averageRating" class="text-muted align-middle desktop-only">{{ averageRating }}</span> -->
-              <!-- <app-rating-stars class="desktop-only" *ngIf="averageRating > 3" [rating]="averageRating" [size]="'large'"></app-rating-stars> 
+              <!-- <tribes-rating-stars class="desktop-only" *ngIf="averageRating > 3" [rating]="averageRating" [size]="'large'"></tribes-rating-stars> 
               <h2 class="text-normal desktop-only">{{ product.title }}</h2>
               <span class="h2 d-block desktop-only">
-                <app-price class="desktop-only" [product]="product"></app-price>
+                <tribes-price class="desktop-only" [product]="product"></tribes-price>
               </span> -->
               <p class="white-space-pre-line text-lg">{{product.description}}</p>
               
@@ -374,7 +374,7 @@
               <h4>Вам может понравится:</h4>
           </div>
           <div class="row">
-            <app-product-widget  *ngFor="let product of product.crossSaleProducts" [product]="product" [displayMode]='all' class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></app-product-widget>
+            <tribes-product-widget  *ngFor="let product of product.crossSaleProducts" [product]="product" [displayMode]='all' class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></tribes-product-widget>
         </div>
         </div>
       </div>
@@ -390,7 +390,7 @@
           <div class="row align-items-center justify-content-center" *ngFor="let review of reviews; index as i">
             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
               <div class="">
-                <app-rating-stars [rating]=review.rating [size]="'large'"></app-rating-stars> 
+                <tribes-rating-stars [rating]=review.rating [size]="'large'"></tribes-rating-stars> 
                 <div class="col-12 pb-1"></div>
                 <div class="lead">
                   <span class="">{{review.review}}</span>

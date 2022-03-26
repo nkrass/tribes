@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 
 @Component({
-  selector: 'app-checkout-footer',
+  selector: 'tribes-checkout-footer',
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss']
 })

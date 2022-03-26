@@ -39,7 +39,7 @@ import { HttpRequestInterceptor } from './interceptors/http-request-interceptor.
 import {HttpLink} from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { RxState } from '@rx-angular/state';
-import { AppGlobalState, APP_GLOBAL_STATE } from './app-global.state';
+import { AppGlobalState, APP_GLOBAL_STATE } from './tribes-global.state';
 import { environment } from 'environments/environment';
 // import { SocialModule } from './social/luckyday/social.module';
 

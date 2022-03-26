@@ -8,7 +8,7 @@ import { ProductQuery } from 'gql/types';
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
-  selector: 'app-product-widget',
+  selector: 'tribes-product-widget',
   templateUrl: './product-widget.component.html',
   styleUrls: [
     './product-widget.component.scss'

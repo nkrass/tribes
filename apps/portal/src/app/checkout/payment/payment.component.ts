@@ -5,7 +5,7 @@ import { environment } from '../../../../src/environments/environment'
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
-  selector: 'app-checkout-payment',
+  selector: 'tribes-checkout-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })

@@ -6,7 +6,7 @@ import { Order } from '../../models/order.model';
 import { takeUntil } from 'rxjs';
 
 @Component({
-  selector: 'app-orders',
+  selector: 'tribes-orders',
   templateUrl: './orders.component.html',
   styleUrls: ['./orders.component.scss']
 })

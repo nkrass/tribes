@@ -30,8 +30,8 @@
       <a class="text-dark text-decoration-none" routerLink="/product/{{product.sku}}">{{product.title}}</a>
     </h4>
     <p class="card-text text-center">
-      <app-price [priceSale]="product.priceSale" [sku]="product.sku" [priceBase]="product.priceBase" [count]="1">
-      </app-price></p>
+      <tribes-price [priceSale]="product.priceSale" [sku]="product.sku" [priceBase]="product.priceBase" [count]="1">
+      </tribes-price></p>
     <p class="card-text text-center d-inline" *ngFor="let barcode of product.barcodes">
       {{barcode.size}}
     </p>

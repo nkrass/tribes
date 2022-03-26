@@ -19,7 +19,7 @@ export const SippingMethods = [
 ];
 
 @Component({
-  selector: 'app-checkout-shipping',
+  selector: 'tribes-checkout-shipping',
   templateUrl: './shipping.component.html',
   styleUrls: ['./shipping.component.scss']
 })
