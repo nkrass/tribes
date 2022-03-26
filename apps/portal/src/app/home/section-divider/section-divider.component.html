@@ -1,0 +1,16 @@
+<div class="container">
+  <div class="row vertical-center align-items-center horizontal-center">
+    <div class="card">
+      <div class="card-body text-center" [ngSwitch]="h">
+
+          <h5 *ngSwitchCase="'h5'">{{section}}</h5>
+          <h4 *ngSwitchCase="'h4'">{{section}}</h4>
+          <h3 *ngSwitchCase="'h3'">{{section}}</h3>
+          <h2 *ngSwitchCase="'h2'">{{section}}</h2>
+          <h1 *ngSwitchCase="'h1'">{{section}}</h1>
+          <h4 *ngSwitchDefault>{{section}}</h4>
+
+      </div>
+    </div>
+  </div>
+</div>

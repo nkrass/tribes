@@ -1,0 +1,31 @@
+<h4>
+  Выберите способ оплаты</h4>
+<hr class="pb-1">
+<form [formGroup]="formPayment">
+<div class="table-responsive">
+  <table class="table">
+    <thead class="thead-default">
+      <tr>
+        <th class="col-8">Оплата</th>
+        <th class="col-4"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let paymentMethod of paymentMethods">
+        <td class="align-middle">
+          <label class="custom-control custom-radio">
+            <input class="form-control-radio" type="radio" name="paymentMethod" value="{{paymentMethod}}" formControlName="paymentMethod">
+            <span class="custom-control-indicator pl-3">Оплата картой при получении</span>
+          </label>
+        </td>
+        <td class="align-middle">
+          <img class="supported-payments" src="{{staticAssetsUrl}}static/img/payments/supported_cards.png" alt="{{paymentMethod}}" *ngIf="paymentMethod === 'Безналично (картой)'" />
+          <span *ngIf="paymentMethod !== 'Безналично (картой)'" class="text-medium">{{paymentMethod}}</span>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</form>
+
+<app-checkout-footer [buttons]="['back', 'continue']" (back)="onBack()" (continue)="onContinue()" [continueEnabled]="formPayment.valid"></app-checkout-footer>

@@ -1,0 +1,178 @@
+<ngx-json-ld [json]="schema"></ngx-json-ld>
+<!-- <section data-nosnippet>
+  <app-main-slider [items]="sliderImages"></app-main-slider>    
+</section> -->
+
+<!-- Aboit brand -->
+<section>
+  <!-- <div class="pt-3 mb-3">
+    <app-section-divider  [h]="'h3'" [section]="'Больше своего времени'"></app-section-divider>
+  </div> -->
+  <app-brand-advantages></app-brand-advantages>
+  <div class="container">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0">
+        <div class="card border-0 text-white text-center collection align-items-center justify-content-center">
+          <img 
+           data-nosnippet
+           class="card-img rounded-0" 
+           [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" 
+           [lazyLoad]="staticAssetsUrl + 'static/img/about-brand/hero_2.jpg'" 
+           alt="О бренде TRIBES">
+          <div class="card-img-overlay collection">
+            <a class="btn btn-light btn-cta btn-lg" [routerLink]="['/about-tribes-brand']" fragment="history">👉 Читать о бренде</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+<!-- Collections -->
+<section data-nosnippet class="mt-4 mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="card">
+        <div class="card-body text-center">
+            <h4>Откройте для себя последнюю коллекцию TRIBES®</h4>
+        </div>
+        <div class="row">
+          <app-gender-filter></app-gender-filter>  
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- New collection WB -->
+<!-- <section class="pt-2 pb-2" data-nosnippet>
+  <app-section-divider [section]="'Заказ новых коллекций'"></app-section-divider>
+  <div class="container">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-sm-12 col-md-6 col-lg-5 col-xl-4 px-0">
+        <div class="card border-0 text-white text-center">
+          <img class="card-img" 
+            [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" 
+            [lazyLoad]="resizedImgUrl('static/img/home/home_cta_bg.jpg', 500, 400)" 
+            alt="Заказ новых коллекций TRIBES">
+          <div class="card-img-overlay">
+            <h2 class="card-title padding-top-2x">на <br> WILDBERRIES</h2>
+            <p class="card-text">Бесконтактная доставка</p>
+            <a class="btn btn-light btn-cta btn-lg" href="https://www.wildberries.ru/brands/tribes">👉 Заказать на WB</a>
+          </div>
+          <div class="ribbon-cta">
+            <div class="ribbon-cta-inner">Новинки</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->
+    
+<!-- New products-->
+<section data-nosnippet class="mt-4 mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="card">
+        <div class="card-body text-center">
+            <h4>Новинки</h4>
+        </div>
+        <div class="row">
+          <app-product-widget  *ngFor="let product of products" [product]="product" class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></app-product-widget>
+      </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Feedback and reviews  -->
+<section data-nosnippet class="mt-4 mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="card">
+        <div class="card-body text-center">
+            <h4>Отзывы покупателей</h4>
+        </div>
+        <div class="row">
+          <app-reviews-slider [items]="reviews"></app-reviews-slider>  
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- Advantages-->
+<section data-nosnippet class="mt-4 mb-4">
+  <div class="container">
+    <div class="row">
+      <div class="card">
+        <div class="row align-items-center justify-content-center pt-4">
+          <div class="col-md-4 col-sm-6 text-center mb-30">
+            <img class="d-block w-90 img-thumbnail rounded-circle mx-auto mb-3" 
+              [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" 
+              [lazyLoad]="resizedImgUrl('static/img/services/01.png', 180, 180)" alt="Бесконтактная доставка по СНГ одежды TRIBES">
+            <h6>Бесконтактная доставка</h6>
+            <p class="text-muted mb-0">Доставим домой, в офис или в пункт примерки в любой город России, Белоруссии и Казахстана</p>
+          </div>
+          <div class="col-md-4 col-sm-6 text-center mb-30">
+            <img class="d-block w-90 img-thumbnail rounded-circle mx-auto mb-3" 
+            [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'"
+            [lazyLoad]="resizedImgUrl('static/img/services/02.png', 180, 180)" alt="Покупайте качественное">
+            <h6>Удобные возвраты</h6>
+            <p class="text-muted mb-0">Легко возвращайте вещи, которые не подошлии</p>
+          </div>
+          <!-- <div class="col-md-3 col-sm-6 text-center mb-30">
+            <img class="d-block w-90 img-thumbnail rounded-circle mx-auto mb-3" src="{{staticAssetsUrl}}static/img/services/03.png" alt="Support">
+            <h6>24/7 Customer Support</h6>
+            <p class="text-muted mb-0">Friendly 24/7 customer support</p>
+          </div> -->
+          <div class="col-md-4 col-sm-6 text-center mb-30">
+            <img class="d-block w-90 img-thumbnail rounded-circle mx-auto mb-3" 
+              [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'"
+              [lazyLoad]="resizedImgUrl('static/img/services/04.png', 180, 180)" 
+              alt="Безопасная оплата онлайн и при получении">
+            <h6>Безопасная оплата онлайн</h6>
+            <p class="text-muted mb-0">Вы можете оплатить заказ онлайн безналично или оплатить картой курьеру при получении</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</section>
+<!-- Categories -->
+<section data-nosnippet class="mt-4 pb-4">
+  <div class="container">
+    <div class="row">
+      <div class="card">
+        <div class="card-body text-center">
+            <h4>Категории</h4>
+        </div>
+        <div class="row">
+          <app-product-categories></app-product-categories>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Delivery -->
+<!-- <section class="pb-2 pt-2" data-nosnippet>
+  <app-section-divider [section]="'Информация о доставке'"></app-section-divider>
+  <div class="container">
+    <div class="row align-items-center justify-content-center">
+      <div class="col-sm-12 col-md-6 col-lg-5 col-xl-5">
+        <div class="card border-0 text-white text-center">
+          <img class="card-img" 
+            [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'"
+            [lazyLoad]="resizedImgUrl('static/img/home/home_cta_bg.jpg', 500, 400)" alt="Информация о достачке одежды бренда TRIBES">
+          <div class="card-img-overlay">
+            <h2 class="card-title padding-top-2x">Доставка и Оплата</h2>
+            <p class="card-text">Информация о доставке <br> и оплате одежды TRIBES</p>
+            <a class="btn btn-light btn-cta btn-lg" routerLink="/about-tribes-brand">👉 Читать как заказать</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section> -->

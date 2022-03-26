@@ -1,0 +1,19 @@
+query CartFilter($input: GetCartInput!){
+  cart(input: $input){
+    id
+    userId
+    orderId
+    status
+    externalUserId
+    createdAt
+    updatedAt
+    cartItems {
+      barcode { barcode, coverImage, title, sku, category, priceBase, priceSale, stock, size }
+      price,
+      quantity
+      currency
+    }
+    totalAmount
+    totalItemsCount
+  }
+}

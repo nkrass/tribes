@@ -1,0 +1,5 @@
+query CategoriesList($gender: String){
+  categories(gender: $gender){
+    name
+  }
+}

@@ -1,0 +1,63 @@
+<carousel [isAnimated]="true" [interval]="false" [showIndicators]="false" class="">
+  <slide *ngFor="let item of items; index as i" >
+    <div class="">
+      <div class="card border-0 text-white text-center collection p-0">
+        <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" 
+            [lazyLoad]="item.image_path" 
+            class="card-img hero-image align-self-end {{item.image_class}}"
+            alt="{{item.title}}&nbsp;{{item.caption}}&nbsp;{{item.description}}">
+        <div class="card-img-overlay">
+          <div class="mt-auto {{item.caption_class}} hero-text-align" innerHTML={{item.caption}}>
+            <h3 innerHTML={{item.caption}}></h3>
+          </div>
+          <div class="mt-auto mt-2">
+            <h1 class="{{item.title_class}} hero-text-align" innerHTML={{item.title}}></h1>
+          </div>
+          <div class="mt-auto">
+            <h4 class="{{item.description_class}} hero-text-align" innerHTML={{item.description}}></h4>
+          </div>
+          <a class="btn btn-primary scale-up delay-1 {{item.button_class}} mt-1" 
+            [routerLink]="item.button_routerlink" 
+            [queryParams]="item.button_query_params" innerHTML={{item.button_text}}>{{item.button_text}}</a>
+        </div>
+      </div>
+    </div>
+  </slide>
+</carousel>
+<div class="row align-items-center justify-content-center">
+  
+
+
+
+
+<!-- <carousel [isAnimated]="true" [interval]="false" class="">
+  <slide *ngFor="let item of items; index as i" >
+    <div class="slider-bg hero-slider container-fluid padding-top-3x" style="background-image: url({{item.image_path}});">
+      <div class="row" >
+        <div class="col-2"></div>
+        <div class="col">
+          <div class="d-flex align-items-around flex-column content">
+            <div class="mt-auto {{item.caption_class}}" innerHTML={{item.caption}}>
+              <h3 innerHTML={{item.caption}}></h3>
+            </div>
+            <div class="mt-auto">
+              <h1 class="{{item.title_class}}" innerHTML={{item.title}}></h1>
+            </div>
+            <div class="mt-auto">
+              <h4 class="{{item.description_class}}" innerHTML={{item.description}}></h4>
+            </div>
+            <!-- <div class="h2 text-body text-normal mb-4 pb-1">всего за -->
+              <!-- <span class="text-bold"><app-price [product]="item"></app-price></span> -->
+            <!-- </div>
+          </div>
+          <a class="btn btn-primary scale-up delay-1 {{item.button_class}}" routerLink="{{item.button_href}}" innerHTML={{item.button_text}}>{{item.button_text}}</a>
+        </div>
+        <div class="col-2"><div class="d-block"></div>
+          <!-- <div class="image-wrapper" [ngClass]="{'loading': !imagesLoaded.includes(item.image_path)}">  -->
+            <!-- <img [hidden]="!imagesLoaded.includes(item.image_path)" class="d-block mx-auto" src="{{ item.image_path }}" alt="{{ item.title }}" (load)="onImageLoad($event)"> -->
+          <!-- </div>
+        </div>
+      </div>
+    </div>
+  </slide>
+</carousel> -->

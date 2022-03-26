@@ -1,0 +1,19 @@
+mutation UpdateCart($input: UpdateCartInput!){
+  updateCart(input: $input){
+    id
+    userId
+    orderId
+    status
+    externalUserId
+    cartItems {
+      barcode { barcode, coverImage, title, sku, category, priceBase, priceSale, stock, size }
+      price,
+      quantity
+      currency
+    }
+    totalAmount
+    totalItemsCount
+    createdAt
+    updatedAt
+  }
+}

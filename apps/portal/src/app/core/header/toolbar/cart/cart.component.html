@@ -1,0 +1,46 @@
+<div class="cart" [ngClass]="{'hover': toolbarShow$ === true | async, 'full': cart.cartItems.length > 0}" *rxLet="cart$ as cart">
+  <a routerLink="/cart"></a>
+  <i class="icon-bag"></i>
+  <span *ngIf="cart" class="count">{{ cart.totalItemsCount }}</span>
+  <span *ngIf="!cart" class="count">0</span>
+  <span *ngIf="cart"class="subtotal">{{ cart.totalAmount }} руб.</span>
+  <span *ngIf="!cart" class="subtotal">0 руб.</span>
+  <!-- <div class="toolbar-dropdown">
+    <div *ngIf="cart; else noItemsInCart" class="scrollable-list">
+      <div *ngFor="let item of cart.items" class="dropdown-product-item">
+        <span class="dropdown-product-remove" (click)="onRemoveItem($event, item)">
+          <i class="icon-cross"></i>
+        </span>
+        <a class="dropdown-product-thumb" [routerLink]="['/product', item.product.sku]">
+          <img [src]="item.product.images_src[0]" alt="{{item.product.name}}">
+        </a>
+        <div class="dropdown-product-info">
+          <a class="dropdown-product-title" [routerLink]="['/product', item.product.sku]">{{item.product.name}}</a>
+          <span class="dropdown-product-details">{{item.amount}} x <span><app-price [product]="item.product"></app-price></span></span>
+        </div>
+      </div>
+    </div>
+    <ng-template #noItemsInCart>
+      <div>
+        <p>Ваша корзина пока пуста.</p>
+      </div>
+    </ng-template>
+    <div class="toolbar-dropdown-group">
+      <div class="column">
+        <span class="text-lg">Итого:</span>
+      </div>
+      <div class="column text-right">
+        <span *ngIf="cart" class="text-lg text-medium">{{cart.total}}</span>
+        <span *ngIf="!cart" class="text-lg text-medium">0</span>
+      </div>
+    </div>
+    <div class="toolbar-dropdown-group">
+      <div class="column">
+        <a class="btn btn-sm btn-block btn-secondary" routerLink="/cart">В корзину</a>
+      </div>
+      <div class="column">
+        <a class="btn btn-sm btn-block btn-success" routerLink="/checkout">Заказать</a>
+      </div>
+    </div>
+  </div> -->
+</div>

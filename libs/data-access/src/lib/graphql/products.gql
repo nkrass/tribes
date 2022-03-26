@@ -1,0 +1,33 @@
+query ProductsList($input: FilterProductInput!){
+  products(input: $input){
+    sku
+    skuFamily
+    nomenclature {tnvd}
+    title
+    titleFull
+    description
+    descriptionSeo
+    color
+    materials{material, quantity}
+    priceBase
+    priceSale
+    stock
+    status
+    category
+    gender
+    tags
+    collection
+    videos
+    wildberriesId
+    crossSale
+    manufactured
+    notes
+    rating
+    barcodes { size, stock }
+    createdAt
+    updatedAt
+    coverImage
+    imagesSrc
+    sizes
+  }
+}

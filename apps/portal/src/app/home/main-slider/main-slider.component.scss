@@ -1,0 +1,36 @@
+@import '~scss/helpers/variables';
+@import '~scss/helpers/mixins';
+
+@keyframes fadeOut {
+  0% { opacity: 1; }
+  100% { opacity: 0; }
+}
+.hero-image{
+  max-width: 500px;
+  min-height: 330px;
+  border:none;
+}
+.full-width{
+  max-width: 100%!important;
+  object-fit: cover;
+  object-position: left;
+}
+.red{ color: #fc3c44}
+.dark-blue{ color: #3d4760}
+
+h1 {
+  font-size: 50px;
+  font-weight: 700;
+}
+.hero-text-align{
+  text-align: center;
+}
+.margin-top-20pct{
+  margin-top: 20%;
+}
+@media (max-width: $screen-sm) {
+  h1 { font-size: 31px;}
+  .hero-text-align {
+    text-align: left;
+  }
+}

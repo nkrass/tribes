@@ -1,0 +1,13 @@
+query Barcode($input: GetBarcodeInput!){
+  barcode(input: $input){
+    barcode
+    sku
+    stock
+    size
+    coverImage
+    category
+    product {
+      sku, color, title, category, coverImage, priceBase, priceSale
+    }
+  }
+}

@@ -1,0 +1,149 @@
+<!-- Navbar-->
+<header class="sticky-top bg-opaque">
+  <app-search [class.d-block]="searchVisible"></app-search>
+  <nav class="navbar navbar-expand-xl navbar-light" *rxLet="cart$ as cart">
+    <div class="container-fluid order-3 order-lg-1">
+      <div data-nosnippet [collapse]="isCollapsed" [isAnimated]="true" class="navbar-collapse collapse w-100 order-3 order-lg-1 h6">
+        <ul class="navbar-nav me-auto text-center">
+          <li *ngIf="cart.cartItems.length>0" class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/cart">
+              <span class="badge badge-pill badge-gradient">В корзине {{cart.cartItems}} шт.</span>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+            <a class="nav-link" routerLink="/">
+              <span>Главная</span>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/women/catalog">
+              <span>Женщинам</span>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/men/catalog">
+              <span>Мужчинам</span>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/orders-payment-info">
+              <span>Доставка</span>
+            </a>
+          </li>
+          <li class="nav-item" routerLinkActive="active">
+            <a class="nav-link" routerLink="/about-tribes-brand">
+              <span>Бренд</span>
+            </a>
+          </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-1 order-lg-2 w-100 container">
+      <div class="row">
+        <div class="col-2 text-center p-0 mt-3">
+          <button 
+            type="button" 
+            class="navbar-toggler p-0" 
+            (click)="back()"
+            *ngIf="canNavigateBack$|async">
+            <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+              <path fill="#120d0e"fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+            </svg>
+            <span class="visually-hidden">Назад</span>
+          </button>
+        </div>
+        <div class="col-8 text-center">
+          <a routerLink="/" class="w-100 text-center">
+            <img width="100" height="auto" class="" src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg">
+          </a>
+        </div>
+        <div class="col-2 mt-1 p-0 text-center">
+          <button 
+            type="button" 
+            class="navbar-toggler" 
+            (click)="isCollapsed = !isCollapsed"
+            [attr.aria-expanded]="!isCollapsed"
+            [class.collapsed]="isCollapsed"
+            >
+            <span class="icon-bar top-bar"></span>
+            <span class="icon-bar middle-bar"></span>
+            <span class="icon-bar bottom-bar"></span>
+            <span *ngIf="cart.items_count>0" class="badge badge-menu badge-gradient">{{cart.cartItems}}</span>
+            <span class="visually-hidden">Меню</span>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-2 order-lg-3">
+      <div class="toolbar navbar-nav ms-auto">
+        <div class="inner">
+          <div class="tools">
+            <div (click)="openSearch($event)" class="search">
+              <!-- <i (click)="showSearch = true" class="icon-search"></i> -->
+              <i class="icon-search"></i>
+            </div>
+            <!-- <div class="account">
+              <a *ngIf="!user; else whenLoggedIn" routerLink="/register-login"></a>
+    
+              <ng-template #whenLoggedIn>
+                <a routerLink="/account/profile"></a>
+              </ng-template>
+    
+              <i class="icon-head"></i>
+              <ul *ngIf="user" class="toolbar-dropdown">
+                <li class="sub-menu-user">
+                  <div class="user-info">
+                    <h6 class="user-name">{{ user.email }}
+                      <span *ngIf="user.roles.admin"> (Admin)</span>
+                    </h6>
+                  </div>
+                </li>
+                <li>
+                  <a routerLink="/account/profile" href="">My Profile</a>
+                </li>
+                <li>
+                  <a routerLink="/account/orders" href="">Orders List</a>
+                </li>
+                <li class="sub-menu-separator"></li>
+                <li>
+                  <a href="" (click)="onLogOut($event)">
+                    <i class="icon-unlock"></i>Logout</a>
+                </li>
+              </ul>
+            </div> -->
+    
+            <app-toolbar-cart></app-toolbar-cart>
+    
+          </div>
+        </div>
+      </div>
+        <!-- <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Right</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul> -->
+    </div>
+  </div>
+</nav>
+  
+  
+
+  <!-- <div class="site-branding form-inline">
+    <div class="inner" >
+      <a class="offcanvas-toggle" href="" (click)="onMenuToggle($event)"></a>
+    </div>
+    <div class="inner d-flex justify-content-center align-items-center">
+      <a (click)="back()">
+        <img src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg" 
+        data-src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg" 
+        class="site-logo" alt="TRIBES — Smart styling, happy livig">
+      </a>
+    </div>
+  </div>
+  <app-navigation-main></app-navigation-main> -->
+
+  <!-- Toolbar-->
+  
+</header>

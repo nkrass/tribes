@@ -1,0 +1,51 @@
+<div class="offcanvas offcanvas-top" data-bs-scroll="true" data-bs-backdrop="false" tabindex="-1" id="offcanvasTop" aria-labelledby="offcanvasTopLabel" [ngClass]="{'showSearchBox': visible}">
+  <div class="offcanvas-header">
+    <h5 id="offcanvasTopLabel">Поиск по каталогу:</h5>
+    <input class="form-control form-control" 
+      type="text" 
+      [autofocus]="true" (input)="onSearchInput($event)" placeholder="Введите для поиска..."
+      aria-label="Поиск">
+    <button type="button" (click)="closeSearch()" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body" *ngIf="products && products.length>0">
+    <div class="row pb-2" *ngFor="let product of products">
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <a class="product-thumb align-top " 
+          [ngClass]="{'loading': imageLoading}"
+          routerLink="/product/{{product.sku}}"
+          (click)="onCloseSearch()">
+          <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'"  [lazyLoad]="product.images_src[0]" alt="{{product.title}}"/>
+        </a>
+      </div>
+      <div class="col-6 col-sm-6 col-md-6 col-lg-6 col-xl-6">
+        <h4 class="product-title">
+          {{product.title}}
+        </h4>
+        <h4 class="product-price"><app-price [product]="product"></app-price></h4>
+        <p class="hidden-xs-down">{{product.description_short}}</p>
+        <!-- <div class="product-buttons">
+          <button class="btn btn-outline-primary btn-sm" (click)="onAddToCart()">в Корзину</button>
+        </div> -->
+        <div class="text-center">
+          <a routerLink="/product/{{product.sku}}" 
+            class="btn btn-primary"
+            (click)="onCloseSearch()">
+            Подробнее
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row" *ngIf="cross_sale.length>0">
+    <div class="col-md-12 mt-2">
+      <tabset #productsCrossSale>
+        <tab heading="Вам может понравится:" id="tab2">
+          <div class="row">
+            <app-product-crosssale *ngFor="let product of cross_sale" [product]="product" [ref]="cross_sale.sku" class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0">
+            </app-product-crosssale>
+          </div>
+        </tab>
+      </tabset>
+    </div>
+  </div>
+</div>

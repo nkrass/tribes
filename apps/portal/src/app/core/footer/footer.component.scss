@@ -1,0 +1,52 @@
+@import '~scss/helpers/variables';
+@import '~scss/helpers/mixins';
+.logo-small{
+  max-height: 30px!important;
+}
+.site-footer {
+  padding-top: floor($grid-vertical-step * 2); //~72px;
+  background-color: $brand-primary;//$gray-darker;
+  @media (max-width: $screen-md) {
+    padding-top: floor($grid-vertical-step * 2); //~48px;
+  }
+}
+.footer-copyright {
+  margin: 0;
+  padding: {
+    top: 10px;
+    bottom: $grid-vertical-step; // ~24px
+  }
+  color: rgba($white-color, .5);
+  font: {
+    size: $font-size-sm;
+    weight: normal;
+  }
+  > a {
+    transition: color .25s;
+    color: rgba($white-color, .5);
+    text-decoration: none;
+    &:hover { 
+      //color: $link-hover-color;
+      font-weight: bold;
+    }
+  }
+}
+
+// Light Footer
+.footer-light {
+  background-color: $gray-lighter;
+  .footer-copyright {
+    color: $gray;
+    > a {
+      color: $gray;
+      &:hover { color: $link-hover-color; }
+      }
+  }
+}
+
+.social-button{
+  width: 80px;
+  height: 80px;
+  line-height: 80px;
+  font-size: 40px;
+}

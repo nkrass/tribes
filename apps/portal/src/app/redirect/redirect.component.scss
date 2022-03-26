@@ -1,0 +1,8 @@
+@import '~scss/helpers/variables';
+@import '~scss/helpers/mixins';
+
+.loading{
+  display: block;
+  min-height: 20vh;
+  height: 20vh;
+}

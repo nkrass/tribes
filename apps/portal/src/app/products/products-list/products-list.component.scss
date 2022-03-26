@@ -1,0 +1,402 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/forms";
+@import '~scss/helpers/variables';
+@import '~scss/helpers/mixins';
+
+.catalogSlider {
+  width: 100%;
+  height: auto;
+  z-index: unset;
+}
+
+.btn-circle.btn-sm {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  font-size: 8px;
+  text-align: center;
+}
+.tagcloud06 ul {
+	margin: 0;
+	padding: 0;
+	list-style: none;
+  cursor: pointer;
+}
+.tagcloud06 ul li {
+	display: inline-block;
+	margin: 0 0 .3em 1em;
+	padding: 0;
+}
+.tagcloud06 ul li a {
+	position: relative;
+	display: inline-block;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 1em 0 .75em;
+	background-color: #ff7043;
+	border-radius: 0 3px 3px 0;
+	color: #fff;
+	font-size: 13px;
+	text-decoration: none;
+	-webkit-transition: .2s;
+	transition: .2s;
+}
+.tagcloud06 ul li a::before {
+	position: absolute;
+	top: 0;
+	left: -15px;
+	z-index: 1;
+	content: '';
+	width: 30px;
+	height: 30px;
+	background-color: #ff7043;
+	border-radius: 50%;
+	-webkit-transition: .2s;
+	transition: .2s;
+}
+.tagcloud06 ul li a::after {
+	position: absolute;
+	top: 50%;
+	left: -6px;
+	z-index: 2;
+	display: block;
+	content: '';
+	width: 6px;
+	height: 6px;
+	margin-top: -3px;
+	background-color: #fff;
+	border-radius: 100%;
+}
+.tagcloud06 ul li span {
+	display: block;
+	max-width: 100px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	overflow: hidden;
+  padding-left: 5px;
+}
+.tagcloud06 ul li a:hover {
+	background-color: #555;
+	color: #fff;
+}
+.tagcloud06 ul li a:hover::before {
+	background-color: #555;
+}
+.tagcloud06.active{
+  transition: all .3s linear;
+}
+
+
+.mainSlider {
+  width: 100%;
+  height: auto;
+  z-index: unset;
+}
+.swiper-slide {
+  text-align: center;
+  font-size: 18px;
+  background: #fff;
+
+  /* Center slide text vertically */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  -webkit-justify-content: center;
+  justify-content: center;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  -webkit-align-items: center;
+  align-items: center;
+}
+
+.swiper-slide img {
+  display: block;
+  // width: 100%;
+  object-fit: fill;
+}
+.categories-mobile {
+  display: none;
+  @include media-breakpoint-down(xl){
+    display: flex;
+  }
+}
+.panel-img{
+  min-height: 34vw;
+}
+.categories-desktop {
+  display: none;
+  @include media-breakpoint-up(xl){
+    display: block;
+    background: #fff0;
+    position: sticky;
+    top: 66px;
+    height: 100%;
+    .list-group-item{
+      border: #d0d3d4;
+      border-radius: 0!important;
+    }
+    span{
+      display: none;
+    }
+    a:hover{
+      &a.active{
+        text-decoration: overline;
+        span{ display: none;}
+      }
+    }
+  }
+}
+
+// .categories-list{
+//   // top: 80px;
+//   &.show{
+//     display: flex;
+//   }
+//   > a.active{
+//     text-decoration: overline;
+//   }
+// }
+// [hidden] {
+//   display: none !important;
+// }
+
+// .shop-sorting {
+//   label,
+//   .form-control,
+//   span {
+//     display: inline-block;
+//     vertical-align: middle;
+//   }
+//   span { padding: 8px 0; }
+//   label {
+//     margin: 0;
+//     padding: 8px 5px 8px 0;
+//     color: $gray;
+//     font: {
+//       size: $font-size-sm;
+//       weight: normal;
+//     }
+//   }
+//   .form-control {
+//     width: 100%;
+//     // max-width: 230px;
+//     margin-right: 10px;
+//   }
+//   @media (max-width: $screen-sm) {
+//     label, .form-control {
+//       display: block;
+//       width: 100%;
+//       max-width: 100%;
+//       padding: 0px 10px 0px 10px;
+//     }
+//     label {
+//       padding: 0px;
+//     }
+//   }
+// }
+.shop-view {
+  @include clearfix;
+  > a {
+    display: block;
+    width: $shop-view-size;
+    height: $shop-view-size;
+    margin-left: 10px;
+    padding: 13px;
+    float: left;
+    transition: background-color .35s;
+    border: 1px solid $border-color;
+    border-radius: 50%;
+    background-color: $shop-view-bg-color;
+    span {
+      display: block;
+      position: relative;
+      width: 3px;
+      height: 3px;
+      margin-bottom: 3px;
+      background-color: $shop-view-color;
+      &::before,
+      &::after {
+        display: block;
+        position: absolute;
+        background-color: $shop-view-color;
+      }
+      &:last-child { margin-bottom: 0; }
+    }
+    &:hover { background-color: $shop-view-hover-bg-color; }
+    &.active {
+      border-color: $shop-view-active-bg-color;
+      background-color: $shop-view-active-bg-color;
+      cursor: default;
+      pointer-events: none;
+      span,
+      span::before,
+      span::after { background-color: $white-color; }
+    }
+    &.grid-view span {
+      &::before,
+      &::after {
+        top: 0;
+        width: 3px;
+        height: 3px;
+        content: '';
+      }
+      &::before { left: 6px; }
+      &::after { left: 12px; }
+    }
+    &.list-view span {
+      &::before {
+        top: 1px;
+        left: 6px;
+        width: 9px;
+        height: 1px;
+        content: '';
+      }
+    }
+  }
+}
+
+a.dropdown-item{
+  padding-left: 5px!important;
+}
+.dropdown-item:hover{
+  // background-color: #e9ecef;
+  background: url('/static/img/bg.png')!important;
+  background-repeat: no-repeat!important;
+  background-size: cover!important;
+}
+.pointer{
+  cursor: pointer;
+}
+.colorSelectorCircle {
+  display: inline;
+  width: 25%;
+  height: 2rem;
+  margin: -4px 5px 0px 5px;
+  float: left;
+  top: 0px;
+  border-radius: 10px;
+  &00{@extend .colorSelectorCircle; background-color: #fff; background-image: url('/static/img/bg.png'); background-size: cover; background-repeat: no-repeat;}
+  &01{@extend .colorSelectorCircle; background-color: #ffffff ;}
+  &02{@extend .colorSelectorCircle; background-color: #ffffff ;}
+  &03{@extend .colorSelectorCircle; background-color: #120d0e ;}
+  &04{@extend .colorSelectorCircle; background-color: #ffffff ;}
+  &05{@extend .colorSelectorCircle; background-color: #ee331a ;}
+  &06{@extend .colorSelectorCircle; background-color: #9f0e2c ;}
+  &07{@extend .colorSelectorCircle; background-color: #834424 ;}
+  &08{@extend .colorSelectorCircle; background-color: #ab7412 ;}
+  &09{@extend .colorSelectorCircle; background-color: #f7f7e3 ;}
+  &10{@extend .colorSelectorCircle; background-color: #a19f9f ;}
+  &11{@extend .colorSelectorCircle; background-color: #fdd605 ;}
+  &12{@extend .colorSelectorCircle; background-color: #fdfff5 ;}
+  &13{@extend .colorSelectorCircle; background-color: #fbc3cd ;}
+  &14{@extend .colorSelectorCircle; background-color: #244585 ;}
+  &15{@extend .colorSelectorCircle; background-color: #477ce3 ;}
+  &16{@extend .colorSelectorCircle; background-color: #fcff00 ;}
+  &17{@extend .colorSelectorCircle; background-color: #368715 ;}
+  &18{@extend .colorSelectorCircle; background-color: #ffbe00 ;}
+  &19{@extend .colorSelectorCircle; background-color: #ffc800 ;}
+  &20{@extend .colorSelectorCircle; background-color: #009473 ;}
+  &21{@extend .colorSelectorCircle; background-color: #f08080 ;}
+  &22{@extend .colorSelectorCircle; background-color: #b87333 ;}
+  &23{@extend .colorSelectorCircle; background-color: #708238 ;}
+  &24{@extend .colorSelectorCircle; background-color: #bf00ff ;}
+  &25{@extend .colorSelectorCircle; background-color: #c0c0c0 ;}
+  &26{@extend .colorSelectorCircle; background-color: #e5b6f7 ;}
+  &27{@extend .colorSelectorCircle; background-color: #615e3e ;}
+  &28{@extend .colorSelectorCircle; background-color: #f5f5dc ;}
+  &29{@extend .colorSelectorCircle; background-color: #305db3 ;}
+  &30{@extend .colorSelectorCircle; background-color: #183772 ;}
+  &31{@extend .colorSelectorCircle; background-color: #244585 ;}
+  &32{@extend .colorSelectorCircle; background-color: #e1c699 ;}
+  &33{@extend .colorSelectorCircle; background-color: #ffdfe5 ;}
+  &34{@extend .colorSelectorCircle; background-color: #444444 ;}
+  &35{@extend .colorSelectorCircle; background-color: #b35642 ;}
+  &36{@extend .colorSelectorCircle; background-color: #274788 ;}
+  &37{@extend .colorSelectorCircle; background-color: #242526 ;}
+  &38{@extend .colorSelectorCircle; background-color: #291c13 ;}
+  &39{@extend .colorSelectorCircle; background-color: #cef100 ;}
+  &40{@extend .colorSelectorCircle; background-color: #4d4d33 ;}
+  &41{@extend .colorSelectorCircle; background-color: #623411 ;}
+  &42{@extend .colorSelectorCircle; background-color: #9c4722 ;}
+  &43{@extend .colorSelectorCircle; background-color: #a9d39e ;}
+  &44{@extend .colorSelectorCircle; background-color: #4c3532 ;}
+  &45{@extend .colorSelectorCircle; background-color: #99d8ae ;}
+  &46{@extend .colorSelectorCircle; background-color: #f103f2 ;}
+  &47{@extend .colorSelectorCircle; background-color: #09638e ;}
+  &48{@extend .colorSelectorCircle; background-color: #a30a21 ;}
+  &49{@extend .colorSelectorCircle; background-color: #998762 ;}
+  &50{@extend .colorSelectorCircle; background-color: #f1c29b ;}
+  &51{@extend .colorSelectorCircle; background-color: #2dcabd ;}
+  &52{@extend .colorSelectorCircle; background-color: #eceee7 ;}
+  &53{@extend .colorSelectorCircle; background-color: #ef8900 ;}
+  &54{@extend .colorSelectorCircle; background-color: #fb861a ;}
+}
+.btn-color{
+  border: 1px solid #fffde4;
+  box-shadow: 0px 1px 2px 0px #edddec;
+  &:hover{
+    color:#2f3337;
+  }
+}
+.btn-color{
+  &00{@extend .btn-color; background-color: #ffffff; background-image: url('/static/img/bg.png'); background-size: cover; background-repeat: no-repeat;}
+  &01{@extend .btn-color; background-color: #ffffff; border: 1px solid #b9b9b9;}
+  &02{@extend .btn-color; background-color: #ffffff; border: 1px solid #b9b9b9;}
+  &03{@extend .btn-color; background-color: #120d0e; color: #fff}
+  &04{@extend .btn-color; background-color: #ffffff; border: 1px solid #b9b9b9;}
+  &05{@extend .btn-color; background-color: #ee331a; color: #fff}
+  &06{@extend .btn-color; background-color: #9f0e2c; color: #fff}
+  &07{@extend .btn-color; background-color: #834424; color: #fff}
+  &08{@extend .btn-color; background-color: #ab7412; color: #fff}
+  &09{@extend .btn-color; background-color: #f7f7e3; }
+  &10{@extend .btn-color; background-color: #a19f9f; color: #fff}
+  &11{@extend .btn-color; background-color: #fdd605; color: #fff}
+  &12{@extend .btn-color; background-color: #fdfff5; }
+  &13{@extend .btn-color; background-color: #fbc3cd; color: #fff}
+  &14{@extend .btn-color; background-color: #244585; color: #fff}
+  &15{@extend .btn-color; background-color: #477ce3; color: #fff}
+  &16{@extend .btn-color; background-color: #fcff00; color: #fff}
+  &17{@extend .btn-color; background-color: #368715; color: #fff}
+  &18{@extend .btn-color; background-color: #ffbe00; color: #fff}
+  &19{@extend .btn-color; background-color: #ffc800; color: #fff}
+  &20{@extend .btn-color; background-color: #009473; color: #fff}
+  &21{@extend .btn-color; background-color: #f08080; color: #fff}
+  &22{@extend .btn-color; background-color: #b87333; color: #fff}
+  &23{@extend .btn-color; background-color: #708238; color: #fff}
+  &24{@extend .btn-color; background-color: #bf00ff; color: #fff}
+  &25{@extend .btn-color; background-color: #c0c0c0; color: #fff}
+  &26{@extend .btn-color; background-color: #e5b6f7; color: #fff}
+  &27{@extend .btn-color; background-color: #615e3e; color: #fff}
+  &28{@extend .btn-color; background-color: #f5f5dc; }
+  &29{@extend .btn-color; background-color: #305db3; color: #fff}
+  &30{@extend .btn-color; background-color: #183772; color: #fff}
+  &31{@extend .btn-color; background-color: #244585; color: #fff}
+  &32{@extend .btn-color; background-color: #e1c699; }
+  &33{@extend .btn-color; background-color: #ffdfe5; }
+  &34{@extend .btn-color; background-color: #444444; color: #fff}
+  &35{@extend .btn-color; background-color: #b35642; color: #fff}
+  &36{@extend .btn-color; background-color: #274788; color: #fff}
+  &37{@extend .btn-color; background-color: #242526; color: #fff}
+  &38{@extend .btn-color; background-color: #291c13; color: #fff}
+  &39{@extend .btn-color; background-color: #cef100; color: #fff}
+  &40{@extend .btn-color; background-color: #4d4d33; color: #fff}
+  &41{@extend .btn-color; background-color: #623411; color: #fff}
+  &42{@extend .btn-color; background-color: #9c4722; color: #fff}
+  &43{@extend .btn-color; background-color: #a9d39e; color: #fff}
+  &44{@extend .btn-color; background-color: #4c3532; color: #fff}
+  &45{@extend .btn-color; background-color: #99d8ae; color: #fff}
+  &46{@extend .btn-color; background-color: #f103f2; color: #fff}
+  &47{@extend .btn-color; background-color: #09638e; color: #fff}
+  &48{@extend .btn-color; background-color: #a30a21; color: #fff}
+  &49{@extend .btn-color; background-color: #998762; color: #fff}
+  &50{@extend .btn-color; background-color: #f1c29b; color: #fff}
+  &51{@extend .btn-color; background-color: #2dcabd; color: #fff}
+  &52{@extend .btn-color; background-color: #eceee7; }
+  &53{@extend .btn-color; background-color: #ef8900; color: #fff}
+  &54{@extend .btn-color; background-color: #fb861a; color: #fff}
+}

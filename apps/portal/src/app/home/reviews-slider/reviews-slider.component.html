@@ -1,0 +1,107 @@
+<div class="reviews-slider">
+  <swiper
+          [slidesPerView]="1"
+          [spaceBetween]="0"
+          [navigation]="true"
+          [pagination]="{
+            clickable: true
+          }"
+          [breakpoints]="{
+            '320': {
+              slidesPerView: 1
+            },
+            '960': {
+              slidesPerView: 1
+            }
+          }"
+          class="mainSlider"
+          style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
+        >
+          <ng-template swiperSlide *ngFor="let item of items; index as i" >
+            <div class="card-panel container align-self-center" *ngFor="let item of items; index as i">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-12 col-sm-6 col-md-5 pb-2 text-md-left text-center">
+                  <div class="from-bottom">
+                    <app-rating-stars [rating]=item.rating [size]="'large'"></app-rating-stars> 
+                    <div class="col-12 pb-1"></div>
+                    <div class="h4">
+                      <span class="">
+                        {{item.review}}
+                        <!-- <app-price [product]="item"></app-price> -->
+                      </span>
+                    </div>
+                    <div class="product-rating">
+                      {{item.name}}           
+                    </div>
+                  </div>
+                  <!-- <a class="btn btn-primary scale-up delay-1" routerLink="/product/{{ item.sku }}">Подробнее</a> -->
+                </div>
+                <div class="col-12 col-sm-4 col-md-4 pb-2 pt-3 align-self-center">
+                  <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" [lazyLoad]="item.image_path" alt="{{ item.sku }}" class="d-block reviews-product-image">
+                </div>
+              </div>
+            </div>
+          </ng-template>
+  </swiper>
+  <!-- <ngx-flicking
+      class="flicking"
+      [options]="{circular: false }"
+      [plugins]="plugins">
+      <div flicking-panel class="card-panel container align-self-center" *ngFor="let item of items; index as i">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-12 col-sm-6 col-md-5 pb-2 text-md-left text-center">
+            <div class="from-bottom">
+              <app-rating-stars [rating]=item.rating [size]="'large'"></app-rating-stars> 
+              <div class="col-12 pb-1"></div>
+              <div class="h4">
+                <span class="">
+                  {{item.review}}
+                  <app-price [product]="item"></app-price>
+                </span>
+              </div>
+              <div class="product-rating">
+                {{item.name}}           
+              </div>
+            </div>
+            <a class="btn btn-primary scale-up delay-1" routerLink="/product/{{ item.sku }}">Подробнее</a>
+          </div>
+          <div class="col-12 col-sm-4 col-md-4 pb-2 pt-3 align-self-center">
+            <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" [lazyLoad]="item.image_path" alt="{{ item.sku }}" class="d-block reviews-product-image">
+          </div>
+        </div>
+      </div>
+      <div in-viewport class="flicking-pagination reviews-pagination"></div>
+      <span in-viewport class="flicking-arrow-prev reviews-arrow-prev"></span>
+      <span in-viewport class="flicking-arrow-next reviews-arrow-next"></span>
+  </ngx-flicking> -->
+  
+  
+
+  <!-- <carousel [isAnimated]="true" [interval]="false" class="container">
+    <slide *ngFor="let item of items; index as i" >
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div class="col-12 col-sm-6 col-md-4 col-lg-4 col-xl-4 pb-2 text-md-left text-center">
+            <div class="from-bottom">
+              <app-rating-stars [rating]=item.rating [size]="'large'"></app-rating-stars> 
+              <div class="col-12 pb-1"></div>
+              <div class="h4">
+                <span class="">
+                  {{item.review_text}}
+                  <app-price [product]="item"></app-price> 
+                </span>
+              </div>
+              <div class="product-rating">
+                {{item.author}}           
+              </div>
+            </div>
+            <a class="btn btn-primary scale-up delay-1" routerLink="/product/{{ item.sku }}">Подробнее</a>
+          </div>
+          <div class="col-8 col-sm-4 col-md-6 pb-2 pt-3 align-self-center">
+            <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" [lazyLoad]="item.image_path" alt="{{ item.product_title }}" class="d-block reviews-product-image">
+          </div>
+        </div>
+      </div>
+    </slide>
+  </carousel>
+</div> -->

@@ -1,0 +1,66 @@
+<h4>Проверка заказа</h4>
+<hr class="pb-1">
+<div class="table-responsive shopping-cart">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Продукция</th>
+        <th class="text-center">Подитог</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of cart.cartItems; let i = index">
+        <td>
+          <div class="product-item">
+            <a class="product-thumb" routerLink="/product/{{item.barcode.sku}}">
+              <img [src]="item.barcode.coverImage" alt="{{item.barcode.title}}">
+            </a>
+            <div class="product-info">
+              <h4 class="product-title">
+                <a routerLink="/product/{{item.barcode.sku}}">{{item.barcode.title}}
+                  <small>x {{item.quantity}}</small>
+                </a>
+              </h4>
+            </div>
+          </div>
+        </td>
+        <td class="text-center text-lg text-medium">{{ (item.barcode.priceSale * item.quantity) }}&nbsp; руб.</td>
+        <td class="text-center">
+          <a class="btn btn-outline-primary btn-sm" routerLink="/cart">Изменить</a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+<div class="shopping-cart-footer">
+  <div class="column"></div>
+  <div class="column text-lg">Итого:
+    <span class="text-medium">{{ total }} &nbsp; руб.</span>
+  </div>
+</div>
+<div class="row padding-top-1x mt-3">
+  <div class="col-sm-6">
+    <h5>Доставка:</h5>
+    <ul class="list-unstyled">
+      <li>
+        <span class="text-muted">Покупатель:</span>{{customer.lastname}} {{customer.firstname}} {{customer.patronymic}}</li>
+      <li>
+        <span class="text-muted">Адрес доставки:</span>{{customer.zip}} {{customer.address1}} {{customer.address2}} {{customer.city}} {{customer.country}}</li>
+      <li>
+        <span class="text-muted">Телефон:</span>{{customer.phone}}</li>
+      <li>
+        <span class="text-muted">Email:</span>{{customer.email}}
+      </li>
+    </ul>
+  </div>
+  <div class="col-sm-6">
+    <h5>Оплата:</h5>
+    <ul class="list-unstyled">
+      <li>
+        <span class="text-muted">{{ paymentMethod }}</span></li>
+    </ul>
+  </div>
+</div>
+
+<app-checkout-footer [buttons]="['back', 'completeOrder']" (back)="onBack()" (completeOrder)="onCompleteOrder()"></app-checkout-footer>

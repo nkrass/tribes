@@ -1,0 +1,30 @@
+<div class="h-100 container" *rxLet="product$ as product">
+  <!-- Page Content-->
+  <div class="row">
+    <div class="card">
+      <div class="card-body text-center">
+          <h4>Ожидайте автоматический переход на сайт Wildberries для оформления заказа</h4>
+          <span class="loading"></span>
+          <a href="{{redirect_address}}" *ngIf="product">
+            <button class="btn btn-primary" [disabled]='btn_disabled' *ngIf="btn_disabled">
+              Переход через: {{countdown}} сек.
+            </button>
+          </a>
+          <a href="{{redirect_address}}"  *ngIf="product && !btn_disabled" class="">
+            <button class="btn btn-primary" >
+              Перейти на сайт 
+            </button>
+          </a>
+          <br>
+          <br>
+          <a href="{{redirect_address}}"  *ngIf="product" class="text-xs dark">Если переход не произошел автоматически, кликните по по этой ссылке</a>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="product" class="">
+    <ngx-json-ld [json]="schema"></ngx-json-ld>
+    <noscript>
+      <img crossorigin height="1" width="1" style="display:none"
+        src="https://www.facebook.com/tr?id=375373836490576&ev=ViewContent&cd[content_ids]={{product.sku}}&cd[content_name]={{product.title}}&noscript=1"/>
+    </noscript>
+</div>

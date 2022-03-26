@@ -1,0 +1,106 @@
+@import '~scss/helpers/variables';
+
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+ul > li {
+  margin-bottom: 4px;
+}
+h2 {
+  padding: 0;
+  margin: 0;
+}
+form > section {
+  margin-bottom: 2em;
+}
+form > section > h1 {
+  padding: 10px 0;
+  text-transform: uppercase;
+  border-bottom: 1px solid #f1f1f1;
+  position: relative;
+  margin-bottom: 1em;
+}
+// form > section > section > h1 {
+//   text-transform: uppercase;
+// }
+form > section > section {
+  display: flex;
+  flex-direction: column;
+}
+label {
+  cursor: pointer;
+}
+label:hover, input:checked+label {
+  color: $brand-primary;
+}
+input[type=text],
+textarea {
+  border: 0;
+  padding: 15px;
+  color: $gray-darker;
+  background-color: transparent;
+}
+input[type=text] {
+  border-bottom: 2px solid #f1f1f1;
+}
+input[type=text]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+textarea {
+  border: 2px solid #f1f1f1;
+  width: 98%;
+  height: 150px;
+}
+select {
+  border: 0;
+  border-bottom: 2px solid #f1f1f1;
+  padding: 4px;
+  cursor: pointer;
+  color: $gray-darker;
+  background-color: transparent;
+}
+input[type=checkbox], input[type=radio] {
+  width: 28px;
+  height: 28px;
+  position: relative;
+  margin: 20px auto;
+}
+button:disabled{
+  background-color: $gray-darker;
+}
+.customer-name input[type=text], .customer-email input[type=text] {
+  width: 100%;
+  // text-transform: uppercase;
+}
+.customer-name input[type=text].ng-invalid {
+  // border: 1px solid $brand-primary;
+}
+
+.more-feedbacks input[type=text] {
+  width: 50%;
+  margin-bottom: 15px;
+  margin-right: 10px
+}
+.detailed-feedback{
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+}
+.detailed-feedback> h1, .detailed-feedback> section {
+  flex: 1 100%;
+}
+.detailed-feedback> section { flex: 1 auto; }
+.detailed-feedback> section ul > li input {
+  margin-right: 5px;
+}  
+.detailed-feedback> section ul > li input, .detailed-feedback> section ul > li label {
+  display: inline-block;
+  vertical-align: middle;
+}
+.errors {
+  color: $brand-primary;
+}

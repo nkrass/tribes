@@ -1,0 +1,16 @@
+.main-wrapper {
+  background: #fff;
+  // background: linear-gradient(to left top, aqua 0%, rgba(255, 0, 255, 0.5) 50%, yellow 100%), linear-gradient(black, black);
+  // background: linear-gradient(to right top, whitesmoke 0%, rgba(255, 0, 255, 0.5) 50%, #f3f4f0 100%), linear-gradient(whitesmoke, #c68761);
+  height: 100%;
+  width: 100%;
+  // background-image: url("https://cdn.mytribes.ru/static/img/layout/grad.png");
+  background-image: url('/static/img/bg.png');
+  background-repeat: no-repeat;
+  background-position: initial;
+  background-size: cover;
+}
+.content{
+  // background: rgba(255, 255, 255, 0.85);
+  display: block;
+}

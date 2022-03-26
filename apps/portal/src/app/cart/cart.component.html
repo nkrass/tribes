@@ -1,0 +1,78 @@
+<!-- Page Content-->
+<div class="container px-0 pb-4" *rxLet="cart$ as cart">
+  <div class="row busket">
+    <div class="col cart">
+      <div class="title">
+          <div class="row">
+              <div class="col">
+                  <h4><b>Корзина</b></h4>
+              </div>
+              <div class="col align-self-center text-right text-muted">{{cart.items_count}} шт.</div>
+          </div>
+      </div>
+      <div class="row border-top" *ngFor="let item of cart.items; let i = index">
+          <div class="row main align-items-center">
+              <div class="col-4 col-sm-2 col-md-2 p-0">
+                <img class="img-fluid" [src]="item.product.coverImage" [alt]="item.product.title">
+              </div>
+              <div class="col-8 col-sm-10 col-md-4 col-lg-4">
+                  <div class="row text-muted text-sm">Арт.: {{item.product.sku}}</div>
+                  <div class="row">{{item.product.title}}</div>
+                  <div class="row">Цвет: {{item.product.color}}</div>
+                  <div class="row">Размер: {{item.barcode.slice(item.barcode.length-2)}}</div>
+              </div>
+              <div class="col-4 col-md-2 p-0" *ngIf="!showDistributor"> 
+                <a class="dark" (click)="decreaseAmount(item)">-</a>
+                <a class="border dark">{{item.amount}}</a>
+                <a class="dark" (click)="increaseAmount(item)">+</a> </div>
+              <div class="col-6 col-sm-6 col-md-3" *ngIf="!showDistributor">
+                <app-price class="card-text h6" [product]="item.product" [count]="item.amount"></app-price>
+              </div>
+              <div class="col-2 col-sm-2 col-md-1 p-0" *ngIf="!showDistributor">
+                <span class="close" (click)="removeItem($event, item)">&#10005;</span>
+              </div>
+              <div class="col-6" *ngIf="showDistributor">
+                <a class="btn btn-sm btn-wb" href="https://www.wildberries.ru/catalog/{{item.product.id}}/detail.aspx?" target="_blank">Открыть на сайте Wildberries &#8594;</a>
+              </div>
+          </div>
+      </div>
+      <div *ngIf="cart.items_count == 0" class="row justify-content-center align-content-center">
+        <div class="col">
+          <h5 class="p-2 text-center">Корзина все еще пуста, добавьте в нее продукты...</h5>
+        </div>
+      </div>
+      <div class="back-to-shop text-center">
+        <button class="btn btn-secondary" routerLink="/catalog">&#8592; Обратно к покупкам</button>
+      </div>
+    </div>
+    <div *ngIf="cart.items_count > 0"class="col-md-4 summary">
+      <div class="title">
+          <h4><b>Оформить заказ</b></h4>
+      </div>
+      <hr>
+      <div class="row">
+          <div class="col p-0 pt-2" style="padding-left:0;">Всего {{cart.items_count}} шт.</div>
+          <div class="col p-0 pt-2">на сумму {{cart.total}} ₽</div>
+      </div>
+      <form>
+          <p>Выберите магазин для заказа:</p>
+          <select #selectShop (change)="onSelectShop(selectShop.value)">
+            <option class="text-muted" value="wb">Заказать на Вайлдберриз</option>
+            <option class="text-muted" value="mytribes">Оформить на сайте</option>
+          </select>
+          <!-- <p>Секретный токен</p>
+          <input *ngIf="!showDistributor" id="code" placeholder="Скопируйте код и вставьте"> -->
+      </form>
+      <div *ngIf="!showDistributor" class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
+          <div class="col">Итоговая стоимость</div>
+          <div class="col text-right">{{cart.total}} ₽</div>
+      </div> 
+      <button class="btn btn-block btn-success" *ngIf="!showDistributor && cart.items_count" (click)="initCheckout($event)">
+        Оформить доставку
+      </button>
+      <button class="btn btn-outline-success disabled" *ngIf="!showDistributor && !cart.items_count">
+        Оформить доставку
+      </button>
+    </div>
+  </div>
+</div>

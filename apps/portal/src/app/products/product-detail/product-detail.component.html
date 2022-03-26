@@ -1,0 +1,501 @@
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Размерная сетка</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="pb-2 pt-2">
+      <div class="row mb-3">
+        <p class="pb-2">
+          Для Вашего комфорта при примерке заказанной одежды мы рекомендуем Вам снять мерки, и перед измерением обязательно наденьте то белье, которое Вы планируете носить с этим изделием. Выпрямитесь, расправьте плечи. Для того, чтобы наиболее точно определить линию талии, нагнитесь сначала вправо, а затем влево - точки сгиба покажут ее расположение. Снимайте мерки только по выступающим точкам (грудь и бедра). Не втягивайте живот и не выгибайтесь. Сантиметровая лента должна не стягивать кожу и не висеть, а прилегать плотно. Если Ваш размер является чем-то средним между двумя, то выбирайте вещь большего размера. 
+        </p>
+      </div>
+      <div class="row mt-3">
+        <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8 order-0">
+          <h3 class="h2 text-center">Женская одежда</h3>
+          <br>
+          <p>В таблице содержатся данные о размерах женской одежды и указаны измерения, на которые стоит ориентироваться при покупке.</p>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Россия (RU)</th>
+                  <th scope="col">Международный (Int)</th>
+                  <th scope="col">Европа (EU)</th>
+                  <th scope="col">США (US)</th>
+                  <th scope="col">Обхват груди (см)</th>
+                  <th scope="col">Обхват талии (см)</th>
+                  <th scope="col">Обхват бедер (см)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">40</th>
+                  <td>XS</td>
+                  <td>34</td>
+                  <td>6</td>
+                  <td>80</td>
+                  <td>62</td>
+                  <td>86</td>
+                </tr>
+                <tr>
+                  <th scope="row">42</th>
+                  <td>S</td>
+                  <td>36</td>
+                  <td>8</td>
+                  <td>84</td>
+                  <td>66</td>
+                  <td>92</td>
+                </tr>
+                <tr>
+                  <th scope="row">44</th>
+                  <td>M</td>
+                  <td>38</td>
+                  <td>10</td>
+                  <td>88</td>
+                  <td>70</td>
+                  <td>96</td>
+                </tr>
+                <tr>
+                  <th scope="row">46</th>
+                  <td>M</td>
+                  <td>40</td>
+                  <td>12</td>
+                  <td>92</td>
+                  <td>74</td>
+                  <td>100</td>
+                </tr>
+                <tr>
+                  <th scope="row">48</th>
+                  <td>L</td>
+                  <td>42</td>
+                  <td>14</td>
+                  <td>96</td>
+                  <td>78</td>
+                  <td>104</td>
+                </tr>
+                <tr>
+                  <th scope="row">50</th>
+                  <td>L</td>
+                  <td>44</td>
+                  <td>16</td>
+                  <td>100</td>
+                  <td>82</td>
+                  <td>108</td>
+                </tr>
+                <tr>
+                  <th scope="row">52</th>
+                  <td>XL</td>
+                  <td>46</td>
+                  <td>18</td>
+                  <td>104</td>
+                  <td>86</td>
+                  <td>112</td>
+                </tr>
+                <tr>
+                  <th scope="row">54</th>
+                  <td>XXL</td>
+                  <td>48</td>
+                  <td>20</td>
+                  <td>108</td>
+                  <td>90</td>
+                  <td>116</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xl-4 d-none d-lg-block order-1">
+          <img 
+            [lazyLoad]="staticAssetsUrl + 'static/img/sizes/women-sizes.png'"
+            [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'"
+            alt="Женская размерная сетка | TRIBES — стиль большого города">
+        </div>
+      </div>
+      
+      <!-- Men -->
+      <div class="row mt-3 mb-3">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8 order-0">
+          <h3 class="h2 text-center">Мужская одежда</h3>
+          <br>
+          <p>В таблице содержатся данные о размерах мужской одежды и указаны измерения, на которые стоит ориентироваться при покупке.</p>
+          <div class="table-responsive">
+            <table class="table table-striped">
+              <thead>
+                <tr>
+                  <th scope="col">Россия (RU)</th>
+                  <th scope="col">Международный (Int)</th>
+                  <th scope="col">Европа (EU)</th>
+                  <th scope="col">США (US)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <th scope="row">46</th>
+                  <td>S</td>
+                  <td>46</td>
+                  <td>36</td>
+                </tr>
+                <tr>
+                  <th scope="row">48</th>
+                  <td>M</td>
+                  <td>48</td>
+                  <td>38</td>
+                </tr>
+                <tr>
+                  <th scope="row">50</th>
+                  <td>L</td>
+                  <td>50</td>
+                  <td>40</td>
+                </tr>
+                <tr>
+                  <th scope="row">52</th>
+                  <td>XL</td>
+                  <td>52</td>
+                  <td>42</td>
+                </tr>
+                <tr>
+                  <th scope="row">54</th>
+                  <td>XXL</td>
+                  <td>54</td>
+                  <td>44</td>
+                </tr>
+                <tr>
+                  <th scope="row">56-58</th>
+                  <td>XXXL</td>
+                  <td>56-58</td>
+                  <td>46-48</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-lg-4 col-xl-4 d-none d-lg-block order-1">
+          <img 
+            [lazyLoad]="staticAssetsUrl + 'static/img/sizes/men-sizes.png'"
+            [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'"
+            alt="Мужская размерная сетка | TRIBES — больше своего времени">
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- <ngx-json-ld  *rxLet="schema$ as schema" [json]="schema"></ngx-json-ld> -->
+<noscript>
+  <img crossorigin height="1" width="1" style="display:none" *rxLet="urlSKU$ as urlSKU"
+    src="https://www.facebook.com/tr?id=375373836490576&ev=ViewContent&cd[content_ids]={{urlSKU}}&cd[content_category]=product&noscript=1"/>
+</noscript>
+
+
+<div class="h-100" [ngClass]="{'loading' : isLoading$ | push}" *rxLet="product$ as product">
+  <!-- Page Content-->
+  <div class="container">
+    
+    <div class="row">
+      <!-- Poduct Gallery-->
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 px-0">
+        <swiper
+          [slidesPerView]="2.5"
+          [spaceBetween]="0"
+          [zoom]="true"
+          [navigation]="true"
+          [pagination]="{
+            clickable: true
+          }"
+          [breakpoints]="{
+            '320': {
+              slidesPerView: 1
+            },
+            '960': {
+              slidesPerView: 2.5
+            }
+          }"
+          class="mainSlider"
+          style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
+        >
+          <ng-template swiperSlide *ngFor="let item of product.imagesSrc;" >
+            <div class="swiper-zoom-container">
+              <img class="" 
+              [src]="item" 
+              alt="{{product.title}}&nbsp;{{product.description}}&nbsp;{{product.sku}}"
+              draggable=false>
+            </div>
+          </ng-template>
+        </swiper>
+        
+        <div class="testimonial-group">
+          <div class="row text-center">
+            <app-rating-stars *ngIf="product.rating > 3" [rating]="product.rating" [size]="'large'"></app-rating-stars> 
+            <h2 class="text-normal">{{ product.title }}</h2>
+          </div>
+          <app-price class="h3 d-flex justify-content-center" [priceSale]="product.priceSale" [priceBase]="product.priceBase" [count]="1"></app-price>
+          <swiper
+            [slidesPerView]="7"
+            [spaceBetween]="0"
+            [navigation]="true"
+            [mousewheel]="true"
+            [direction]="'horizontal'"
+            [grabCursor]="true"
+            [freeMode]="true"
+            [breakpoints]="{
+              '320': {
+                slidesPerView: 4
+              },
+              '960': {
+                slidesPerView: 7
+              }
+            }"
+            class="variantsSlider"
+            style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
+            *ngIf="product.variants.length > 1"
+          >
+            <ng-template swiperSlide *ngFor="let item of product.variants; let i = index" >
+              <a [routerLink]="['/product', item.sku]" class="product-colors-image pb-3 variant-color-{{item.color}}" >
+                <img 
+                  draggable=false
+                  [defaultImage]="staticAssetsUrl + 'static/img/products/product-placeholder.jpg'" 
+                  [lazyLoad]="item.coverImage" 
+                  alt="{{product.title}} {{item.color}} {{product.sku}}">
+              </a>
+            </ng-template>
+          </swiper>
+          <!-- <div class="row thumbnails" *ngIf="product.variants.length > 1"> 
+            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 px-1" *ngFor="let item of product.variants; let i = index">
+              <a [routerLink]="['/product', item.sku]" class="product-colors-image" >
+                <img 
+                  draggable=false
+                  [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" 
+                  [lazyLoad]="item.coverImage" 
+                  alt="{{product.title}} {{item.color}} {{product.sku}}">
+              </a>
+            </div>
+          </div> -->
+          <!-- Product Info-->
+          <div class="row">
+            <div class="col-md-12 mt-2"></div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8">
+              <!-- <div class="padding-top-2x mt-2 hidden-md-up desktop-only"></div> -->
+              <!-- <app-rating-stars [rating]="product.currentRating desktop-only"></app-rating-stars> -->
+              <!-- <span *ngIf="averageRating" class="text-muted align-middle desktop-only">{{ averageRating }}</span> -->
+              <!-- <app-rating-stars class="desktop-only" *ngIf="averageRating > 3" [rating]="averageRating" [size]="'large'"></app-rating-stars> 
+              <h2 class="text-normal desktop-only">{{ product.title }}</h2>
+              <span class="h2 d-block desktop-only">
+                <app-price class="desktop-only" [product]="product"></app-price>
+              </span> -->
+              <p class="white-space-pre-line text-lg">{{product.description}}</p>
+              
+              <span class="text-lg">Состав:
+                <p *ngFor="let material of product.materials" class="d-inline">
+                  {{material.material}} {{material.quantity}}%&nbsp;
+                </p>
+              </span>
+              <p class="text-lg">Цвет модели: {{ colorsDict[product.color]}}</p>
+              <button class="btn btn-outline-primary" (click)="scrollTo('reviews')" *ngIf="product.reviews.length>0">Отзывы</button>
+              <button class="btn btn-outline-primary" (click)="scrollTo('sku-properties')">Характеристики</button>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center" *rxLet="selectedSizes$ as selectedSizes">
+              <div class="sizes-container mt-1">
+                <div class="size-checkbox" *ngFor="let barcode of product.barcodes; index as i;">
+                  <div class="round">
+                    <input 
+                      #checkboxes
+                      type="checkbox" 
+                      id="size-{{barcode.barcode}}"
+                      [attr.data-barcode]="barcode.barcode"
+                      (change)="selectSizeBtn$.next($event)"
+                      [disabled]='barcode.stock === 0'
+                      />
+                    <label *ngIf="!barcode.stock" 
+                      for="size-{{barcode.barcode}}"
+                      class="disabled"  
+                      title="{{barcode.size}} размер закончился">{{barcode.size}}
+                    </label>
+                    <label *ngIf="barcode.stock" 
+                      for="size-{{barcode.barcode}}"
+                      title="{{barcode.size}} размер достепен к заказу">{{barcode.size}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outlined mb-2" (click)="openModal(template)">Размерная сетка</button>
+              <div class="sp-buttons mt-2 mb-2 text-center" *ngIf="selectedSizes.length">
+                <!-- <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
+                  <i class="icon-heart"></i>
+                </button> -->
+                <button class="btn btn-primary product-add-to-cart-button" (click)="addToCartBtn$.next($event)">
+                  <i class="icon-bag"></i> В корзину
+                </button>
+              </div>
+              <div class="sp-buttons mt-0 mb-2 text-center" *ngIf="!selectedSizes.length">
+                <button class="btn btn-primary" *ngIf="!product.stock" disabled>
+                  Все размеры закончились
+                </button>
+                <button class="btn btn-primary" *ngIf="product.stock" disabled>
+                  Выберите размер
+                </button>
+              </div>
+              <!-- sizes -->
+              
+              <div class="d-flex justify-content-center">
+                <div class="entry-share mt-2 mb-2">
+                  <span class="text-muted">Поделиться:</span>
+                  <div class="share-links" *rxLet="urlSKU$ as urlSKU">
+                    <a class="social-button shape-circle sb-vk" href="http://vk.com/share.php?url=https%3A%2F%2Fmytribes.ru%2Fproduct%2F{{urlSKU}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Vkontakte">
+                      <i class="socicon-vkontakte"></i>
+                    </a>
+                    <a class="social-button shape-circle sb-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmytribes.ru%2Fproduct%2F{{urlSKU}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Facebook">
+                      <i class="socicon-facebook"></i>
+                    </a>
+                    <a class="social-button shape-circle sb-twitter" href="https://twitter.com/share?text={{product.title}}&url=https%3A%2F%2Fmytribes.ru%2Fproduct%2F{{urlSKU}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter">
+                      <i class="socicon-twitter"></i>
+                    </a>
+                    <a class="social-button shape-circle sb-instagram" href="https://instagram.com/tribes_brand/" target="_blank" data-toggle="tooltip" data-placement="top" title="Instagram">
+                      <i class="socicon-instagram"></i>
+                    </a>
+                    <a class="social-button shape-circle sb-pinterest" href="https://www.pinterest.ru/tribes_brand/" target="_blank" data-toggle="tooltip" data-placement="top" title="Google +">
+                      <i class="socicon-pinterest"></i>
+                    </a>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- Cross Sale -->
+    <section id="cross-sale" class="pt-3" *ngIf="product.crossSaleProducts.length>0">
+      <div class="row">
+        <div class="card">
+          <div class="card-body text-center">
+              <h4>Вам может понравится:</h4>
+          </div>
+          <div class="row">
+            <app-product-widget  *ngFor="let product of product.crossSaleProducts" [product]="product" [displayMode]='all' class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></app-product-widget>
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews" class="pt-3" *ngIf="product.reviews.length>0">
+      <div class="row">
+        <div class="card">
+          <div class="card-body text-center">
+              <h4>Отзывы:</h4>
+          </div>
+          <div class="row align-items-center justify-content-center" *ngFor="let review of reviews; index as i">
+            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+              <div class="">
+                <app-rating-stars [rating]=review.rating [size]="'large'"></app-rating-stars> 
+                <div class="col-12 pb-1"></div>
+                <div class="lead">
+                  <span class="">{{review.review}}</span>
+                </div>
+                <div class="lead text-capitalize">{{review.name}}</div>
+              </div>
+            </div>
+            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 mb-1 align-self-center p-0">
+              <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" [lazyLoad]="review.image_path" alt="{{ product.title }}" class="d-block reviews-product-image">
+            </div>
+            <div class="col-11 px-0 mb-1">
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Properties of SKU -->
+    <section id="sku-properties" class="pt-3">
+      <div class="row">
+        <div class="card">
+          <div class="card-body text-center">
+              <h4>Описание модели:</h4>
+          </div>
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <th scope="row">Модель</th>
+                    <td>{{product.title}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Размеры</th>
+                    <td>{{product.sizes}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Цвет</th>
+                    <td>{{colorsDict[product.color]}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Пол</th>
+                    <td>{{product.gender}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Материал</th>
+                    <td>
+                      <span *ngFor="let material of product.materials">
+                        {{material.material}} {{material.quantity}}%&nbsp;
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Артикул (SKU)</th>
+                    <td><p class="text-uppercase">{{ product.sku }}</p></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Категория(-и)</th>
+                    <td>
+                      <a class="navi-link" routerLink="{{product.gender}}/catalog/{{product.category}}">{{ product.category }}</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Бренд</th>
+                    <td>tribes</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Страна производства:</th>
+                    <td>{{product.manufactured}}</td>
+                  </tr>
+                  <tr *ngIf="product.notes">
+                    <th scope="row">Примечания</th>
+                    <td>{{product.notes}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- How to order -->
+    <section id="how-to-order" class="pt-3">
+      <div class="row">
+        <div class="card">
+          <div class="card-body text-center">
+              <h4>Как сделать заказ:</h4>
+          </div>
+          <div class="row">
+            <p><strong>Заказать одежду нашего бренда TRIBES Вы можете на нашем сайте Mytribes.ru и на сайтах наших партнеров.</strong></p>
+              <p>В России и СНГ нашим официальным дистрибьютером является компания ООО «Вайлдберриз».</p>
+              <p><strong>Как сделать Заказ: {{product.title}} TRIBES</strong></p>
+              <p><strong>На нашем сайте:</strong> выберите необходимый размер и цвет и нажмите кнопку "В КОРЗИНУ".</p>
+              <p>На сайте партнеров: перейдите на сайт партнера в каталог бренда TRIBES и оформите заказ в соответствии с условиями на сайте партнера. Цена на сайте партнера может отличаться.</p>
+              <p>Артикул этого товара на сайте ООО «Вайлдберриз»: {{product.wildberriesId}}</p>
+              <img src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg" data-src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg" class="site-logo d-inline" alt="TRIBES — для ярких и смелых">
+              <a href="https://www.wildberries.ru/catalog/{{product.wildberriesId}}/detail.aspx" target="_blank" class="btn btn-primary btn-wb col-12 col-sm-12 col-md-6" >
+                <i class="icon-bag"></i> на сайте WILDBERRIES.RU
+              </a>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>

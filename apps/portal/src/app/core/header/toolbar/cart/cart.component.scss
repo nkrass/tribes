@@ -1,0 +1,16 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/forms";
+@import '~scss/helpers/variables';
+@import '~scss/helpers/mixins';
+
+.scrollable-list{
+  overflow-x: hidden;
+  overflow-y: auto;
+  min-height: 100%;
+  max-height: 400px;
+  @media (max-width: $screen-sm) {
+    max-height: 300px;
+  }
+}

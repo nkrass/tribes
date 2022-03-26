@@ -1,0 +1,476 @@
+Resources:
+  CartTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}-cart-table
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: orderId
+          AttributeType: S
+        - AttributeName: status
+          AttributeType: S
+        - AttributeName: externalUserId
+          AttributeType: S
+        - AttributeName: createdAt
+          AttributeType: 'N'
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: idGlobalIndex
+          KeySchema:
+            - AttributeName: id
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: userIdGlobalIndex
+          KeySchema:
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: orderIdGlobalIndex
+          KeySchema:
+            - AttributeName: orderId
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: statusGlobalIndex
+          KeySchema:
+            - AttributeName: status
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: externalUserIdGlobalIndex
+          KeySchema:
+            - AttributeName: externalUserId
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+  ItemTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}-item-table
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: productBarcode
+          AttributeType: S
+        - AttributeName: userId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: productBarcodeGlobalIndex
+          KeySchema:
+            - AttributeName: productBarcode
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: userIdGlobalIndex
+          KeySchema:
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+  OrderTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}-order-table
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: productBarcode
+          AttributeType: S
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: status
+          AttributeType: S
+        - AttributeName: createdAt
+          AttributeType: 'N'
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: productBarcodeGlobalIndex
+          KeySchema:
+            - AttributeName: productBarcode
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: userIdGlobalIndexById
+          KeySchema:
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: userIdGlobalIndexByProductBarcode
+          KeySchema:
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: productBarcode
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: userIdGlobalIndexByCreatedAt
+          KeySchema:
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: statusGlobalIndex
+          KeySchema:
+            - AttributeName: status
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+  BarcodeTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}-barcode-table
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: barcode
+          AttributeType: S
+        - AttributeName: sku
+          AttributeType: S
+        - AttributeName: skuFamily
+          AttributeType: S
+        - AttributeName: wildberriesId
+          AttributeType: 'N'
+        - AttributeName: size
+          AttributeType: S
+        - AttributeName: gender
+          AttributeType: S
+        - AttributeName: categoryGenderColorSize
+          AttributeType: S
+        - AttributeName: categoryGenderSize
+          AttributeType: S
+        - AttributeName: categoryGender
+          AttributeType: S
+        - AttributeName: genderColorSize
+          AttributeType: S
+        - AttributeName: genderSize
+          AttributeType: S
+        - AttributeName: genderColor
+          AttributeType: S
+        - AttributeName: categorySize
+          AttributeType: S
+        - AttributeName: category
+          AttributeType: S
+        - AttributeName: stock
+          AttributeType: 'N'
+      KeySchema:
+        - AttributeName: barcode
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: skuGlobalIndex
+          KeySchema:
+            - AttributeName: sku
+              KeyType: HASH
+            - AttributeName: barcode
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: skuFamilyGlobalIndex
+          KeySchema:
+            - AttributeName: skuFamily
+              KeyType: HASH
+            - AttributeName: barcode
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: wildberriesIdGlobalIndex
+          KeySchema:
+            - AttributeName: wildberriesId
+              KeyType: HASH
+            - AttributeName: barcode
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: sizeGlobalIndex
+          KeySchema:
+            - AttributeName: size
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: genderGlobalIndex
+          KeySchema:
+            - AttributeName: gender
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: categoryGenderColorSizeGlobalIndex
+          KeySchema:
+            - AttributeName: categoryGenderColorSize
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: categoryGenderSizeGlobalIndex
+          KeySchema:
+            - AttributeName: categoryGenderSize
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: categoryGenderGlobalIndex
+          KeySchema:
+            - AttributeName: categoryGender
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: genderColorSizeGlobalIndex
+          KeySchema:
+            - AttributeName: genderColorSize
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: genderSizeGlobalIndex
+          KeySchema:
+            - AttributeName: genderSize
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: genderColorGlobalIndex
+          KeySchema:
+            - AttributeName: genderColor
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: categorySizeGlobalIndex
+          KeySchema:
+            - AttributeName: categorySize
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: categoryGlobalIndex
+          KeySchema:
+            - AttributeName: category
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+  ProductTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}-product-table
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: sku
+          AttributeType: S
+        - AttributeName: skuFamily
+          AttributeType: S
+        - AttributeName: skuIndex
+          AttributeType: 'N'
+        - AttributeName: wildberriesId
+          AttributeType: 'N'
+        - AttributeName: category
+          AttributeType: S
+        - AttributeName: gender
+          AttributeType: S
+        - AttributeName: categoryGenderColor
+          AttributeType: S
+        - AttributeName: categoryGender
+          AttributeType: S
+        - AttributeName: genderColor
+          AttributeType: S
+        - AttributeName: categoryColor
+          AttributeType: S
+        - AttributeName: stock
+          AttributeType: 'N'
+        - AttributeName: stockBySkuIndex
+          AttributeType: 'N'
+      KeySchema:
+        - AttributeName: sku
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: skuFamilyGlobalIndex
+          KeySchema:
+            - AttributeName: skuFamily
+              KeyType: HASH
+            - AttributeName: wildberriesId
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: skuIndexGlobalIndex
+          KeySchema:
+            - AttributeName: skuIndex
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: wildberriesIdGlobalIndex
+          KeySchema:
+            - AttributeName: wildberriesId
+              KeyType: HASH
+            - AttributeName: stock
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: categoryGlobalIndex
+          KeySchema:
+            - AttributeName: category
+              KeyType: HASH
+            - AttributeName: stockBySkuIndex
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: genderGlobalIndex
+          KeySchema:
+            - AttributeName: gender
+              KeyType: HASH
+            - AttributeName: stockBySkuIndex
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: categoryGenderColorGlobalIndex
+          KeySchema:
+            - AttributeName: categoryGenderColor
+              KeyType: HASH
+            - AttributeName: stockBySkuIndex
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: categoryGenderGlobalIndex
+          KeySchema:
+            - AttributeName: categoryGender
+              KeyType: HASH
+            - AttributeName: stockBySkuIndex
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: genderColorGlobalIndex
+          KeySchema:
+            - AttributeName: genderColor
+              KeyType: HASH
+            - AttributeName: stockBySkuIndex
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: categoryColorGlobalIndex
+          KeySchema:
+            - AttributeName: categoryColor
+              KeyType: HASH
+            - AttributeName: stockBySkuIndex
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+  ReviewTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}-review-table
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: sku
+          AttributeType: S
+        - AttributeName: skuFamily
+          AttributeType: S
+        - AttributeName: userId
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: skuGlobalIndex
+          KeySchema:
+            - AttributeName: sku
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: skuFamilyGlobalIndex
+          KeySchema:
+            - AttributeName: skuFamily
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: userIdGlobalIndex
+          KeySchema:
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+  UserTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}-user-table
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: emailGlobalIndex
+          KeySchema:
+            - AttributeName: email
+              KeyType: HASH
+            - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL

@@ -1,0 +1,31 @@
+mutation CreateItem($input: CreateItemInput!){
+  createItem(input: $input){
+    id
+    productBarcode
+    registered
+    barcode { 
+      barcode, 
+      stock, 
+      size,
+      product {
+        sku
+        title
+        coverImage
+        imagesSrc
+        videosSrc
+        description
+        sizes
+        category
+        priceBase
+        priceSale
+        reviews {
+          sku, reviewText, reviewAuthor, reviewRating, reviewDate, id
+        }
+        variants {
+          sku, colorGroup, coverImage, title, priceBase, priceSale, color
+        }
+        materials{ material, quantity }
+      }
+    }
+  }
+}

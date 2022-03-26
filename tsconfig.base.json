@@ -7,15 +7,21 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
+    "strict": true,
     "importHelpers": true,
-    "target": "es2015",
-    "module": "esnext",
+    "target": "ES2021",
+    "module": "commonjs",
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
-      "@tribes/api-interfaces": ["libs/api-interfaces/src/index.ts"]
+      "@tribes/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@tribes/data-access": ["libs/data-access/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

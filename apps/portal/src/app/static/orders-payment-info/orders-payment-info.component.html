@@ -1,0 +1,85 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <img class="hero" 
+          [lazyLoad]="staticAssetsUrl + 'static/img/payments/slider-new_year_2.jpg'" 
+          [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'"
+          alt="Зимняя коллекция TRIBES">
+      </div>
+    </div>
+    <app-section-divider [section]="'Условия и правила заказа, оплаты и доставки'" [h]="'h2'"></app-section-divider>
+    <div class="row pb-2 pt-2">
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h3>Заказ одежды бренда</h3>
+        <hr>
+        <p>Заказать одежду нашего бренда TRIBES Вы можете на нашем сайте <strong>Mytribes.ru</strong> и на сайтах наших партнеров</p>
+        <p>В России и СНГ нашим официальным дистрибьютером является компания ООО «Вайлдберриз».</p>
+        <p><strong>Как сделать Заказ одежды бренда</strong> <img src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg" data-src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg" class="site-logo d-inline" alt="TRIBES — стиль большого города"></p>
+        <p><strong>На нашем сайте:</strong> </p>
+        <ul>
+          <li>
+            перейдите в карточку понравившегося товара
+          </li>
+          <li>
+            выберите необходимый размер и цвет и нажмите кнопку "В КОРЗИНУ"
+          </li>
+          <li>
+            в случае, если Вы готовы сделать заказ - перейдите в раздел <a routerLink="/cart">Заказы</a>
+          </li>
+          <li>
+            заполните информацию по доставке товара и следуйте указаниям
+          </li>
+          <li>
+            после размещения заказа с Вами свяжутся наши менеджеры.
+          </li>
+        </ul>
+        <p>На сайте партнеров: перейдите на сайт партнера в каталог бренда TRIBES и оформите заказ в соответствии с условиями на сайте партнера. Цена на сайте партнера может отличаться.</p>
+        <!-- <p><strong>Перейдите на сайт партнера в каталог бренда TRIBES и оформите заказ в соответствии с условиями на сайте партнера.</strong></p>
+        <a href="https://wb.ru/brands/tribes" target="_blank" class="btn btn-primary btn-wb" >
+          <i class="icon-bag"></i> TRIBES на сайте WILDBERRIES
+        </a> -->
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4 pb-2">
+        <h3>Условия доставки</h3>
+        <hr>
+        <p>Доставку изделий осуществляют компании партнеры.</p>
+        <p>Для Вашего комфорта доступны следующие виды доставки:</p>
+        <ul>
+          <li><p>Бесконтактная доставка до двери курьером</p></li>
+          <li><p>До пунктов выдачи заказов (самовывоз) — в более 7000 фирменных пунктах самовывоза в России и СНГ</p></li>
+        </ul>
+        <p>Бесплатная примерка вещей в любом удобном для вас месте — дома или в пунктах выдачи.</p>
+        <a href="https://www.wildberries.ru/services/besplatnaya-dostavka" class="text-decoration-none">
+          Адреса пунктов выдачи на сайте партнера</a>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h3>Условия оплаты</h3>
+        <hr>
+        <p>Оплата заказа после примерки наличными, возможна во всех пунктах самовывоза и курьерам во всех регионах через партнеров компании.</p>
+        <p><strong>Курьеры партнеров принимают к оплате банковские карты: </strong></p>
+        <img src="{{staticAssetsUrl}}static/img/payments/supported_cards.png" class="" alt="Visa MasterCard МИР Совесть карты - поддерживаемые платежные системы ">
+        <p>Для этого у службы доставки есть специальные мобильные терминалы. Оплата заказа картой после примерки возможна во всех пунктах самовывоза.</p>
+        <p>Оплата банковской картой, через Интернет, возможна через системы электронных платежей на сайтах партнеров.</p>
+        <p>Минимальная сумма платежа — 1 рубль. Максимальная сумма платежа отсутствует.</p>
+        <p>Номер карты (PAN) должен иметь не менее 15 и не более 19 символов.</p>
+      </div>
+    </div>
+    <div class="row pb-2">
+      <div class="col-12 col-sm-12 col-md-8 col-lg-8 col-xl-8 pb-2">
+        <h3>Оптовые заказы на сайте</h3>
+        <hr>
+        <p>На данный момент оптовые заказы на сайте принимаются через форму обратной связи. </p>
+        <a href="/contacts" class="text-decoration-none">Связаться с нами</a>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <h3>Возврат товара</h3>
+        <hr>
+        <p>Информация о правилах и условиях возврата товаров и денег можно прочесть в разделе:
+          <br><br>
+          <a class="text-decoration-none" routerLink="/returns-and-refunds">Условия возврата товаров и денег</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>

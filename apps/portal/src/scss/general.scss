@@ -1,0 +1,59 @@
+// .card-img-overlay:hover{
+//  background-color: rgba(255, 0, 0, 0.05) !important;
+// }
+.collection{
+//  > img {
+//    max-width: 375px;
+//  }
+ > a {
+   margin-top: 100%;
+ }
+}
+.categories{
+ a { 
+   top: 75%;
+ }
+ img {
+   object-fit: contain;
+ }
+}
+.top-75{
+ top: 75%;
+}
+.loading {
+  min-height: 900px;
+  background: url('https://cdn.mytribes.ru/static/img/spinners/spinner-1.svg') center center no-repeat; 
+  background-size: 74px;
+  background-color: #fff0;
+}
+.ng-lazyloading{
+  background-position: center;
+  background-color: #fff0;
+  background-image: url(https://cdn.mytribes.ru/static/img/spinners/spinner-1.svg) !important;
+  background-repeat: no-repeat;
+  background-size: 100px;
+}
+.bg-opaque {
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(10px);
+  -webkit-backface-visibility: hidden;
+  -webkit-perspective: 1000;
+  -webkit-transform: translate3d(0,0,0);
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000;
+  transform: translate3d(0,0,0);
+  transform: translateZ(0);
+}
+.mobile-only {
+  display: none!important;
+  @media (max-width: $screen-sm) {
+    display: block;
+  }
+}
+.desktop-only {
+  display: block;
+  @media (max-width: $screen-sm) {
+    display: none!important;
+  }
+}

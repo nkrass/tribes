@@ -1,9 +1,10 @@
-<div style="text-align: center">
-  <h1>Welcome to portal!</h1>
-  <img
-    width="450"
-    src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png"
-    alt="Nx - Smart, Fast and Extensible Build System"
-  />
+<div class="main-wrapper">
+    <!-- <app-navigation-off-canvas data-nosnippet></app-navigation-off-canvas> -->
+    <!-- <app-top-bar></app-top-bar> -->
+    <app-header data-nosnippet></app-header>
+    <div class="content container-fluid">
+        <router-outlet></router-outlet>
+    </div>
+    <app-footer></app-footer>
+    <!-- <app-content class="content"></app-content> -->
 </div>
-<div>Message: {{ hello$ | async | json }}</div>

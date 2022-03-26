@@ -1,0 +1,59 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/forms";
+@import '~scss/helpers/variables';
+@import '~scss/helpers/mixins';
+
+.panel-img {
+  object-fit: contain;
+}
+
+.flicking-arrow{
+  &-prev, &-next{
+    top: unset !important;
+    bottom: 0% !important;
+    height: 30px !important;
+    &::before, &::after{
+      width: 16px!important;
+      height: 5px!important;
+    }
+  }
+}
+
+.product-badge {
+  color: #ffffff;
+  font-size: 100%;
+  font-weight: 500;
+  background: #fff;
+}
+.card-horizontal {
+  display: flex;
+  flex: 1 1 auto;
+}
+.card {
+  border-radius: 0px;
+  background: #fff;
+  border: none;
+}
+.product-price {
+  margin-bottom: 10px;
+  color: $product-price-color;
+  font: {
+    size: $product-price-font-size;
+    weight: 500;
+  }
+  text-align: center;
+  > del {
+    margin-right: 5px;
+    color: $gray;
+  }
+}
+
+:host ::ng-deep .rating-stars {
+  position: absolute;
+  top: 15px;
+  right: 18px;
+}
+
+

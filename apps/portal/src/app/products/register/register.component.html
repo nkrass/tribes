@@ -1,0 +1,97 @@
+
+<div class="row justify-content-md-center minheight-80" *ngIf="!(item$ | push)">
+  <div class="col-12 text-center align-self-center" *rxLet="cameraState$ as state">
+    <button *ngIf="state===0 || state===1 || state===3 " (click)="onToggle()" class="btn btn-secondary">Запустить сканирование кода</button>
+    <button *ngIf="state===2" (click)="onToggle()" class="btn btn-secondary">Пауза</button>
+  </div>
+  <div class="col-12 col-md-6" id="reader"></div>
+</div>
+<div class="row" *rxLet="item$ as item">
+  <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 px-0">
+    <swiper
+      [slidesPerView]="2.5"
+      [spaceBetween]="0"
+      [zoom]="true"
+      [navigation]="true"
+      [pagination]="{
+        clickable: true
+      }"
+      [breakpoints]="{
+        '320': {
+          slidesPerView: 1
+        },
+        '960': {
+          slidesPerView: 2.5
+        }
+      }"
+      class="mainSlider"
+      style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
+    >
+      <ng-template swiperSlide *ngFor="let img of item.barcode.product.imagesSrc;" >
+        <div class="swiper-zoom-container">
+          <img class="" 
+          [src]="img" 
+          alt="{{item.barcode.product.title}}&nbsp;{{item.barcode.product.description}}&nbsp;{{item.barcode.product.sku}}"
+          draggable=false>
+        </div>
+      </ng-template>
+    </swiper>
+    
+    <div class="testimonial-group">
+      <div class="row text-center">
+        <app-rating-stars *ngIf="item.barcode.product.rating > 3" [rating]="item.barcode.product.rating" [size]="'large'"></app-rating-stars> 
+        <h2 class="text-normal">{{ item.barcode.product.title }}</h2>
+      </div>
+      <!-- <app-price class="h3 d-flex justify-content-center" [priceSale]="product.priceSale" [priceBase]="product.priceBase" [count]="1"></app-price> -->
+      <swiper
+        [slidesPerView]="7"
+        [spaceBetween]="0"
+        [navigation]="true"
+        [mousewheel]="true"
+        [direction]="'horizontal'"
+        [grabCursor]="true"
+        [freeMode]="true"
+        [breakpoints]="{
+          '320': {
+            slidesPerView: 4
+          },
+          '960': {
+            slidesPerView: 7
+          }
+        }"
+        class="variantsSlider"
+        style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
+        *ngIf="item.barcode.product.variants.length > 1"
+      >
+        <ng-template swiperSlide *ngFor="let variant of item.barcode.product.variants; let i = index" >
+          <a [routerLink]="['/product', variant.sku]" class="product-colors-image pb-3 variant-color-{{variant.color}}" >
+            <img 
+              draggable=false
+              [defaultImage]="staticAssetsUrl + 'static/img/products/product-placeholder.jpg'" 
+              [lazyLoad]="variant.coverImage" 
+              alt="{{item.barcode.product.title}} {{variant.color}} {{item.barcode.product.sku}}">
+          </a>
+        </ng-template>
+      </swiper>
+      
+      <!-- Product Info-->
+      <div class="row">
+        <div class="col-md-12 mt-2"></div>
+        <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8">
+          <p class="white-space-pre-line text-lg">{{item.barcode.product.description}}</p>
+          
+          <span class="text-lg">Состав:
+            <p *ngFor="let material of item.barcode.product.materials" class="d-inline">
+              {{material.material}} {{material.quantity}}%&nbsp;
+            </p>
+          </span>
+          <p class="text-lg">Цвет модели: {{ colorsDict[item.barcode.product.color]}}</p>
+          <button class="btn btn-outline-primary" (click)="scrollTo('reviews')" *ngIf="item.barcode.product.reviews.length>0">Отзывы</button>
+          <button class="btn btn-outline-primary" (click)="scrollTo('sku-properties')">Характеристики</button>
+        </div>
+        
+      </div>
+      
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col">
+        <img class="hero" 
+          [lazyLoad]="staticAssetsUrl + 'static/img/payments/slider-new_year_2.jpg'"
+          [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" 
+          alt="Зимняя коллекция TRIBES">
+      </div>
+    </div>
+    <div class="row">
+      <app-section-divider [section]="'Поддержка'" [h]="'h2'"></app-section-divider>
+    </div>
+    <div class="row pb-2 pt-2">
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <p>TRIBES — это женская и мужская одежда для повседневной жизни, с дизайнерскими элементами, которая стильно сочетается с другой одеждой.
+          <br>
+          Наша философия — дополнять, но не диктовать.
+        </p>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <p>В случае, если Вам необходима помощь Вы можете обратиться к нам с запросом и мы обязательно Вам поможем.</p>
+      </div>
+      <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-4">
+        <p>Заполните контактную форму ниже или свяжитесь с нами через быструю кнопку "Связаться с нами", которая расположена справа внизу на каждой странице сайта.</p>
+      </div>
+    </div>
+    <div class="row mt-2 align-items-center justify-content-center">
+      <app-section-divider [section]="'Связаться с нами'" [h]="'h2'" class="mt-2"></app-section-divider>
+      <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 ">
+        <form novalidate [formGroup]="feedbackForm" (ngSubmit)="submitFeedbackForm()">
+          <section class="customer-name">
+            <p>Имя, Фамилия</p>
+            <input required type="text" placeholder="Введите Ваше имя и фамилию" formControlName="customerName">
+            <div *ngIf="customerNameControl.errors" class="errors">
+              <div *ngIf="customerNameControl.errors.required">
+                Данное поле является обязательным для заполнения.
+              </div>  
+              <div *ngIf="customerNameControl.errors.minlength">
+                Ввведите пожалуйста не менее {{customerNameControl.errors.minlength.requiredLength}} символов
+              </div>
+            </div>
+          </section>
+          <section class="customer-email">
+            <p>Email</p>
+            <input type="text" placeholder="Введите Email" formControlName="customerEmail">
+          </section>
+          <section class="contact-purpose">
+            <p>Выберите тип обращения</p>
+            <label>Я обращаюсь по теме:</label>
+            <select required formControlName="contactPurpose">
+              <option value="1">Поддержка - Заказ товаров на сайте</option>
+              <option value="2">Поддержка - Качество продукции</option>
+              <option value="3">Поддержка - Другие вопросы</option>
+            </select>
+          </section>
+          <section>
+            <p>Текст сообщения</p>
+            <textarea required formControlName="suggestions"></textarea>
+          </section>
+          <button class="btn btn-primary delay-1 scale-up" type="submit" [disabled]='!feedbackForm.valid'>Отправить</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

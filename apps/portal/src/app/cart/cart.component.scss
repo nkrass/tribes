@@ -1,0 +1,148 @@
+@import "~bootstrap/scss/functions";
+@import "~bootstrap/scss/variables";
+@import "~bootstrap/scss/mixins";
+@import "~bootstrap/scss/forms";
+@import '~scss/helpers/variables';
+@import '~scss/helpers/mixins';
+
+.title {
+  margin-bottom: 3vh
+}
+.busket {
+  box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 7px;
+}
+.card {
+  margin: auto;
+  // box-shadow: 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  // border-radius: 1rem;
+  border: transparent;
+}
+
+@media(max-width:767px) {
+  .card {
+      font-size: 1.1rem;
+  }
+}
+.cart {
+  background-color: #fff;
+  padding: 2vh 2vh;
+  // border-bottom-left-radius: 1rem;
+  // border-top-left-radius: 1rem
+}
+
+@media(max-width:767px) {
+  .cart {
+      padding: 3vh;
+      border-bottom-left-radius: unset;
+      // border-top-right-radius: 1rem
+  }
+}
+
+.summary {
+  background-color: #ddd;
+  border-bottom-left-radius: 7px;
+  padding: 4vh;
+  color: $brand-primary;
+}
+
+@media(max-width:767px) {
+  .summary {
+      border-top-right-radius: unset;
+      border-bottom-left-radius: 7px;
+      border-bottom-right-radius: 7px;
+  }
+}
+
+.summary .col-2 {
+  padding: 0
+}
+
+.summary .col-10 {
+  padding: 0
+}
+
+.row {
+  margin: 0
+}
+
+.title b {
+  font-size: 1.5rem
+}
+
+.main {
+  margin: 0;
+  padding: 2vh 0;
+  width: 100%
+}
+
+
+a {
+  padding: 0 1vh
+}
+
+.close {
+  margin-left: auto;
+  font-size: 0.7rem
+}
+
+.back-to-shop {
+  margin-top: 4.5rem
+}
+
+h5 {
+  margin-top: 4vh
+}
+
+hr {
+  margin-top: 1.25rem
+}
+
+form {
+  padding: 2vh 0
+}
+
+select {
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  padding: 1.5vh 1vh;
+  margin-bottom: 4vh;
+  outline: none;
+  width: 100%;
+  background-color: rgb(247, 247, 247)
+}
+
+input {
+  border: 1px solid rgba(0, 0, 0, 0.137);
+  padding: 1vh;
+  margin-bottom: 4vh;
+  outline: none;
+  width: 100%;
+  background-color: rgb(247, 247, 247)
+}
+
+input:focus::-webkit-input-placeholder {
+  color: transparent
+}
+
+a {
+  color: #fff;
+  text-decoration: none;
+  &.dark{
+    color: rgb(65, 65, 65);
+  }
+}
+
+a:hover {
+  color: #fff;
+  text-decoration: none;
+  &.dark{
+    color: rgb(65, 65, 65);
+  }
+}
+
+#code {
+  background-image: linear-gradient(to left, rgba(255, 255, 255, 0.253), rgba(255, 255, 255, 0.185)), url("https://img.icons8.com/small/16/000000/long-arrow-right.png");
+  background-repeat: no-repeat;
+  background-position-x: 95%;
+  background-position-y: center
+}

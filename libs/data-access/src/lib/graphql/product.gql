@@ -1,0 +1,39 @@
+query Product($input: GetProductInput!){
+  product(input: $input){
+    sku
+    nomenclature {tnvd}
+    title
+    titleFull
+    description
+    descriptionSeo
+    color
+    colorGroup
+    materials{material, quantity}
+    priceBase
+    priceSale
+    stock
+    status
+    category
+    gender
+    tags
+    collection
+    wildberriesId
+    crossSaleProducts { sku, coverImage, title}
+    manufactured
+    notes
+    rating
+    barcodes { barcode, coverImage, title, sku, category, priceBase, priceSale, stock, size}
+    createdAt
+    updatedAt
+    coverImage
+    imagesSrc
+    videosSrc
+    sizes
+    variants {
+      sku, colorGroup, coverImage, title, priceBase, priceSale, color
+    }
+    reviews {
+      sku, reviewText, reviewAuthor, reviewRating, reviewDate, id
+    }
+  }
+}

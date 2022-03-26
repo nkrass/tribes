@@ -1,0 +1,5 @@
+query User($input: String!){
+  user(id: $input){
+    id, email, firstName, lastName, phone, userRole, createdAt, updatedAt
+  }
+}
