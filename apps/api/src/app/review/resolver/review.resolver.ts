@@ -59,4 +59,12 @@ export class ReviewResolver {
   reviews(@Args('input') input: FilterReviewInput) {
     return this.reviewService.findByFilter(input);
   }
+
+  @UseGuards(GqlAuthGuard)
+  @Mutation(() => [Review])
+  processReviews(@Args('input') start: boolean, @CurrentUser() user: User) {
+    const ability = this.access.createForUser(user);
+    if (ability.can(Action.Create, Review) && start) return this.reviewService.createBatch();
+    else throw new UnauthorizedException('Unauthorized');
+  }
 }

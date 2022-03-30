@@ -48,5 +48,12 @@ export const ReviewSchema = new Schema({
   updatedAt: {
     type: Date,
     default: Date.now()
+  },
+  promoRating: {
+    type: String,
+    index: {
+      global: true,
+      rangeKey: 'createdAt',
+    }
   }
 });

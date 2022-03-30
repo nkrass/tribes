@@ -2,11 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { SortOrder } from 'dynamoose/dist/General';
 import { omitBy, isNil } from 'lodash';
 import { InjectModel, Model, Document } from 'nestjs-dynamoose';
+import { GoogleServices } from '../../shared/googledoc.service';
 import { CreateProductInput } from '../dto/create-product.input';
 import { FilterProductInput } from '../dto/filter-product.input';
 import { UpdateProductInput } from '../dto/update-product.input';
 import { Product, ProductKey } from '../entities/product.model';
-import { GoogleServices } from './googledoc.service';
 
 
 
@@ -114,37 +114,4 @@ export class ProductService {
     priceMin && priceMax && (all = true) && (queryObj['priceSale'] = { between: [priceMin, priceMax] });
     return !all? this.model.query(queryObj).sort(SortOrder.descending).limit(limit).exec() : this.model.query(queryObj).sort(SortOrder.descending).all(100).exec();
   }
-  //   if (category && gender && color){
-  //     const query = this.model.query('categoryGenderColor').eq(`${category}#${gender}#${color}`)
-  //     return inStock? query.where('stock').gt(0).sort(SortOrder.descending).where('priceSale').between(priceMin, priceMax).limit(limit).exec() :
-  //       query.where('priceSale').between(priceMin, priceMax).limit(limit).exec()
-  //   } else if (category && gender) { 
-  //     const query = this.model.query('categoryGender').eq(`${category}#${gender}`)
-  //     return inStock? query.where('stock').gt(0).where('priceSale').between(priceMin, priceMax).sort(SortOrder.descending).limit(limit).exec() :
-  //       query.where('priceSale').between(priceMin, priceMax).sort(SortOrder.descending).limit(limit).exec()
-  //   } else if (gender && color) { 
-  //     const query = this.model.query('genderColor').eq(`${gender}#${color}`)
-  //     return inStock? query.where('stock').gt(0).where('priceSale').between(priceMin, priceMax).sort(SortOrder.descending).limit(limit).exec() :
-  //       query.where('priceSale').between(priceMin, priceMax).sort(SortOrder.descending).limit(limit).exec()
-  //   }
-
-
-  //   for (const prop in filter) {
-  //     if (prop === "sku" ||
-  //        prop === "skuFamily" ||
-  //        prop === "wildberriesId" ||
-  //        prop === "category" ||
-  //        prop === "gender" ||
-  //        prop === 'categoryGenderColor' ||
-  //        prop === 'categoryGender' ||
-  //        prop === 'categoryColor' ||
-  //        prop === 'genderColor'
-  //     ) obj[prop] = { 'eq': (filter as any)[prop] };
-  //     else if ( prop === 'all' || prop === 'limit' || prop === 'priceMax' || prop === 'priceMin' || prop === 'inStock') { }
-  //     else obj[prop] = { 'contains': (filter as any)[prop] };
-  //   }
-  //   return all? 
-  //     this.model.query(obj).where('priceSale').between(priceMin, priceMax).sort(SortOrder.descending).all().exec() : 
-  //     this.model.query(obj).where('priceSale').between(priceMin, priceMax).sort(SortOrder.descending).limit(limit).exec();
-  // }
 }

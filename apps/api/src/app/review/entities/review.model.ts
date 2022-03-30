@@ -26,11 +26,4 @@ export class Review extends CreateReviewInput {
   @IsDate()
   @Field({nullable: true})
   updatedAt: Date
-
-  @IsOptional()
-  @Field({nullable: true})
-  count?: number;
-
-  @Field({nullable: true})
-  lastKey?: string
 }

@@ -10,13 +10,14 @@ import { BarcodeSchema } from './schema/barcode.schema';
 import { ProductSchema } from './schema/product.schema';
 import { BarcodeService } from './service/barcode.service';
 import { CategoryService } from './service/category.service';
-import { GoogleServices } from './service/googledoc.service';
+import { GoogleServices } from '../shared/googledoc.service';
 import { ProductService } from './service/product.service';
+import { SharedModule } from '../shared/shared.module';
 
 @Module({
   imports: [
     forwardRef(() => ReviewModule),
-    CaslModule,
+    CaslModule, SharedModule,
     DynamooseModule.forFeature([
       {
         name: 'product',
@@ -30,6 +31,6 @@ import { ProductService } from './service/product.service';
   ],
   providers: [ProductService, ProductResolver, GoogleServices, BarcodeService, BarcodeResolver, CategoryResolver, CategoryService],
   // controllers: [ProductController],
-  exports: [ProductService, GoogleServices, BarcodeService, CategoryService],
+  exports: [ProductService, BarcodeService, CategoryService],
 })
 export class ProductModule {}

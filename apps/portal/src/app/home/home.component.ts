@@ -52,7 +52,7 @@ export class HomeComponent {
         map(([products_w, products_m]) => ([...products_w, ...products_m]))
       )
     );
-    this.state.connect('reviews', this.reviewsGql.fetch({input: {all: true, limit: 10}}).pipe(pluck('data', 'reviews')));
+    this.state.connect('reviews', this.reviewsGql.fetch({input: {promoRating: "promo", limit: 10}}).pipe(pluck('data', 'reviews')));
 
     const {description, title} = this.router.snapshot.data
     this.schema = {

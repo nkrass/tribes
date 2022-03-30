@@ -15,6 +15,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { DateScalar } from './shared/date.scalar';
 import { environment } from '../environments/environment';
 import { FeedbackModule } from './feedback/feedback.module';
+import { SharedModule } from './shared/shared.module';
 
 
 @Module({
@@ -45,7 +46,7 @@ import { FeedbackModule } from './feedback/feedback.module';
         suffix: '-table',
       },
     }),
-    CaslModule, AuthModule, UserModule, ProductModule, ReviewModule, ItemModule, OrderModule, CartModule, FeedbackModule 
+    CaslModule, SharedModule, AuthModule, UserModule, ProductModule, ReviewModule, ItemModule, OrderModule, CartModule, FeedbackModule 
   ], providers: [ComplexityPlugin, DateScalar],
 })
 export class AppModule {}

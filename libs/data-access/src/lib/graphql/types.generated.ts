@@ -240,6 +240,7 @@ export type CreateProductInput = {
 };
 
 export type CreateReviewInput = {
+  promoRating?: InputMaybe<Scalars['String']>;
   reviewAnswer?: InputMaybe<Scalars['String']>;
   reviewAuthor: Scalars['String'];
   reviewDate: Scalars['Date'];
@@ -377,6 +378,7 @@ export type FilterReviewInput = {
   all?: InputMaybe<Scalars['Boolean']>;
   id?: InputMaybe<Scalars['String']>;
   limit?: InputMaybe<Scalars['Int']>;
+  promoRating?: InputMaybe<Scalars['String']>;
   reviewDate?: InputMaybe<Scalars['Date']>;
   reviewRating?: InputMaybe<Scalars['Float']>;
   sku?: InputMaybe<Scalars['String']>;
@@ -461,6 +463,7 @@ export type Mutation = {
   login: Auth;
   processBarcodes: Array<Barcode>;
   processProducts: Array<Product>;
+  processReviews: Array<Review>;
   register: Auth;
   removeUser: User;
   updateBarcode: Barcode;
@@ -555,6 +558,11 @@ export type MutationProcessBarcodesArgs = {
 
 
 export type MutationProcessProductsArgs = {
+  input: Scalars['Boolean'];
+};
+
+
+export type MutationProcessReviewsArgs = {
   input: Scalars['Boolean'];
 };
 
@@ -842,11 +850,10 @@ export type RegisterAuthInput = {
 
 export type Review = {
   __typename?: 'Review';
-  count?: Maybe<Scalars['Float']>;
   createdAt?: Maybe<Scalars['Date']>;
   id?: Maybe<Scalars['String']>;
-  lastKey?: Maybe<Scalars['String']>;
   product: Product;
+  promoRating?: Maybe<Scalars['String']>;
   reviewAnswer?: Maybe<Scalars['String']>;
   reviewAuthor: Scalars['String'];
   reviewDate: Scalars['Date'];
@@ -958,6 +965,7 @@ export type UpdateProductInput = {
 
 export type UpdateReviewInput = {
   id: Scalars['String'];
+  promoRating?: InputMaybe<Scalars['String']>;
   reviewAnswer?: InputMaybe<Scalars['String']>;
   reviewAuthor?: InputMaybe<Scalars['String']>;
   reviewDate?: InputMaybe<Scalars['Date']>;
@@ -1789,7 +1797,7 @@ export type MaterialTypeFieldPolicy = {
 	material?: FieldPolicy<any> | FieldReadFunction<any>,
 	quantity?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type MutationKeySpecifier = ('createBarcode' | 'createCart' | 'createFeedback' | 'createItem' | 'createOrder' | 'createProduct' | 'createReview' | 'createUser' | 'deleteBarcode' | 'deleteCart' | 'deleteFeedback' | 'deleteItem' | 'deleteProduct' | 'deleteReview' | 'login' | 'processBarcodes' | 'processProducts' | 'register' | 'removeUser' | 'updateBarcode' | 'updateCart' | 'updateFeedback' | 'updateItem' | 'updateOrder' | 'updateProduct' | 'updateReview' | 'updateUser' | MutationKeySpecifier)[];
+export type MutationKeySpecifier = ('createBarcode' | 'createCart' | 'createFeedback' | 'createItem' | 'createOrder' | 'createProduct' | 'createReview' | 'createUser' | 'deleteBarcode' | 'deleteCart' | 'deleteFeedback' | 'deleteItem' | 'deleteProduct' | 'deleteReview' | 'login' | 'processBarcodes' | 'processProducts' | 'processReviews' | 'register' | 'removeUser' | 'updateBarcode' | 'updateCart' | 'updateFeedback' | 'updateItem' | 'updateOrder' | 'updateProduct' | 'updateReview' | 'updateUser' | MutationKeySpecifier)[];
 export type MutationFieldPolicy = {
 	createBarcode?: FieldPolicy<any> | FieldReadFunction<any>,
 	createCart?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -1808,6 +1816,7 @@ export type MutationFieldPolicy = {
 	login?: FieldPolicy<any> | FieldReadFunction<any>,
 	processBarcodes?: FieldPolicy<any> | FieldReadFunction<any>,
 	processProducts?: FieldPolicy<any> | FieldReadFunction<any>,
+	processReviews?: FieldPolicy<any> | FieldReadFunction<any>,
 	register?: FieldPolicy<any> | FieldReadFunction<any>,
 	removeUser?: FieldPolicy<any> | FieldReadFunction<any>,
 	updateBarcode?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -1904,13 +1913,12 @@ export type QueryFieldPolicy = {
 	reviews?: FieldPolicy<any> | FieldReadFunction<any>,
 	user?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type ReviewKeySpecifier = ('count' | 'createdAt' | 'id' | 'lastKey' | 'product' | 'reviewAnswer' | 'reviewAuthor' | 'reviewDate' | 'reviewRating' | 'reviewText' | 'sku' | 'skuFamily' | 'updatedAt' | 'userId' | 'visible' | ReviewKeySpecifier)[];
+export type ReviewKeySpecifier = ('createdAt' | 'id' | 'product' | 'promoRating' | 'reviewAnswer' | 'reviewAuthor' | 'reviewDate' | 'reviewRating' | 'reviewText' | 'sku' | 'skuFamily' | 'updatedAt' | 'userId' | 'visible' | ReviewKeySpecifier)[];
 export type ReviewFieldPolicy = {
-	count?: FieldPolicy<any> | FieldReadFunction<any>,
 	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
 	id?: FieldPolicy<any> | FieldReadFunction<any>,
-	lastKey?: FieldPolicy<any> | FieldReadFunction<any>,
 	product?: FieldPolicy<any> | FieldReadFunction<any>,
+	promoRating?: FieldPolicy<any> | FieldReadFunction<any>,
 	reviewAnswer?: FieldPolicy<any> | FieldReadFunction<any>,
 	reviewAuthor?: FieldPolicy<any> | FieldReadFunction<any>,
 	reviewDate?: FieldPolicy<any> | FieldReadFunction<any>,

@@ -6,7 +6,7 @@
         data-nosnippet
         class="card-img rounded-0" 
         [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" 
-        [lazyLoad]="resizedImgUrl('static/img/home/collections/women.jpg', 375, 500, 'fill')"
+        [lazyLoad]="staticAssetsUrl + 'static/img/home/collections/women.jpg'"
         alt="Для нее | Женские коллекции TRIBES">
        <div class="card-img-overlay collection">
          <a class="btn btn-light btn-cta btn-lg" [routerLink]="['/women/catalog']">👉 Для нее</a>
@@ -18,7 +18,7 @@
        <img 
         data-nosnippet
         class="card-img rounded-0" [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" 
-        [lazyLoad]="resizedImgUrl('static/img/home/collections/men.jpg', 375, 500, 'fill')" 
+        [lazyLoad]="staticAssetsUrl + 'static/img/home/collections/men.jpg'" 
         alt="Для него | Мужские коллекции TRIBES">
        <div class="card-img-overlay collection">
          <a class="btn btn-light btn-cta btn-lg" [routerLink]="['/men/catalog']">👉 Для него</a>

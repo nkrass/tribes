@@ -11,5 +11,5 @@ export const environment = {
   cdnUrl: "https://cdn.mytribes.ru",
   cdn2Url: "https://cdn2.mytribes.ru",
   cdnBucket: "cdn.mytribes.ru",
-  staticAssetsUrl: ""
+  staticAssetsUrl: "assets/"
 };

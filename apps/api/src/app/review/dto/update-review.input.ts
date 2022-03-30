@@ -55,4 +55,9 @@ export class UpdateReviewInput {
   @IsUUID()
   @Field(() => String, {nullable: true})
   userId?: string
+  
+  @IsOptional()
+  @IsString()
+  @Field(() => String, {nullable: true})
+  promoRating?: string
 }

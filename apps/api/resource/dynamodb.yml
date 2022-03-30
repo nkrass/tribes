@@ -470,6 +470,8 @@ Resources:
           AttributeType: 'N'
         - AttributeName: userId
           AttributeType: S
+        - AttributeName: promoRating
+          AttributeType: S
         - AttributeName: createdAt
           AttributeType: 'N'
       KeySchema:
@@ -505,6 +507,14 @@ Resources:
             - AttributeName: userId
               KeyType: HASH
             - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: promoRatingGlobalIndex
+          KeySchema:
+            - AttributeName: promoRating
+              KeyType: HASH
+            - AttributeName: createdAt
               KeyType: RANGE
           Projection:
             ProjectionType: ALL

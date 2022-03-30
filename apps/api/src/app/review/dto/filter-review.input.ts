@@ -51,6 +51,10 @@ export class FilterReviewInput extends LimitArgs{
   @Field( () => Boolean, {nullable: true})
   visible: boolean;
 
+  @IsString()
+  @IsOptional()
+  @Field( () => String, {nullable: true})
+  promoRating: string;
   // @IsOptional()
   // @IsNumber()
   // @Field( () => Number, {nullable: true})

@@ -2,12 +2,11 @@ import { Injectable } from '@nestjs/common';
 import { SortOrder} from 'dynamoose/dist/General';
 import { isNil, omitBy } from 'lodash';
 import { InjectModel, Model, Document } from 'nestjs-dynamoose';
+import { GoogleServices } from '../../shared/googledoc.service';
 import { CreateBarcodeInput } from '../dto/create-barcode.input';
 import { FilterBarcodeInput } from '../dto/filter-barcode.input';
 import { UpdateBarcodeInput } from '../dto/update-barcode.input';
 import { Barcode, BarcodeKey } from '../entities/barcode.model';
-
-import { GoogleServices } from './googledoc.service';
 
 
 
