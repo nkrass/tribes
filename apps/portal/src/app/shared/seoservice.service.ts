@@ -1,11 +1,10 @@
-import {Injectable, Inject} from '@angular/core'; 
+import { Injectable, Inject } from '@angular/core'; 
 import { Meta, Title } from '@angular/platform-browser';
 import { DOCUMENT } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
-
-import {environment} from "../../../src/environments/environment"
-import { ProductQuery } from 'gql/types';
+import { environment } from "../../../src/environments/environment"
 import { resizedImgUrl } from './utils/utils.utils';
+import { ProductQuery } from '@tribes/data-access';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 const resizedImgCover = resizedImgUrl(staticAssetsUrl+"static/img/home/slider-new_year_2.jpg", 1520, 656)
@@ -71,7 +70,7 @@ export class SEOService {
   constructor(
     private title: Title, 
     private meta: Meta, 
-    @Inject(DOCUMENT) private doc: any
+    @Inject(DOCUMENT) private doc: Document
   ) { }
   setTitle(title: string) {
     this.title.setTitle(title);
@@ -84,7 +83,7 @@ export class SEOService {
   }
   setCanonicalURL(url?:string) {
     let link = this.doc.querySelector("link[rel='canonical']")
-    let canURL = url == undefined ? this.doc.URL : url;
+    const canURL = url == undefined ? this.doc.URL : url;
     if (link) {
       link.setAttribute('href', canURL);
     } else {
@@ -132,7 +131,7 @@ export class SEOService {
         '@context': 'https://schema.org',
         '@type': 'Product',
         '@id': scheme_product_id_ref,
-        name: title!,
+        name: title as string,
         url: 'https://mytribes.ru/product/' + sku,
         description: '⭐️⭐️⭐️⭐️⭐️ ' + description,
         brand: {
@@ -147,13 +146,13 @@ export class SEOService {
           'https://www.instagram.com/tribes_brand/',
           'https://www.pinterest.ru/tribes_brand/pins/'
         ],
-        sku: sku!,
+        sku,
         hasMerchantReturnPolicy: {
           'merchantReturnLink': 'https://mytribes.ru/returns-and-refunds',
           'inStoreReturnsOffered': true,
           'merchantReturnDays': 14,
           'identifier': 'https://mytribes.ru/returns-and-refunds',
-          '@id': sku!
+          '@id': sku as string
         },
         slogan: 'Для ярких и смелых- tribes',
         logo: staticAssetsUrl + 'static/img/logo/logo_tribes_woodmark.svg',
@@ -165,16 +164,16 @@ export class SEOService {
         color: color,
         image: { 
           "@type": "ImageObject", 
-          url: coverImage!, 
-          name: title!, 
+          url: coverImage as string, 
+          name: title as string, 
           caption: '⭐️⭐️⭐️⭐️⭐️ ' + description,
-          sameAs: 'https://mytribes.ru/product/' + sku
+          sameAs: 'https://mytribes.ru/product/' + sku as string
           },//cover_image,
         offers: {
           "@type": "AggregateOffer",
-          highPrice: product.priceBase!,
-          lowPrice: product.priceSale!,
-          price: priceSale || priceBase!,
+          highPrice: product.priceBase as number,
+          lowPrice: product.priceSale as number,
+          price: priceSale || priceBase as number,
           priceCurrency: 'RUB',
           offerCount: 2,
           // '@id': scheme_product_id_ref,
@@ -182,23 +181,23 @@ export class SEOService {
           offers: [
             { '@type': 'Offer',
               url: 'https://www.wildberries.ru/catalog/'+ product.wildberriesId +'/detail.aspx?targetUrl=BP',
-              availability: stock! > 0 ? 'https://schema.org/InStock' : 'https://schema.org/LimitedAvailability',
+              availability: stock ? 'https://schema.org/InStock' : 'https://schema.org/LimitedAvailability',
             },
             { '@type': 'Offer',
               url: 'https://mytribes.ru/product/' + sku,
-              availability: stock! > 0 ? 'https://schema.org/InStock' : 'https://schema.org/LimitedAvailability',
+              availability: stock ? 'https://schema.org/InStock' : 'https://schema.org/LimitedAvailability',
             }
           ]
         },
         aggregateRating: {
           '@type': 'AggregateRating',
           // itemReviewed: { "@type": "Product", sku, name: title, '@id': scheme_product_id_ref },
-          ratingValue: product.rating!,
+          ratingValue: product.rating as number,
           ratingCount: product.reviews?.length,
           bestRating: 5,
           worstRating: 1
         },
-        review: product.reviews?.map(e => {
+        review: product.reviews?.map((e: any) => {
           return {
             '@type': 'Review',
             '@id': 'https://mytribes.ru/product/'+e.sku+'#product_review_'+e.id,

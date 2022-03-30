@@ -14,6 +14,7 @@ import { CartModule } from './cart/cart.module';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { DateScalar } from './shared/date.scalar';
 import { environment } from '../environments/environment';
+import { FeedbackModule } from './feedback/feedback.module';
 
 
 @Module({
@@ -44,7 +45,7 @@ import { environment } from '../environments/environment';
         suffix: '-table',
       },
     }),
-    CaslModule, AuthModule, UserModule, ProductModule, ReviewModule, ItemModule, OrderModule, CartModule 
+    CaslModule, AuthModule, UserModule, ProductModule, ReviewModule, ItemModule, OrderModule, CartModule, FeedbackModule 
   ], providers: [ComplexityPlugin, DateScalar],
 })
 export class AppModule {}

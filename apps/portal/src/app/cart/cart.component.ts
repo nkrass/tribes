@@ -1,11 +1,10 @@
-import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject, PLATFORM_ID } from '@angular/core';
+import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
 import { CartService } from './shared/cart.service';
 import { AnalyticsService } from '../shared/analytics.service'
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Router } from '@angular/router';
 import { RxState } from '@rx-angular/state';
-import { CartItems, CartQuery, CartStatus } from 'gql/types';
 import { AppGlobalState, APP_GLOBAL_STATE } from '../app-global.state';
+import { CartItems, CartQuery, CartStatus } from '@tribes/data-access';
 
 interface CartState {
   cart: CartQuery['cart']
@@ -17,7 +16,7 @@ interface CartState {
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CartComponent {
-  public showDistributor: boolean = true
+  public showDistributor = true
   readonly cart$ = this.globalState.select('cart')
 
   constructor(
@@ -61,7 +60,7 @@ export class CartComponent {
 
   }
 
-  public removeItem(event: any, barcode: CartItems['barcode']) {
+  public removeItem(event: any,  barcode: CartItems['barcode']|any) {
     event.preventDefault();
     event.stopPropagation();
     if (window.confirm("Подтверждаете удаление")) {
@@ -69,16 +68,7 @@ export class CartComponent {
     }
   }
 
-  public updateAmount(barcode: CartItems['barcode'], newQuantity: number) {
+  public updateAmount(barcode: CartItems['barcode']|any, newQuantity: number) {
     this.cartService.updateCartItemsAmount(barcode, newQuantity);
   }
-
-
-  // public checkAmount(item: CartItem) {
-  //   this.cartService.updateItemAmount(
-  //     this.get('cart'),
-  //     item,
-  //     item.amount < 1 || !item.amount || isNaN(item.amount) ? 1 : item.amount
-  //   );
-  // }
 }

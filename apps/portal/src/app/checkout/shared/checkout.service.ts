@@ -1,8 +1,8 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Order } from '../../models/order.model';
 import { Customer } from '../../models/customer.model';
 import { BehaviorSubject } from 'rxjs';
-import { CartQuery } from 'gql/types';
+import { CartQuery } from '@tribes/data-access';
 
 export const enum EDeliveryMethod {
   "courier" = "courier",
@@ -15,12 +15,9 @@ export class CheckoutService {
   // public orderInProgressChanged: EventEmitter<Order> = new EventEmitter<Order>();
   public orderInProgressChanged = new BehaviorSubject(this.orderInProgress)
   // public stepChanged: EventEmitter<number> = new EventEmitter<number>();
-  public activeStep: number = 0
+  public activeStep = 0
   public stepChanged = new BehaviorSubject(this.activeStep)
   public deliveryMethod$ = new BehaviorSubject(EDeliveryMethod['wildberries']);
-
-  constructor() {
-  }
 
   public gotoStep(number: number) {
     this.activeStep = number;

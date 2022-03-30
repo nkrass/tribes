@@ -12,6 +12,8 @@
     "esModuleInterop": true,
     "strictPropertyInitialization": false,
     "strict": true,
+    "noImplicitAny": false,
+    "noImplicitOverride": false,
     "importHelpers": true,
     "target": "ES2021",
     "module": "commonjs",
@@ -21,8 +23,9 @@
     "baseUrl": "./",
     "paths": {
       "@tribes/api-interfaces": ["libs/api-interfaces/src/index.ts"],
-      "@tribes/data-access": ["libs/data-access/src/index.ts"]
+      "@tribes/data-access": ["libs/data-access/src/index.ts"],
+      "swiper_angular": ["node_modules/swiper/angular"]
     }
   },
-  "exclude": ["node_modules", "tmp"]
+  "exclude": ["node_modules", "tmp", "**/*.spec.ts", "**/*.test.ts"]
 }

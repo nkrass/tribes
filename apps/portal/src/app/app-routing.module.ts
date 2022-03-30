@@ -34,7 +34,7 @@ export class MyRouterOutlet extends RouterOutlet {
     super(parentContexts, location, resolver, name, ref);
   }
 
-  activateWith(
+  override activateWith(
     activatedRoute: ActivatedRoute,
     resolver: ComponentFactoryResolver
   ): void {

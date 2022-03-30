@@ -2,14 +2,11 @@ import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/
 import { pluck, map, startWith, switchMap, endWith, zip, Observable, combineLatest } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { environment } from '../../../../src/environments/environment'
-import { ProductsListGQL, CategoriesListGQL, CategoriesListQuery, ProductsListQuery } from 'gql/types';
 import { RxState } from '@rx-angular/state';
-import SwiperCore, { Pagination, Zoom, Navigation, Mousewheel, FreeMode } from "swiper";
 import { PlaceholderImage, ProductMock } from '../shared/product-placeholder.mock';
 import { GeneralColorsDictionary } from '../shared/detailed-colors.dictionary';
 import { ItemList, WithContext, OfferCatalog } from 'schema-dts';
-
-SwiperCore.use([Pagination, Zoom, Navigation, Mousewheel, FreeMode]);
+import { CategoriesListGQL, CategoriesListQuery, ProductCategory, ProductGender, ProductsListGQL, ProductsListQuery } from '@tribes/data-access';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 
@@ -50,22 +47,6 @@ export class ProductsListComponent {
 
   colorsPalette = Object.keys(GeneralColorsDictionary).map(e=> ({colorCode: e, colorTitle: GeneralColorsDictionary[e]}))
   params$ = this.route.paramMap;
-
-  getProducts$ = (p: ParamMap): Observable<ProductsListQuery['products']> => {
-    return this.productsListGQL.fetch({
-      input: { 
-        category: p.get('category') === 'all'? undefined : p.get('category') || undefined, 
-        gender: p.get('gender') || undefined,
-        color: p.get('color') || undefined,
-        size: p.get('size') || undefined,
-      }
-    }).pipe(pluck('data', 'products'))
-  }
-  getCategories$ = (p: ParamMap): Observable<CategoriesListQuery['categories']> => {
-    return this.categoriesList.fetch({
-      gender: p.get('gender') || undefined
-    }).pipe(pluck('data', 'categories'))
-  }
   fetchOnUrlChange$ = this.params$.pipe(
     switchMap(p => 
       combineLatest([
@@ -89,6 +70,22 @@ export class ProductsListComponent {
       )
     )
   )
+  getProducts$ = (p: ParamMap): Observable<ProductsListQuery['products']> => {
+    return this.productsListGQL.fetch({
+      input: { 
+        category: p.get('category') === 'all'? undefined : p.get('category') as ProductCategory|| undefined, 
+        gender: p.get('gender') as ProductGender || undefined,
+        color: p.get('color') || undefined,
+        size: p.get('size') || undefined,
+      }
+    }).pipe(pluck('data', 'products'))
+  }
+  getCategories$ = (p: ParamMap): Observable<CategoriesListQuery['categories']> => {
+    return this.categoriesList.fetch({
+      gender: p.get('gender') as ProductGender|| undefined
+    }).pipe(pluck('data', 'categories'))
+  }
+  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -100,7 +97,7 @@ export class ProductsListComponent {
   }
 
   buildSchema(products: ProductsListQuery['products']){
-    const itemListElement = [];
+    const itemListElement: any[] = [];
     for (let i=0; i< products.length; i++){
       const {sku, title, description, category, materials, color, imagesSrc, priceSale, stock} = products[i]
       const el = {
@@ -136,7 +133,7 @@ export class ProductsListComponent {
           offers: {
             price: priceSale,
             priceCurrency: 'RUB',
-            availability: stock! > 0 ? 'InStock' : 'LimitedAvailability',
+            availability: stock ? 'InStock' : 'LimitedAvailability',
             '@id': 'https://mytribes.ru/product/' + sku,
             sku, url: 'https://mytribes.ru/product/' + sku
           }
@@ -145,8 +142,8 @@ export class ProductsListComponent {
       itemListElement.push(el)
     }
     const url = 'https://mytribes.ru' + '/' + this.route.snapshot.url.map(u=> u.path).join('/')
-    const description = this.route.snapshot.data.description
-    const name = this.route.snapshot.data.title
+    const description = this.route.snapshot.data['description']
+    const name = this.route.snapshot.data['title']
     return {
       '@context': 'https://schema.org',
       '@type': "OfferCatalog",

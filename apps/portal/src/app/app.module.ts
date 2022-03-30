@@ -33,16 +33,14 @@ import { StripUndefinedParams } from './interceptors/http-params.interceptor';
 import { SupportComponent } from './static/support/support.component';
 import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 import { TransferHttpCacheModule } from '@nguniversal/common';
-import { AnalyticsService } from 'app/shared/analytics.service'
+import { AnalyticsService } from './shared/analytics.service'
 import { SocialLuckydayComponent } from './social/luckyday/luckyday.component';
 import { HttpRequestInterceptor } from './interceptors/http-request-interceptor.service';
 import {HttpLink} from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { RxState } from '@rx-angular/state';
-import { AppGlobalState, APP_GLOBAL_STATE } from './tribes-global.state';
-import { environment } from 'environments/environment';
-// import { SocialModule } from './social/luckyday/social.module';
-
+import { AppGlobalState, APP_GLOBAL_STATE } from './app-global.state';
+import { environment } from '../environments/environment';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 const APOLLO_CACHE = new InjectionToken<InMemoryCache>('apollo-cache');
@@ -115,12 +113,9 @@ const STATE_KEY = makeStateKey<any>('apollo.state');
     CheckoutModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserTransferStateModule,
-    
     GoogleTagManagerModule.forRoot({
       id: 'GTM-MLTQWTV'
-    }),
-
-    // SocialModule
+    })
   ],
   bootstrap: [AppComponent]
 })

@@ -1,18 +1,16 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild, TemplateRef, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, PLATFORM_ID, Inject, ViewChildren, QueryList } from '@angular/core';
+import { Component, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, PLATFORM_ID, Inject, ViewChildren, QueryList } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { switchMap, map, pluck, startWith, Subject, tap, filter } from 'rxjs';
+import { switchMap, map, pluck, startWith, Subject, tap, } from 'rxjs';
 import { CartService } from '../../cart/shared/cart.service';
 import { SEOService } from '../../shared/seoservice.service';
 import { ItemList, Product as SchemaProduct, WithContext } from 'schema-dts';
 import { environment } from '../../../environments/environment'
-import { AnalyticsService } from 'app/shared/analytics.service'
+import { AnalyticsService } from '../../shared/analytics.service'
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { MessageService } from 'app/messages/message.service';
-import { NavigationService } from 'app/shared/navigation.service';
+import { MessageService } from '../../messages/message.service';
 import { RxState } from '@rx-angular/state';
-import { CartQuery, CategoriesListGQL, CategoriesListQuery, ProductGQL, ProductQuery } from 'gql/types';
+import { CategoriesListQuery, ProductGQL } from '@tribes/data-access';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 const cdnUrl = environment.cdnUrl
@@ -50,18 +48,17 @@ export class CatalogComponent {
     private modalService: BsModalService,
     private analytics: AnalyticsService,
     private messageService: MessageService,
-    private navigation: NavigationService,
-    @Inject(DOCUMENT) private doc: any,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(DOCUMENT) private doc: Document,
+    @Inject(PLATFORM_ID) private platformId: typeof PLATFORM_ID,
     private productGql: ProductGQL,
     private state: RxState<ProductState>
   ) {
     const fetchProductOnUrlChange$ = this.route.paramMap.pipe(
       switchMap((params) => {
-        return this.productGql.watch({ input: { 'sku': params.get('id')! } }).valueChanges.pipe(
+        return this.productGql.watch({ input: { 'sku': params.get('id') as string } }).valueChanges.pipe(
           pluck('data', 'product'),
           map((product) => {
-           return { product, isLoading: false, urlSKU: params.get('id')!, schema: this.seo.buildProductSeoAndSchema(product)} 
+           return { product, isLoading: false, urlSKU: params.get('id') as string, schema: this.seo.buildProductSeoAndSchema(product)} 
           }),
           tap(({product}) => {
             this.analytics.viewContent( product.barcodes.map(barcode => ({ barcode, price: product.priceSale, quantity: 1 })))
@@ -71,7 +68,7 @@ export class CatalogComponent {
       }),
       startWith({isLoading: true })
     )
-    // this.state.connect(fetchProductOnUrlChange$)
+    this.state.connect(fetchProductOnUrlChange$)
     // this.state.connect(this.selectSizeBtn$, this.onSelectSize.bind(this));
     // this.state.connect(this.addToCartBtn$, this.onAddToCart.bind(this))
   }

@@ -1,4 +1,4 @@
-<del *ngIf="priceSale < priceBase" class="text-muted text-normal">
-  {{priceBase * count}}
+<del *ngIf="((priceSale||0 )< (priceBase||0))" class="text-muted text-normal">
+  {{(priceBase||0) * (count||0)}}
 </del>
-<span class="pricecomp-product-price" [attr.data-pid]="sku" [attr.data-sku]="sku"  [attr.data-price]="priceSale" [attr.data-pcount]="count">&nbsp;&nbsp;{{(priceBase || priceSale) * count}} ₽</span>
+<span class="pricecomp-product-price" [attr.data-pid]="sku" [attr.data-sku]="sku"  [attr.data-price]="priceSale" [attr.data-pcount]="count">&nbsp;&nbsp;{{(priceBase || priceSale || 0) * (count || 0)}} ₽</span>

@@ -2,7 +2,7 @@ import { Inject, Injectable } from '@angular/core';
 import { BaseCookieService } from '../../shared/storage/services/base-cookie.service';
 import { switchMap, map, pluck, Observable, BehaviorSubject, Subject, distinctUntilChanged, catchError} from 'rxjs';
 import { RxState } from '@rx-angular/state';
-import { CartGQL, CartQuery, CartStatus, CreateCartGQL, UpdateCartGQL } from '@tribes/data-access';
+import { CartGQL, CartQuery, CartStatus, CreateCartGQL, CreateCartMutation, UpdateCartGQL } from '@tribes/data-access';
 import { AppGlobalState, APP_GLOBAL_STATE } from '../../app-global.state';
 import { AnalyticsService } from '../../shared/analytics.service';
 

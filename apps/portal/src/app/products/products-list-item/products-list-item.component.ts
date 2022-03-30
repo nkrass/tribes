@@ -1,31 +1,22 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewChild } from '@angular/core';
-
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Subject } from 'rxjs';
-
 import { environment } from '../../../../src/environments/environment'
 import { Router } from '@angular/router';
-import { RxState } from '@rx-angular/state';
-import { ProductsListQuery } from 'gql/types';
 import { PlaceholderImage } from '../shared/product-placeholder.mock';
-// import { Product } from 'gql/types';
+import SwiperCore, { Pagination, Zoom, Navigation, Mousewheel, FreeMode } from "swiper";
+import { ProductsListQuery } from '@tribes/data-access';
+SwiperCore.use([Pagination, Zoom, Navigation, Mousewheel, FreeMode]);
 
 const staticAssetsUrl = environment.staticAssetsUrl
-
-
-// interface CompoentState{
-//   product: Product
-// }
 
 @Component({
   selector: 'tribes-products-list-item',
   templateUrl: './products-list-item.component.html',
-  styleUrls: [
-    './products-list-item.component.scss'
-  ],
+  styleUrls: ['./products-list-item.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  // providers: [RxState]
+
 })
-export class ProductsListItemComponent implements OnInit, OnDestroy, AfterViewInit {
+export class ProductsListItemComponent {
   public staticAssetsUrl: string = staticAssetsUrl
   public placeholderImage: string = PlaceholderImage
   
@@ -42,16 +33,5 @@ export class ProductsListItemComponent implements OnInit, OnDestroy, AfterViewIn
   }
   navigateToProduct(event:any){
     this.router.navigate(['/product', this.product.sku])
-  }
-
-  ngOnInit() {
-    // this.cdr.markForCheck();
-  }
-  ngAfterViewInit() {
-    // this.cdr.markForCheck();
-  }
-  ngOnDestroy() {
-    this.unsubscribe$.next(null);
-    this.unsubscribe$.complete();
   }
 }

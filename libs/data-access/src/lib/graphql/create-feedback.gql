@@ -1,0 +1,12 @@
+mutation CreateFeedback($input: CreateFeedbackInput!){
+  createFeedback(input: $input){
+    id
+    text
+    name
+    purpose
+    email
+    userId
+    createdAt
+
+  }
+}

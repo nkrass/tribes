@@ -19,15 +19,15 @@
     <div class="row justify-content-md-center"> 
       <div class="col-12 col-lg-2 col-xl-2 mb-3">
         <select class="form-control" #selectCategory (change)="onSelectCategory(selectCategory.value)">
-          <option value="all" [selected]="selectCategory.value=='all' || selectCategory.value == ''">Все категории</option>
-          <option *ngFor="let category of categories$ | push" [value]="category.name" [selected]="category.name == category$ | push">
+          <option value="all" [selected]="selectCategory.value==='all' || selectCategory.value === ''">Все категории</option>
+          <option *ngFor="let category of categories$ | push" [value]="category.name" [selected]="category.name === (category$ | push)">
             {{category.name}}
           </option>
         </select>
         <div class="btn-group col-12" dropdown #dropdown="bs-dropdown" [autoClose]="true">
           <button id="button-basic" dropdownToggle  type="button" class="col-12 btn btn-color{{(color$ | push) || '00'}} dropdown-toggle " 
             data-bs-toggle="dropdown" aria-expanded="false">
-            Цвет: {{colorDictionary[(color$ | push)] || 'Все цвета'}}
+            Цвет: {{colorDictionary[(color$ | push) || '00'] || 'Все цвета'}}
           </button>
           <ul *dropdownMenu id="dropdown-basic" aria-labelledby="button-basic" class="dropdown-menu col-12">
             <li class="pointer">

@@ -5,6 +5,7 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { UseGuards } from '@nestjs/common';
 import { GqlAuthGuard } from '../auth/guards/gql-auth.guard';
+import { CurrentUser } from '../auth/decorators/ctx-user.decorator';
 
 @Resolver(() => User)
 export class UserResolver {
@@ -20,9 +21,14 @@ export class UserResolver {
   //   return this.userService.findAll();
   // }
   @UseGuards(GqlAuthGuard)
-  @Query(() => User, { name: 'user' })
-  findOne(@Args('id', { type: () => String }) id: string) {
+  @Query(() => User, )
+  user(@Args('id', { type: () => String }) id: string) {
     return this.userService.findOne({id});
+  }
+  @UseGuards(GqlAuthGuard)
+  @Query(() => User )
+  me(@CurrentUser() user: User) {
+    return this.userService.findOne({ id: user.id });
   }
   @UseGuards(GqlAuthGuard)
   @Mutation(() => User)

@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { DynamooseModule } from 'nestjs-dynamoose';
 import { CaslModule } from '../casl/casl.module';
 import { ReviewModule } from '../review/review.module';
@@ -15,7 +15,8 @@ import { ProductService } from './service/product.service';
 
 @Module({
   imports: [
-    ReviewModule, CaslModule,
+    forwardRef(() => ReviewModule),
+    CaslModule,
     DynamooseModule.forFeature([
       {
         name: 'product',

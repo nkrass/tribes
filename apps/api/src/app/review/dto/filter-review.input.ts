@@ -19,6 +19,12 @@ class LimitArgs {
 @InterfaceType('FilterReviewInput')
 export class FilterReviewInput extends LimitArgs{
   @IsOptional()
+  @IsUUID()
+  @Transform((s) => s.value.toLowerCase())
+  @Field(() => String, {nullable: true})
+  id: string;
+
+  @IsOptional()
   @IsString()
   @Transform((s) => s.value.toLowerCase())
   @Field(() => String, {nullable: true})
@@ -44,6 +50,16 @@ export class FilterReviewInput extends LimitArgs{
   @IsOptional()
   @Field( () => Boolean, {nullable: true})
   visible: boolean;
+
+  // @IsOptional()
+  // @IsNumber()
+  // @Field( () => Number, {nullable: true})
+  // reviewRatingMin: number;
+
+  // @IsOptional()
+  // @IsNumber()
+  // @Field( () => Number, {nullable: true})
+  // reviewRatingMax: number;
 
   @IsOptional()
   @IsUUID()

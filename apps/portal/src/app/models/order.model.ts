@@ -1,10 +1,10 @@
 import { Customer } from './customer.model';
-import { DBBaseModel } from '../../../api/services/dynamodb.service'
-import { CartQuery } from 'gql/types';
+import { CartQuery } from '@tribes/data-access';
+
 export class Order {
   public customer: Customer
   public items: CartQuery['cart']['cartItems']
-  public total: number = 0
+  public total = 0
   public status?: string
   public id: string
   public number: string|number

@@ -3,12 +3,12 @@ import { CookieService } from '@gorniv/ngx-universal';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
-import { environment } from 'environments/environment';
+import { environment } from '../../environments/environment';
 import { NavigationEnd } from '@angular/router';
-import { catchError, combineLatest, distinctUntilChanged, filter, from, fromEvent, interval, map, of, pipe, race, ReplaySubject, Subject, switchMapTo, take, tap, timeout, timer } from 'rxjs';
+import { catchError, combineLatest, distinctUntilChanged, filter, from, fromEvent, interval, map, of, ReplaySubject, Subject, switchMapTo, take, tap, timeout, timer } from 'rxjs';
 import { takeUntil } from 'rxjs';
 import { waitFor } from './rxjs.extensions';
-import { CartItems, CartQuery } from 'gql/types';
+import { CartQuery } from '@tribes/data-access';
 
 @Injectable({
   providedIn: 'root'
@@ -24,11 +24,11 @@ export class AnalyticsService implements OnDestroy {
   constructor(
     private gtmService: GoogleTagManagerService,
     private _cookieService: CookieService,
-    @Inject(PLATFORM_ID) private readonly platformId: Object,
+    @Inject(PLATFORM_ID) private readonly platformId: typeof PLATFORM_ID,
     @Optional() @Inject(REQUEST) private request: Request,
     @Inject(DOCUMENT) private document: Document
   ) { 
-    const that = this
+    // const that = this
     //1. wait for analytics scripts to load
 
     this.runAnalytics && combineLatest([
@@ -97,8 +97,8 @@ export class AnalyticsService implements OnDestroy {
   }
   getRefQueryParam(name: string) {
     name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
-    var regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
-    var results = regex.exec(location.search);
+    const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
+    const results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));
   };
   public redirectTo(url: string){
@@ -234,7 +234,7 @@ export class AnalyticsService implements OnDestroy {
         content_type: 'product',
         content_name: items[0].barcode?.sku, 
         currency: items[0].currency || "RUB", 
-        value: items.reduce((acc, pv) => pv.quantity! * pv.price! + acc, 0)
+        value: items.reduce((acc, pv) => (pv.quantity as number) * (pv.price as number) + acc, 0)
       });
       (window as any).ym?.(this.ymID,'reachGoal','ya_addtocart')
     }).catch(e => console.log('Error in loading GTM'))
@@ -268,9 +268,9 @@ export class AnalyticsService implements OnDestroy {
         content_name: 'CartCheckout', 
         content_type: 'product',
         currency: items[0].currency || "RUB",
-        value: items.reduce((acc, pv) => pv.quantity! * pv.price! + acc, 0)
+        value: items.reduce((acc, pv) => (pv.quantity as number) * (pv.price as number) + acc, 0)
       });
-      (window as any).ym?.(this.ymID,'reachGoal','ya_initiatecheckout', { order_price: items.reduce((acc, pv) => pv.quantity! * pv.price! + acc, 0), currency: "RUB"})
+      (window as any).ym?.(this.ymID,'reachGoal','ya_initiatecheckout', { order_price: items.reduce((acc, pv) => (pv.quantity as number) * (pv.price as number) + acc, 0), currency: "RUB"})
     })
     .catch(e => console.log('Error in loading GTM'))
   }
@@ -286,7 +286,7 @@ export class AnalyticsService implements OnDestroy {
         actionField: {
           id: trx_id, // Transaction ID. Required for purchases and refunds.
           affiliation: this.getRefQueryParam('utm_source') || 'mytribes.ru',
-          revenue: items.reduce((acc, pv) => pv.quantity! * pv.price! + acc, 0), // Total transaction value (incl. tax and shipping)
+          revenue: items.reduce((acc, pv) => (pv.quantity as number) * (pv.price as number) + acc, 0), // Total transaction value (incl. tax and shipping)
           // tax:'4.90',
           // 'shipping': '5.99',
           // 'coupon': 'SUMMER_SALE'
@@ -311,7 +311,7 @@ export class AnalyticsService implements OnDestroy {
       (window as any).fbq?.('track', 'Purchase', { 
         content_ids: items.map(i => i.barcode?.barcode),
         currency: items[0].currency || "RUB",
-        value: items.reduce((acc, pv) => pv.quantity! * pv.price! + acc, 0),
+        value: items.reduce((acc, pv) => (pv.quantity as number) * (pv.price as number) + acc, 0),
         content_type: 'product'
       });
       (window as any).ym?.(this.ymID,'reachGoal','ya_purchase')

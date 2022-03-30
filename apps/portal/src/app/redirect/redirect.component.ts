@@ -1,21 +1,15 @@
-import { Component, Input, OnDestroy, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, Inject, PLATFORM_ID, Renderer2 } from '@angular/core';
+import { Component, OnDestroy, OnInit, ChangeDetectorRef, ChangeDetectionStrategy, Inject, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { interval, map, pluck, startWith, Subject, switchMap, take, tap } from 'rxjs';
-
-
-
-import { Product } from '../../../api/components/product/product.model';
 import { SEOService } from '../shared/seoservice.service';
 import { Product as SchemaProduct, WithContext } from 'schema-dts';
 import { environment } from '../../../src/environments/environment'
-
-import { AnalyticsService } from 'app/shared/analytics.service'
-
-import { ProductService } from 'app/products/shared/product.service';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Meta, Title } from '@angular/platform-browser';
-import { ProductGQL, ProductQuery } from 'gql/types';
+
 import { RxState } from '@rx-angular/state';
+import { ProductGQL, ProductQuery } from '@tribes/data-access';
+import { AnalyticsService } from '../shared/analytics.service';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 const cdnUrl = environment.cdnUrl
@@ -30,9 +24,7 @@ interface ProductState {
 @Component({
   selector: 'tribes-redirect',
   templateUrl: './redirect.component.html',
-  styleUrls: [
-    './redirect.component.scss',
-  ],
+  styleUrls: ['./redirect.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [RxState]
 })
@@ -70,22 +62,23 @@ export class RedirectComponent implements OnInit, OnDestroy {
     private meta: Meta,
     private productGql: ProductGQL,
     private state: RxState<ProductState>,
-    @Inject(PLATFORM_ID) private platformId: Object,
-    @Inject(DOCUMENT) private doc: any
+    @Inject(PLATFORM_ID) private platformId: typeof PLATFORM_ID,
+    @Inject(DOCUMENT) private doc: Document
   ) {
     const fetchProductOnUrlChange$ = this.route.paramMap.pipe(
-      switchMap((params) => {
+      switchMap(params => {
         console.log('params', params)
-        return this.productGql.watch({ input: { 'sku': params.get('id')! } }).valueChanges.pipe(
+        return this.productGql.fetch({ input: { 'sku': params.get('id') as string } }).pipe(
           pluck('data', 'product'),
-          map((product) => {
-            // const schema = this.buildSchema({product})
-           return { product, isLoading: false, urlSKU: params.get('id')!, schema: this.seo.buildProductSeoAndSchema(product)} 
-          }),
-          tap(({product}) => {
+          tap((product) => {
             this.analytics.viewContent( product.barcodes.map(barcode => ({ barcode, price: product.priceSale, quantity: 1 })))
           }),
-          startWith({isLoading: true, urlSKU: params.get('id')! })
+          map((product) => { 
+            // const schema = this.buildSchema({product})
+           return { product, isLoading: false, urlSKU: params.get('id') as string, schema: this.seo.buildProductSeoAndSchema(product)} 
+          }),
+          
+          startWith({isLoading: true, urlSKU: params.get('id') as string })
         )
       })
     )

@@ -22,12 +22,21 @@ export const ReviewSchema = new Schema({
       rangeKey: 'id',
     },
   },
-  reviewText: {type: String},
-  reviewAuthor: { type: String},
-  reviewRating: { type: Number},
-  reviewDate: { type: Date},
-  reviewAnswer: { type: String},
-  visible: { type: Boolean, default: true },
+  reviewText: { type: String },
+  reviewAuthor: { type: String },
+  reviewRating: { 
+    type: Number, 
+    index: {
+      global: true,
+      rangeKey: 'createdAt',
+    }
+  },
+  reviewDate: { type: Date },
+  reviewAnswer: { type: String },
+  visible: { 
+    type: Boolean, 
+    default: true
+  },
   userId: { type: String, index: {
     global: true,
     rangeKey: 'id',

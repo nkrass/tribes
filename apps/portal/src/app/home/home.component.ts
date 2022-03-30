@@ -1,6 +1,6 @@
-import { Component, OnDestroy, OnInit, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
-import { combineLatest, map, pluck, Subject, takeUntil, zip } from 'rxjs';
+import { map, pluck, Subject, zip } from 'rxjs';
 import { HomeSliderImages } from '../models/home-slider-images';
 import { HomeSliderImagesService } from './main-slider/home-slider-images.service';
 
@@ -25,7 +25,7 @@ interface HomeComponentState {
   changeDetection: ChangeDetectionStrategy.OnPush,
   providers: [RxState]
 })
-export class HomeComponent implements OnInit, OnDestroy {
+export class HomeComponent {
   public staticAssetsUrl: string = staticAssetsUrl
   public resizedImgUrl = resizedImgUrl
 
@@ -33,6 +33,8 @@ export class HomeComponent implements OnInit, OnDestroy {
   public sliderImages: HomeSliderImages[] = [];
   public schema: WithContext<WebSite>;
   public meta = BrandDefaultMeta
+  reviews$ = this.state.select('reviews');
+  products$ = this.state.select('products');
 
   constructor(
     private state: RxState<HomeComponentState>,
@@ -51,7 +53,7 @@ export class HomeComponent implements OnInit, OnDestroy {
       )
     );
     this.state.connect('reviews', this.reviewsGql.fetch({input: {all: true, limit: 10}}).pipe(pluck('data', 'reviews')));
-    
+
     const {description, title} = this.router.snapshot.data
     this.schema = {
       '@context': 'https://schema.org',
@@ -91,26 +93,5 @@ export class HomeComponent implements OnInit, OnDestroy {
         }
       ]
     };
-  }
-  
-  ngOnInit() {
-    combineLatest([
-      this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Women }}).pipe(pluck('data', 'products')),
-      this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Men }}).pipe(pluck('data', 'products')),
-      // this.productService.getProducts({page: 1, limit: 12, sort: ESortingBehaviour["date_desc"], by_model: 1}),
-      this.homeSliderImagesService.getSliderImages(),
-      this.seo.currentRouteData$
-    ]).pipe(takeUntil(this.unsubscribe$))
-    .subscribe(([products_w, products_m, slides, meta]) => {
-      this.products =  [...products_w, ...products_m]
-      this.sliderImages = slides
-      this.meta = meta
-      
-      this.cdr.markForCheck()
-    })
-  }
-  ngOnDestroy() {
-    this.unsubscribe$.next(null);
-    this.unsubscribe$.complete();
   }
 }

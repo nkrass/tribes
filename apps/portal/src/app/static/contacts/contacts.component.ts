@@ -12,12 +12,12 @@ const staticAssetsUrl = environment.staticAssetsUrl
   styleUrls: ['./contacts.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ContactsComponent implements OnInit, OnDestroy {
+export class ContactsComponent implements OnDestroy {
   public staticAssetsUrl = staticAssetsUrl
   private readonly unsubscribe$ = new Subject();
   feedbackForm!: FormGroup; // Declaring a variable of type FormGroup
   morefeedbacksControls!: FormArray;
-  customerNameChanged: boolean = false;
+  customerNameChanged = false;
   customerNameControl: any;
 
   constructor(
@@ -29,7 +29,6 @@ export class ContactsComponent implements OnInit, OnDestroy {
     this.buildFeedbackForm();
   }
 
-  ngOnInit() {}
 
   buildFeedbackForm() {
     // Building the Feedback Form Group

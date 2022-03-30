@@ -6,6 +6,8 @@ export interface AppGlobalState {
   user: UserQuery["user"];
   showCart: boolean;
   showSearch: boolean;
-  showMenu: boolean
+  showMenu: boolean;
+  canNavigateBack: boolean;
+  routerHistory: string[]
 }
 export const APP_GLOBAL_STATE = new InjectionToken<RxState<AppGlobalState>>('APP_GLOBAL_STATE');

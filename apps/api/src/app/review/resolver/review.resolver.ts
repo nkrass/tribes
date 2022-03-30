@@ -1,10 +1,12 @@
-import { UnauthorizedException, UseGuards } from '@nestjs/common';
-import { Args, Mutation, Query, Resolver} from '@nestjs/graphql';
+import { forwardRef, Inject, UnauthorizedException, UseGuards } from '@nestjs/common';
+import { Args, Mutation, Parent, Query, ResolveField, Resolver} from '@nestjs/graphql';
 import { ReviewKey } from 'aws-sdk/clients/alexaforbusiness';
 import { CurrentUser } from '../../auth/decorators/ctx-user.decorator';
 import { GqlAuthGuard } from '../../auth/guards/gql-auth.guard';
 import { Action } from '../../casl/actions.eum';
 import { CaslAbilityFactory } from '../../casl/casl-ability.factory';
+import { Product } from '../../product/entities/product.model';
+import { ProductService } from '../../product/service/product.service';
 import { User } from '../../user/entities/user.entity';
 import { CreateReviewInput } from '../dto/create-review.input';
 import { FilterReviewInput } from '../dto/filter-review.input';
@@ -16,9 +18,14 @@ import { ReviewService } from '../service/review.service';
 export class ReviewResolver {
   constructor(
     private readonly reviewService: ReviewService,
-    private readonly access: CaslAbilityFactory
+    private readonly access: CaslAbilityFactory,
+    @Inject(forwardRef(() => ProductService))
+    private readonly productService: ProductService
     ) {}
-
+  @ResolveField('product', () => Product)
+  async product(@Parent() review: Review){
+    return this.productService.findOne({sku: review.sku});
+  }
   @UseGuards(GqlAuthGuard)
   @Mutation(() => Review)
   createReview(@Args('input') input: CreateReviewInput, @CurrentUser() user: User) {

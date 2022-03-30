@@ -7,36 +7,36 @@
               <div class="col">
                   <h4><b>Корзина</b></h4>
               </div>
-              <div class="col align-self-center text-right text-muted">{{cart.items_count}} шт.</div>
+              <div class="col align-self-center text-right text-muted">{{cart.totalItemsCount}} шт.</div>
           </div>
       </div>
-      <div class="row border-top" *ngFor="let item of cart.items; let i = index">
+      <div class="row border-top" *ngFor="let item of cart.cartItems; let i = index">
           <div class="row main align-items-center">
               <div class="col-4 col-sm-2 col-md-2 p-0">
-                <img class="img-fluid" [src]="item.product.coverImage" [alt]="item.product.title">
+                <img class="img-fluid" [src]="item.barcode?.coverImage" [alt]="item.barcode?.title">
               </div>
               <div class="col-8 col-sm-10 col-md-4 col-lg-4">
-                  <div class="row text-muted text-sm">Арт.: {{item.product.sku}}</div>
-                  <div class="row">{{item.product.title}}</div>
-                  <div class="row">Цвет: {{item.product.color}}</div>
-                  <div class="row">Размер: {{item.barcode.slice(item.barcode.length-2)}}</div>
+                  <div class="row text-muted text-sm">Арт.: {{item.barcode?.sku}}</div>
+                  <div class="row">{{item.barcode?.title}}</div>
+                  <!-- <div class="row">Цвет: {{item.barcode?.color}}</div> -->
+                  <div class="row">Размер: {{item.barcode?.size}}</div>
               </div>
               <div class="col-4 col-md-2 p-0" *ngIf="!showDistributor"> 
-                <a class="dark" (click)="decreaseAmount(item)">-</a>
-                <a class="border dark">{{item.amount}}</a>
-                <a class="dark" (click)="increaseAmount(item)">+</a> </div>
+                <a class="dark" (click)="updateAmount(item.barcode, -1)">-</a>
+                <a class="border dark">{{item.quantity}}</a>
+                <a class="dark" (click)="updateAmount(item.barcode, 1)">+</a> </div>
               <div class="col-6 col-sm-6 col-md-3" *ngIf="!showDistributor">
-                <tribes-price class="card-text h6" [product]="item.product" [count]="item.amount"></tribes-price>
+                <tribes-price class="card-text h6" [priceBase]="item.price" [count]="item.quantity"></tribes-price>
               </div>
               <div class="col-2 col-sm-2 col-md-1 p-0" *ngIf="!showDistributor">
-                <span class="close" (click)="removeItem($event, item)">&#10005;</span>
+                <span class="close" (click)="removeItem($event, item.barcode)">&#10005;</span>
               </div>
               <div class="col-6" *ngIf="showDistributor">
-                <a class="btn btn-sm btn-wb" href="https://www.wildberries.ru/catalog/{{item.product.id}}/detail.aspx?" target="_blank">Открыть на сайте Wildberries &#8594;</a>
+                <a class="btn btn-sm btn-wb" href="https://www.wildberries.ru/catalog/{{item.barcode?.sku}}/detail.aspx?" target="_blank">Открыть на сайте Wildberries &#8594;</a>
               </div>
           </div>
       </div>
-      <div *ngIf="cart.items_count == 0" class="row justify-content-center align-content-center">
+      <div *ngIf="cart.totalItemsCount === 0" class="row justify-content-center align-content-center">
         <div class="col">
           <h5 class="p-2 text-center">Корзина все еще пуста, добавьте в нее продукты...</h5>
         </div>
@@ -45,14 +45,14 @@
         <button class="btn btn-secondary" routerLink="/catalog">&#8592; Обратно к покупкам</button>
       </div>
     </div>
-    <div *ngIf="cart.items_count > 0"class="col-md-4 summary">
+    <div *ngIf="cart.totalItemsCount > 0"class="col-md-4 summary">
       <div class="title">
           <h4><b>Оформить заказ</b></h4>
       </div>
       <hr>
       <div class="row">
-          <div class="col p-0 pt-2" style="padding-left:0;">Всего {{cart.items_count}} шт.</div>
-          <div class="col p-0 pt-2">на сумму {{cart.total}} ₽</div>
+          <div class="col p-0 pt-2" style="padding-left:0;">Всего {{cart.totalItemsCount}} шт.</div>
+          <div class="col p-0 pt-2">на сумму {{cart.totalAmount}} ₽</div>
       </div>
       <form>
           <p>Выберите магазин для заказа:</p>
@@ -65,12 +65,12 @@
       </form>
       <div *ngIf="!showDistributor" class="row" style="border-top: 1px solid rgba(0,0,0,.1); padding: 2vh 0;">
           <div class="col">Итоговая стоимость</div>
-          <div class="col text-right">{{cart.total}} ₽</div>
+          <div class="col text-right">{{cart.totalAmount}} ₽</div>
       </div> 
-      <button class="btn btn-block btn-success" *ngIf="!showDistributor && cart.items_count" (click)="initCheckout($event)">
+      <button class="btn btn-block btn-success" *ngIf="!showDistributor && cart.totalItemsCount" (click)="initCheckout()">
         Оформить доставку
       </button>
-      <button class="btn btn-outline-success disabled" *ngIf="!showDistributor && !cart.items_count">
+      <button class="btn btn-outline-success disabled" *ngIf="!showDistributor && !cart.totalItemsCount">
         Оформить доставку
       </button>
     </div>

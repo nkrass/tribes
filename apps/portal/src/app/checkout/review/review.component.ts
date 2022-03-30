@@ -7,13 +7,12 @@ import { map, switchMap, takeUntil } from 'rxjs';
 import { CheckoutService } from '../shared/checkout.service';
 import { CartService } from '../../cart/shared/cart.service';
 import { MessageService } from '../../messages/message.service';
-import { OrderService } from '../../account/orders/shared/order.service';
 
 import { Customer } from '../../models/customer.model';
 import { Order } from '../../models/order.model';
 import { User } from '../../models/user.model';
-import { AnalyticsService } from 'app/shared/analytics.service'
-import { CartQuery, CartStatus } from 'gql/types';
+import { AnalyticsService } from '../../shared/analytics.service'
+import { CartQuery, CartStatus } from '@tribes/data-access';
 
 @Component({
   selector: 'tribes-checkout-review',
@@ -33,7 +32,6 @@ export class ReviewComponent implements OnInit, OnDestroy {
   constructor(
     private cartService: CartService,
     private checkoutService: CheckoutService,
-    private orderService: OrderService,
     private router: Router,
     private messageService: MessageService,
     private cdr: ChangeDetectorRef,
@@ -50,7 +48,7 @@ export class ReviewComponent implements OnInit, OnDestroy {
       map(order => {
         this.customer = order.customer;
         this.paymentMethod = order.paymentMethod;
-        this.total = order.shippingMethod.fee + this.cart.cartItems.reduce((acc, item) => acc + item.price! * item.quantity!, 0); 
+        this.total = order.shippingMethod.fee + this.cart.cartItems.reduce((acc, item) => acc + (item.price as number) * (item.quantity as number), 0); 
       }),
       takeUntil(this.unsubscribe$),
     )
@@ -72,20 +70,20 @@ export class ReviewComponent implements OnInit, OnDestroy {
   }
 
   private submitUserOrder(order: Order, total: number, userUid?: string) {
-    this.orderService
-      .placeOrder(order, total, userUid)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe((response) => {
-          this.cartService.clearCart(CartStatus.Closed);
-          this.checkoutService.resetSteps();
-          const order_number = response.number
-          this.analytics.purchase( this.cart.cartItems, order_number);
-          this.router.navigate(['/order-complete']);
-        },
-        (error) => {
-          this.messageService.addError('Заказ не был отправлен. Попробуйте снова.');
-        }
-      );
+    // this.orderService
+    //   .placeOrder(order, total, userUid)
+    //   .pipe(takeUntil(this.unsubscribe$))
+    //   .subscribe((response) => {
+    //       this.cartService.clearCart(CartStatus.Closed);
+    //       this.checkoutService.resetSteps();
+    //       const order_number = response.number
+    //       this.analytics.purchase( this.cart.cartItems, order_number);
+    //       this.router.navigate(['/order-complete']);
+    //     },
+    //     (error) => {
+    //       this.messageService.addError('Заказ не был отправлен. Попробуйте снова.');
+    //     }
+    //   );
   }
 
   ngOnDestroy() {

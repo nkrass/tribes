@@ -1,7 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CheckoutService, EDeliveryMethod } from '../shared/checkout.service';
-import { Customer } from '../../models/customer.model';
+import { CheckoutService } from '../shared/checkout.service';
 
 export const SippingMethods = [
   {
@@ -23,7 +22,7 @@ export const SippingMethods = [
   templateUrl: './shipping.component.html',
   styleUrls: ['./shipping.component.scss']
 })
-export class ShippingComponent implements OnInit {
+export class ShippingComponent {
   public shippingMethods = SippingMethods;
   public formShipping: FormGroup = new FormGroup({
     'shippingMethod': new FormControl(this.shippingMethods[0].value, Validators.required)
@@ -32,9 +31,8 @@ export class ShippingComponent implements OnInit {
 
   constructor(private checkoutService: CheckoutService) { }
 
-  ngOnInit() {}
   public updateCosts(event: any){
-    this.checkoutService.deliveryMethod$.next(this.formShipping.controls.shippingMethod.value)
+    this.checkoutService.deliveryMethod$.next(this.formShipping.controls['shippingMethod'].value)
   }
   public onBack() {
     this.checkoutService.previousStep();
@@ -42,8 +40,8 @@ export class ShippingComponent implements OnInit {
 
   public onContinue() {
     this.checkoutService.setShippingMethod({
-      value: this.formShipping.controls.shippingMethod.value,
-      fee: SippingMethods.filter(e => e.value === this.formShipping.controls.shippingMethod.value)[0].fee
+      value: this.formShipping.controls['shippingMethod'].value,
+      fee: SippingMethods.filter(e => e.value === this.formShipping.controls['shippingMethod'].value)[0].fee
     });
     this.checkoutService.nextStep();
   }

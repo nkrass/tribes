@@ -13,19 +13,19 @@
       <tr *ngFor="let item of cart.cartItems; let i = index">
         <td>
           <div class="product-item">
-            <a class="product-thumb" routerLink="/product/{{item.barcode.sku}}">
-              <img [src]="item.barcode.coverImage" alt="{{item.barcode.title}}">
+            <a class="product-thumb" routerLink="/product/{{item.barcode?.sku}}">
+              <img [src]="item.barcode?.coverImage" alt="{{item.barcode?.title}}">
             </a>
             <div class="product-info">
               <h4 class="product-title">
-                <a routerLink="/product/{{item.barcode.sku}}">{{item.barcode.title}}
+                <a routerLink="/product/{{item.barcode?.sku}}">{{item.barcode?.title}}
                   <small>x {{item.quantity}}</small>
                 </a>
               </h4>
             </div>
           </div>
         </td>
-        <td class="text-center text-lg text-medium">{{ (item.barcode.priceSale * item.quantity) }}&nbsp; руб.</td>
+        <td class="text-center text-lg text-medium">{{ (item.barcode!.priceSale! * item.quantity!) }}&nbsp; руб.</td>
         <td class="text-center">
           <a class="btn btn-outline-primary btn-sm" routerLink="/cart">Изменить</a>
         </td>

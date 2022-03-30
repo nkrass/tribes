@@ -1,6 +1,6 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { User } from '../user/entities/user.entity';
+import { User, UserRole } from '../user/entities/user.entity';
 import { UserService } from '../user/user.service';
 import { JwtDto } from './dto/jwt.dto';
 import { LoginAuthInput } from './dto/login-auth.input';
@@ -30,13 +30,14 @@ export class AuthService {
   async register(registerAuthInput: RegisterAuthInput): Promise<Auth> {
     const found = await this.userService.findByEmail(registerAuthInput.email);
     if (found.length) throw new BadRequestException('Bad credentials');
-    const user = await this.userService.create(registerAuthInput);
+    //TODO disable admin
+    const user = await this.userService.create({...registerAuthInput, userRole: UserRole.admin});
     const authData = new Auth()
     authData.user = user;
     authData.token = await this.signToken(user);
     return authData;
   }
-  async validateUser(id: string): Promise<any> {
+  async validateUser(id: string) {
     return this.userService.findOne({ id });
   }
   async signToken(user: User) {

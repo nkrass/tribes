@@ -1,7 +1,6 @@
 
 import { InputType, Field, Int } from '@nestjs/graphql';
 import { IsEmail, IsOptional, IsString } from 'class-validator';
-import { UserRole } from '../../user/entities/user.entity';
 
 @InputType()
 export class RegisterAuthInput {
@@ -27,8 +26,5 @@ export class RegisterAuthInput {
   @IsOptional()
   @Field(() => Int, { nullable: true})
   phone?: string;
-
-  //TODO disable
-  userRole: UserRole = UserRole.user
 
 }

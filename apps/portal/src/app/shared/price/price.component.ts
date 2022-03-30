@@ -8,8 +8,8 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 })
 export class PriceComponent {
   // @Input() public product!: Product;
-  @Input() public count = 1;
-  @Input() public priceBase = 0;
-  @Input() public priceSale = 0;
-  @Input() public sku = '';
+  @Input() public count: number|null|undefined = 1;
+  @Input() public priceBase: number|null|undefined = 0;
+  @Input() public priceSale: number|null|undefined = 0;
+  @Input() public sku: string|null|undefined = '';
 }

@@ -28,7 +28,6 @@ export class UpdateUserInput extends PartialType(CreateUserInput) {
   @Field(() => String, { nullable: true})
   phone?: string;
 
-  @IsString()
   @IsOptional()
   @Field(() => UserRole, { nullable: true})
   userRole?: UserRole;

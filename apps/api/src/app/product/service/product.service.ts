@@ -34,12 +34,12 @@ export class ProductService {
     const products = await this.googleServices.getProducts();
     let unprocessed: Document<Product>[] = []
     for (let i = 0; i < products.length; i += 25) {
-      let processed = await this.model.batchPut(products.slice(i, i + 25))
+      const processed = await this.model.batchPut(products.slice(i, i + 25))
       unprocessed.push(...processed.unprocessedItems);
     }
     if (unprocessed.length > 0){
       for (let i = 0; i < unprocessed.length; i += 25) {
-        let processed = await this.model.batchPut(unprocessed.slice(i, i + 25))
+        const processed = await this.model.batchPut(unprocessed.slice(i, i + 25))
         unprocessed.push(...processed.unprocessedItems);
       }
     }

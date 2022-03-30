@@ -1,13 +1,13 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
 import { SEOService } from '../../shared/seoservice.service';
-import { BehaviorSubject, catchError, map, of, pluck, Subject, switchMap, switchMapTo, takeUntil, tap } from 'rxjs';
+import { BehaviorSubject, catchError, map, of, pluck, Subject, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment'
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {Html5QrcodeScanner, Html5Qrcode, Html5QrcodeSupportedFormats} from "html5-qrcode"
 import { ActivatedRoute } from '@angular/router';
 import { RxState } from '@rx-angular/state';
-import { CreateItemGQL, CreateItemMutation } from 'gql/types';
 import { ColorsDictionaryTranslationRus } from '../shared/detailed-colors.dictionary';
+import { CreateItemGQL, CreateItemMutation } from '@tribes/data-access';
 import SwiperCore, { Pagination, Zoom, Navigation, Mousewheel, FreeMode } from "swiper";
 SwiperCore.use([Pagination, Zoom, Navigation, Mousewheel, FreeMode]);
 
@@ -49,7 +49,7 @@ export class ScanToRegisterComponent implements OnDestroy {
     private createItemGql: CreateItemGQL,
     private state: RxState<LocalState>,
     @Inject(DOCUMENT) private doc: Document, 
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(PLATFORM_ID) private platformId: typeof PLATFORM_ID,
     private elementRef: ElementRef
   ) {
     this.state.connect(this.cameraStateInput$.pipe( map(cameraState => ({ cameraState })) ))
@@ -58,10 +58,9 @@ export class ScanToRegisterComponent implements OnDestroy {
     ))
     this.state.connect(this.barcodeInput$.pipe(switchMap(scannedCode => {
       const code = scannedCode.toLocaleLowerCase()
-      const size = this.state.get('size')
-      const id = this.state.get('id')!
+      const size = this.state.get('size') as string
+      const id = this.state.get('id') as string
       if (code.slice(14,16) !== size) { 
-        debugger
         alert("Размер и баркод не совпадают. Перепроверьте код и попробуйте снова.")
         return of({size, id})
       }
@@ -153,15 +152,6 @@ export class ScanToRegisterComponent implements OnDestroy {
       // this.cdr.markForCheck();
     }
   }
-  // ngOnInit(): void {
-  //   // this.html5QrcodeScanner.start({ facingMode: "environment" }, this.html5QrcodeScannerConfig, this.onScanSuccess);
-  //   // this.seo.currentRouteData$
-  //   // .pipe(takeUntil(this.unsubscribe$))
-  //   // .subscribe(data => {
-  //   //   this.seo.setTitle('❤️Твой лучший день - сегодня! 🛍TRIBES ® - Больше своего времени')
-  //   //   this.cdr.markForCheck()
-  //   // })
-  // }
   scrollTo(id: string){
     this.elRef.nativeElement.querySelector('#' + id).scrollIntoView();
   }

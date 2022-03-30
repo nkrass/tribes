@@ -6,8 +6,6 @@ import { ProductDetailComponent } from './product-detail/product-detail.componen
 import { ProductsListItemComponent } from './products-list-item/products-list-item.component';
 
 import { FileUploadService } from './shared/file-upload.service';
-import { ProductsCacheService } from './shared/products-cache.service';
-import { ProductRatingService } from './shared/product-rating.service';
 
 import { SortPipe } from './shared/sort.pipe';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -16,11 +14,11 @@ import { ModalModule } from 'ngx-bootstrap/modal'
 import { CarouselModule } from "ngx-bootstrap/carousel"
 import { BsDropdownModule, BsDropdownConfig} from "ngx-bootstrap/dropdown"
 import { NgxJsonLdModule } from '@ngx-lite/json-ld';
-import { RedirectComponent } from 'app/redirect/redirect.component';
+import { RedirectComponent } from '../redirect/redirect.component';
 import { LetModule, PushModule } from '@rx-angular/template';
 import { CatalogComponent } from './catalog/catalog.component';
-import { SwiperModule } from 'swiper/angular'
 import { ScanToRegisterComponent } from './register/register.component';
+import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
   declarations: [
@@ -54,7 +52,7 @@ import { ScanToRegisterComponent } from './register/register.component';
     RedirectComponent,
     ScanToRegisterComponent
   ],
-  providers: [SortPipe, FileUploadService, ProductsCacheService, ProductRatingService, BsDropdownConfig
+  providers: [SortPipe, FileUploadService, BsDropdownConfig
     // { provide: HAMMER_GESTURE_CONFIG, useClass: CustomHammerConfig }
   ]
 })

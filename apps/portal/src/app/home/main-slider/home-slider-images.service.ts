@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { HomeSliderImages } from '../../models/home-slider-images';
 import { environment } from '../../../../src/environments/environment'
-import { resizedImgUrl } from '../../../../api/utils';
+import { resizedImgUrl } from '../../shared/utils/utils.utils';
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Injectable()

@@ -5,9 +5,7 @@ import {
   Inject
 } from '@angular/core';
 import { RxState } from "@rx-angular/state";
-import { Subject, debounceTime,  distinctUntilChanged,  filter, takeUntil, BehaviorSubject, map, pluck, switchMap } from 'rxjs';
-
-import { ProductService } from '../../../products/shared/product.service';
+import { Subject, debounceTime,  distinctUntilChanged,  filter, BehaviorSubject, pluck, switchMap } from 'rxjs';
 
 import { environment } from '../../../../../src/environments/environment'
 import { OffcanvasService } from '../../shared/offcanvas.service';
@@ -36,7 +34,6 @@ export class SearchComponent {
   showSearch$ = this.globalState.select('showSearch')
   products$ = this.state.select('products')
   constructor(
-    private productService: ProductService, 
     private cdr: ChangeDetectorRef,
     public offcanvasService: OffcanvasService,
     @Inject(APP_GLOBAL_STATE) private globalState: RxState<AppGlobalState>,

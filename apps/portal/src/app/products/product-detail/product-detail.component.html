@@ -227,7 +227,7 @@
         
         <div class="testimonial-group">
           <div class="row text-center">
-            <tribes-rating-stars *ngIf="product.rating > 3" [rating]="product.rating" [size]="'large'"></tribes-rating-stars> 
+            <tribes-rating-stars *ngIf="product?.rating! > 3" [rating]="product.rating!" [size]="'large'"></tribes-rating-stars> 
             <h2 class="text-normal">{{ product.title }}</h2>
           </div>
           <tribes-price class="h3 d-flex justify-content-center" [priceSale]="product.priceSale" [priceBase]="product.priceBase" [count]="1"></tribes-price>
@@ -291,8 +291,8 @@
                   {{material.material}} {{material.quantity}}%&nbsp;
                 </p>
               </span>
-              <p class="text-lg">Цвет модели: {{ colorsDict[product.color]}}</p>
-              <button class="btn btn-outline-primary" (click)="scrollTo('reviews')" *ngIf="product.reviews.length>0">Отзывы</button>
+              <p class="text-lg">Цвет модели: {{ colorsDict[product.color!]}}</p>
+              <button class="btn btn-outline-primary" (click)="scrollTo('reviews')" *ngIf="product.reviews">Отзывы</button>
               <button class="btn btn-outline-primary" (click)="scrollTo('sku-properties')">Характеристики</button>
             </div>
             <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center" *rxLet="selectedSizes$ as selectedSizes">
@@ -367,39 +367,42 @@
       </div>
     </div>
     <!-- Cross Sale -->
-    <section id="cross-sale" class="pt-3" *ngIf="product.crossSaleProducts.length>0">
+    <section id="cross-sale" class="pt-3" *ngIf="product?.crossSaleProducts?.length">
       <div class="row">
         <div class="card">
           <div class="card-body text-center">
               <h4>Вам может понравится:</h4>
           </div>
           <div class="row">
-            <tribes-product-widget  *ngFor="let product of product.crossSaleProducts" [product]="product" [displayMode]='all' class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></tribes-product-widget>
+            <div class="col-6 col-md-4 px-0 bg-white">
+              <tribes-products-list-item [isLoading]="isLoading$ | push" [product]="product"></tribes-products-list-item>
+            </div>
+            <!-- <tribes-product-widget  *ngFor="let product of product.crossSaleProducts" [product]="product!" [displayMode]='all' class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></tribes-product-widget> -->
         </div>
         </div>
       </div>
     </section>
 
     <!-- Reviews -->
-    <section id="reviews" class="pt-3" *ngIf="product.reviews.length>0">
+    <section id="reviews" class="pt-3" *ngIf="product?.reviews?.length">
       <div class="row">
         <div class="card">
           <div class="card-body text-center">
               <h4>Отзывы:</h4>
           </div>
-          <div class="row align-items-center justify-content-center" *ngFor="let review of reviews; index as i">
+          <div class="row align-items-center justify-content-center" *ngFor="let review of product.reviews; index as i">
             <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
               <div class="">
-                <tribes-rating-stars [rating]=review.rating [size]="'large'"></tribes-rating-stars> 
+                <tribes-rating-stars [rating]=review?.reviewRating! [size]="'large'"></tribes-rating-stars> 
                 <div class="col-12 pb-1"></div>
                 <div class="lead">
-                  <span class="">{{review.review}}</span>
+                  <span class="">{{review?.reviewText}}</span>
                 </div>
-                <div class="lead text-capitalize">{{review.name}}</div>
+                <div class="lead text-capitalize">{{review?.reviewAuthor}}</div>
               </div>
             </div>
             <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 mb-1 align-self-center p-0">
-              <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" [lazyLoad]="review.image_path" alt="{{ product.title }}" class="d-block reviews-product-image">
+              <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" [lazyLoad]="product.coverImage" alt="{{ product.title }}" class="d-block reviews-product-image">
             </div>
             <div class="col-11 px-0 mb-1">
               <hr>
@@ -430,7 +433,7 @@
                   </tr>
                   <tr>
                     <th scope="row">Цвет</th>
-                    <td>{{colorsDict[product.color]}}</td>
+                    <td>{{colorsDict[product.color!]}}</td>
                   </tr>
                   <tr>
                     <th scope="row">Пол</th>

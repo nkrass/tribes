@@ -18,6 +18,8 @@ mutation CreateItem($input: CreateItemInput!){
         category
         priceBase
         priceSale
+        color
+        rating
         reviews {
           sku, reviewText, reviewAuthor, reviewRating, reviewDate, id
         }

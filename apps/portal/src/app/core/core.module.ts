@@ -10,26 +10,22 @@ import { FooterComponent } from './footer/footer.component';
 // import { NavigationMainComponent } from './header/navigation-main/navigation-main.component';
 import { HomeComponent } from '../home/home.component';
 import { MainSliderComponent } from '../home/main-slider/main-slider.component';
-import { ProductWidgetComponent } from '../shared/product-widget/product-widget.component';
 import { SearchComponent } from './header/search/search.component';
 
-import { ProductService } from '../products/shared/product.service';
 import { MessageService } from '../messages/message.service';
 import { CartService } from '../cart/shared/cart.service';
 import { PagerService } from '../pager/pager.service';
-import { OrderService } from '../account/orders/shared/order.service';
+// import { OrderService } from '../account/orders/shared/order.service';
 import { CheckoutService } from '../checkout/shared/checkout.service';
 import { AuthService } from '../account/shared/auth.service';
 import { OffcanvasService } from './shared/offcanvas.service';
 import { UiService } from '../products/shared/ui.service';
-import { ProductsCacheService } from '../products/shared/products-cache.service';
 import { NgxJsonLdModule } from '@ngx-lite/json-ld'
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { ReviewsSliderComponent } from '../home/reviews-slider/reviews-slider.component';
 import { HomeSliderImagesService } from '../home/main-slider/home-slider-images.service';
 
 import {CarouselModule} from "ngx-bootstrap/carousel"
-import { ReviewService } from './shared/review.service';
 import { FeedbackService } from '../shared/feedback.service';
 import { StorageModule } from '../shared/storage/storage.module';
 import { BaseCookieService } from '../shared/storage/services/base-cookie.service';
@@ -40,6 +36,7 @@ import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { LetModule, PushModule } from '@rx-angular/template';
 import { ToolbarCartComponent } from './header/toolbar/cart/cart.component';
+import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { SwiperModule } from 'swiper/angular';
 
 @NgModule({
@@ -67,8 +64,8 @@ import { SwiperModule } from 'swiper/angular';
         AlertModule.forRoot(),
         ButtonsModule.forRoot(),
         LetModule, PushModule,
+        LazyLoadImageModule,
         SwiperModule
-        
     ],
     exports: [
         CommonModule,
@@ -85,17 +82,14 @@ import { SwiperModule } from 'swiper/angular';
         // ProductWidgetComponent,
     ],
     providers: [
-        ProductService,
-        ProductsCacheService,
         MessageService,
         CartService,
         PagerService,
-        OrderService,
+        // OrderService,
         FeedbackService,
         CheckoutService,
         AuthService,
         OffcanvasService,
-        ReviewService,
         UiService,
         HomeSliderImagesService,
         BaseCookieService,

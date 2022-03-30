@@ -1,7 +1,7 @@
 import {HttpRequest, HttpResponse} from '@angular/common/http';
 import {Injectable, PLATFORM_ID} from '@angular/core';
-import { BaseMemoryStorage } from 'app/shared/storage/storages/base-memory.storage';
-import { BaseSessionStorage } from 'app/shared/storage/storages/base-session.storage';
+import { BaseMemoryStorage } from '../shared/storage/storages/base-memory.storage';
+import { BaseSessionStorage } from '../shared/storage/storages/base-session.storage';
 
 // export const CachableRoutePatterns = {
 // 	'/api/person/:id': true,

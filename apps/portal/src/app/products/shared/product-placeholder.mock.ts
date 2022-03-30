@@ -1,4 +1,4 @@
-import { environment } from "environments/environment"
+import { environment } from "../../../environments/environment"
 
 const staticAssetsUrl = environment.staticAssetsUrl
 export const PlaceholderImage = `${staticAssetsUrl}/static/img/products/product-placeholder.jpg`

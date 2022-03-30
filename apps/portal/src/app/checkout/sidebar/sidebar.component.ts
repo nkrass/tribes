@@ -4,7 +4,7 @@ import { CartService } from '../../cart/shared/cart.service';
 import { CheckoutService, EDeliveryMethod } from '../shared/checkout.service';
 import { takeUntil } from 'rxjs';
 import { Subject } from 'rxjs';
-import { CartQuery } from 'gql/types';
+import { CartQuery } from '@tribes/data-access';
 
 @Component({
   selector: 'tribes-checkout-sidebar',

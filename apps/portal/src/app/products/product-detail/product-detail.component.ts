@@ -1,21 +1,20 @@
-import { Component, Input, OnDestroy, OnInit, ViewChild, TemplateRef, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, PLATFORM_ID, Inject, ViewChildren, QueryList, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild, TemplateRef, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, PLATFORM_ID, Inject, ViewChildren, QueryList, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { switchMap, map, pluck, startWith, Subject, tap, filter } from 'rxjs';
+import { switchMap, map, pluck, startWith, Subject, tap  } from 'rxjs';
 import { CartService } from '../../cart/shared/cart.service';
 import { SEOService } from '../../shared/seoservice.service';
 import { Product as SchemaProduct, WithContext } from 'schema-dts';
 import { environment } from '../../../../src/environments/environment'
-import { AnalyticsService } from 'app/shared/analytics.service'
+import { AnalyticsService } from '../../shared/analytics.service'
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { MessageService } from 'app/messages/message.service';
-import { NavigationService } from 'app/shared/navigation.service';
+import { MessageService } from '../../messages/message.service';
 import { RxState } from '@rx-angular/state';
-import { CartQuery, ProductGQL, ProductQuery } from 'gql/types';
 import { ColorsDictionaryTranslationRus } from '../shared/detailed-colors.dictionary';
 import SwiperCore, { Pagination, Zoom, Navigation, Mousewheel, FreeMode } from "swiper";
 import { ProductMock } from '../shared/product-placeholder.mock';
+import { CartQuery, ProductGQL, ProductQuery } from '@tribes/data-access';
 SwiperCore.use([Pagination, Zoom, Navigation, Mousewheel, FreeMode]);
 
 const staticAssetsUrl = environment.staticAssetsUrl
@@ -77,18 +76,17 @@ export class ProductDetailComponent {
     private modalService: BsModalService,
     private analytics: AnalyticsService,
     private messageService: MessageService,
-    private navigation: NavigationService,
-    @Inject(DOCUMENT) private doc: any,
-    @Inject(PLATFORM_ID) private platformId: Object,
+    @Inject(DOCUMENT) private doc: Document,
+    @Inject(PLATFORM_ID) private platformId: typeof PLATFORM_ID,
     private productGql: ProductGQL,
     private state: RxState<ProductState>
   ) {
     const fetchProductOnUrlChange$ = this.route.paramMap.pipe(
       switchMap((params) => {
-        return this.productGql.watch({ input: { 'sku': params.get('id')! } }).valueChanges.pipe(
+        return this.productGql.watch({ input: { 'sku': params.get('id') as string} }).valueChanges.pipe(
           pluck('data', 'product'),
           map((product) => {
-           return { product, isLoading: false, urlSKU: params.get('id')!, schema: this.seo.buildProductSeoAndSchema(product)} 
+           return { product, isLoading: false, urlSKU: params.get('id') as string, schema: this.seo.buildProductSeoAndSchema(product)} 
           }),
           tap(({product}) => {
             this.analytics.viewContent( product.barcodes.map(barcode => ({ barcode, price: product.priceSale, quantity: 1 })))
@@ -97,7 +95,7 @@ export class ProductDetailComponent {
           
         )
       }),
-      startWith({isLoading: true, urlSKU: this.route.snapshot.paramMap.get('id')!, selectedSizes: [], product: ProductMock })
+      startWith({isLoading: true, urlSKU: this.route.snapshot.paramMap.get('id') as string, selectedSizes: [], product: ProductMock })
     )
     this.state.connect(fetchProductOnUrlChange$)
     this.state.connect(this.selectSizeBtn$, this.onSelectSize.bind(this));
@@ -110,7 +108,7 @@ export class ProductDetailComponent {
       if (checked){
         !selectedSizes.includes(barcode) && selectedSizes.push(barcode);
         const barcodes = product.barcodes.filter(b => b.barcode === barcode)
-        let cartItems = barcodes.map(barcode => ({ barcode, quantity: 1, price: product.priceSale }))
+        const cartItems = barcodes.map(barcode => ({ barcode, quantity: 1, price: product.priceSale }))
         this.analytics.sizeClick(cartItems)
       } else {
         selectedSizes.includes(barcode) && selectedSizes.splice(selectedSizes.indexOf(barcode), 1)

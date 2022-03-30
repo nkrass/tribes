@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 
 import { Subject } from 'rxjs';
@@ -8,14 +8,13 @@ import { CheckoutService } from '../shared/checkout.service';
 import { map, switchMap, takeUntil } from 'rxjs';
 import { User } from '../../../app/models/user.model';
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
-import { Customer } from 'app/models/customer.model';
-import { CartService } from 'app/cart/shared/cart.service';
-import { Order } from 'app/models/order.model';
-import { OrderService } from 'app/account/orders/shared/order.service';
+import { Customer } from '../../models/customer.model';
+import { CartService } from '../../cart/shared/cart.service';
+import { Order } from '../../models/order.model';
 import { Router } from '@angular/router';
-import { AnalyticsService } from 'app/shared/analytics.service';
-import { MessageService } from 'app/messages/message.service';
-import { CartQuery, CartStatus } from 'gql/types';
+import { AnalyticsService } from '../../shared/analytics.service';
+import { MessageService } from '../../messages/message.service';
+import { CartQuery, CartStatus } from '@tribes/data-access';
 
 @Component({
   selector: 'tribes-checkout-address',
@@ -47,7 +46,6 @@ export class AddressComponent implements OnInit, OnDestroy {
     private authService: AuthService,
     private cdr: ChangeDetectorRef,
     private cartService: CartService,
-    private orderService: OrderService,
     private router: Router,
     private messageService: MessageService,
     private analytics: AnalyticsService
@@ -121,21 +119,21 @@ export class AddressComponent implements OnInit, OnDestroy {
     this.checkoutService.nextStep();
   }
   private submitUserOrder(order: Order, total: number, userUid?: string) {
-    this.orderService
-      .placeOrder(order, total, userUid)
-      .pipe(takeUntil(this.unsubscribe$))
-      .subscribe(
-        (response) => {
-          this.cartService.clearCart(CartStatus.Closed);
-          this.checkoutService.resetSteps();
-          this.router.navigate(['/order-complete']);
-          const order_number = response.number
-          this.analytics.purchase( this.cart.cartItems, order_number)
-        },
-        (error) => {
-          this.messageService.addError('Заказ не был отправлен. Попробуйте снова.');
-        }
-      );
+    // this.orderService
+    //   .placeOrder(order, total, userUid)
+    //   .pipe(takeUntil(this.unsubscribe$))
+    //   .subscribe(
+    //     (response) => {
+    //       this.cartService.clearCart(CartStatus.Closed);
+    //       this.checkoutService.resetSteps();
+    //       this.router.navigate(['/order-complete']);
+    //       const order_number = response.number
+    //       this.analytics.purchase( this.cart.cartItems, order_number)
+    //     },
+    //     (error) => {
+    //       this.messageService.addError('Заказ не был отправлен. Попробуйте снова.');
+    //     }
+    //   );
   }
   public onCompleteOrder() {
     const customer = Customer.FromCustomerForm(this.formAddress.value)

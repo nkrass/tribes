@@ -76,7 +76,7 @@
         <div class="card-body text-center">
             <h4>Новинки</h4>
         </div>
-        <div class="row">
+        <div class="row" *rxLet="products$ as products">
           <tribes-product-widget  *ngFor="let product of products" [product]="product" class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></tribes-product-widget>
       </div>
       </div>
@@ -93,7 +93,7 @@
             <h4>Отзывы покупателей</h4>
         </div>
         <div class="row">
-          <tribes-reviews-slider [items]="reviews"></tribes-reviews-slider>  
+          <tribes-reviews-slider [reviews]="reviews$ | push"></tribes-reviews-slider>  
         </div>
       </div>
     </div>

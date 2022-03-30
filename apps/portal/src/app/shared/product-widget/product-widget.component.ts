@@ -1,9 +1,8 @@
-import { AfterViewInit, ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Subject } from 'rxjs';
 import { environment } from '../../../environments/environment'
 import { Router } from '@angular/router';
-
-import { ProductQuery } from 'gql/types';
+import { ProductQuery, ProductsListQuery } from '@tribes/data-access';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 
@@ -15,13 +14,13 @@ const staticAssetsUrl = environment.staticAssetsUrl
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductWidgetComponent implements OnInit, OnDestroy, AfterViewInit{
+export class ProductWidgetComponent implements OnInit, OnDestroy {
   public staticAssetsUrl: string = staticAssetsUrl
   private readonly unsubscribe$ = new Subject();
 
   
-  @Input() public widgetTitle: string = '';
-  @Input() public product!: ProductQuery['product']
+  @Input() public widgetTitle: string|undefined|null = '';
+  @Input() public product!: ProductsListQuery['products'][0]
   @Input() public displayMode: 'group'|'all' = 'group';
   
   product_variants!: ProductQuery['product']['variants']
@@ -34,10 +33,9 @@ export class ProductWidgetComponent implements OnInit, OnDestroy, AfterViewInit{
   }
 
   ngOnInit() {
-    this.product_variants = this.product.variants;  //resizedImagesUrls(this.product.model_variants.map(e => e.images_paths[0]), 600, 800, 'fill')//.resizedImages(900, 1200,'fill')
+    // this.product_variants = this.product;  //resizedImagesUrls(this.product.model_variants.map(e => e.images_paths[0]), 600, 800, 'fill')//.resizedImages(900, 1200,'fill')
   }
-  ngAfterViewInit() {
-  }
+
   ngOnDestroy() {
     this.unsubscribe$.next(null);
     this.unsubscribe$.complete();

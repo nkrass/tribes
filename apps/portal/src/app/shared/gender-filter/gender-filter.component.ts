@@ -1,6 +1,6 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { environment } from '../../../../src/environments/environment'
-import { resizedImgUrl } from '../../../../api/utils';
+import { resizedImgUrl } from '../utils/utils.utils';
 const staticAssetsUrl = environment.staticAssetsUrl
 
 @Component({
@@ -9,12 +9,9 @@ const staticAssetsUrl = environment.staticAssetsUrl
   styleUrls: ['./gender-filter.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class GenderFilterComponent implements OnInit {
+export class GenderFilterComponent {
   public staticAssetsUrl: string = staticAssetsUrl
   public resizedImgUrl = resizedImgUrl
-  constructor() { }
-
-  ngOnInit(): void {
-  }
+  // constructor() { }
 
 }

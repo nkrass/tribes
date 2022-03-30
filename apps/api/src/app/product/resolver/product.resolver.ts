@@ -1,4 +1,4 @@
-import { UnauthorizedException, UseGuards } from '@nestjs/common';
+import { forwardRef, Inject, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { Args, ComplexityEstimatorArgs, Mutation, Parent, Query, ResolveField, Resolver} from '@nestjs/graphql';
 import { CurrentUser } from '../../auth/decorators/ctx-user.decorator';
 import { GqlAuthGuard } from '../../auth/guards/gql-auth.guard';
@@ -19,6 +19,7 @@ import { ProductService } from '../service/product.service';
 export class ProductResolver {
   constructor(
     private readonly productService: ProductService, 
+    @Inject(forwardRef(() => ReviewService))
     private readonly reviewsService: ReviewService,
     private readonly barcodesService: BarcodeService,
     private readonly access: CaslAbilityFactory
@@ -59,7 +60,7 @@ export class ProductResolver {
   @ResolveField(() => [Product], {nullable: true})
   async crossSaleProducts(@Parent() product: Product){
     const queries = product.crossSale.map(async s => await this.productService.findBySkuFamily(s))
-    const results = []
+    const results: any = []
     for await (const res of queries) {
       results.push(res)
     }

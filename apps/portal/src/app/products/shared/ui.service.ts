@@ -29,7 +29,7 @@ export const ESortingBehaviour: Sortable = {
 
 @Injectable()
 export class UiService {
-  public sorting$ = new BehaviorSubject(ESortingBehaviour.date_desc);
+  public sorting$ = new BehaviorSubject(ESortingBehaviour['date_desc']);
   public displayMode$ = new BehaviorSubject('grid');
   public currentPagingPage$ = new BehaviorSubject(1);
 

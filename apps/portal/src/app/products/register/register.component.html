@@ -27,11 +27,11 @@
       class="mainSlider"
       style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
     >
-      <ng-template swiperSlide *ngFor="let img of item.barcode.product.imagesSrc;" >
+      <ng-template swiperSlide *ngFor="let img of item?.barcode?.product?.coverImage;" >
         <div class="swiper-zoom-container">
           <img class="" 
           [src]="img" 
-          alt="{{item.barcode.product.title}}&nbsp;{{item.barcode.product.description}}&nbsp;{{item.barcode.product.sku}}"
+          alt="{{item?.barcode?.product?.title}}&nbsp;{{item?.barcode?.product?.description}}&nbsp;{{item?.barcode?.product?.sku}}"
           draggable=false>
         </div>
       </ng-template>
@@ -39,8 +39,8 @@
     
     <div class="testimonial-group">
       <div class="row text-center">
-        <tribes-rating-stars *ngIf="item.barcode.product.rating > 3" [rating]="item.barcode.product.rating" [size]="'large'"></tribes-rating-stars> 
-        <h2 class="text-normal">{{ item.barcode.product.title }}</h2>
+        <tribes-rating-stars *ngIf="item?.barcode?.product?.rating! > 3" [rating]="item?.barcode?.product?.rating!" [size]="'large'"></tribes-rating-stars> 
+        <h2 class="text-normal">{{ item?.barcode?.product?.title }}</h2>
       </div>
       <!-- <tribes-price class="h3 d-flex justify-content-center" [priceSale]="product.priceSale" [priceBase]="product.priceBase" [count]="1"></tribes-price> -->
       <swiper
@@ -61,15 +61,15 @@
         }"
         class="variantsSlider"
         style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
-        *ngIf="item.barcode.product.variants.length > 1"
+        *ngIf="item?.barcode?.product?.variants?.length"
       >
-        <ng-template swiperSlide *ngFor="let variant of item.barcode.product.variants; let i = index" >
+        <ng-template swiperSlide *ngFor="let variant of item?.barcode?.product?.variants; let i = index" >
           <a [routerLink]="['/product', variant.sku]" class="product-colors-image pb-3 variant-color-{{variant.color}}" >
             <img 
               draggable=false
               [defaultImage]="staticAssetsUrl + 'static/img/products/product-placeholder.jpg'" 
               [lazyLoad]="variant.coverImage" 
-              alt="{{item.barcode.product.title}} {{variant.color}} {{item.barcode.product.sku}}">
+              alt="{{item?.barcode?.product?.title}} {{variant.color}} {{item?.barcode?.product?.sku}}">
           </a>
         </ng-template>
       </swiper>
@@ -78,15 +78,15 @@
       <div class="row">
         <div class="col-md-12 mt-2"></div>
         <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8">
-          <p class="white-space-pre-line text-lg">{{item.barcode.product.description}}</p>
+          <p class="white-space-pre-line text-lg">{{item?.barcode?.product?.description}}</p>
           
           <span class="text-lg">Состав:
-            <p *ngFor="let material of item.barcode.product.materials" class="d-inline">
+            <p *ngFor="let material of item?.barcode?.product?.materials" class="d-inline">
               {{material.material}} {{material.quantity}}%&nbsp;
             </p>
           </span>
-          <p class="text-lg">Цвет модели: {{ colorsDict[item.barcode.product.color]}}</p>
-          <button class="btn btn-outline-primary" (click)="scrollTo('reviews')" *ngIf="item.barcode.product.reviews.length>0">Отзывы</button>
+          <p class="text-lg">Цвет модели: {{ colorsDict[item?.barcode?.product?.color || 0]}}</p>
+          <button class="btn btn-outline-primary" (click)="scrollTo('reviews')" *ngIf="item?.barcode?.product?.reviews">Отзывы</button>
           <button class="btn btn-outline-primary" (click)="scrollTo('sku-properties')">Характеристики</button>
         </div>
         

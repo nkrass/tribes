@@ -1,4 +1,4 @@
-import { UnauthorizedException, UseGuards } from '@nestjs/common';
+import { forwardRef, Inject, UnauthorizedException, UseGuards } from '@nestjs/common';
 import { Args, ComplexityEstimatorArgs, Mutation, Parent, Query, ResolveField, Resolver} from '@nestjs/graphql';
 import { CurrentUser } from '../../auth/decorators/ctx-user.decorator';
 import { GqlAuthGuard } from '../../auth/guards/gql-auth.guard';
@@ -21,6 +21,7 @@ export class BarcodeResolver {
     private readonly productService: ProductService, 
     private readonly barcodeService: BarcodeService,
     private readonly access: CaslAbilityFactory,
+    @Inject(forwardRef(() => ReviewService))
     private readonly reviewsService: ReviewService,
   ) {}
   

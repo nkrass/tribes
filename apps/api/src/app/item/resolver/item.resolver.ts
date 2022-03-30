@@ -1,6 +1,5 @@
 import { UnauthorizedException, UseGuards } from '@nestjs/common';
 import { Args, Mutation, Parent, Query, ResolveField, Resolver} from '@nestjs/graphql';
-import { ReviewKey } from 'aws-sdk/clients/alexaforbusiness';
 import { CurrentUser } from '../../auth/decorators/ctx-user.decorator';
 import { GqlAuthGuard } from '../../auth/guards/gql-auth.guard';
 import { Action } from '../../casl/actions.eum';
@@ -11,7 +10,7 @@ import { BarcodeService } from '../../product/service/barcode.service';
 import { ProductService } from '../../product/service/product.service';
 import { User } from '../../user/entities/user.entity';
 import { CreateItemInput } from '../dto/create-item.input';
-import { FilterItemInput } from '../dto/filter-item.input';
+import { FilterItemInput, GetItemInput } from '../dto/filter-item.input';
 import { UpdateItemInput } from '../dto/update-item.input';
 import { Item } from '../entities/item.model';
 import { ItemService } from '../service/item.service';
@@ -64,8 +63,8 @@ export class ItemResolver {
   }
 
   @Query(/* istanbul ignore next */ () => Item)
-  item(@Args({ name: 'id', type: () => String }) id: ReviewKey) {
-    return this.itemService.findOne({ id });
+  item(@Args('input') id: GetItemInput) {
+    return this.itemService.findOne(id);
   }
 
   @Query(/* istanbul ignore next */ () => [Item])

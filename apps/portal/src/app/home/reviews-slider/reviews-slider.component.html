@@ -1,43 +1,29 @@
 <div class="reviews-slider">
-  <swiper
-          [slidesPerView]="1"
-          [spaceBetween]="0"
-          [navigation]="true"
-          [pagination]="{
-            clickable: true
-          }"
-          [breakpoints]="{
-            '320': {
-              slidesPerView: 1
-            },
-            '960': {
-              slidesPerView: 1
-            }
-          }"
+  <swiper [config]="config"
           class="mainSlider"
           style="--swiper-navigation-color: #fff;--swiper-pagination-color: #fff"
         >
-          <ng-template swiperSlide *ngFor="let item of items; index as i" >
-            <div class="card-panel container align-self-center" *ngFor="let item of items; index as i">
+          <ng-template swiperSlide *ngFor="let review of reviews; index as i" >
+            <div class="card-panel container align-self-center">
               <div class="row align-items-center justify-content-center">
                 <div class="col-12 col-sm-6 col-md-5 pb-2 text-md-left text-center">
                   <div class="from-bottom">
-                    <tribes-rating-stars [rating]=item.rating [size]="'large'"></tribes-rating-stars> 
+                    <tribes-rating-stars [rating]=review.reviewRating [size]="'large'"></tribes-rating-stars> 
                     <div class="col-12 pb-1"></div>
                     <div class="h4">
                       <span class="">
-                        {{item.review}}
+                        {{item.reviewText}
                         <!-- <tribes-price [product]="item"></tribes-price> -->
                       </span>
                     </div>
                     <div class="product-rating">
-                      {{item.name}}           
+                      {{review.reviewAuthor}}           
                     </div>
                   </div>
                   <!-- <a class="btn btn-primary scale-up delay-1" routerLink="/product/{{ item.sku }}">Подробнее</a> -->
                 </div>
                 <div class="col-12 col-sm-4 col-md-4 pb-2 pt-3 align-self-center">
-                  <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" [lazyLoad]="item.image_path" alt="{{ item.sku }}" class="d-block reviews-product-image">
+                  <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" [lazyLoad]="review.product.coverImage" alt="{{ review.sku }}" class="d-block reviews-product-image">
                 </div>
               </div>
             </div>

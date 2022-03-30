@@ -62,6 +62,51 @@ Resources:
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
+  FeedbackTable:
+    Type: AWS::DynamoDB::Table
+    DeletionPolicy: Delete
+    Properties:
+      TableName: ${self:service}-${self:provider.stage}-feedback-table
+      BillingMode: PAY_PER_REQUEST
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+        - AttributeName: purpose
+          AttributeType: S
+        - AttributeName: email
+          AttributeType: S
+        - AttributeName: userId
+          AttributeType: S
+        - AttributeName: createdAt
+          AttributeType: 'N'
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
+      GlobalSecondaryIndexes:
+        - IndexName: purposeGlobalIndex
+          KeySchema:
+            - AttributeName: purpose
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: emailGlobalIndex
+          KeySchema:
+            - AttributeName: email
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: userIdGlobalIndex
+          KeySchema:
+            - AttributeName: userId
+              KeyType: HASH
+            - AttributeName: createdAt
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
   ItemTable:
     Type: AWS::DynamoDB::Table
     DeletionPolicy: Delete
@@ -421,8 +466,12 @@ Resources:
           AttributeType: S
         - AttributeName: skuFamily
           AttributeType: S
+        - AttributeName: reviewRating
+          AttributeType: 'N'
         - AttributeName: userId
           AttributeType: S
+        - AttributeName: createdAt
+          AttributeType: 'N'
       KeySchema:
         - AttributeName: id
           KeyType: HASH
@@ -440,6 +489,14 @@ Resources:
             - AttributeName: skuFamily
               KeyType: HASH
             - AttributeName: id
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
+        - IndexName: reviewRatingGlobalIndex
+          KeySchema:
+            - AttributeName: reviewRating
+              KeyType: HASH
+            - AttributeName: createdAt
               KeyType: RANGE
           Projection:
             ProjectionType: ALL

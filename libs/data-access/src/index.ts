@@ -1,1 +1,1 @@
-export * from './lib/graphql/types';
+export * from './lib/graphql/types.generated';

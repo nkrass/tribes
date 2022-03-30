@@ -22,17 +22,17 @@ import { ProductWidgetComponent } from './product-widget/product-widget.componen
         ProductWidgetComponent
     ],
     imports: [
-        CommonModule,
         AppRoutingModule,
+        CommonModule,
         FormsModule,
         LazyLoadImageModule,
         AutofocusFixModule.forRoot()
     ],
     exports: [
+        AppRoutingModule,
         PriceComponent,
         SectionDividerComponent,
         CommonModule,
-        AppRoutingModule,
         FormsModule,
         RatingStarsComponent,
         GenderFilterComponent,

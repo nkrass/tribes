@@ -3,17 +3,17 @@
 <form *ngIf="formAddress" [formGroup]="formAddress">
   <div class="row">
     <div class="col-sm-4">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('lastname').invalid && formAddress.get('lastname').touched}">
+      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('lastname')?.invalid && formAddress.get('lastname')?.touched}">
         <label for="lastname">Фамилия (*)</label>
         <input class="form-control" type="text" id="lastname" name="lastname" formControlName="lastname">
-        <div class="form-control-feedback" *ngIf="formAddress.get('lastname').invalid && formAddress.get('lastname').touched">Введите Вашу фамилию</div>
+        <div class="form-control-feedback" *ngIf="formAddress.get('lastname')?.invalid && formAddress.get('lastname')?.touched">Введите Вашу фамилию</div>
       </div>
     </div>
     <div class="col-sm-4">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('firstname').invalid && formAddress.get('firstname').touched}">
+      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('firstname')?.invalid && formAddress.get('firstname')?.touched}">
         <label for="firstname">Имя (*)</label>
         <input class="form-control" type="text" id="firstname" name="firstname" formControlName="firstname">
-        <div class="form-control-feedback" *ngIf="formAddress.get('firstname').invalid && formAddress.get('firstname').touched">Введите Ваше имя!</div>
+        <div class="form-control-feedback" *ngIf="formAddress.get('firstname')?.invalid && formAddress.get('firstname')?.touched">Введите Ваше имя!</div>
       </div>
     </div>
     <div class="col-sm-4">
@@ -27,19 +27,19 @@
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('address1').invalid && formAddress.get('address1').touched}">
+      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('address1')?.invalid && formAddress.get('address1')?.touched}">
         <label for="address1">Улица, дом (*)</label>
         <input class="form-control" type="text" id="address1" name="address1" formControlName="address1">
-        <div class="form-control-feedback" *ngIf="formAddress.get('address1').invalid && formAddress.get('address1').touched">
+        <div class="form-control-feedback" *ngIf="formAddress.get('address1')?.invalid && formAddress.get('address1')?.touched">
           Введите адрес доставки
         </div>
       </div>
     </div>
     <div class="col-sm-6">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('address2').invalid && formAddress.get('address2').touched}">
+      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('address2')?.invalid && formAddress.get('address2')?.touched}">
         <label for="address2">Квартира / офис (*)</label>
         <input class="form-control" type="text" id="address2" name="address2" formControlName="address2">
-        <div class="form-control-feedback" *ngIf="formAddress.get('address2').invalid && formAddress.get('address2').touched">
+        <div class="form-control-feedback" *ngIf="formAddress.get('address2')?.invalid && formAddress.get('address2')?.touched">
           Введите номер квартиры / офиса
         </div>
       </div>
@@ -47,14 +47,14 @@
   </div>
   <div class="row">
     <div class="col-sm-6">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('city').invalid && formAddress.get('city').touched}">
+      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('city')?.invalid && formAddress.get('city')?.touched}">
         <label for="city">Город (*)</label>
         <input class="form-control" type="text" name="city" id="city" formControlName="city">
-        <div class="form-control-feedback" *ngIf="formAddress.get('city').invalid && formAddress.get('city').touched">Введите название города</div>
+        <div class="form-control-feedback" *ngIf="formAddress.get('city')?.invalid && formAddress.get('city')?.touched">Введите название города</div>
       </div>
     </div>
     <div class="col-sm-6">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('phone').invalid && formAddress.get('phone').touched}">
+      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('phone')?.invalid && formAddress.get('phone')?.touched}">
         <label for="phone">Номер телефона для связи (*)</label>
         <div class="wrapper">
           <ngx-intl-tel-input 
@@ -66,16 +66,16 @@
             [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" 
             [searchCountryPlaceholder]="'Выберите страну'"
             [selectFirstCountry]="false"
-            [selectedCountryISO]="CountryISO.Russia" [maxLength]="15"
+            [selectedCountryISO]="CountryISO.Russia" [maxLength]="'15'"
             [phoneValidation]="true" 
             [separateDialCode]="separateDialCode"
             [enablePlaceholder]="true"
 
-            [numberFormat]="PhoneNumberFormat.International" name="phone" formControlName="phone">
+            [numberFormat]="PhoneNumberFormat" name="phone" formControlName="phone">
           </ngx-intl-tel-input>
         </div>
         <!-- <input class="form-control" type="text" id="phone" name="phone" formControlName="phone"> -->
-        <div class="form-control-feedback" *ngIf="formAddress.get('phone').invalid && formAddress.get('phone').touched">Введите Ваш телефон</div>
+        <div class="form-control-feedback" *ngIf="formAddress.get('phone')?.invalid && formAddress.get('phone')?.touched">Введите Ваш телефон</div>
       </div>
     </div>
   </div>
@@ -89,10 +89,10 @@
       </div>
     </div>
     <div class="col-sm-6">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('email').invalid && formAddress.get('email').touched}">
+      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('email')?.invalid && formAddress.get('email')?.touched}">
         <label for="email">E-mail (*)</label>
         <input class="form-control" type="email" id="email" name="email" formControlName="email">
-        <div class="form-control-feedback" *ngIf="formAddress.get('email').invalid && formAddress.get('email').touched">Введите Ваш E-mail</div>
+        <div class="form-control-feedback" *ngIf="formAddress.get('email')?.invalid && formAddress.get('email')?.touched">Введите Ваш E-mail</div>
       </div>
     </div>
   </div>

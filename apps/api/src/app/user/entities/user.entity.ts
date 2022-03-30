@@ -43,9 +43,8 @@ export class User {
   @Field(() => String, { nullable: true})
   phone?: string;
 
-  @IsString()
-  @IsOptional()
-  @Field(() => UserRole, { nullable: true})
+  
+  @Field(() => String, { nullable: true})
   userRole: UserRole;
 
   passwordSalt: string;

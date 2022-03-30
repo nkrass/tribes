@@ -50,12 +50,12 @@ import { GlobalConfig, Toast, ToastPackage, ToastrService } from 'ngx-toastr';
   preserveWhitespaces: false,
 })
 export class BootstrapToast extends Toast {
-  options!: BootstrapToastConfig;
+  override options!: BootstrapToastConfig;
   containerClass = '';
 
   constructor(
-    protected toastrService: ToastrService,
-    public toastPackage: ToastPackage
+    override toastrService: ToastrService,
+    override toastPackage: ToastPackage
   ) {
     super(toastrService, toastPackage);
     if (this.options.context) {

@@ -3,7 +3,7 @@ import { CreateUserInput } from './dto/create-user.input';
 import { UpdateUserInput } from './dto/update-user.input';
 import { v4 } from 'uuid';
 import { InjectModel, Model } from 'nestjs-dynamoose';
-import { User, UserKey } from './entities/user.entity';
+import { User, UserKey, UserRole } from './entities/user.entity';
 import { genSalt, compare, hash } from 'bcryptjs'
 @Injectable()
 export class UserService {
@@ -43,10 +43,11 @@ export class UserService {
 
   async update(key: UserKey, input: UpdateUserInput) {
     const model = await this.model.get(key);
-    if (!model) throw new BadRequestException('Review not found');
+    if (!model) throw new BadRequestException('User not found');
     for (const prop in input) {
       if (prop !== "id"){
-        if (prop === "password") (model as any)[prop] = (input as any)[prop];
+        if (prop !== "password")
+          if (prop !== 'userRole') (model as any)[prop] = (input as any)[prop];
       }
     }
     if (input.password){
@@ -54,6 +55,7 @@ export class UserService {
       model.passwordHash = passwordHash;
       model.passwordSalt = passwordSalt
     }
+    input.userRole && model.userRole === UserRole.admin && (model.userRole = input.userRole);
     model.updatedAt = new Date();
     return this.model.update(model);
   }
