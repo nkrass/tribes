@@ -73,6 +73,7 @@ export class ProductService {
     return this.model
       .query('skuFamily')
       .eq(skuFamily)
+      .sort(SortOrder.descending)
       .exec();
   }
   findByCategory(category: string) {

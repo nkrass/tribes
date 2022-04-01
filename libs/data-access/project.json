@@ -23,12 +23,12 @@
     },
     "generate": {
       "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "npx graphql-codegen --config libs/data-access/codegen.yml"
-              }
-          ]
+      "options": {
+        "commands": [
+          {
+            "command": "npx graphql-codegen --config libs/data-access/codegen.yml"
+          }
+        ]
       }
     }
   },

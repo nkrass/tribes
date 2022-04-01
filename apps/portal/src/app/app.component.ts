@@ -47,12 +47,15 @@ export class AppComponent {
     ) {
       //setup history
       this.globalState.connect(this.navigationEnd$, (state, event) => {
-        const routerHistory = state.routerHistory? [...state.routerHistory, event.urlAfterRedirects] : [event.urlAfterRedirects]
-        if (event.urlAfterRedirects !== '/'){
-          return {...state, canNavigateBack: true, routerHistory, showCart: false}
-        } else {
-          return {...state, canNavigateBack: false, showCart: false, routerHistory}
-        }
+        const routerHistory: string[] = [];
+        if (!state.routerHistory) state.routerHistory = [];
+        if (!state.routerHistory.length) routerHistory.push(event.urlAfterRedirects)
+        else if (state.routerHistory[state.routerHistory.length - 1] === event.urlAfterRedirects) routerHistory.push(...state.routerHistory)
+        else routerHistory.push(...state.routerHistory, event.urlAfterRedirects)
+
+        if (routerHistory.length && routerHistory[routerHistory.length - 1] !== '/') return {...state, routerHistory, canNavigateBack: true, showCart: false }
+        else return {...state, routerHistory, canNavigateBack: false, showCart: false }
+
       })
       //ru analytics
       this.globalState.hold(this.navigationEnd$.pipe(tap(this.analytics.pageView)))

@@ -1,7 +1,4 @@
-interface ProductColorMatcher {
-  [string: string]: string;
-}
-export const ProductColorMatcher: ProductColorMatcher= {
+export const ProductColorGroupMatch = {
   "01" :	"01", //Мультиколор 
   "02" :	"02", //Рисунок / Принт
   "03" :	"03", //Черный
@@ -55,5 +52,9 @@ export const ProductColorMatcher: ProductColorMatcher= {
   "51" :	"15", //Бирюзовый
   "52" :	"04", //Жемчужный
   "53" :	"54", //Апельсиновый
-  "54" :	"54"  //Оранжевый
+  "54" :	"54", //Оранжевый
+  "55" :  "15", // "Серо-голубой",
+  "56" :  "14", //"Джинсовый",
+  "57" :  "09", // "Пудровый",
+  "58" :  "13"  // "Пепельная роза"
 }

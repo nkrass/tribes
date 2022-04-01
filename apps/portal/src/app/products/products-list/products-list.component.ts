@@ -4,9 +4,10 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { environment } from '../../../../src/environments/environment'
 import { RxState } from '@rx-angular/state';
 import { PlaceholderImage, ProductMock } from '../shared/product-placeholder.mock';
-import { GeneralColorsDictionary } from '../shared/detailed-colors.dictionary';
+
 import { ItemList, WithContext, OfferCatalog } from 'schema-dts';
 import { CategoriesListGQL, CategoriesListQuery, ProductCategory, ProductGender, ProductsListGQL, ProductsListQuery } from '@tribes/data-access';
+import { ColorsDictionary } from 'libs/colors-dictionary/src';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 
@@ -34,7 +35,7 @@ interface ProductsListState {
 export class ProductsListComponent {
   staticAssetsUrl: string = staticAssetsUrl
   placeholderImage: string = PlaceholderImage
-  colorDictionary = GeneralColorsDictionary
+  colorDictionary = ColorsDictionary.getColorName
   vm$ = this.state.select()
   readonly products$ = this.state.select('products');
   readonly isLoading$ = this.state.select('isLoading');
@@ -45,7 +46,7 @@ export class ProductsListComponent {
   readonly color$ = this.state.select('color')
   readonly size$ = this.state.select('size')
 
-  colorsPalette = Object.keys(GeneralColorsDictionary).map(e=> ({colorCode: e, colorTitle: GeneralColorsDictionary[e]}))
+  colorsPalette = ColorsDictionary.GeneralColorGroupsCodes.map(e=> ({colorCode: e, colorTitle: ColorsDictionary.getColorGroupName(e)}))
   params$ = this.route.paramMap;
   fetchOnUrlChange$ = this.params$.pipe(
     switchMap(p => 
@@ -61,8 +62,7 @@ export class ProductsListComponent {
             gender: p.get('gender'), 
             category: p.get('category'),
             color: p.get('color'),
-            size: p.get('size'),
-            isLoading: false
+            size: p.get('size')
           }
         }),
         startWith({ isLoading: true, products: Array(9).fill(ProductMock) }),
@@ -93,6 +93,7 @@ export class ProductsListComponent {
     private categoriesList: CategoriesListGQL,
     private state: RxState<ProductsListState>
   ) {
+    this.state.set({products: Array(9).fill(ProductMock)})
     this.state.connect(this.fetchOnUrlChange$)
   }
 

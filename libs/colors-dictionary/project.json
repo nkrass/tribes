@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/colors-dictionary",
+  "sourceRoot": "libs/colors-dictionary/src",
+  "prefix": "tribes",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/colors-dictionary"],
+      "options": {
+        "jestConfig": "libs/colors-dictionary/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/colors-dictionary/src/**/*.ts",
+          "libs/colors-dictionary/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

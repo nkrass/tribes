@@ -14,7 +14,7 @@ const staticAssetsUrl = environment.staticAssetsUrl
   ],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class ProductWidgetComponent implements OnInit, OnDestroy {
+export class ProductWidgetComponent implements OnDestroy {
   public staticAssetsUrl: string = staticAssetsUrl
   private readonly unsubscribe$ = new Subject();
 
@@ -30,10 +30,6 @@ export class ProductWidgetComponent implements OnInit, OnDestroy {
   ) {}
   navigateToProduct(event:any){
     this.router.navigate(['/product', this.product.sku])
-  }
-
-  ngOnInit() {
-    // this.product_variants = this.product;  //resizedImagesUrls(this.product.model_variants.map(e => e.images_paths[0]), 600, 800, 'fill')//.resizedImages(900, 1200,'fill')
   }
 
   ngOnDestroy() {

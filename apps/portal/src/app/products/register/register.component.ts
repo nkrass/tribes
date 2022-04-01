@@ -6,9 +6,9 @@ import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import {Html5QrcodeScanner, Html5Qrcode, Html5QrcodeSupportedFormats} from "html5-qrcode"
 import { ActivatedRoute } from '@angular/router';
 import { RxState } from '@rx-angular/state';
-import { ColorsDictionaryTranslationRus } from '../shared/detailed-colors.dictionary';
 import { CreateItemGQL, CreateItemMutation } from '@tribes/data-access';
 import SwiperCore, { Pagination, Zoom, Navigation, Mousewheel, FreeMode } from "swiper";
+import { ColorsDictionary } from 'libs/colors-dictionary/src';
 SwiperCore.use([Pagination, Zoom, Navigation, Mousewheel, FreeMode]);
 
 const staticAssetsUrl = environment.staticAssetsUrl
@@ -33,7 +33,7 @@ export class ScanToRegisterComponent implements OnDestroy {
   public staticAssetsUrl = staticAssetsUrl
   public html5QrCode?: Html5Qrcode;
   public html5QrcodeScanner?: Html5QrcodeScanner
-  public colorsDict = ColorsDictionaryTranslationRus as {[string: string]: string }
+  public colorsDict = ColorsDictionary.getColorName
   public cameraId?: string
   barcodeInput$ = new Subject<string>()
   cameraStateInput$ = new BehaviorSubject<number>(0)

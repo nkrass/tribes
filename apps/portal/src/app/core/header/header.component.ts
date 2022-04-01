@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common'
-import { distinctUntilChanged, map, Subject, switchMap, tap } from 'rxjs';
+import { distinctUntilChanged, map, Subject, switchMap, take, tap } from 'rxjs';
 import { environment } from '../../../../src/environments/environment'
 import { AppGlobalState, APP_GLOBAL_STATE } from '../../app-global.state';
 import { RxState } from '@rx-angular/state';
@@ -22,7 +22,7 @@ export class HeaderComponent {
   readonly showMenu$ = this.globalState.select('showMenu');
   readonly cart$ = this.globalState.select('cart')
   readonly toggleSearch$ = new Subject<boolean>()
-  readonly toggleMenu$ = new Subject<boolean>()
+  readonly toggleMenu$ = new Subject<any>()
   readonly backButtonPressed$ = new Subject<any>()
   readonly routerHistory$ = this.globalState.select('routerHistory')
   constructor(
@@ -31,21 +31,26 @@ export class HeaderComponent {
     private router: Router,
 
   ) {
-    const goBack$ = this.backButtonPressed$.asObservable().pipe(
-      switchMap(() => this.routerHistory$),
-      distinctUntilChanged(),
-      map(history => {
-        history?.length && history.pop();
-        if (history.length) {
-          return { routerHistory: history, canNavigateBack: true }
-        } else return { routerHistory: ['/'], canNavigateBack: false }
+    const goBack$ = this.backButtonPressed$.pipe(
+      
+      // distinctUntilChanged(),
+      // switchMap(() => this.routerHistory$),
+      map(_ => {
+        const routerHistory = this.globalState.get('routerHistory')
+        routerHistory?.length && routerHistory.pop();
+        this.globalState.set({routerHistory})
+        if (routerHistory.length > 1) {
+          return { routerHistory, canNavigateBack: true }
+        } else return { routerHistory: [], canNavigateBack: false }
       }),
       tap(({ canNavigateBack }) => {
         if (canNavigateBack) this.location.back() 
         else this.router.navigateByUrl('/') 
       })
     )
-
+    this.globalState.connect('showMenu', this.toggleMenu$.asObservable().pipe(
+      map(_ => !this.globalState.get('showMenu') 
+    )))
     this.globalState.connect('showSearch', this.toggleSearch$.asObservable())
     this.globalState.connect('showMenu', this.toggleSearch$.asObservable())
     this.globalState.hold(goBack$)

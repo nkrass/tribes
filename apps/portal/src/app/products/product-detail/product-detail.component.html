@@ -291,7 +291,7 @@
                   {{material.material}} {{material.quantity}}%&nbsp;
                 </p>
               </span>
-              <p class="text-lg">Цвет модели: {{ colorsDict[product.color!]}}</p>
+              <p class="text-lg">Цвет модели: {{ colorsDict(product.color!)}}</p>
               <button class="btn btn-outline-primary" (click)="scrollTo('reviews')" *ngIf="product.reviews">Отзывы</button>
               <button class="btn btn-outline-primary" (click)="scrollTo('sku-properties')">Характеристики</button>
             </div>
@@ -433,7 +433,7 @@
                   </tr>
                   <tr>
                     <th scope="row">Цвет</th>
-                    <td>{{colorsDict[product.color!]}}</td>
+                    <td>{{colorsDict(product.color!)}}</td>
                   </tr>
                   <tr>
                     <th scope="row">Пол</th>

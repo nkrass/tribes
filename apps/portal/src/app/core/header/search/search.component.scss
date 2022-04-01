@@ -14,7 +14,8 @@
   right: 18px;
 }
 :host  {
-  height: 100vh;
+  height: auto;
+  min-height: 50px;
 }
 .showSearchBox{
   width: 100%;

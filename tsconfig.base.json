@@ -23,6 +23,7 @@
     "baseUrl": "./",
     "paths": {
       "@tribes/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@tribes/colors-dictionary": ["libs/colors-dictionary/src/index.ts"],
       "@tribes/data-access": ["libs/data-access/src/index.ts"],
       "swiper_angular": ["node_modules/swiper/angular"]
     }

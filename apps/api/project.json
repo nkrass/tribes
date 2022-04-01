@@ -1,56 +1,56 @@
-{ 
+{
   "root": "apps/api",
   "sourceRoot": "apps/api/src",
   "projectType": "application",
   "targets": {
     "ddb-install": {
       "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "sls dynamodb install"
-              }
-          ]
+      "options": {
+        "commands": [
+          {
+            "command": "sls dynamodb install"
+          }
+        ]
       }
     },
     "ddb-start": {
       "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "sls dynamodb start"
-              }
-          ]
+      "options": {
+        "commands": [
+          {
+            "command": "sls dynamodb start"
+          }
+        ]
       }
     },
     "sls-start": {
       "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "cross-env NO_COLOR= cross-env IS_NOT_SLS= npx sls offline start"
-              }
-          ]
+      "options": {
+        "commands": [
+          {
+            "command": "cross-env NO_COLOR= cross-env IS_NOT_SLS= npx sls offline start"
+          }
+        ]
       }
     },
     "sls-deploy-production": {
       "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "NODE_ENV=production npx sls deploy --stage production --region eu-north-1 --verbose"
-              }
-          ]
+      "options": {
+        "commands": [
+          {
+            "command": "NODE_ENV=production npx sls deploy --stage production --region eu-north-1 --verbose"
+          }
+        ]
       }
     },
     "generate": {
       "executor": "@nrwl/workspace:run-commands",
-          "options": {
-            "commands": [
-              {
-                "command": "ts-node apps/api/genres.ts -- \"apps/api/src/app/**/*.schema.ts\" \"apps/api/resource/dynamodb.yml\""
-              }
-          ]
+      "options": {
+        "commands": [
+          {
+            "command": "ts-node apps/api/genres.ts -- \"apps/api/src/app/**/*.schema.ts\" \"apps/api/resource/dynamodb.yml\""
+          }
+        ]
       }
     },
     "build": {

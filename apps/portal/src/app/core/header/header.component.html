@@ -3,7 +3,7 @@
   <tribes-search [class.d-block]="showSearch$ | push"></tribes-search>
   <nav class="navbar navbar-expand-xl navbar-light" *rxLet="cart$ as cart">
     <div class="container-fluid order-3 order-lg-1">
-      <div data-nosnippet [collapse]="showMenu$ | push" [isAnimated]="true" class="navbar-collapse collapse w-100 order-3 order-lg-1 h6">
+      <div data-nosnippet [collapse]="!(showMenu$ | push)" [isAnimated]="true" class="navbar-collapse collapse w-100 order-3 order-lg-1 h6">
         <ul class="navbar-nav me-auto text-center">
           <li *ngIf="cart.cartItems.length>0" class="nav-item" routerLinkActive="active">
             <a class="nav-link" routerLink="/cart">
@@ -58,12 +58,11 @@
         </div>
         <div class="col-2 mt-1 p-0 text-center">
           <button 
-            *rxLet="showMenu$ as showMenu"
             type="button" 
             class="navbar-toggler" 
-            (click)="toggleMenu$.next(!showMenu) "
-            [attr.aria-expanded]="showMenu"
-            [class.collapsed]="!showMenu"
+            (click)="toggleMenu$.next($event) "
+            [attr.aria-expanded]="showMenu$ | push"
+            [class.collapsed]="!(showMenu$ | push)"
             >
             <span class="icon-bar top-bar"></span>
             <span class="icon-bar middle-bar"></span>

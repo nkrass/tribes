@@ -85,7 +85,7 @@
               {{material.material}} {{material.quantity}}%&nbsp;
             </p>
           </span>
-          <p class="text-lg">Цвет модели: {{ colorsDict[item?.barcode?.product?.color || 0]}}</p>
+          <p class="text-lg">Цвет модели: {{ colorsDict(item?.barcode?.product?.color || '00')}}</p>
           <button class="btn btn-outline-primary" (click)="scrollTo('reviews')" *ngIf="item?.barcode?.product?.reviews">Отзывы</button>
           <button class="btn btn-outline-primary" (click)="scrollTo('sku-properties')">Характеристики</button>
         </div>

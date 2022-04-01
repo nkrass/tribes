@@ -280,7 +280,7 @@ a.dropdown-item{
   float: left;
   top: 0px;
   border-radius: 10px;
-  &00{@extend .colorSelectorCircle; background-color: #fff; background-image: url('/static/img/bg.png'); background-size: cover; background-repeat: no-repeat;}
+  &00{@extend .colorSelectorCircle; background-color: #fff; background-image: url('/assets/static/img/bg.png'); background-size: cover; background-repeat: no-repeat;}
   &01{@extend .colorSelectorCircle; background-color: #ffffff ;}
   &02{@extend .colorSelectorCircle; background-color: #ffffff ;}
   &03{@extend .colorSelectorCircle; background-color: #120d0e ;}
@@ -335,6 +335,10 @@ a.dropdown-item{
   &52{@extend .colorSelectorCircle; background-color: #eceee7 ;}
   &53{@extend .colorSelectorCircle; background-color: #ef8900 ;}
   &54{@extend .colorSelectorCircle; background-color: #fb861a ;}
+  &55{@extend .colorSelectorCircle; background-color: #8eadcf ;}
+  &56{@extend .colorSelectorCircle; background-color: #4f83bb ;}
+  &57{@extend .colorSelectorCircle; background-color: #f7d493 ;}
+  &58{@extend .colorSelectorCircle; background-color: #ec94b2 ;}
 }
 .btn-color{
   border: 1px solid #fffde4;
@@ -344,7 +348,10 @@ a.dropdown-item{
   }
 }
 .btn-color{
-  &00{@extend .btn-color; background-color: #ffffff; background-image: url('/static/img/bg.png'); background-size: cover; background-repeat: no-repeat;}
+  &00{@extend .btn-color; background-color: #ffffff; background-image: url('/assets/static/img/bg.png'); 
+    background-size: cover; background-repeat: no-repeat;
+    &:hover{background-image: url('/assets/static/img/bg.png'); background-position: right;}
+  }
   &01{@extend .btn-color; background-color: #ffffff; border: 1px solid #b9b9b9;}
   &02{@extend .btn-color; background-color: #ffffff; border: 1px solid #b9b9b9;}
   &03{@extend .btn-color; background-color: #120d0e; color: #fff}
@@ -399,4 +406,8 @@ a.dropdown-item{
   &52{@extend .btn-color; background-color: #eceee7; }
   &53{@extend .btn-color; background-color: #ef8900; color: #fff}
   &54{@extend .btn-color; background-color: #fb861a; color: #fff}
+  &55{@extend .btn-color; background-color: #8eadcf; color: #fff}
+  &56{@extend .btn-color; background-color: #4f83bb; color: #fff}
+  &57{@extend .btn-color; background-color: #f7d493;}
+  &58{@extend .btn-color; background-color: #ec94b2;}
 }

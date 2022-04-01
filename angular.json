@@ -1,11 +1,9 @@
 {
-  "cli": {
-    "analytics": false
-  },
   "version": 2,
   "projects": {
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
+    "colors-dictionary": "libs/colors-dictionary",
     "data-access": "libs/data-access",
     "portal": "apps/portal",
     "portal-e2e": "apps/portal-e2e"

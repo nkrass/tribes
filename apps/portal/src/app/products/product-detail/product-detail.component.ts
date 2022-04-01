@@ -11,10 +11,10 @@ import { AnalyticsService } from '../../shared/analytics.service'
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { MessageService } from '../../messages/message.service';
 import { RxState } from '@rx-angular/state';
-import { ColorsDictionaryTranslationRus } from '../shared/detailed-colors.dictionary';
 import SwiperCore, { Pagination, Zoom, Navigation, Mousewheel, FreeMode } from "swiper";
 import { ProductMock } from '../shared/product-placeholder.mock';
 import { CartQuery, ProductGQL, ProductQuery } from '@tribes/data-access';
+import { ColorsDictionary } from 'libs/colors-dictionary/src';
 SwiperCore.use([Pagination, Zoom, Navigation, Mousewheel, FreeMode]);
 
 const staticAssetsUrl = environment.staticAssetsUrl
@@ -53,7 +53,7 @@ export class ProductDetailComponent {
 
   public modalRef?: BsModalRef
 
-  public colorsDict = ColorsDictionaryTranslationRus as {[string: string]: string }
+  public colorsDict = ColorsDictionary.getColorName
 
   public promotions = { marketplace: undefined, promocode: undefined, rate: undefined, redirect: false}
   public setup_promotions(){

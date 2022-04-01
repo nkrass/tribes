@@ -73,10 +73,10 @@ export class Product {
   collection: string;
 
   @Field(() => [String], {nullable: true})
-  images: [string];
+  images: string[];
 
   @Field(() => [String], {nullable: true})
-  videos: [string];
+  videos: string[];
 
   @Field(()=> Number, {nullable: true})
   wildberriesId: number;

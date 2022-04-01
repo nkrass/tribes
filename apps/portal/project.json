@@ -79,9 +79,7 @@
           "apps/portal/src/**/*.ts",
           "apps/portal/src/**/*.html"
         ],
-        "exclude": [
-          "**/*generated.ts"
-        ]
+        "exclude": ["**/*generated.ts"]
       }
     },
     "test": {

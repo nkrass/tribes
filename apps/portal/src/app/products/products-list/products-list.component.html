@@ -27,7 +27,7 @@
         <div class="btn-group col-12" dropdown #dropdown="bs-dropdown" [autoClose]="true">
           <button id="button-basic" dropdownToggle  type="button" class="col-12 btn btn-color{{(color$ | push) || '00'}} dropdown-toggle " 
             data-bs-toggle="dropdown" aria-expanded="false">
-            Цвет: {{colorDictionary[(color$ | push) || '00'] || 'Все цвета'}}
+            Цвет: {{colorDictionary((color$ | push) || '00') || 'Все цвета'}}
           </button>
           <ul *dropdownMenu id="dropdown-basic" aria-labelledby="button-basic" class="dropdown-menu col-12">
             <li class="pointer">

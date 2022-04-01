@@ -42,6 +42,7 @@
     "@rx-angular/cdk": "^1.0.0-beta.2",
     "@rx-angular/state": "^1.6.0",
     "@rx-angular/template": "^1.0.0-beta.32",
+    "@supercharge/promise-pool": "^2.1.0",
     "@types/bcryptjs": "^2.4.2",
     "@vendia/serverless-express": "^4.5.4",
     "ajv": "^8.11.0",
@@ -81,6 +82,7 @@
     "serverless": "^3.10.0",
     "source-map-support": "^0.5.21",
     "swiper": "^8.0.7",
+    "tslib": "^2.0.0",
     "validator": "^13.7.0",
     "zone.js": "^0.11.5"
   },

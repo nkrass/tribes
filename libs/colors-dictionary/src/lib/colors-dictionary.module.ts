@@ -1,4 +1,13 @@
-export const ColorsDictionaryTranslationRus = {
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { ProductColorGroupMatch } from './color.matching';
+
+// @NgModule({
+//   imports: [CommonModule],
+// })
+// export class ColorsDictionaryModule {}
+
+const ColorsDictionaryTranslationRus = {
   "01":"Мультиколор",
   "02":"Рисунок / Принт",
   "03":"Черный",
@@ -52,9 +61,13 @@ export const ColorsDictionaryTranslationRus = {
   "51":"Бирюзовый",
   "52":"Жемчужный",
   "53":"Апельсиновый",
-  "54":"Оранжевый"
+  "54":"Оранжевый",
+  "55": "Серо-голубой",
+  "56": "Джинсовый",
+  "57": "Пудровый",
+  "58": "Пепельная роза"
 }
-export const GeneralColorsDictionary: { [String: string]: string } = {
+const GeneralColorsDictionaryRus: { [String: string]: string } = {
   '04' : 'Белый',
   '03' : 'Черный',
   '10' : 'Серый',
@@ -71,3 +84,35 @@ export const GeneralColorsDictionary: { [String: string]: string } = {
   '16' : 'Желтый',
   '54' : 'Оранжевый',
 }
+const GeneralColorGroupsCodes = [ '04', '03', '10', '13', '14', '17', '24', '05', '07', '09', '15', '16', '54' ];
+// @Module({
+//   controllers: [],
+//   providers: [],
+//   exports: [],
+// })
+export class ColorsDictionary {
+  static GeneralColorGroupsCodes = GeneralColorGroupsCodes
+  // static GeneralColorsDictionaryRus = GeneralColorsDictionaryRus
+  // static ColorsDictionaryTranslationRus = ColorsDictionaryTranslationRus
+  // static ProductColorGroupMatch = ProductColorGroupMatch
+  static matchColorToGroup(str: string): string {
+    return ProductColorGroupMatch[str]
+  }
+  static getColorName(code: string, lang= 'rus'): string {
+    switch (lang) {
+      case 'rus': return ColorsDictionaryTranslationRus[code]
+      // case 'eng': return this.ColorsDictionaryTranslationEng[code]
+      default: return ColorsDictionaryTranslationRus[code]
+    }
+  }
+  static getColorGroupName(code: string, lang = 'rus'){
+    switch(lang){
+      case 'rus': return GeneralColorsDictionaryRus[code]
+      // case 'eng': return this.GeneralColorsDictionaryEng[code]
+      default: return GeneralColorsDictionaryRus[code]
+    }
+  }
+}
+
+
+
