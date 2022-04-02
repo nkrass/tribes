@@ -16,8 +16,7 @@
     "noImplicitOverride": false,
     "noPropertyAccessFromIndexSignature": false,
     "noImplicitReturns": false,
-    "noFallthroughCasesInSwitch": false,
-    "overrideSupport": false,
+    "noFallthroughCasesInSwitch": false
   },
   "angularCompilerOptions": {
     "strictInjectionParameters": false,

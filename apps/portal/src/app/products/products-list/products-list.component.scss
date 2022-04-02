@@ -4,7 +4,7 @@
 @import "~bootstrap/scss/forms";
 @import '../../../scss/helpers/variables';
 @import '../../../scss/helpers/mixins';
-
+@import '../../../scss/brand-palete.variables.scss';
 .catalogSlider {
   width: 100%;
   height: auto;
@@ -281,30 +281,33 @@ a.dropdown-item{
   top: 0px;
   border-radius: 10px;
   &00{@extend .colorSelectorCircle; background-color: #fff; background-image: url('/assets/static/img/bg.png'); background-size: cover; background-repeat: no-repeat;}
+  &03{@extend .colorSelectorCircle; background: tribesgradient($C0, $C0T, 40deg) ;}
+  &04{@extend .colorSelectorCircle; background: tribesgradient($C13T, $C13, 40deg) ;}
+  &05{@extend .colorSelectorCircle; background: tribesgradient($C1, $C1TT, 40deg) ;}
+  &07{@extend .colorSelectorCircle; background: tribesgradient($C2S60, $C2S20, 40deg) ;}
+  &09{@extend .colorSelectorCircle; background: tribesgradient($C12T, $C12TTT, 40deg);}
+  &10{@extend .colorSelectorCircle; background: tribesgradient($C11, $C11TT, 40deg);}
+  &13{@extend .colorSelectorCircle; background: tribesgradient($C6, $C6TT, 40deg);}
+  &14{@extend .colorSelectorCircle; background: tribesgradient($C8, $C8TT, 40deg);}
+  &15{@extend .colorSelectorCircle; background: tribesgradient($C7, $C7TTT, 40deg);}
+  &16{@extend .colorSelectorCircle; background: tribesgradient($C3, $C3TTT, 40deg);}
+  &17{@extend .colorSelectorCircle; background: tribesgradient($C5, $C5TT, 40deg);}
+  &24{@extend .colorSelectorCircle; background: tribesgradient($C10, $C10TT, 40deg);}
+  &54{@extend .colorSelectorCircle; background: tribesgradient($C2, $C2TTT, 40deg);}
+
   &01{@extend .colorSelectorCircle; background-color: #ffffff ;}
   &02{@extend .colorSelectorCircle; background-color: #ffffff ;}
-  &03{@extend .colorSelectorCircle; background-color: #120d0e ;}
-  &04{@extend .colorSelectorCircle; background-color: #ffffff ;}
-  &05{@extend .colorSelectorCircle; background-color: #ee331a ;}
   &06{@extend .colorSelectorCircle; background-color: #9f0e2c ;}
-  &07{@extend .colorSelectorCircle; background-color: #834424 ;}
   &08{@extend .colorSelectorCircle; background-color: #ab7412 ;}
-  &09{@extend .colorSelectorCircle; background-color: #f7f7e3 ;}
-  &10{@extend .colorSelectorCircle; background-color: #a19f9f ;}
   &11{@extend .colorSelectorCircle; background-color: #fdd605 ;}
   &12{@extend .colorSelectorCircle; background-color: #fdfff5 ;}
-  &13{@extend .colorSelectorCircle; background-color: #fbc3cd ;}
-  &14{@extend .colorSelectorCircle; background-color: #244585 ;}
-  &15{@extend .colorSelectorCircle; background-color: #477ce3 ;}
-  &16{@extend .colorSelectorCircle; background-color: #fcff00 ;}
-  &17{@extend .colorSelectorCircle; background-color: #368715 ;}
   &18{@extend .colorSelectorCircle; background-color: #ffbe00 ;}
   &19{@extend .colorSelectorCircle; background-color: #ffc800 ;}
   &20{@extend .colorSelectorCircle; background-color: #009473 ;}
   &21{@extend .colorSelectorCircle; background-color: #f08080 ;}
   &22{@extend .colorSelectorCircle; background-color: #b87333 ;}
   &23{@extend .colorSelectorCircle; background-color: #708238 ;}
-  &24{@extend .colorSelectorCircle; background-color: #bf00ff ;}
+  
   &25{@extend .colorSelectorCircle; background-color: #c0c0c0 ;}
   &26{@extend .colorSelectorCircle; background-color: #e5b6f7 ;}
   &27{@extend .colorSelectorCircle; background-color: #615e3e ;}
@@ -334,7 +337,7 @@ a.dropdown-item{
   &51{@extend .colorSelectorCircle; background-color: #2dcabd ;}
   &52{@extend .colorSelectorCircle; background-color: #eceee7 ;}
   &53{@extend .colorSelectorCircle; background-color: #ef8900 ;}
-  &54{@extend .colorSelectorCircle; background-color: #fb861a ;}
+  
   &55{@extend .colorSelectorCircle; background-color: #8eadcf ;}
   &56{@extend .colorSelectorCircle; background-color: #4f83bb ;}
   &57{@extend .colorSelectorCircle; background-color: #f7d493 ;}
@@ -343,39 +346,70 @@ a.dropdown-item{
 .btn-color{
   border: 1px solid #fffde4;
   box-shadow: 0px 1px 2px 0px #edddec;
+  font-weight: 500;
   &:hover{
-    color:#2f3337;
+    // color:#2f3337;
+    box-shadow: 0px 1px 2px 0px #edddec;
   }
 }
 .btn-color{
-  &00{@extend .btn-color; background-color: #ffffff; background-image: url('/assets/static/img/bg.png'); 
-    background-size: cover; background-repeat: no-repeat;
-    &:hover{background-image: url('/assets/static/img/bg.png'); background-position: right;}
+  &00{@extend .btn-color; 
+    background-color: #ffffff; 
+    background-image: url('/assets/static/img/bg.png'); 
+    background-size: cover; 
+    background-repeat: no-repeat;
+    &:hover{
+      background-image: url('/assets/static/img/bg.png');
+      background-position: right;
+    }
   }
+  
+  &03{@extend .btn-color; background: tribesgradient($C0, $C0T, 40deg); color: $C13;
+    &:hover{ background: tribesgradient($C0, $C0T, 120deg); color: $C13TT }}
+  &04{@extend .btn-color; background: tribesgradient($C13, $C13T, 40deg); color: $C0T; 
+    &:hover{ background: tribesgradient($C13, $C13T, 120deg); color: $C0TT;}}
+  &05{@extend .btn-color; background: tribesgradient($C1, $C1TT, 40deg); color: $C13;
+    &:hover{ background: tribesgradient($C1, $C1TT, 120deg); color: $C13T}}
+  &07{@extend .btn-color; background: tribesgradient($C2S60, $C2S20, 40deg); color: $C13;
+    &:hover{ background: tribesgradient($C2S60, $C2S20, 120deg); color: $C13T;}}
+  &09{@extend .btn-color; background: tribesgradient($C12T, $C12TTT, 40deg); color: $C0T;
+    &:hover{ background: tribesgradient($C12T, $C12TTT, 120deg); color: $C0TT;}}
+  &10{@extend .btn-color; background: tribesgradient($C11, $C11TT, 40deg); color: $C0T;
+    &:hover{ background: tribesgradient($C11, $C11TT, 120deg); color: $C0TT; }}
+  &13{@extend .btn-color; background: tribesgradient($C6, $C6TT, 40deg); color: $C13;
+    &:hover{ background: tribesgradient($C6, $C6TT, 120deg); color: $C13T; }}
+  &14{@extend .btn-color; background: tribesgradient($C8, $C8TT, 40deg); color: $C13;
+    &:hover{ background: tribesgradient($C8, $C8TT, 120deg); color: $C13T; }}
+  &15{@extend .btn-color; background: tribesgradient($C7, $C7TTT, 40deg); color: $C13;
+    &:hover{ background: tribesgradient($C7, $C7TTT, 120deg); color: $C13T;}}
+  &16{@extend .btn-color; background: tribesgradient($C3, $C3TTT, 40deg); color: $C0T;
+    &:hover{ background: tribesgradient($C3, $C3TTT, 120deg); color: $C0TT;}}
+  &17{@extend .btn-color; background: tribesgradient($C5, $C5TT, 40deg); color: $C13;
+    &:hover{ background: tribesgradient($C5, $C5TT, 120deg); color: $C13T}}
+  &24{@extend .btn-color; background: tribesgradient($C10, $C10TT, 40deg); color: $C13;
+    &:hover{ background: tribesgradient($C10, $C10TT, 120deg); color: $C13T;}}
+  &54{@extend .btn-color; background: tribesgradient($C2, $C2TTT, 40deg); color: $C13;
+    &:hover{ background: tribesgradient($C2, $C2TTT, 120deg); color: $C13T;}} 
+
+
   &01{@extend .btn-color; background-color: #ffffff; border: 1px solid #b9b9b9;}
   &02{@extend .btn-color; background-color: #ffffff; border: 1px solid #b9b9b9;}
-  &03{@extend .btn-color; background-color: #120d0e; color: #fff}
-  &04{@extend .btn-color; background-color: #ffffff; border: 1px solid #b9b9b9;}
-  &05{@extend .btn-color; background-color: #ee331a; color: #fff}
   &06{@extend .btn-color; background-color: #9f0e2c; color: #fff}
   &07{@extend .btn-color; background-color: #834424; color: #fff}
   &08{@extend .btn-color; background-color: #ab7412; color: #fff}
   &09{@extend .btn-color; background-color: #f7f7e3; }
-  &10{@extend .btn-color; background-color: #a19f9f; color: #fff}
   &11{@extend .btn-color; background-color: #fdd605; color: #fff}
   &12{@extend .btn-color; background-color: #fdfff5; }
-  &13{@extend .btn-color; background-color: #fbc3cd; color: #fff}
-  &14{@extend .btn-color; background-color: #244585; color: #fff}
-  &15{@extend .btn-color; background-color: #477ce3; color: #fff}
-  &16{@extend .btn-color; background-color: #fcff00; color: #fff}
-  &17{@extend .btn-color; background-color: #368715; color: #fff}
+
+
+
   &18{@extend .btn-color; background-color: #ffbe00; color: #fff}
   &19{@extend .btn-color; background-color: #ffc800; color: #fff}
   &20{@extend .btn-color; background-color: #009473; color: #fff}
   &21{@extend .btn-color; background-color: #f08080; color: #fff}
   &22{@extend .btn-color; background-color: #b87333; color: #fff}
   &23{@extend .btn-color; background-color: #708238; color: #fff}
-  &24{@extend .btn-color; background-color: #bf00ff; color: #fff}
+
   &25{@extend .btn-color; background-color: #c0c0c0; color: #fff}
   &26{@extend .btn-color; background-color: #e5b6f7; color: #fff}
   &27{@extend .btn-color; background-color: #615e3e; color: #fff}
@@ -405,7 +439,6 @@ a.dropdown-item{
   &51{@extend .btn-color; background-color: #2dcabd; color: #fff}
   &52{@extend .btn-color; background-color: #eceee7; }
   &53{@extend .btn-color; background-color: #ef8900; color: #fff}
-  &54{@extend .btn-color; background-color: #fb861a; color: #fff}
   &55{@extend .btn-color; background-color: #8eadcf; color: #fff}
   &56{@extend .btn-color; background-color: #4f83bb; color: #fff}
   &57{@extend .btn-color; background-color: #f7d493;}

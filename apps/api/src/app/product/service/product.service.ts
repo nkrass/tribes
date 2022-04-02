@@ -32,7 +32,7 @@ export class ProductService {
   }
   async createBatch(){
     const products = await this.googleServices.getProducts();
-    let unprocessed: Document<Product>[] = []
+    const unprocessed: Document<Product>[] = []
     for (let i = 0; i < products.length; i += 25) {
       const processed = await this.model.batchPut(products.slice(i, i + 25))
       unprocessed.push(...processed.unprocessedItems);

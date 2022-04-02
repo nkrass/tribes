@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { pluck, map, startWith, switchMap, endWith, zip, Observable, combineLatest } from 'rxjs';
+import { pluck, map, startWith, switchMap, endWith, Observable, combineLatest, tap } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { environment } from '../../../../src/environments/environment'
 import { RxState } from '@rx-angular/state';
@@ -7,7 +7,7 @@ import { PlaceholderImage, ProductMock } from '../shared/product-placeholder.moc
 
 import { ItemList, WithContext, OfferCatalog } from 'schema-dts';
 import { CategoriesListGQL, CategoriesListQuery, ProductCategory, ProductGender, ProductsListGQL, ProductsListQuery } from '@tribes/data-access';
-import { ColorsDictionary } from 'libs/colors-dictionary/src';
+import { ColorsDictionary } from '@tribes/colors-dictionary';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 

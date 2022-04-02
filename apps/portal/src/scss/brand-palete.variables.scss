@@ -1,0 +1,523 @@
+//Brand colors with its namings
+$C13: #FFFFFF;       //C13 - 100%. White-tribe «Absolute» Total Blank
+$C13S10: #e6e6e6;
+$C13S20: #cccccc;
+$C13S30: #b3b3b3;
+$C13S40: #999999;
+$C13S50: #808080;
+$C13S60: #666666;
+$C13S70: #4c4c4c;
+$C13S80: #333333;
+$C13S90: #191919;
+$C13S100: #000000;
+
+$C0: #000000;       //C0 - 100%. Back-tribe «Hole» Total Zero
+$C0T10: #1a1a1a; 
+$C0T20: #333333; 
+$C0T30: #4d4d4d; 
+$C0T40: #666666; 
+$C0T50: #808080; 
+$C0T60: #999999; 
+$C0T70: #b3b3b3; 
+$C0T80: #cccccc; 
+$C0T90: #e6e6e6; 
+$C0T100: $C13;
+
+$C1: #E52F1E;       //C1 - 100%. Red-tribe Chakra «I Am»
+$C1S0: $C1;
+$C1S10: #d02a1b;
+$C1S20: #b72618;
+$C1S30: #a02115;
+$C1S40: #891c12;
+$C1S50: #73180f;
+$C1S60: #5c130c;
+$C1S70: #450e09;
+$C1S80: #2e0906;
+$C1S90: #170503;
+$C1S100: $C0;
+$C1T0: $C1;
+$C1T10: #e84435;
+$C1T20: #ea594b;
+$C1T30: #ed6d62;
+$C1T40: #ef8278;
+$C1T50: #f2978f;
+$C1T60: #f5aca5;
+$C1T70: #f7c1bc;
+$C1T80: #fad5d2;
+$C1T90: #fceae9;
+$C1T100: $C13;
+
+$C2: #F39222;       //C2 - 100%. Orange-tribe Chakra «I Feel»
+$C2S0: $C2;
+$C2S10: #db831f;
+$C2S20: #c2751b;
+$C2S30: #aa6618;
+$C2S40: #925814;
+$C2S50: #7a4911;
+$C2S60: #613a0e;
+$C2S70: #492c0a;
+$C2S80: #311d07;
+$C2S90: #180f03;
+$C2S100: $C0;
+$C2T0: $C2;
+$C2T10: #f49d38;
+$C2T20: #f5a84e;
+$C2T30: #f7b364; //C2T
+$C2T40: #f8be7a;
+$C2T50: #f9c991;
+$C2T60: #fad3a7; //C2TT
+$C2T70: #fbdebd;
+$C2T80: #fde9d3;
+$C2T90: #fef4e9; //C2TTT
+$C2T100: $C13;
+
+$C3: #FFCC00;       //C3 - 100%. Yellow-tribe Chakra «I Do»
+$C3S0: $C3;   
+$C3S10: #e6b800;  
+$C3S20: #cca300;  
+$C3S30: #b38f00;  
+$C3S40: #997a00;  
+$C3S50: #806600;  
+$C3S60: #665200;  
+$C3S70: #4c3d00;  
+$C3S80: #332900;  
+$C3S90: #191400;  
+$C3S100: $C0;   
+$C3T0: $C3;
+$C3T10: #ffd11a;
+$C3T20: #ffd633;
+$C3T30: #ffdb4d;
+$C3T40: #ffe066;
+$C3T50: #ffe680;
+$C3T60: #ffeb99;
+$C3T70: #fff0b3;
+$C3T80: #fff5cc;
+$C3T90: #fffae6;
+$C3T100: $C13;
+
+$C4: #BAC81E;           //C4 - 100%. Green-tribe Chakra «I Love» (male)
+$C4S10: #a7b41b;
+$C4S20: #95a018;
+$C4S30: #828c15;
+$C4S40: #707812;
+$C4S50: #5d640f;
+$C4S60: #4a500c;
+$C4S70: #383c09;
+$C4S80: #252806;
+$C4S90: #131403;
+$C4S100: $C0;
+$C4T10: #c1ce35;
+$C4T20: #c8d34b;
+$C4T30: #cfd962;
+$C4T40: #d6de78;
+$C4T50: #dde48f;
+$C4T60: #e3e9a5;
+$C4T70: #eaefbc;
+$C4T80: #f1f4d2;
+$C4T90: #f8fae9;
+$C4T100: $C13;
+
+$C5: #00936E;       //C5 - 100%. Green-tribe Chakra «I Love» (unite)
+$C5S10: #008463;
+$C5S20: #007658;
+$C5S30: #00674d;
+$C5S40: #005842;
+$C5S50: #004a37;
+$C5S60: #003b2c;
+$C5S70: #002c21;
+$C5S80: #001d16;
+$C5S90: #000f0b;
+$C5S100: $C0;
+$C5T10: #1a9e7d;
+$C5T20: #33a98b;
+$C5T30: #4db39a;
+$C5T40: #66bea8;
+$C5T50: #80c9b7;
+$C5T60: #99d4c5;
+$C5T70: #b3dfd4;
+$C5T80: #cce9e2;
+$C5T90: #e6f4f1;
+$C5T100: $C13;
+
+$C6: #B1589E;       //C6 - 100%. Rose-tribe Chakra «I Love» (female)
+$C6S10: #9f4f8e;
+$C6S20: #8e467e;
+$C6S30: #7c3e6f;
+$C6S40: #6a355f;
+$C6S50: #592c4f;
+$C6S60: #47233f;
+$C6S70: #351a2f;
+$C6S80: #231220;
+$C6S90: #120910;
+$C6S100: $C0;
+$C6T10: #b969a8;
+$C6T20: #c179b1;
+$C6T30: #c88abb;
+$C6T40: #d09bc5;
+$C6T50: #d8accf;
+$C6T60: #e0bcd8;
+$C6T70: #e8cde2;
+$C6T80: #efdeec;
+$C6T90: #f7eef5;
+$C6T100: $C13;
+
+$C7: #00A5DF;        //C7 - 100%. Blue-tribe Chakra «I Speak»
+$C7S10: #0095c9;
+$C7S20: #0084b2;
+$C7S30: #00739c;
+$C7S40: #006386;
+$C7S50: #005370;
+$C7S60: #004259;
+$C7S70: #003143;
+$C7S80: #00212d;
+$C7S90: #001016;
+$C7S100: $C0;
+$C7T10: #1aaee2;
+$C7T20: #33b7e5;
+$C7T30: #4dc0e9;
+$C7T40: #66c9ec;
+$C7T50: #80d2ef;
+$C7T60: #99dbf2;
+$C7T70: #b3e4f5;
+$C7T80: #ccedf9;
+$C7T90: #e6f6fc;
+$C7T100: $C13;
+
+$C8: #0074BE;        //C8 - 100%. Blue-tribe Chakra «I See»
+$C8S10: #0068ab;
+$C8S20: #005d98;
+$C8S30: #005185;
+$C8S40: #004672;
+$C8S50: #003a5f;
+$C8S60: #002e4c;
+$C8S70: #002339;
+$C8S80: #001726;
+$C8S90: #000c13;
+$C8S100: $C0;
+$C8T10: #1a82c5;
+$C8T20: #3390cb;
+$C8T30: #4d9ed2;
+$C8T40: #66acd8;
+$C8T50: #80badf;
+$C8T60: #99c7e5;
+$C8T70: #b3d5ec;
+$C8T80: #cce3f2;
+$C8T90: #e6f1f9;
+$C8T100: $C13;
+
+$C9: #521357;        //C9 - 100%. Purple-tribe Chakra «I Hear»
+$C9S10: #4a114e;
+$C9S20: #420f46;
+$C9S30: #390d3d;
+$C9S40: #310b34;
+$C9S50: #290a2c;
+$C9S60: #210823;
+$C9S70: #19061a;
+$C9S80: #100411;
+$C9S90: #080209;
+$C9S100: $C0;
+$C9T10: #632b68;
+$C9T20: #754279;
+$C9T30: #865a89;
+$C9T40: #97719a;
+$C9T50: #a989ab;
+$C9T60: #baa1bc;
+$C9T70: #cbb8cd;
+$C9T80: #dcd0dd;
+$C9T90: #eee7ee;
+$C9T100: $C13;
+
+$C10: #502182;       //C10 - 100%. Violet-tribe Chakra «I Know»
+$C10S10: #481e75;
+$C10S20: #401a68;
+$C10S30: #38175b;
+$C10S40: #30144e;
+$C10S50: #281141;
+$C10S60: #200d34;
+$C10S70: #180a27;
+$C10S80: #10071a;
+$C10S90: #08030d;
+$C10S100: $C0;
+$C10T10: #62378f;
+$C10T20: #734d9b;
+$C10T30: #8564a8;
+$C10T40: #967ab4;
+$C10T50: #a890c1;
+$C10T60: #b9a6cd;
+$C10T70: #cbbcda;
+$C10T80: #dcd3e6;
+$C10T90: #eee9f3;
+$C10T100: $C13;
+
+$C11: #B1AEAD;       //C11 - 100%. Silver-tribe «Luna» Substance
+$C11S10: #9f9d9c;
+$C11S20: #8e8b8a;
+$C11S30: #7c7a79;
+$C11S40: #6a6868;
+$C11S50: #595757;
+$C11S60: #474645;
+$C11S70: #353434;
+$C11S80: #232323;
+$C11S90: #121111;
+$C11S100: $C0;
+$C11T10: #b9b6b5;
+$C11T20: #c1bebd;
+$C11T30: #c8c6c6;
+$C11T40: #d0cece;
+$C11T50: #d8d7d6;
+$C11T60: #e0dfde;
+$C11T70: #e8e7e6;
+$C11T80: #efefef;
+$C11T90: #f7f7f7;
+$C11T100: $C13;
+
+$C12: #C59B20;       //C12 - 100%. Gold-tribe «Sun» Substance
+$C12S10: #b18c1d;
+$C12S20: #9e7c1a;
+$C12S30: #8a6d16;
+$C12S40: #765d13;
+$C12S50: #634e10;
+$C12S60: #4f3e0d;
+$C12S70: #3b2e0a;
+$C12S80: #271f06;
+$C12S90: #140f03;
+$C12S100: $C0;
+$C12T10: #cba536;
+$C12T20: #d1af4d;
+$C12T30: #d6b963;
+$C12T40: #dcc379;
+$C12T50: #e2cd90;
+$C12T60: #e8d7a6;
+$C12T70: #eee1bc;
+$C12T80: #f3ebd2;
+$C12T90: #f9f5e9;
+$C12T100: $C13;
+
+//Shortened colors
+$C0T:   $C0T30;
+$C0TT:  $C0T60;
+$C0TTT: $C0T80;
+$C1T:   $C1T30;
+$C1TT:  $C1T60;
+$C1TTT: $C1T80;
+$C2T:   $C2T30;
+$C2TT:  $C2T60;
+$C2TTT: $C2T80;
+$C3T:   $C3T30;
+$C3TT:  $C3T60;
+$C3TTT: $C3T80;
+$C4T:   $C4T30;
+$C4TT:  $C4T60;
+$C4TTT: $C4T80;
+$C5T:   $C5T30;
+$C5TT:  $C5T60;
+$C5TTT: $C5T80;
+$C6T:   $C6T30;
+$C6TT:  $C6T60;
+$C6TTT: $C6T80;
+$C7T:   $C7T30;
+$C7TT:  $C7T60;
+$C7TTT: $C7T80;
+$C8T:   $C8T30;
+$C8TT:  $C8T60;
+$C8TTT: $C8T80;
+$C9T:   $C9T30;
+$C9TT:  $C9T60;
+$C9TTT: $C9T80;
+$C10T:   $C10T30;
+$C10TT:  $C10T60;
+$C10TTT: $C10T80;
+$C11T:   $C11T30;
+$C11TT:  $C11T60;
+$C11TTT: $C11T80;
+$C12T:   $C12T30;
+$C12TT:  $C12T60;
+$C12TTT: $C12T80;
+$C13T:   $C13S10;
+$C13TT:  $C13S30;
+$C13TTT: $C13S50;
+
+
+//Gradients
+// Orange-tribe Chakra «I Feel»
+$GC2T: linear-gradient(90deg,    $C2 0%, $C2T 100%);
+$GC25: linear-gradient(90deg,    $C2 0%, $C5 100%);
+$GC25T: linear-gradient(90deg,   $C2 0%, $C5T 100%);
+$GC25TT: linear-gradient(90deg,  $C2 0%, $C5TT 100%);
+$GC26: linear-gradient(90deg,    $C2 0%, $C6 100%);
+$GC26T: linear-gradient(90deg,   $C2 0%, $C6T 100%);
+$GC26TT: linear-gradient(90deg,  $C2 0%, $C6TT 100%);
+$GC27: linear-gradient(90deg,    $C2 0%, $C7 100%);
+$GC27T: linear-gradient(90deg,   $C2 0%, $C7T 100%);
+$GC27TT: linear-gradient(90deg,  $C2 0%, $C7TT 100%);
+$GC29: linear-gradient(90deg,    $C2 0%, $C9 100%);
+$GC29T: linear-gradient(90deg,   $C2 0%, $C9T 100%);
+$GC29TT: linear-gradient(90deg,  $C2 0%, $C9TT 100%);
+$GC210: linear-gradient(90deg,   $C2 0%, $C10 100%);
+$GC210T: linear-gradient(90deg,  $C2 0%, $C10T 100%);
+$GC210TT: linear-gradient(90deg, $C2 0%, $C10TT 100%);
+//Yellow-tribe Chakra «I Do»
+$GC3T: linear-gradient(90deg,    $C3 0%, $C3T 100%);
+$GC35: linear-gradient(90deg,    $C3 0%, $C5 100%);
+$GC35T: linear-gradient(90deg,   $C3 0%, $C5T 100%);
+$GC35TT: linear-gradient(90deg,  $C3 0%, $C5TT 100%);
+$GC36: linear-gradient(90deg,    $C3 0%, $C6 100%);
+$GC36T: linear-gradient(90deg,   $C3 0%, $C6T 100%);
+$GC36TT: linear-gradient(90deg,  $C3 0%, $C6TT 100%);
+$GC37: linear-gradient(90deg,    $C3 0%, $C7 100%);
+$GC37T: linear-gradient(90deg,   $C3 0%, $C7T 100%);
+$GC37TT: linear-gradient(90deg,  $C3 0%, $C7TT 100%);
+$GC39: linear-gradient(90deg,    $C3 0%, $C9 100%);
+$GC39T: linear-gradient(90deg,   $C3 0%, $C9T 100%);
+$GC39TT: linear-gradient(90deg,  $C3 0%, $C9TT 100%);
+$GC310: linear-gradient(90deg,   $C3 0%, $C10 100%);
+$GC310T: linear-gradient(90deg,  $C3 0%, $C10T 100%);
+$GC310TT: linear-gradient(90deg, $C3 0%, $C10TT 100%);
+//Green-tribe Chakra «I Love» Male
+$GC4T: linear-gradient(90deg,    $C4 0%, $C4T 100%);
+$GC45: linear-gradient(90deg,    $C4 0%, $C5 100%);
+$GC45T: linear-gradient(90deg,   $C4 0%, $C5T 100%);
+$GC45TT: linear-gradient(90deg,  $C4 0%, $C5TT 100%);
+$GC46: linear-gradient(90deg,    $C4 0%, $C6 100%);
+$GC46T: linear-gradient(90deg,   $C4 0%, $C6T 100%);
+$GC46TT: linear-gradient(90deg,  $C4 0%, $C6TT 100%);
+$GC47: linear-gradient(90deg,    $C4 0%, $C7 100%);
+$GC47T: linear-gradient(90deg,   $C4 0%, $C7T 100%);
+$GC47TT: linear-gradient(90deg,  $C4 0%, $C7TT 100%);
+$GC49: linear-gradient(90deg,    $C4 0%, $C9 100%);
+$GC49T: linear-gradient(90deg,   $C4 0%, $C9T 100%);
+$GC49TT: linear-gradient(90deg,  $C4 0%, $C9TT 100%);
+$GC410: linear-gradient(90deg,   $C4 0%, $C10 100%);
+$GC410T: linear-gradient(90deg,  $C4 0%, $C10T 100%);
+$GC410TT: linear-gradient(90deg, $C4 0%, $C10TT 100%);
+//Green-tribe Chakra «I Love» Unite
+$GC5T: linear-gradient(90deg,    $C5 0%, $C5T 100%);
+$GC51: linear-gradient(90deg,    $C5 0%, $C1 100%);
+$GC51T: linear-gradient(90deg,   $C5 0%, $C1T 100%);
+$GC51TT: linear-gradient(90deg,  $C5 0%, $C1TT 100%);
+$GC52: linear-gradient(90deg,    $C5 0%, $C2 100%);
+$GC52T: linear-gradient(90deg,   $C5 0%, $C2T 100%);
+$GC52TT: linear-gradient(90deg,  $C5 0%, $C2TT 100%);
+$GC53: linear-gradient(90deg,    $C5 0%, $C3 100%);
+$GC53T: linear-gradient(90deg,   $C5 0%, $C3T 100%);
+$GC53TT: linear-gradient(90deg,  $C5 0%, $C3TT 100%);
+$GC54: linear-gradient(90deg,    $C5 0%, $C4 100%);
+$GC54T: linear-gradient(90deg,   $C5 0%, $C4T 100%);
+$GC54TT: linear-gradient(90deg,  $C5 0%, $C4TT 100%);
+$GC58: linear-gradient(90deg,    $C5 0%, $C8 100%);
+$GC58T: linear-gradient(90deg,   $C5 0%, $C8T 100%);
+$GC58TT: linear-gradient(90deg,  $C5 0%, $C8TT 100%);
+//Pink-tribe Chakra «I Love» Female
+$GC6T: linear-gradient(90deg,    $C6 0%, $C6T 100%);
+$GC61: linear-gradient(90deg,    $C6 0%, $C1 100%);
+$GC61T: linear-gradient(90deg,   $C6 0%, $C1T 100%);
+$GC61TT: linear-gradient(90deg,  $C6 0%, $C1TT 100%);
+$GC62: linear-gradient(90deg,    $C6 0%, $C2 100%);
+$GC62T: linear-gradient(90deg,   $C6 0%, $C2T 100%);
+$GC62TT: linear-gradient(90deg,  $C6 0%, $C2TT 100%);
+$GC63: linear-gradient(90deg,    $C6 0%, $C3 100%);
+$GC63T: linear-gradient(90deg,   $C6 0%, $C3T 100%);
+$GC63TT: linear-gradient(90deg,  $C6 0%, $C3TT 100%);
+$GC64: linear-gradient(90deg,    $C6 0%, $C4 100%);
+$GC64T: linear-gradient(90deg,   $C6 0%, $C4T 100%);
+$GC64TT: linear-gradient(90deg,  $C6 0%, $C4TT 100%);
+$GC68: linear-gradient(90deg,    $C6 0%, $C8 100%);
+$GC68T: linear-gradient(90deg,   $C6 0%, $C8T 100%);
+$GC68TT: linear-gradient(90deg,  $C6 0%, $C8TT 100%);
+//Blue-tribe Chakra «I Speak»
+$GC7T: linear-gradient(90deg,    $C7 0%, $C7T 100%);
+$GC71: linear-gradient(90deg,    $C7 0%, $C1 100%);
+$GC71T: linear-gradient(90deg,   $C7 0%, $C1T 100%);
+$GC71TT: linear-gradient(90deg,  $C7 0%, $C1TT 100%);
+$GC72: linear-gradient(90deg,    $C7 0%, $C2 100%);
+$GC72T: linear-gradient(90deg,   $C7 0%, $C2T 100%);
+$GC72TT: linear-gradient(90deg,  $C7 0%, $C2TT 100%);
+$GC73: linear-gradient(90deg,    $C7 0%, $C3 100%);
+$GC73T: linear-gradient(90deg,   $C7 0%, $C3T 100%);
+$GC73TT: linear-gradient(90deg,  $C7 0%, $C3TT 100%);
+$GC74: linear-gradient(90deg,    $C7 0%, $C4 100%);
+$GC74T: linear-gradient(90deg,   $C7 0%, $C4T 100%);
+$GC74TT: linear-gradient(90deg,  $C7 0%, $C4TT 100%);
+$GC78: linear-gradient(90deg,    $C7 0%, $C8 100%);
+$GC78T: linear-gradient(90deg,   $C7 0%, $C8T 100%);
+$GC78TT: linear-gradient(90deg,  $C7 0%, $C8TT 100%);
+//Red-tribe Chakra «I Am»
+$GC1T: linear-gradient(90deg,    $C1 0%, $C1T 100%);
+$GC15: linear-gradient(90deg,    $C1 0%, $C5 100%);
+$GC15T: linear-gradient(90deg,   $C1 0%, $C5T 100%);
+$GC15TT: linear-gradient(90deg,  $C1 0%, $C5TT 100%);
+$GC16: linear-gradient(90deg,    $C1 0%, $C6 100%);
+$GC16T: linear-gradient(90deg,   $C1 0%, $C6T 100%);
+$GC16TT: linear-gradient(90deg,  $C1 0%, $C6TT 100%);
+$GC17: linear-gradient(90deg,    $C1 0%, $C7 100%);
+$GC17T: linear-gradient(90deg,   $C1 0%, $C7T 100%);
+$GC17TT: linear-gradient(90deg,  $C1 0%, $C7TT 100%);
+$GC19: linear-gradient(90deg,    $C1 0%, $C9 100%);
+$GC19T: linear-gradient(90deg,   $C1 0%, $C9T 100%);
+$GC19TT: linear-gradient(90deg,  $C1 0%, $C9TT 100%);
+$GC110: linear-gradient(90deg,   $C1 0%, $C10 100%);
+$GC110T: linear-gradient(90deg,  $C1 0%, $C10T 100%);
+$GC110TT: linear-gradient(90deg, $C1 0%, $C10TT 100%);
+//Blue-tribe Chakra «I See»
+$GC8T: linear-gradient(90deg,    $C8 0%, $C8T 100%);
+$GC85: linear-gradient(90deg,    $C8 0%, $C5 100%);
+$GC85T: linear-gradient(90deg,   $C8 0%, $C5T 100%);
+$GC85TT: linear-gradient(90deg,  $C8 0%, $C5TT 100%);
+$GC86: linear-gradient(90deg,    $C8 0%, $C6 100%);
+$GC86T: linear-gradient(90deg,   $C8 0%, $C6T 100%);
+$GC86TT: linear-gradient(90deg,  $C8 0%, $C6TT 100%);
+$GC87: linear-gradient(90deg,    $C8 0%, $C7 100%);
+$GC87T: linear-gradient(90deg,   $C8 0%, $C7T 100%);
+$GC87TT: linear-gradient(90deg,  $C8 0%, $C7TT 100%);
+$GC89: linear-gradient(90deg,    $C8 0%, $C9 100%);
+$GC89T: linear-gradient(90deg,   $C8 0%, $C9T 100%);
+$GC89TT: linear-gradient(90deg,  $C8 0%, $C9TT 100%);
+$GC810: linear-gradient(90deg,   $C8 0%, $C10 100%);
+$GC810T: linear-gradient(90deg,  $C8 0%, $C10T 100%);
+$GC810TT: linear-gradient(90deg, $C8 0%, $C10TT 100%);
+//Violet-tribe Chakra «I Hear»
+$GC9T: linear-gradient(90deg,    $C9 0%, $C9T 100%);
+$GC91: linear-gradient(90deg,    $C9 0%, $C1 100%);
+$GC91T: linear-gradient(90deg,   $C9 0%, $C1T 100%);
+$GC91TT: linear-gradient(90deg,  $C9 0%, $C1TT 100%);
+$GC92: linear-gradient(90deg,    $C9 0%, $C2 100%);
+$GC92T: linear-gradient(90deg,   $C9 0%, $C2T 100%);
+$GC92TT: linear-gradient(90deg,  $C9 0%, $C2TT 100%);
+$GC93: linear-gradient(90deg,    $C9 0%, $C3 100%);
+$GC93T: linear-gradient(90deg,   $C9 0%, $C3T 100%);
+$GC93TT: linear-gradient(90deg,  $C9 0%, $C3TT 100%);
+$GC94: linear-gradient(90deg,    $C9 0%, $C4 100%);
+$GC94T: linear-gradient(90deg,   $C9 0%, $C4T 100%);
+$GC94TT: linear-gradient(90deg,  $C9 0%, $C4TT 100%);
+$GC98: linear-gradient(90deg,    $C9 0%, $C8 100%);
+$GC98T: linear-gradient(90deg,   $C9 0%, $C8T 100%);
+$GC98TT: linear-gradient(90deg,  $C9 0%, $C8TT 100%);
+//Purple-tribe Chakra «I Know»
+$GC10T: linear-gradient(90deg,   $C10 0%, $C10T 100%);
+$GC101: linear-gradient(90deg,   $C10 0%, $C1 100%);
+$GC101T: linear-gradient(90deg,  $C10 0%, $C1T 100%);
+$GC101TT: linear-gradient(90deg, $C10 0%, $C1TT 100%);
+$GC102: linear-gradient(90deg,   $C10 0%, $C2 100%);
+$GC102T: linear-gradient(90deg,  $C10 0%, $C2T 100%);
+$GC102TT: linear-gradient(90deg, $C10 0%, $C2TT 100%);
+$GC103: linear-gradient(90deg,   $C10 0%, $C3 100%);
+$GC103T: linear-gradient(90deg,  $C10 0%, $C3T 100%);
+$GC103TT: linear-gradient(90deg, $C10 0%, $C3TT 100%);
+$GC104: linear-gradient(90deg,   $C10 0%, $C4 100%);
+$GC104T: linear-gradient(90deg,  $C10 0%, $C4T 100%);
+$GC104TT: linear-gradient(90deg, $C10 0%, $C4TT 100%);
+$GC108: linear-gradient(90deg,   $C10 0%, $C8 100%);
+$GC108T: linear-gradient(90deg,  $C10 0%, $C8T 100%);
+$GC108TT: linear-gradient(90deg, $C10 0%, $C8TT 100%);
+//Black-tribe «Hole» Total Zero
+$GC0T: linear-gradient(90deg,    $C0 0%,  $C0T 100%);
+//Silver-tribe «Luna» Substance
+$GC11T: linear-gradient(90deg,   $C11 0%, $C11T 100%);
+//Gold-tribe «Sun» Substance
+$GC12T: linear-gradient(90deg,   $C12 0%, $C12T 100%);
+
+
+@function tribesgradient($startColor, $endColor, $deg: 90deg) {
+  $result: linear-gradient($deg, $startColor 0%, $endColor 100%);
+  @return $result;
+}

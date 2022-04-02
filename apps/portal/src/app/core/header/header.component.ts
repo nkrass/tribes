@@ -1,7 +1,7 @@
 import { ChangeDetectionStrategy, Component, Inject} from '@angular/core';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common'
-import { distinctUntilChanged, map, Subject, switchMap, take, tap } from 'rxjs';
+import { map, Subject, tap } from 'rxjs';
 import { environment } from '../../../../src/environments/environment'
 import { AppGlobalState, APP_GLOBAL_STATE } from '../../app-global.state';
 import { RxState } from '@rx-angular/state';

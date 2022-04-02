@@ -2,7 +2,7 @@
 import { BrowserModule, Title, Meta, TransferState, makeStateKey, BrowserTransferStateModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule, LOCALE_ID, DEFAULT_CURRENCY_CODE, InjectionToken } from '@angular/core';
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { ProductsModule } from './products/products.module';
 import { SharedModule } from './shared/shared.module';
@@ -28,14 +28,12 @@ import localeRu from '@angular/common/locales/ru';
 import localeRuExtra from '@angular/common/locales/extra/ru';
 
 import { HttpErrorHandler } from './shared/http-error-handler.service';
-import { StripUndefinedParams } from './interceptors/http-params.interceptor';
 
 import { SupportComponent } from './static/support/support.component';
 import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { AnalyticsService } from './shared/analytics.service'
 import { SocialLuckydayComponent } from './social/luckyday/luckyday.component';
-import { HttpRequestInterceptor } from './interceptors/http-request-interceptor.service';
 import {HttpLink} from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { RxState } from '@rx-angular/state';
@@ -50,8 +48,6 @@ const STATE_KEY = makeStateKey<any>('apollo.state');
   providers:[Title, Meta, SEOService, HttpErrorHandler, AnalyticsService, 
     { provide: LOCALE_ID, useValue: 'ru-RU' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'RUB'},
-    { provide: HTTP_INTERCEPTORS, useClass: StripUndefinedParams, multi: true},
-    { provide: HTTP_INTERCEPTORS, useClass: HttpRequestInterceptor, multi: true},
     { provide: APP_GLOBAL_STATE, useFactory: () => new RxState<AppGlobalState>() },
     {
       provide: APOLLO_CACHE,

@@ -25,7 +25,6 @@ export class AppComponent {
       while (route.firstChild) route = route.firstChild;
       return route;
     }),
-    // filter((route) => route.outlet === 'primary'),
     mergeMap((route) => route.data),
     map(data => {
       this._seoService.setTitle(data['title']);
