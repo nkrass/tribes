@@ -173,8 +173,8 @@ custom:
       seed: false
 
 functions:
-  index-function:
-    handler: src/index.handler
+  server:
+    handler: apps/api/src/index.default
     events:
       - http:
           cors: true

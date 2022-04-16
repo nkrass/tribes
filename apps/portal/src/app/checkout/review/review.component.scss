@@ -1,5 +1,4 @@
-@import '../../../scss/helpers/variables';
-@import '../../../scss/helpers/mixins';
+@import 'variables';
 
 .shopping-cart {
   margin-bottom: floor($grid-vertical-step / 1.2); //~20px

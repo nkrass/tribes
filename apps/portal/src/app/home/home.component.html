@@ -77,8 +77,13 @@
             <h4>Новинки</h4>
         </div>
         <div class="row" *rxLet="products$ as products">
+          <div class="col-6 col-md-4 px-0 bg-white" *ngFor="let product of products">
+            <tribes-product-list-item [isLoading]="isLoading$ | push" [product]="product" [staticAssetsUrl]="staticAssetsUrl"></tribes-product-list-item>
+          </div>
+        </div>
+        <!-- <div class="row" *rxLet="products$ as products">
           <tribes-product-widget  *ngFor="let product of products" [product]="product" class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></tribes-product-widget>
-      </div>
+      </div> -->
       </div>
     </div>
   </div>

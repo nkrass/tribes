@@ -33,7 +33,7 @@ query Product($input: GetProductInput!){
       sku, colorGroup, coverImage, title, priceBase, priceSale, color
     }
     reviews {
-      sku, reviewText, reviewAuthor, reviewRating, reviewDate, id, product { coverImage }
+      sku, reviewText, reviewAuthor, reviewRating, reviewDate, id, product { coverImage }, skuFamily
     }
   }
 }

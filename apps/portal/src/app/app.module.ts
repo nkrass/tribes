@@ -5,9 +5,8 @@ import { NgModule, LOCALE_ID, DEFAULT_CURRENCY_CODE, InjectionToken } from '@ang
 import { HttpClientModule } from '@angular/common/http';
 import { ToastrModule } from 'ngx-toastr';
 import { ProductsModule } from './products/products.module';
-import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
-import { CheckoutModule } from './checkout/checkout.module';
+// import { CheckoutModule } from './checkout/checkout.module';
 import { CookieModule } from '@gorniv/ngx-universal';
 import { ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
 
@@ -15,21 +14,13 @@ import { ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
 import { AppComponent } from './app.component';
 import { CartComponent } from './cart/cart.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { OrdersPaymentInfoComponent } from './static/orders-payment-info/orders-payment-info.component';
-import { AboutTribesBrandComponent } from './static/about-tribes-brand/about-tribes-brand.component';
-import { PolicyComponent } from './static/policy/policy.component';
-import { AboutCompanyComponent } from './static/about-company/about-company.component';
-import { ContactsComponent } from './static/contacts/contacts.component';
 import { SEOService } from './shared/seoservice.service';
-import { ReturnsAndRefundsComponent } from './static/returns-and-refunds/returns-and-refunds.component';
-import { SizessComponent } from './static/sizes/sizes.component';
 import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import localeRuExtra from '@angular/common/locales/extra/ru';
 
 import { HttpErrorHandler } from './shared/http-error-handler.service';
 
-import { SupportComponent } from './static/support/support.component';
 import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 import { TransferHttpCacheModule } from '@nguniversal/common';
 import { AnalyticsService } from './shared/analytics.service'
@@ -39,6 +30,9 @@ import { InMemoryCache } from '@apollo/client/core';
 import { RxState } from '@rx-angular/state';
 import { AppGlobalState, APP_GLOBAL_STATE } from './app-global.state';
 import { environment } from '../environments/environment';
+import { UiModule } from '@tribes/ui';
+import { StaticPagesModule } from './static/static-pages.module';
+import { AppRoutingModule } from './app-routing.module';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 const APOLLO_CACHE = new InjectionToken<InMemoryCache>('apollo-cache');
@@ -61,7 +55,6 @@ const STATE_KEY = makeStateKey<any>('apollo.state');
         transferState: TransferState,
       ) {
         const isBrowser = transferState.hasKey<any>(STATE_KEY);
-
         if (isBrowser) {
           const state = transferState.get<any>(STATE_KEY, null);
           cache.restore(state);
@@ -72,7 +65,6 @@ const STATE_KEY = makeStateKey<any>('apollo.state');
           // Reset cache after extraction to avoid sharing between requests
           cache.reset();
         }
-
         return {
           link: httpLink.create({uri: environment.graphqlUrl}),
           cache,
@@ -86,32 +78,26 @@ const STATE_KEY = makeStateKey<any>('apollo.state');
     AppComponent,
     CartComponent,
     PageNotFoundComponent,
-    OrdersPaymentInfoComponent,
-    AboutTribesBrandComponent,
-    PolicyComponent,
-    AboutCompanyComponent,
-    ContactsComponent,
-    SupportComponent,
-    ReturnsAndRefundsComponent,
-    SizessComponent,
-    SocialLuckydayComponent
+    SocialLuckydayComponent,
   ],
   imports: [
     ApolloModule,
+    UiModule,
     TransferHttpCacheModule,
     BrowserAnimationsModule,
     CookieModule.forRoot(),
     HttpClientModule,
-    SharedModule,
     ToastrModule.forRoot(),
     CoreModule,
     ProductsModule,
-    CheckoutModule,
+    StaticPagesModule,
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
     BrowserTransferStateModule,
     GoogleTagManagerModule.forRoot({
       id: 'GTM-MLTQWTV'
-    })
+    }),
+    // FormsModule,
+    // ReactiveFormsModule
   ],
   bootstrap: [AppComponent]
 })

@@ -1,6 +1,6 @@
-import { Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectorRef, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 
-import { map, pluck, Subject, zip } from 'rxjs';
+import { endWith, map, pluck, startWith, Subject, zip } from 'rxjs';
 import { HomeSliderImages } from '../models/home-slider-images';
 import { HomeSliderImagesService } from './main-slider/home-slider-images.service';
 
@@ -23,7 +23,7 @@ interface HomeComponentState {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [RxState]
+  providers: [RxState],
 })
 export class HomeComponent {
   public staticAssetsUrl: string = staticAssetsUrl
@@ -35,7 +35,7 @@ export class HomeComponent {
   public meta = BrandDefaultMeta
   reviews$ = this.state.select('reviews');
   products$ = this.state.select('products');
-
+  isLoading$ = this.state.select('isLoading');
   constructor(
     private state: RxState<HomeComponentState>,
     private homeSliderImagesService: HomeSliderImagesService,
@@ -45,11 +45,14 @@ export class HomeComponent {
     private productsGql: ProductsListGQL,
     private reviewsGql: ReviewsListGQL
   ) {
-    this.state.connect('products', zip([
+    this.state.connect(zip([
       this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Women }}).pipe(pluck('data', 'products')),
       this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Men }}).pipe(pluck('data', 'products'))
     ]).pipe(
-        map(([products_w, products_m]) => ([...products_w, ...products_m]))
+        map(([products_w, products_m]) => ([...products_w, ...products_m])),
+        map((products) => ({products, isLoading: false})),
+        startWith({isLoading: true}),
+        endWith({isLoading: false})
       )
     );
     this.state.connect('reviews', this.reviewsGql.fetch({input: {promoRating: "promo", limit: 10}}).pipe(pluck('data', 'reviews')));

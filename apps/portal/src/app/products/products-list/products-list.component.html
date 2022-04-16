@@ -2,19 +2,6 @@
   <ngx-json-ld *rxLet="schema$ as schema" [json]="schema"></ngx-json-ld>
   <!-- Page Content-->
   <div class="container-fluid">
-    <!-- Shop Toolbar-->
-    <div class="row align-items-center justify-content-center pt-3 pb-3" >
-      <!-- <div class="tagcloud06"> -->
-        <!-- <ul *rxLet="category$ as currentCategory">
-          <li *ngFor="let category of categories$ |async" >
-            <a (click)="onSelectCategory(category.name)" class="me-2" [ngClass]="{'active': category.name === currentCategory }">
-              <span>{{category.name}}</span>
-            </a>
-          </li>
-        </ul> -->
-      <!-- </div> -->
-      
-    </div>
     <!-- Products List -->
     <div class="row justify-content-md-center"> 
       <div class="col-12 col-lg-2 col-xl-2 mb-3">
@@ -47,9 +34,18 @@
       </div>
       <!-- Product list -->
       <div class="col-sm-12 col-lg-10 col-xl-10">
-        <div class="row" *rxLet="products$ as products">
-          <div class="col-6 col-md-4 px-0 bg-white" *ngFor="let product of products">
-            <tribes-products-list-item [isLoading]="isLoading$ | push" [product]="product"></tribes-products-list-item>
+        <ng-template #error>ERROR</ng-template>
+        
+        <ng-template #productsLoadingTemplate>
+          <div class="row">
+            <div class="col-6 col-md-4 px-0 bg-white" *ngFor="let product of productsMock">
+              <tribes-product-list-item [isLoading]="true" [product]="product"></tribes-product-list-item>
+            </div>
+          </div>
+        </ng-template>
+        <div class="row" *ngIf="!(isLoading$ | push); else productsLoadingTemplate">
+          <div class="col-6 col-md-4 px-0 bg-white" *ngFor="let product of products$ | push">
+            <tribes-product-list-item [isLoading]="false" [product]="product"></tribes-product-list-item>
           </div>
         </div>
       </div>

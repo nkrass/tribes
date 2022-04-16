@@ -1,0 +1,43 @@
+<div class="card border-0 text-dark text-center">
+  <swiper [config]="swiperConfig" style="--swiper-navigation-color: #f6f7e3;--swiper-pagination-color: #808080">
+    <ng-template swiperSlide *ngFor="let item of product.imagesSrc;" >
+      <a routerLink="/product/{{product.sku}}">
+        <img 
+          [defaultImage]="placeholderImage" 
+          [lazyLoad]="item" 
+          alt="{{product.title}}&nbsp;{{product.description}}&nbsp;{{product.sku}}"
+          class=""
+          draggable=false
+        >
+      </a>
+    </ng-template>
+  </swiper>
+  <div>
+    <div class="card-body" *ngIf="isLoading">
+      <p class="card-text placeholder-glow">
+        <span class="placeholder col-7"></span>
+        <span class="placeholder col-4"></span>
+        <span class="placeholder col-4"></span>
+        <span class="placeholder col-6"></span>
+        <span class="placeholder col-8"></span>
+      </p>
+      <a class="btn btn-outline-primary btn-sm disabled" routerLink="/product/{{product.sku}}" >👉Подробнее</a>
+    </div>
+    <div class="card-body" *ngIf="!isLoading">
+      <h4 class="card-title">
+        <a class="text-dark text-decoration-none" routerLink="/product/{{product.sku}}" *ngIf="product.title">{{product.title}}</a>
+        <a class="text-dark text-decoration-none placeholder col-7" *ngIf="!product.title">{{product.title}}</a>
+      </h4>
+      <p class="card-text text-center" *ngIf="product.priceSale">
+        <tribes-price [priceSale]="product.priceSale" [sku]="product.sku" [priceBase]="product.priceBase" [count]="1"></tribes-price>
+      </p>
+      <span class="placeholder col-4  text-center" *ngIf="!product.priceSale"></span>
+      <p class="card-text text-center" *ngIf="product.sizes">
+        {{product.sizes}}
+      </p>
+      <span class="placeholder col-4  text-center" *ngIf="!product.sizes"></span>
+      <a class="btn btn-outline-primary btn-sm" *ngIf="product.sku" routerLink="/product/{{product.sku}}" >👉Подробнее</a>
+      <a class="btn btn-outline-primary btn-sm disabled" *ngIf="!product.sku" >👉Подробнее</a>
+    </div>
+  </div>
+</div>

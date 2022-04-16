@@ -1,0 +1,294 @@
+
+<div *ngIf="product.sku">
+  <noscript >
+    <img crossorigin height="1" width="1" style="display:none" 
+      src="https://www.facebook.com/tr?id=375373836490576&ev=ViewContent&cd[content_ids]={{product.sku}}&cd[content_category]=product&noscript=1"/>
+  </noscript>
+</div>
+<ng-template #nonEmptySelectedSizes>
+    <div class="modal-header">
+      <h5 class="modal-title">Добавить выбранные размеры в корзину?</h5>
+      <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+        <span aria-hidden="true" class="">&times;</span>
+      </button>
+    </div>
+    <div class="modal-body">
+      <p>Уважаемый клиент, при переходе на другую страницу, выбранные размеры этой модели не будут добавлены в корзину.</p>
+    </div>
+    <div class="modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="onVariantModalClose('proceedWithout')" data-bs-dismiss="modal">Перейти без добавления</button>
+      <button type="button" class="btn btn-primary" (click)="onVariantModalClose('addToCart')">Добавить размеры в корзину и перейти</button>
+    </div>
+</ng-template>
+<ng-template #sizesTemplate>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Размерная сетка</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <tribes-sizes></tribes-sizes>
+  </div>
+</ng-template>
+
+<div class="h-100">
+  <!-- Page Content-->
+  <div class="container">
+    
+    <div class="row">
+      <!-- Poduct Gallery-->
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12 px-0">
+        <swiper [config]="swiperConfig" class="mainSlider" style="--swiper-navigation-color: #f6f7e3;--swiper-pagination-color: #808080">
+          <ng-template swiperSlide *ngFor="let item of product.imagesSrc;" >
+            <div class="swiper-zoom-container">
+              <img class="" 
+              [src]="item" 
+              alt="{{product.title}}&nbsp;{{product.description}}&nbsp;{{product.sku}}"
+              draggable=false>
+            </div>
+          </ng-template>
+        </swiper>
+        
+        <div class="testimonial-group">
+          <div class="row text-center">
+            <tribes-rating-stars *ngIf="product?.rating! > 3" [rating]="product.rating!" [size]="'large'"></tribes-rating-stars> 
+            <h2 class="text-normal">{{ product.title }}</h2>
+          </div>
+          <tribes-price class="h3 d-flex justify-content-center" [priceSale]="product.priceSale" [priceBase]="product.priceBase" [count]="1"></tribes-price>
+          <swiper [config]="swiperVariantsConfig"
+            class="variantsSlider"
+            style="--swiper-navigation-color: #f6f7e3;--swiper-pagination-color: #808080"
+            *ngIf="product.variants.length > 1"
+          >
+            <ng-template swiperSlide *ngFor="let item of product.variants; let i = index" >
+              <a (click)="onVariantClick(item.sku!, nonEmptySelectedSizes)" class="product-colors-image pb-3 variant-color-{{item.color}}" >
+                <img 
+                  draggable=false
+                  [defaultImage]="staticAssetsUrl + 'static/img/products/product-placeholder.jpg'" 
+                  [lazyLoad]="item.coverImage" 
+                  alt="{{product.title}} {{item.color}} {{product.sku}}">
+              </a>
+            </ng-template>
+          </swiper>
+          <!-- Product Info-->
+          <div class="row">
+            <div class="col-md-12 mt-2"></div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-8 col-xl-8 mt-2">
+              <p class="white-space-pre-line text-lg">{{product.description}}</p>
+              <span class="text-lg">Состав:
+                <p *ngFor="let material of product.materials" class="d-inline">
+                  {{material.material}} {{material.quantity}}%&nbsp;
+                </p>
+              </span>
+              <p class="text-lg">Цвет модели: {{ colorsDict(product.color!)}}</p>
+              <button class="btn btn-outline-primary" (click)="scrollTo('reviews')" *ngIf="product.reviews?.length">Отзывы</button>
+              <button class="btn btn-outline-primary" (click)="scrollTo('sku-properties')">Характеристики</button>
+            </div>
+            <div class="col-12 col-sm-12 col-md-6 col-lg-4 col-xl-4 text-center mt-2" *rxLet="selectedSizes$ as selectedSizes">
+              <div class="d-block mt-2 mt-md-0">
+                <div class="size-checkbox" *ngFor="let item of product.barcodes; index as i;">
+                  <div class="round">
+                    <input 
+                      #checkboxes
+                      type="checkbox" 
+                      id="size-{{item.barcode}}"
+                      [attr.data-barcode]="item.barcode"
+                      (change)="selectSizeBtn$.next($event)"
+                      [disabled]='item.stock === 0'
+                      />
+                    <label *ngIf="!item.stock" 
+                      for="size-{{item.barcode}}"
+                      class="disabled"  
+                      title="{{item.size}} размер закончился">{{item.size}}
+                    </label>
+                    <label *ngIf="item.stock" 
+                      for="size-{{item.barcode}}"
+                      title="{{item.size}} размер достепен к заказу">{{item.size}}
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <button type="button" class="btn btn-outlined mb-2" (click)="openModal(sizesTemplate)">Размерная сетка</button>
+              <div class="sp-buttons mt-2 mb-2 text-center">
+                <!-- <button class="btn btn-outline-secondary btn-sm btn-wishlist" data-toggle="tooltip" title="Whishlist">
+                  <i class="icon-heart"></i>
+                </button> -->
+                <button *ngIf="!!product.stock && !!selectedSizes.length" class="btn btn-primary product-add-to-cart-button" (click)="addToCartBtn$.next($event)">
+                  <i class="icon-bag"></i> В корзину
+                </button>
+                <button *ngIf="!!product.stock && !selectedSizes.length" class="btn btn-primary" disabled>
+                  Выберите размер
+                </button>
+                <button *ngIf="!product.stock" class="btn btn-primary" disabled>
+                  Все размеры закончились
+                </button>
+                
+              </div>
+              <!-- sizes -->
+              
+              <div class="d-flex justify-content-center">
+                <div class="entry-share mt-2 mb-2">
+                  <span class="text-muted">Поделиться:</span>
+                  <div class="share-links">
+                    <a class="social-button shape-circle sb-vk" href="http://vk.com/share.php?url=https%3A%2F%2Fmytribes.ru%2Fproduct%2F{{product.sku}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Vkontakte">
+                      <i class="socicon-vkontakte"></i>
+                    </a>
+                    <a class="social-button shape-circle sb-facebook" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fmytribes.ru%2Fproduct%2F{{product.sku}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Facebook">
+                      <i class="socicon-facebook"></i>
+                    </a>
+                    <a class="social-button shape-circle sb-twitter" href="https://twitter.com/share?text={{product.title}}&url=https%3A%2F%2Fmytribes.ru%2Fproduct%2F{{product.sku}}" target="_blank" data-toggle="tooltip" data-placement="top" title="Twitter">
+                      <i class="socicon-twitter"></i>
+                    </a>
+                    <a class="social-button shape-circle sb-instagram" href="https://instagram.com/tribes_brand/" target="_blank" data-toggle="tooltip" data-placement="top" title="Instagram">
+                      <i class="socicon-instagram"></i>
+                    </a>
+                    <a class="social-button shape-circle sb-pinterest" href="https://www.pinterest.ru/tribes_brand/" target="_blank" data-toggle="tooltip" data-placement="top" title="Google +">
+                      <i class="socicon-pinterest"></i>
+                    </a>
+                  </div>
+                </div>
+              </div> 
+            </div>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+    <!-- Cross Sale -->
+    <section id="cross-sale" class="pt-3" *ngIf="product.crossSaleProducts?.length">
+      <div class="row">
+        <div class="card">
+          <div class="card-body text-center">
+              <h4>Вам может понравится:</h4>
+          </div>
+          <div class="row">
+            <div class="col-6 col-md-4 px-0 bg-white">
+              <tribes-product-list-item [isLoading]="false" [product]="product" [staticAssetsUrl]="staticAssetsUrl"></tribes-product-list-item>
+            </div>
+            <!-- <tribes-product-widget  *ngFor="let product of product.crossSaleProducts" [product]="product!" [displayMode]='all' class="col-6 col-sm-6 col-md-4 col-lg-4 col-xl-4 px-0"></tribes-product-widget> -->
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Reviews -->
+    <section id="reviews" class="pt-3 row" *ngIf="product?.reviews?.length">
+      <tribes-reviews-slider class="col-12 px-0" [reviews]="product.reviews!"></tribes-reviews-slider>
+      <!-- <div class="row">
+        <div class="card">
+          <div class="card-body text-center">
+              <h4>Отзывы:</h4>
+          </div>
+          <div class="row align-items-center justify-content-center" *ngFor="let review of product.reviews; index as i">
+            <div class="col-9 col-sm-9 col-md-9 col-lg-9 col-xl-9">
+              <div class="">
+                <tribes-rating-stars [rating]=review?.reviewRating! [size]="'large'"></tribes-rating-stars> 
+                <div class="col-12 pb-1"></div>
+                <div class="lead">
+                  <span class="">{{review?.reviewText}}</span>
+                </div>
+                <div class="lead text-capitalize">{{review?.reviewAuthor}}</div>
+              </div>
+            </div>
+            <div class="col-3 col-sm-3 col-md-2 col-lg-2 col-xl-2 mb-1 align-self-center p-0">
+              <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" [lazyLoad]="product.coverImage" alt="{{ product.title }}" class="d-block reviews-product-image">
+            </div>
+            <div class="col-11 px-0 mb-1">
+              <hr>
+            </div>
+          </div>
+        </div>
+      </div> -->
+    </section>
+
+    <!-- Properties of SKU -->
+    <section id="sku-properties" class="pt-3">
+      <div class="row">
+        <div class="card">
+          <div class="card-body text-center">
+              <h4>Описание модели:</h4>
+          </div>
+          <div class="row">
+            <div class="table-responsive">
+              <table class="table table-hover">
+                <tbody>
+                  <tr>
+                    <th scope="row">Модель</th>
+                    <td>{{product.title}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Размеры</th>
+                    <td>{{product.sizes}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Цвет</th>
+                    <td>{{colorsDict(product.color!)}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Пол</th>
+                    <td>{{product.gender}}</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Материал</th>
+                    <td>
+                      <span *ngFor="let material of product.materials">
+                        {{material.material}} {{material.quantity}}%&nbsp;
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Артикул (SKU)</th>
+                    <td><p class="text-uppercase">{{ product.sku }}</p></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Категория(-и)</th>
+                    <td>
+                      <a class="navi-link" routerLink="{{product.gender}}/catalog/{{product.category}}">{{ product.category }}</a>
+                    </td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Бренд</th>
+                    <td>tribes</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Страна производства:</th>
+                    <td>{{product.manufactured}}</td>
+                  </tr>
+                  <tr *ngIf="product.notes">
+                    <th scope="row">Примечания</th>
+                    <td>{{product.notes}}</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- How to order -->
+    <section id="how-to-order" class="pt-3">
+      <div class="row">
+        <div class="card">
+          <div class="card-body text-center">
+              <h4>Как сделать заказ:</h4>
+          </div>
+          <div class="row">
+            <p><strong>Заказать одежду нашего бренда TRIBES Вы можете на нашем сайте Mytribes.ru и на сайтах наших партнеров.</strong></p>
+              <p>В России и СНГ нашим официальным дистрибьютером является компания ООО «Вайлдберриз».</p>
+              <p><strong>Как сделать Заказ: {{product.title}} TRIBES</strong></p>
+              <p><strong>На нашем сайте:</strong> выберите необходимый размер и цвет и нажмите кнопку "В КОРЗИНУ".</p>
+              <p>На сайте партнеров: перейдите на сайт партнера в каталог бренда TRIBES и оформите заказ в соответствии с условиями на сайте партнера. Цена на сайте партнера может отличаться.</p>
+              <p>Артикул этого товара на сайте ООО «Вайлдберриз»: {{product.wildberriesId}}</p>
+              <img src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg" data-src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg" class="site-logo d-inline" alt="TRIBES — для ярких и смелых">
+              <a href="https://www.wildberries.ru/catalog/{{product.wildberriesId}}/detail.aspx" target="_blank" class="btn btn-primary btn-wb col-12 col-sm-12 col-md-6" >
+                <i class="icon-bag"></i> на сайте WILDBERRIES.RU
+              </a>
+          </div>
+        </div>
+      </div>
+    </section>
+</div>

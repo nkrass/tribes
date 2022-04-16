@@ -93,15 +93,14 @@ export class CartService {
       cart.cartItems.map(item => {
         if (item.barcode?.barcode === cartItem?.barcode?.barcode) {
           newQuantities.push({ ...item, quantity: item.quantity? item.quantity + 1 : 1 })
-        }
-        return
+        } else newQuantities.push(item)
       })
       if (!cart.cartItems.map(b =>b.barcode?.barcode).includes(cartItem?.barcode?.barcode)){
         //if no barcode in it
         newCartItems.push({...cartItem, quantity: 1, price: cartItem.price } as any)
       }
     }
-    const newItems = [...newCartItems, ...newQuantities]
+    const newItems = [...newQuantities, ...newCartItems]
     this.analytics.addToCart(newItems)
     const newCart = {
       ...cart, 

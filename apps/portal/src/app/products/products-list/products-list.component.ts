@@ -24,17 +24,15 @@ interface ProductsListState {
 
 @Component({
   selector: 'tribes-products',
-  encapsulation: ViewEncapsulation.None,
   templateUrl: './products-list.component.html',
   styleUrls: ['./products-list.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [
-    RxState
-  ]
+  providers: [ RxState ]
 })
 export class ProductsListComponent {
   staticAssetsUrl: string = staticAssetsUrl
   placeholderImage: string = PlaceholderImage
+  public productsMock = Array(9).fill(ProductMock)
   colorDictionary = ColorsDictionary.getColorName
   vm$ = this.state.select()
   readonly products$ = this.state.select('products');
@@ -49,26 +47,13 @@ export class ProductsListComponent {
   colorsPalette = ColorsDictionary.GeneralColorGroupsCodes.map(e=> ({colorCode: e, colorTitle: ColorsDictionary.getColorGroupName(e)}))
   params$ = this.route.paramMap;
   fetchOnUrlChange$ = this.params$.pipe(
-    switchMap(p => 
-      combineLatest([
-        this.getProducts$(p),
-        this.getCategories$(p),
-      ]).pipe(
-        map(([products, categories]) => {
-          return {
-            products,
-            categories,
-            schema: this.buildSchema(products),
-            gender: p.get('gender'), 
-            category: p.get('category'),
-            color: p.get('color'),
-            size: p.get('size')
-          }
-        }),
-        startWith({ isLoading: true, products: Array(9).fill(ProductMock) }),
-        endWith({ isLoading: false })
-      )
-    )
+    map(p => ({
+        gender:   p.get('gender'),
+        category: p.get('category'),
+        color:    p.get('color'),
+        size:     p.get('size'),
+      })
+    ), startWith({ isLoading: true, products: this.productsMock })
   )
   getProducts$ = (p: ParamMap): Observable<ProductsListQuery['products']> => {
     return this.productsListGQL.fetch({
@@ -85,7 +70,6 @@ export class ProductsListComponent {
       gender: p.get('gender') as ProductGender|| undefined
     }).pipe(pluck('data', 'categories'))
   }
-  
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -93,7 +77,12 @@ export class ProductsListComponent {
     private categoriesList: CategoriesListGQL,
     private state: RxState<ProductsListState>
   ) {
-    this.state.set({products: Array(9).fill(ProductMock)})
+    // this.state.set({products: Array(9).fill(ProductMock)})
+    this.state.connect(
+      this.params$.pipe(switchMap(this.getProducts$)), 
+      (state, products) => ({...state, products, schema: this.buildSchema(products), isLoading: false})
+    )
+    this.state.connect("categories", this.params$.pipe(switchMap(this.getCategories$)))
     this.state.connect(this.fetchOnUrlChange$)
   }
 

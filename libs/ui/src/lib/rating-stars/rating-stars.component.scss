@@ -1,0 +1,23 @@
+@import 'variables';
+
+.rating-stars {
+  display: inline-block;
+
+  > i {
+    display: inline-block;
+    margin-right: 2px;
+    color: lighten($gray, 15%);
+    font-size: $font-size-sm;
+    // font-size: inherit;
+    &.filled { color: $brand-warning; }
+    &:last-child { margin-right: 0; }
+    &.large { 
+      font-size: 1.3em!important;
+    &:before{
+        // content:"\272E"
+        content: "\2605";
+    }
+    }
+  }
+}
+

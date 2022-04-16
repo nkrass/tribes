@@ -8,7 +8,7 @@ import { ActivatedRoute } from '@angular/router';
 import { RxState } from '@rx-angular/state';
 import { CreateItemGQL, CreateItemMutation } from '@tribes/data-access';
 import SwiperCore, { Pagination, Zoom, Navigation, Mousewheel, FreeMode } from "swiper";
-import { ColorsDictionary } from 'libs/colors-dictionary/src';
+import { ColorsDictionary } from '@tribes/colors-dictionary';
 SwiperCore.use([Pagination, Zoom, Navigation, Mousewheel, FreeMode]);
 
 const staticAssetsUrl = environment.staticAssetsUrl

@@ -1,0 +1,29 @@
+<div class="reviews-slider">
+  <swiper [config]="sliderConfig" style="--swiper-navigation-color: #f6f7e3;--swiper-pagination-color: #808080">
+          <ng-template swiperSlide *ngFor="let review of reviews; index as i" >
+            <div class="card-panel container align-self-center">
+              <div class="row align-items-center justify-content-center">
+                <div class="col-12 col-sm-6 col-md-5 pb-2 text-md-left text-center">
+                  <div class="from-bottom">
+                    <tribes-rating-stars [rating]=review.reviewRating [size]="'large'"></tribes-rating-stars> 
+                    <div class="col-12 pb-1"></div>
+                    <div class="h4">
+                      <span class="">
+                        {{review?.reviewText}}
+                        <!-- <tribes-price [product]="item"></tribes-price> -->
+                      </span>
+                    </div>
+                    <div class="product-rating">
+                      {{review.reviewAuthor}}           
+                    </div>
+                  </div>
+                  <a class="btn btn-primary scale-up delay-1" routerLink="/product/{{ review.sku }}" *ngIf="showProductLink">Подробнее</a>
+                </div>
+                <div class="col-12 col-sm-4 col-md-4 pb-2 pt-3 align-self-center">
+                  <img [defaultImage]="staticAssetsUrl + 'static/img/spinners/spinner-1.svg'" [lazyLoad]="review.product.coverImage" alt="{{ review.sku }}" class="d-block reviews-product-image">
+                </div>
+              </div>
+            </div>
+          </ng-template>
+  </swiper>
+</div>

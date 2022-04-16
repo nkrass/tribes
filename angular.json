@@ -6,6 +6,7 @@
     "colors-dictionary": "libs/colors-dictionary",
     "data-access": "libs/data-access",
     "portal": "apps/portal",
-    "portal-e2e": "apps/portal-e2e"
+    "portal-e2e": "apps/portal-e2e",
+    "ui": "libs/ui"
   }
 }

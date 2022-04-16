@@ -6,10 +6,11 @@ import { ReviewComponent } from './review/review.component';
 import { ShippingComponent } from './shipping/shipping.component';
 import { SidebarComponent } from './sidebar/sidebar.component';
 import { CheckoutComponent } from './checkout.component';
-import { SharedModule } from '../shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompleteComponent } from './complete/complete.component';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
+import { CommonModule } from '@angular/common';
+import { CheckoutRoutingModule } from './checkout-routing.module';
 
 @NgModule({
     declarations: [
@@ -23,13 +24,13 @@ import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
         CompleteComponent
     ],
     imports: [
-        SharedModule,
+        CommonModule,
+        CheckoutRoutingModule,
         FormsModule,
         ReactiveFormsModule,
         NgxIntlTelInputModule
     ],
     exports: [
-        SharedModule,
         CheckoutComponent,
         AddressComponent,
         FooterComponent,

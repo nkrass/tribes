@@ -7,7 +7,7 @@ import { ConsoleLogger, Injectable } from "@nestjs/common";
 import { Barcode } from "../product/entities/barcode.model";
 import { environment } from '../../environments/environment';
 import { Review } from "../review/entities/review.model";
-import { ColorsDictionary } from "libs/colors-dictionary/src";
+import { ColorsDictionary } from "@tribes/colors-dictionary";
 import { ProductGender } from "../product/entities/product-gender.enum";
 import { ProductCategory } from "../product/entities/product-category.enum";
 

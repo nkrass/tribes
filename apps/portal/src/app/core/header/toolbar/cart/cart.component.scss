@@ -2,8 +2,7 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/forms";
-@import '../../../../../scss/helpers/variables';
-@import '../../../../../scss/helpers/mixins';
+@import 'variables';
 
 .scrollable-list{
   overflow-x: hidden;

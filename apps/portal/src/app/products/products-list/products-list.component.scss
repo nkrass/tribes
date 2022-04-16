@@ -2,9 +2,8 @@
 @import "~bootstrap/scss/variables";
 @import "~bootstrap/scss/mixins";
 @import "~bootstrap/scss/forms";
-@import '../../../scss/helpers/variables';
-@import '../../../scss/helpers/mixins';
-@import '../../../scss/brand-palete.variables.scss';
+@import 'variables';
+@import 'brand-palete.variables.scss';
 .catalogSlider {
   width: 100%;
   height: auto;

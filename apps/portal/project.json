@@ -23,7 +23,12 @@
         "styles": [
           "apps/portal/src/scss/styles.scss"
         ],
-        "scripts": []
+        "scripts": [],
+        "stylePreprocessorOptions": {
+          "includePaths": [
+            "libs/ui/src/lib/scss"
+          ]
+        }
       },
       "configurations": {
         "production": {
@@ -31,12 +36,12 @@
             {
               "type": "initial",
               "maximumWarning": "500kb",
-              "maximumError": "1mb"
+              "maximumError": "5mb"
             },
             {
               "type": "anyComponentStyle",
               "maximumWarning": "2kb",
-              "maximumError": "4kb"
+              "maximumError": "64kb"
             }
           ],
           "fileReplacements": [

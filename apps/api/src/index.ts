@@ -25,8 +25,7 @@ const bootstrapServer = async (): Promise<Handler> => {
     app: expressApp,
   });
 };
-
-export const handler: APIGatewayProxyHandler = async (
+const server: APIGatewayProxyHandler = async (
   event,
   context,
   callback,
@@ -36,3 +35,4 @@ export const handler: APIGatewayProxyHandler = async (
   }
   return cachedServer(event, context, callback);
 };
+export default server;
