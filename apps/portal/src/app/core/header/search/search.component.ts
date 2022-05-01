@@ -9,7 +9,7 @@ import { Subject, debounceTime,  distinctUntilChanged,  filter, BehaviorSubject,
 
 import { environment } from '../../../../../src/environments/environment'
 import { OffcanvasService } from '../../shared/offcanvas.service';
-import { AppGlobalState, APP_GLOBAL_STATE } from '../../../app-global.state';
+import { AppGlobalState, APP_GLOBAL_STATE } from '@tribes/global-state';
 import { PlaceholderImage } from '../../../products/shared/product-placeholder.mock';
 import { ProductsListGQL, ProductsListQuery } from '@tribes/data-access';
 

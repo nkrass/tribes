@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/analytics",
+  "sourceRoot": "libs/analytics/src",
+  "prefix": "tribes",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/analytics"],
+      "options": {
+        "jestConfig": "libs/analytics/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/analytics/**/*.ts",
+          "libs/analytics/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

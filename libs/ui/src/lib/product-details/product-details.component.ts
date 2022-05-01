@@ -1,17 +1,17 @@
-import { Component, ViewChild, TemplateRef, ElementRef, ChangeDetectorRef, ChangeDetectionStrategy, PLATFORM_ID, Inject, ViewChildren, QueryList, ViewEncapsulation, Input } from '@angular/core';
+import { Component, ViewChild, TemplateRef, ElementRef, ChangeDetectionStrategy, PLATFORM_ID, Inject, ViewChildren, QueryList, ViewEncapsulation, Input } from '@angular/core';
 import { TabsetComponent } from 'ngx-bootstrap/tabs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
-import { CartService } from '../../../../../apps/portal/src/app/cart/shared/cart.service';
+import { CartService } from '@tribes/cart';
 
-import { AnalyticsService } from '../../../../../apps/portal/src/app/shared/analytics.service'
+import { AnalyticsService } from '@tribes/analytics'
 import { DOCUMENT } from '@angular/common';
 import { RxState } from '@rx-angular/state';
 import SwiperCore, { Pagination, Zoom, Navigation, Mousewheel, FreeMode, SwiperOptions } from "swiper";
 import { ProductQuery } from '@tribes/data-access';
 import { ColorsDictionary } from '@tribes/colors-dictionary';
-import { ProductMock } from '../placeholders/product.placeholder';
 import { Router } from '@angular/router';
+
 SwiperCore.use([Pagination, Zoom, Navigation, Mousewheel, FreeMode]);
 
 interface ProductState {
@@ -32,12 +32,11 @@ export class ProductDetailsComponent {
 
   @ViewChild('productExtraInfoTabs', { static: false }) productExtraInfoTabs!: TabsetComponent;
   @ViewChildren("checkboxes") checkboxes!: QueryList<ElementRef>
-  @Input('product') product: ProductQuery['product']
-  @Input('isLoading') isLoading: boolean
-  
+  @Input() product: ProductQuery['product']
+  @Input() isLoading: boolean
   readonly selectedSizes$ = this.state.select('selectedSizes')
-  readonly selectSizeBtn$ = new Subject();
-  readonly addToCartBtn$ = new Subject();
+  readonly selectSizeBtn$ = new Subject<Event>();
+  readonly addToCartBtn$ = new Subject<Event>();
 
   public modalRef?: BsModalRef
   public colorsDict = ColorsDictionary.getColorName
@@ -83,7 +82,7 @@ export class ProductDetailsComponent {
     this.state.connect(this.selectSizeBtn$, this.onSelectSize.bind(this));
     this.state.connect(this.addToCartBtn$, this.onAddToCart.bind(this))
   }
-  private onSelectSize(state: ProductState, event: any){
+  private onSelectSize(state: ProductState, event){
     const barcode: string = event.target.dataset.barcode
       const { selectedSizes } = state
       const checked = event.target.checked
@@ -97,7 +96,7 @@ export class ProductDetailsComponent {
       }
       return {...state, selectedSizes}
   }
-  onVariantClick(sku: string, template: TemplateRef<any>) {
+  onVariantClick(sku: string, template: TemplateRef<HTMLElement>) {
     if (this.state.get("selectedSizes").length === 0) this.router.navigate(['/product', sku])
     else {
       this.state.set({modalRouterLink: ['/product', sku]})
@@ -107,15 +106,15 @@ export class ProductDetailsComponent {
   }
   onVariantModalClose(type: string){
     this.modalRef?.hide()
-    if (type = 'addToCart') { 
-      this.addToCartBtn$.next({})
+    if (type == 'addToCart') { 
+      this.addToCartBtn$.next(new MouseEvent('click'))
       this.router.navigate(this.state.get('modalRouterLink'))
-    } else if (type = 'proceedWithout') {
+    } else if (type == 'proceedWithout') {
       this.state.set({ selectedSizes: [] })
       this.router.navigate(this.state.get('modalRouterLink'))
-    } else {}
+    }
   }
-  openModal(template: TemplateRef<any>) {
+  openModal(template: TemplateRef<HTMLElement>) {
     this.modalRef = this.modalService.show(template, {
       class:'container',
     });
@@ -127,7 +126,7 @@ export class ProductDetailsComponent {
     this.productExtraInfoTabs.tabs[tabId].active = true;
   }
 
-  private onAddToCart(state: ProductState, event: any) {
+  private onAddToCart(state: ProductState) {
     const { selectedSizes } = state
     const barcodes = selectedSizes.map(e => this.product.barcodes.find(b => b.barcode === e))
     const cartItems = barcodes.map(barcode => ({ barcode, quantity: 1, price: this.product.priceSale, }))

@@ -5,13 +5,13 @@ import { Subject } from 'rxjs';
 import { map, switchMap, takeUntil } from 'rxjs';
 
 import { CheckoutService } from '../shared/checkout.service';
-import { CartService } from '../../cart/shared/cart.service';
+import { CartService } from '@tribes/cart';
 import { MessageService } from '../../messages/message.service';
 
 import { Customer } from '../../models/customer.model';
 import { Order } from '../../models/order.model';
 import { User } from '../../models/user.model';
-import { AnalyticsService } from '../../shared/analytics.service'
+import { AnalyticsService } from '@tribes/analytics'
 import { CartQuery, CartStatus } from '@tribes/data-access';
 
 @Component({

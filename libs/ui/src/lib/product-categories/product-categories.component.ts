@@ -7,5 +7,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ProductCategoriesComponent{
-  @Input() staticAssetsUrl: string = 'https://cdn.mytribes.ru/'
+  @Input() staticAssetsUrl = 'https://cdn.mytribes.ru/'
 }

@@ -9,12 +9,12 @@ import { map, switchMap, takeUntil } from 'rxjs';
 import { User } from '../../../app/models/user.model';
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
 import { Customer } from '../../models/customer.model';
-import { CartService } from '../../cart/shared/cart.service';
+import { CartService } from '@tribes/cart';
 import { Order } from '../../models/order.model';
 import { Router } from '@angular/router';
-import { AnalyticsService } from '../../shared/analytics.service';
+import { AnalyticsService } from '@tribes/analytics';
 import { MessageService } from '../../messages/message.service';
-import { CartQuery, CartStatus } from '@tribes/data-access';
+import { CartQuery } from '@tribes/data-access';
 
 @Component({
   selector: 'tribes-checkout-address',

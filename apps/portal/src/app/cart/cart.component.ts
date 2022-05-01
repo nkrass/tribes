@@ -1,9 +1,9 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
-import { CartService } from './shared/cart.service';
-import { AnalyticsService } from '../shared/analytics.service'
+import { CartService } from '@tribes/cart';
+import { AnalyticsService } from '@tribes/analytics'
 import { Router } from '@angular/router';
 import { RxState } from '@rx-angular/state';
-import { AppGlobalState, APP_GLOBAL_STATE } from '../app-global.state';
+import { AppGlobalState, APP_GLOBAL_STATE } from '@tribes/global-state';
 import { CartItems, CartQuery, CartStatus } from '@tribes/data-access';
 
 interface CartState {
@@ -42,25 +42,15 @@ export class CartComponent {
     }
     this.cdr.detectChanges()
   }
-  // scrollToTop() {
-    // if (isPlatformBrowser(this.platformId)){
-    //   (function smoothscroll() {
-    //     const currentScroll = document.documentElement.scrollTop || document.body.scrollTop;
-    //     if (currentScroll > 0) {
-    //         window.requestAnimationFrame(smoothscroll);
-    //         window.scrollTo(0, currentScroll - (currentScroll / 8));
-    //     }
-    //   })();
-    // }
-  // }
-  public onClearCart(event: any) {
+
+  public onClearCart(event: Event) {
     event.preventDefault();
     event.stopPropagation();
     this.cartService.clearCart(CartStatus.Closed)
 
   }
 
-  public removeItem(event: any,  barcode: CartItems['barcode']|any) {
+  public removeItem(event: Event,  barcode: CartItems['barcode']|any) {
     event.preventDefault();
     event.stopPropagation();
     if (window.confirm("Подтверждаете удаление")) {

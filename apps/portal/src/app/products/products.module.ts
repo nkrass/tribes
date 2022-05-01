@@ -31,12 +31,12 @@ import { CommonModule } from '@angular/common';
     BsDropdownModule
   ],
   exports: [
-    ProductDetailComponent,
-    ProductsListComponent,
-    SortPipe,
-    TabsModule,
-    RedirectComponent,
-    ScanToRegisterComponent
+    // ProductDetailComponent,
+    // ProductsListComponent,
+    // SortPipe,
+    // TabsModule,
+    // RedirectComponent,
+    // ScanToRegisterComponent
   ],
   providers: [SortPipe, BsDropdownConfig
   ]

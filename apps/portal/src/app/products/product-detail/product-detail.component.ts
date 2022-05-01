@@ -2,7 +2,7 @@ import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { switchMap, map, pluck, startWith, tap  } from 'rxjs';
 import { SEOService } from '../../shared/seoservice.service';
-import { AnalyticsService } from '../../shared/analytics.service'
+import { AnalyticsService } from '@tribes/analytics'
 import { RxState } from '@rx-angular/state';
 import { ProductGQL, ProductQuery } from '@tribes/data-access';
 import { ProductMock } from '@tribes/ui';
@@ -48,13 +48,12 @@ export class ProductDetailComponent {
     const fetchProductOnUrlChange$ = this.route.paramMap.pipe(
       switchMap((params) => this.productGql.fetch({ input: { 'sku': params.get('id') as string} }).pipe(
         pluck('data', 'product'),
-        map((product) => ({ product, isLoading: false, schema: this.seo.buildProductSeoAndSchema(product)} ),
-        tap(({product}) => {
+        map( (product) => ({product, isLoading: false, schema: this.seo.buildProductSeoAndSchema(product)}) ),
+        tap( ({product}) => {
           this.analytics.viewContent( product.barcodes.map(barcode => ({ barcode, price: product.priceSale, quantity: 1 })))
           this.setup_promotions()
         }),
-      ))
-      ),
+      )),
       startWith({
         isLoading: true,
         product: ProductMock

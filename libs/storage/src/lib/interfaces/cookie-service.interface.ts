@@ -48,7 +48,7 @@ export abstract class CookieService {
   /**
    * Get all
    */
-  abstract getAll(): { [key: string]: any };
+  abstract getAll(): { [key: string]: unknown };
 
   /**
    * @param name Cookie name

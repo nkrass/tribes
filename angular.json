@@ -1,12 +1,16 @@
 {
   "version": 2,
   "projects": {
+    "analytics": "libs/analytics",
     "api": "apps/api",
     "api-interfaces": "libs/api-interfaces",
+    "cart": "libs/cart",
     "colors-dictionary": "libs/colors-dictionary",
     "data-access": "libs/data-access",
+    "global-state": "libs/global-state",
     "portal": "apps/portal",
     "portal-e2e": "apps/portal-e2e",
+    "storage": "libs/storage",
     "ui": "libs/ui"
   }
 }

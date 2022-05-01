@@ -1,4 +1,4 @@
-import { environment } from "apps/portal/src/environments/environment";
+import { environment } from "../../../environments/environment";
 
 export const resizedImgUrl = (key: string, width: number, height: number, fill='fill'): string => {
   const imageRequest = JSON.stringify({

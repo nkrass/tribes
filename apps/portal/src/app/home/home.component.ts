@@ -1,4 +1,4 @@
-import { Component, ChangeDetectorRef, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component, ChangeDetectorRef, ChangeDetectionStrategy } from '@angular/core';
 
 import { endWith, map, pluck, startWith, Subject, zip } from 'rxjs';
 import { HomeSliderImages } from '../models/home-slider-images';

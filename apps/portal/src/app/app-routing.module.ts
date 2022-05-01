@@ -5,14 +5,14 @@ import { CartComponent } from './cart/cart.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ProductsListComponent } from './products/products-list/products-list.component';
 import { ProductDetailComponent } from './products/product-detail/product-detail.component';
-import { BrandDefaultMeta, BrandDescription, BrandImageDescription, BrandTitle, SEORoute } from './shared/seoservice.service';
+import { BrandDefaultMeta, BrandImageDescription, SEORoute } from './shared/seoservice.service';
 import { SocialLuckydayComponent } from './social/luckyday/luckyday.component';
 import { CartGuardService } from './cart/shared/cart.guard';
 import { RedirectComponent } from './redirect/redirect.component';
 import { ScanToRegisterComponent } from './products/register/register.component';
 
 @Directive({ selector: 'router-outlet' })
-export class MyRouterOutlet extends RouterOutlet {
+export class RouterOutletDirective extends RouterOutlet {
   constructor(
     parentContexts: ChildrenOutletContexts,
     location: ViewContainerRef,
@@ -32,10 +32,10 @@ export class MyRouterOutlet extends RouterOutlet {
 }
 
 @NgModule({
-  declarations: [MyRouterOutlet],
-  exports: [MyRouterOutlet],
+  declarations: [RouterOutletDirective],
+  exports: [RouterOutletDirective],
 })
-export class MyRouterOutletModule {}
+export class RouterOutletModule {}
 
 export const PortalRoutes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -117,7 +117,7 @@ export const PortalRoutes = [
     relativeLinkResolution: 'corrected',
     canceledNavigationResolution: 'computed'
 })],
-  exports: [RouterModule, MyRouterOutletModule],
+  exports: [RouterModule, RouterOutletModule],
   providers: [
     // AdminGuard,
     CartGuardService

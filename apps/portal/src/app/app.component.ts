@@ -3,9 +3,9 @@ import { OffcanvasService } from './core/shared/offcanvas.service';
 import { Router, NavigationEnd, ActivatedRoute  } from '@angular/router';
 import { filter, map, mergeMap, tap, Observable } from 'rxjs';
 import { SEOService } from './shared/seoservice.service';
-import { CartService } from './cart/shared/cart.service';
-import { AnalyticsService } from './shared/analytics.service';
-import { AppGlobalState, APP_GLOBAL_STATE } from './app-global.state';
+import { CartService } from '@tribes/cart';
+import { AnalyticsService } from '@tribes/analytics';
+import { AppGlobalState, APP_GLOBAL_STATE } from '@tribes/global-state';
 import { RxState } from '@rx-angular/state';
 
 @Component({

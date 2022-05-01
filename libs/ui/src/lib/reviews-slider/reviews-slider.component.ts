@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import SwiperCore, { Pagination, Zoom, Navigation, Mousewheel, FreeMode, SwiperOptions } from "swiper";
 import { ReviewsListQuery } from '@tribes/data-access';
 SwiperCore.use([Pagination, Zoom, Navigation, Mousewheel, FreeMode]);

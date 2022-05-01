@@ -19,27 +19,24 @@ import { registerLocaleData } from '@angular/common';
 import localeRu from '@angular/common/locales/ru';
 import localeRuExtra from '@angular/common/locales/extra/ru';
 
-import { HttpErrorHandler } from './shared/http-error-handler.service';
-
 import { GoogleTagManagerModule } from 'angular-google-tag-manager';
 import { TransferHttpCacheModule } from '@nguniversal/common';
-import { AnalyticsService } from './shared/analytics.service'
+import { AnalyticsService } from '@tribes/analytics';
 import { SocialLuckydayComponent } from './social/luckyday/luckyday.component';
 import {HttpLink} from 'apollo-angular/http';
 import { InMemoryCache } from '@apollo/client/core';
 import { RxState } from '@rx-angular/state';
-import { AppGlobalState, APP_GLOBAL_STATE } from './app-global.state';
+import { AppGlobalState, APP_GLOBAL_STATE } from '@tribes/global-state';
 import { environment } from '../environments/environment';
 import { UiModule } from '@tribes/ui';
 import { StaticPagesModule } from './static/static-pages.module';
-import { AppRoutingModule } from './app-routing.module';
 
 registerLocaleData(localeRu, 'ru-RU', localeRuExtra);
 const APOLLO_CACHE = new InjectionToken<InMemoryCache>('apollo-cache');
 const STATE_KEY = makeStateKey<any>('apollo.state');
 
 @NgModule({
-  providers:[Title, Meta, SEOService, HttpErrorHandler, AnalyticsService, 
+  providers:[Title, Meta, SEOService, AnalyticsService, 
     { provide: LOCALE_ID, useValue: 'ru-RU' },
     { provide: DEFAULT_CURRENCY_CODE, useValue: 'RUB'},
     { provide: APP_GLOBAL_STATE, useFactory: () => new RxState<AppGlobalState>() },

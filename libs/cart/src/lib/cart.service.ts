@@ -1,17 +1,17 @@
 import { Inject, Injectable } from '@angular/core';
-import { BaseCookieService } from '../../shared/storage/services/base-cookie.service';
+import { BaseCookieService } from '@tribes/storage';
 import { switchMap, map, pluck, Observable, BehaviorSubject, Subject, distinctUntilChanged, catchError} from 'rxjs';
 import { RxState } from '@rx-angular/state';
-import { CartGQL, CartQuery, CartStatus, CreateCartGQL, CreateCartMutation, UpdateCartGQL } from '@tribes/data-access';
-import { AppGlobalState, APP_GLOBAL_STATE } from '../../app-global.state';
-import { AnalyticsService } from '../../shared/analytics.service';
+import { CartGQL, CartQuery, CartStatus, CreateCartGQL, CreateCartMutation, UpdateCartGQL, UpdateCartMutation } from '@tribes/data-access';
+import { AppGlobalState, APP_GLOBAL_STATE } from '@tribes/global-state';
+import { AnalyticsService } from '@tribes/analytics';
 
 const CART_ID = '_3bs_cart_id'
 
 @Injectable()
 export class CartService {
   // Init and generate some fixtures
-  readonly cart$ = this.globalState.select('cart')  //new BehaviorSubject<Cart>(new Cart([]));
+  readonly cart$ = this.globalState.select('cart') 
   private readonly cartShow$ = new BehaviorSubject<boolean>(false);
   private readonly user$ = this.globalState.select('user')
 
@@ -30,8 +30,8 @@ export class CartService {
     this.globalState.connect("showCart", this.cartShow$)
     this.globalState.connect(this.updateCard$.pipe(
       switchMap(this.updateToServer.bind(this))
-      ), (state, event) => {
-      return {...state}
+      ), (state, cart) => {
+      return {...state, cart}
     })
   }
   updateToServer(cart: CartQuery['cart']){
@@ -48,11 +48,7 @@ export class CartService {
       status: cart.status || CartStatus.Open
     }}).pipe(
       pluck('data', 'updateCart'), 
-      map( cart => {
-        // this.globalState.set({ cart: cart?.updateCart })
-        // this.cartId$.next(cart?.updateCart.id || null)
-        return { cart }
-      }),
+      map( (cart ) => cart as UpdateCartMutation['updateCart']),
     )
   }
   public updateCartItemsAmount(barcode: CartQuery['cart']['cartItems'][0]['barcode'], amount: number){
@@ -97,7 +93,7 @@ export class CartService {
       })
       if (!cart.cartItems.map(b =>b.barcode?.barcode).includes(cartItem?.barcode?.barcode)){
         //if no barcode in it
-        newCartItems.push({...cartItem, quantity: 1, price: cartItem.price } as any)
+        newCartItems.push({...cartItem, quantity: 1, price: cartItem.price })
       }
     }
     const newItems = [...newQuantities, ...newCartItems]
@@ -128,7 +124,7 @@ export class CartService {
       switchMap(id => {
         if (id) { return this.cartGql.watch({input: { id }}).valueChanges.pipe(
           pluck('data', 'cart'), 
-          catchError((e, obs) => this.createCart())
+          catchError(() => this.createCart())
         )}
         else if (this.globalState.get('user')) {
           return this.cartGql.watch({input: { userId: this.globalState.get('user').id }}).valueChanges.pipe(pluck('data', 'cart'))

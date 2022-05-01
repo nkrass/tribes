@@ -22,11 +22,15 @@
     "skipDefaultLibCheck": true,
     "baseUrl": "./",
     "paths": {
+      "@env/*": ["apps/portal/src/environments/*"],
+      "@tribes/analytics": ["libs/analytics/src/index.ts"],
       "@tribes/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@tribes/cart": ["libs/cart/src/index.ts"],
       "@tribes/colors-dictionary": ["libs/colors-dictionary/src/index.ts"],
       "@tribes/data-access": ["libs/data-access/src/index.ts"],
+      "@tribes/global-state": ["libs/global-state/src/index.ts"],
+      "@tribes/storage": ["libs/storage/src/index.ts"],
       "@tribes/ui": ["libs/ui/src/index.ts"],
-      "@env/*": ["apps/portal/src/environments/*"],
       "swiper_angular": ["node_modules/swiper/angular"]
     }
   },

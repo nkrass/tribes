@@ -9,5 +9,5 @@ import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
 export class SectionDividerComponent {
   @Input() staticAssetsUrl = 'https://cdn.mytribes.ru/'
   @Input() public section!: string;
-  @Input() public h: string = "h4"
+  @Input() public h = "h4"
 }

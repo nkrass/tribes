@@ -7,7 +7,7 @@ import { FooterComponent } from './footer/footer.component';
 import { HomeComponent } from '../home/home.component';
 import { SearchComponent } from './header/search/search.component';
 import { MessageService } from '../messages/message.service';
-import { CartService } from '../cart/shared/cart.service';
+import { CartService } from '@tribes/cart';
 import { PagerService } from '../pager/pager.service';
 import { CheckoutService } from '../checkout/shared/checkout.service';
 import { AuthService } from '../account/shared/auth.service';
@@ -18,9 +18,9 @@ import { throwIfAlreadyLoaded } from './module-import-guard';
 import { HomeSliderImagesService } from '../home/main-slider/home-slider-images.service';
 
 import { FeedbackService } from '../shared/feedback.service';
-import { StorageModule } from '../shared/storage/storage.module';
-import { BaseCookieService } from '../shared/storage/services/base-cookie.service';
-import { BaseLocalStorage } from '../shared/storage/storages/base-local.storage';
+import { StorageModule } from '@tribes/storage';
+import { BaseCookieService } from '@tribes/storage';
+import { BaseLocalStorage } from '@tribes/storage';
 import { CollapseModule } from 'ngx-bootstrap/collapse';
 import { AlertModule } from 'ngx-bootstrap/alert';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
@@ -30,6 +30,7 @@ import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { UiModule } from '@tribes/ui';
 import { AppRoutingModule } from '../app-routing.module';
 import { AutofocusFixModule } from 'ngx-autofocus-fix';
+import { AnalyticsModule } from '@tribes/analytics';
 
 @NgModule({
     declarations: [
@@ -52,7 +53,8 @@ import { AutofocusFixModule } from 'ngx-autofocus-fix';
         ButtonsModule.forRoot(),
         LetModule, PushModule,
         LazyLoadImageModule,
-        AutofocusFixModule.forRoot()
+        AutofocusFixModule.forRoot(),
+        AnalyticsModule
     ],
     exports: [
         CommonModule,

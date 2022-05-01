@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, CanActivate, ActivatedRouteSnapshot,RouterStateSnapshot } from '@angular/router';
 import { Subject } from 'rxjs';
 import { map, take } from 'rxjs';
-import { CartService } from './cart.service';
+import { CartService } from '@tribes/cart';
  
  
 @Injectable()

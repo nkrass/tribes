@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { CartService } from '../../cart/shared/cart.service';
+import { CartService } from '@tribes/cart';
 import { CheckoutService, EDeliveryMethod } from '../shared/checkout.service';
 import { takeUntil } from 'rxjs';
 import { Subject } from 'rxjs';

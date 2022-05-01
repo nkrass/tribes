@@ -1,7 +1,7 @@
 import { Component, ChangeDetectionStrategy, ChangeDetectorRef, Inject } from '@angular/core';
-import { CartService } from '../../../../cart/shared/cart.service';
+import { CartService } from '@tribes/cart';
 import { RxState } from '@rx-angular/state';
-import { AppGlobalState, APP_GLOBAL_STATE } from '../../../../app-global.state';
+import { AppGlobalState, APP_GLOBAL_STATE } from '@tribes/global-state';
 import { Barcode } from '@tribes/data-access';
 
 @Component({
@@ -22,7 +22,7 @@ export class ToolbarCartComponent {
   ) {}
 
 
-  public onRemoveItem(event: any, item: Barcode) {
+  public onRemoveItem(event: Event, item: Barcode) {
     event.stopPropagation();
     this.cartService.deleteItems([item])
   }

@@ -1,13 +1,12 @@
-import { ChangeDetectionStrategy, Component, ViewEncapsulation } from '@angular/core';
-import { pluck, map, startWith, switchMap, endWith, Observable, combineLatest, tap } from 'rxjs';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { pluck, map, startWith, switchMap, Observable } from 'rxjs';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { environment } from '../../../../src/environments/environment'
 import { RxState } from '@rx-angular/state';
 import { PlaceholderImage, ProductMock } from '../shared/product-placeholder.mock';
-
-import { ItemList, WithContext, OfferCatalog } from 'schema-dts';
 import { CategoriesListGQL, CategoriesListQuery, ProductCategory, ProductGender, ProductsListGQL, ProductsListQuery } from '@tribes/data-access';
 import { ColorsDictionary } from '@tribes/colors-dictionary';
+import { OfferCatalog, WithContext } from 'schema-dts';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 
@@ -16,12 +15,11 @@ interface ProductsListState {
   gender: string|null
   color: string|null
   size: string|null
-  categories?: CategoriesListQuery['categories']
+  categories: CategoriesListQuery['categories']
   category: string |null
   products?: ProductsListQuery['products']
-  schema?: any//WithContext<OfferCatalog>
+  schema: WithContext<OfferCatalog>
 }
-
 @Component({
   selector: 'tribes-products',
   templateUrl: './products-list.component.html',
@@ -86,7 +84,7 @@ export class ProductsListComponent {
     this.state.connect(this.fetchOnUrlChange$)
   }
 
-  buildSchema(products: ProductsListQuery['products']){
+  buildSchema(products: ProductsListQuery['products']): WithContext<OfferCatalog> {
     const itemListElement: any[] = [];
     for (let i=0; i< products.length; i++){
       const {sku, title, description, category, materials, color, imagesSrc, priceSale, stock} = products[i]

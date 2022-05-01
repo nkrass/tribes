@@ -9,7 +9,7 @@ import { Meta, Title } from '@angular/platform-browser';
 
 import { RxState } from '@rx-angular/state';
 import { ProductGQL, ProductQuery } from '@tribes/data-access';
-import { AnalyticsService } from '../shared/analytics.service';
+import { AnalyticsService } from '@tribes/analytics';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 const cdnUrl = environment.cdnUrl

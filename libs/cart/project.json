@@ -1,0 +1,23 @@
+{
+  "projectType": "library",
+  "root": "libs/cart",
+  "sourceRoot": "libs/cart/src",
+  "prefix": "tribes",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/cart"],
+      "options": {
+        "jestConfig": "libs/cart/jest.config.ts",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": ["libs/cart/**/*.ts", "libs/cart/**/*.html"]
+      }
+    }
+  },
+  "tags": []
+}

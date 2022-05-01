@@ -136,12 +136,22 @@
               "replace": "apps/portal/src/environments/environment.ts",
               "with": "apps/portal/src/environments/environment.prod.ts"
             }
-          ]
+          ],
+          "stylePreprocessorOptions": {
+            "includePaths": [
+              "libs/ui/src/lib/scss"
+            ]
+          }
         },
         "development": {
           "optimization": false,
           "sourceMap": true,
-          "extractLicenses": false
+          "extractLicenses": false,
+          "stylePreprocessorOptions": {
+            "includePaths": [
+              "libs/ui/src/lib/scss"
+            ]
+          }
         }
       },
       "defaultConfiguration": "production"
