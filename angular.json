@@ -10,6 +10,7 @@
     "global-state": "libs/global-state",
     "portal": "apps/portal",
     "portal-e2e": "apps/portal-e2e",
+    "seo": "libs/seo",
     "storage": "libs/storage",
     "ui": "libs/ui"
   }

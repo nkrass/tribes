@@ -7,7 +7,6 @@ import { ToastrModule } from 'ngx-toastr';
 import { ProductsModule } from './products/products.module';
 import { CoreModule } from './core/core.module';
 // import { CheckoutModule } from './checkout/checkout.module';
-import { CookieModule } from '@gorniv/ngx-universal';
 import { ApolloModule, APOLLO_OPTIONS} from 'apollo-angular';
 
 // Components
@@ -82,7 +81,6 @@ const STATE_KEY = makeStateKey<any>('apollo.state');
     UiModule,
     TransferHttpCacheModule,
     BrowserAnimationsModule,
-    CookieModule.forRoot(),
     HttpClientModule,
     ToastrModule.forRoot(),
     CoreModule,

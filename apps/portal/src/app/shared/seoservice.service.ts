@@ -94,7 +94,7 @@ export class SEOService {
     }
   }
   buildProductSeoAndSchema(product: ProductQuery['product']) {
-      const {sku, title, description, descriptionSeo, category, materials, color, priceSale, status, stock, coverImage, priceBase} = product
+      const {sku, title, description, category, materials, color, priceSale, status, stock, coverImage, priceBase} = product
       const page_title = title + " 🛍TRIBES® - Официальный интернет-магазин Россия 🇷🇺"
   
       this.setTitle(page_title)

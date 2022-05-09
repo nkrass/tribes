@@ -1,5 +1,4 @@
 import { Inject, Injectable, OnDestroy, Optional, PLATFORM_ID } from '@angular/core';
-import { CookieService } from '@gorniv/ngx-universal';
 import { GoogleTagManagerService } from 'angular-google-tag-manager';
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { REQUEST } from '@nguniversal/express-engine/tokens';
@@ -8,6 +7,8 @@ import { catchError, combineLatest, distinctUntilChanged, filter, from, fromEven
 import { takeUntil } from 'rxjs';
 import { waitFor } from './rxjs.extensions';
 import { CartQuery } from '@tribes/data-access';
+import { BaseCookieService } from '@tribes/storage';
+
 
 @Injectable({
   providedIn: 'root'
@@ -22,7 +23,7 @@ export class AnalyticsService implements OnDestroy {
 
   constructor(
     private gtmService: GoogleTagManagerService,
-    private _cookieService: CookieService,
+    private cookieService: BaseCookieService,
     @Inject(PLATFORM_ID) private readonly platformId: typeof PLATFORM_ID,
     @Optional() @Inject(REQUEST) private request: Request,
     @Inject(DOCUMENT) private document: Document
@@ -85,10 +86,10 @@ export class AnalyticsService implements OnDestroy {
     return this.clientID;
   }
   getCookie(key: string) {
-    return this._cookieService.get(key);
+    return this.cookieService.get(key);
   }
   getRefQueryParam(name: string) {
-    name = name.replace(/[\[]/, '\\[').replace(/[\]]/, '\\]');
+    name = name.replace(/[[]/, '\\[').replace(/[\]]/, '\\]');
     const regex = new RegExp('[\\?&]' + name + '=([^&#]*)');
     const results = regex.exec(location.search);
     return results === null ? '' : decodeURIComponent(results[1].replace(/\+/g, ' '));

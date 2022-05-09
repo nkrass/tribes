@@ -1,14 +1,11 @@
 {
   "projectType": "library",
-  "root": "libs/colors-dictionary",
   "sourceRoot": "libs/colors-dictionary/src",
   "prefix": "tribes",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/colors-dictionary"
-      ],
+      "outputs": ["coverage/libs/colors-dictionary"],
       "options": {
         "jestConfig": "libs/colors-dictionary/jest.config.js",
         "passWithNoTests": true

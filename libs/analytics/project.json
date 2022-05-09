@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/analytics",
   "sourceRoot": "libs/analytics/src",
   "prefix": "tribes",
   "targets": {

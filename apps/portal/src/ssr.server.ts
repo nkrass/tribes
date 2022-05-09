@@ -1,24 +1,24 @@
 import 'zone.js/node';
 // import { getCurrentInvoke } from '@vendia/serverless-express'
-//  import * as compression from 'compression';
-// import * as cors from 'cors';
-import * as bodyParser from 'body-parser';
+//  import compression from 'compression';
+import cors from 'cors';
+import bodyParser from 'body-parser';
 import { ngExpressEngine } from '@nguniversal/express-engine';
 import { REQUEST, RESPONSE } from '@nguniversal/express-engine/tokens';
-import { NgxRequest, NgxResponse } from '@gorniv/ngx-universal';
 import express = require('express');
 import { join } from 'path';
 import { default as helmet } from 'helmet'
 import { AppServerModule } from './app/app.server.module';
 import { APP_BASE_HREF } from '@angular/common';
 import { existsSync } from 'fs';
-//  import { BootstrapRoutes } from './api/routes';
+
 import { env } from 'process';
 // Start runtime calculation
-const start = new Date().getTime();
+// const start = new Date().getTime();
 // The Express app is exported so that it can be used by serverless Functions.
 export function app() {
   const server = express();
+  server.options('*', cors)
   server.use(([
     (req: express.Request, res: express.Response, next: express.NextFunction) => {
       res.setHeader("X-Powered-By", "Engine 420");
@@ -45,13 +45,13 @@ export function app() {
       crossOriginOpenerPolicy: false,
       contentSecurityPolicy: false
     }),
-    // (cors as any)(),
+    cors(),
    //  (compression as any)(),
     bodyParser.json(),
     bodyParser.urlencoded({
       extended: true
     })
-  ]) as any[])  
+  ]))  
 
   
   const distFolder = join(process.cwd(), 'dist/apps/portal/browser');
@@ -105,15 +105,6 @@ export function app() {
             provide: RESPONSE,
             useValue: res,
           },
-          /// for cookie
-          {
-            provide: NgxRequest,
-            useValue: req,
-          },
-          {
-            provide: NgxResponse,
-            useValue: res,
-          },
           // for absolute path
           {
             provide: 'ORIGIN_URL',
@@ -151,9 +142,7 @@ export function app() {
   });
   return server;
 }
-//  export const app = (express as any)();
-   
- 
+
 function run() {
   const port = process.env['PORTAL_PORT'] || 4200;
   // Start up the Node server

@@ -13,7 +13,6 @@ import { CheckoutService } from '../checkout/shared/checkout.service';
 import { AuthService } from '../account/shared/auth.service';
 import { OffcanvasService } from './shared/offcanvas.service';
 import { UiService } from '../products/shared/ui.service';
-import { NgxJsonLdModule } from '@ngx-lite/json-ld'
 import { throwIfAlreadyLoaded } from './module-import-guard';
 import { HomeSliderImagesService } from '../home/main-slider/home-slider-images.service';
 
@@ -29,8 +28,8 @@ import { ToolbarCartComponent } from './header/toolbar/cart/cart.component';
 import { LazyLoadImageModule } from 'ng-lazyload-image';
 import { UiModule } from '@tribes/ui';
 import { AppRoutingModule } from '../app-routing.module';
-import { AutofocusFixModule } from 'ngx-autofocus-fix';
 import { AnalyticsModule } from '@tribes/analytics';
+import { SeoModule } from '@tribes/seo';
 
 @NgModule({
     declarations: [
@@ -46,15 +45,14 @@ import { AnalyticsModule } from '@tribes/analytics';
         AppRoutingModule,
         CommonModule,
         UiModule,
-        NgxJsonLdModule,
         StorageModule.forRoot(),
         CollapseModule.forRoot(),
         AlertModule.forRoot(),
         ButtonsModule.forRoot(),
         LetModule, PushModule,
         LazyLoadImageModule,
-        AutofocusFixModule.forRoot(),
-        AnalyticsModule
+        AnalyticsModule,
+        SeoModule
     ],
     exports: [
         CommonModule,

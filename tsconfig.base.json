@@ -29,6 +29,7 @@
       "@tribes/colors-dictionary": ["libs/colors-dictionary/src/index.ts"],
       "@tribes/data-access": ["libs/data-access/src/index.ts"],
       "@tribes/global-state": ["libs/global-state/src/index.ts"],
+      "@tribes/seo": ["libs/seo/src/index.ts"],
       "@tribes/storage": ["libs/storage/src/index.ts"],
       "@tribes/ui": ["libs/ui/src/index.ts"],
       "swiper_angular": ["node_modules/swiper/angular"]

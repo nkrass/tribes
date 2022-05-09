@@ -1,14 +1,11 @@
 {
   "projectType": "library",
-  "root": "libs/data-access",
   "sourceRoot": "libs/data-access/src",
   "prefix": "tribes",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": [
-        "coverage/libs/data-access"
-      ],
+      "outputs": ["coverage/libs/data-access"],
       "options": {
         "jestConfig": "libs/data-access/jest.config.js",
         "passWithNoTests": true

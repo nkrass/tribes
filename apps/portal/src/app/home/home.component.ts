@@ -11,6 +11,7 @@ import { SEOService, BrandDefaultMeta } from '../../app/shared/seoservice.servic
 import { ProductGender, ProductsListGQL, ProductsListQuery, ReviewsListGQL, ReviewsListQuery } from '@tribes/data-access';
 import { resizedImgUrl } from '../shared/utils/utils.utils';
 import { RxState } from '@rx-angular/state';
+
 const staticAssetsUrl = environment.staticAssetsUrl
 
 interface HomeComponentState {

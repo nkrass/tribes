@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/storage",
   "sourceRoot": "libs/storage/src",
   "prefix": "tribes",
   "targets": {

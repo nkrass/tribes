@@ -3,7 +3,6 @@ import { ServerModule, ServerTransferStateModule } from '@angular/platform-serve
 
 import { AppModule } from './app.module';
 import { AppComponent } from './app.component';
-import { CookieService, CookieBackendService } from '@gorniv/ngx-universal';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { UniversalDeviceDetectorService } from './shared/universal-device-detector.service';
 
@@ -12,8 +11,7 @@ import { UniversalDeviceDetectorService } from './shared/universal-device-detect
     {
       provide: DeviceDetectorService,
       useClass: UniversalDeviceDetectorService
-    },
-    { provide: CookieService, useClass: CookieBackendService },
+    }
   ],
   imports: [
     AppModule,

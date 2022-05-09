@@ -1,6 +1,5 @@
 {
   "projectType": "library",
-  "root": "libs/global-state",
   "sourceRoot": "libs/global-state/src",
   "prefix": "tribes",
   "targets": {

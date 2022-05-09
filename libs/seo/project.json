@@ -1,20 +1,20 @@
 {
   "projectType": "library",
-  "sourceRoot": "libs/cart/src",
+  "sourceRoot": "libs/seo/src",
   "prefix": "tribes",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/cart"],
+      "outputs": ["coverage/libs/seo"],
       "options": {
-        "jestConfig": "libs/cart/jest.config.ts",
+        "jestConfig": "libs/seo/jest.config.ts",
         "passWithNoTests": true
       }
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/cart/**/*.ts", "libs/cart/**/*.html"]
+        "lintFilePatterns": ["libs/seo/**/*.ts", "libs/seo/**/*.html"]
       }
     }
   },

@@ -3,7 +3,7 @@
     <h5 id="offcanvasTopLabel">Поиск по каталогу:</h5>
     <input #searchTerm class="form-control form-control" 
       type="text" 
-      [autofocus]="true" (input)="searchTerm$.next(searchTerm.value)" placeholder="Введите для поиска..."
+      autofocus (input)="searchTerm$.next(searchTerm.value)" placeholder="Введите для поиска..."
       aria-label="Поиск">
     <button type="button" (click)="toggleSearch$.next(false)" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>

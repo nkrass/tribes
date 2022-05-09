@@ -1,6 +1,6 @@
 <div class="min-vh-100">
   <ng-container *rxLet="vm$ as vm">
-    <ngx-json-ld [json]="vm.schema"></ngx-json-ld>
+    <tribes-json-ld [schema]="vm.schema"></tribes-json-ld>
     <tribes-product-detail [product]="vm.product" [staticAssetsUrl]="staticAssetsUrl" [isLoading]="vm.isLoading"></tribes-product-detail>
   </ng-container>
 </div>
