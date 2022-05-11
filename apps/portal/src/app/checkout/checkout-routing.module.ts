@@ -6,7 +6,8 @@ import { CartGuardService } from '../cart/shared/cart.guard';
 import { CompleteComponent } from './complete/complete.component';
 
 export const CheckoutRoutes = [
-  new SEORoute({ path: 'checkout', 
+  new SEORoute({ 
+    path: '', 
     component: CheckoutComponent, 
     canActivate: [CartGuardService],
     pathMatch: 'prefix', 

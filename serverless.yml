@@ -40,7 +40,8 @@ provider:
           Resource: arn:aws:dynamodb:${self:provider.region}:*:*
 
 plugins:
-  - serverless-plugin-typescript
+  - serverless-esbuild
+  # - serverless-plugin-typescript
   # - serverless-plugin-optimize
   - serverless-dynamodb-local
   - serverless-apigw-binary
@@ -50,6 +51,7 @@ plugins:
 
 # remove the unnecessary packages to keep small upload size
 package:
+  individually: true
   patterns:  
     - '!node_modules/.bin/**'
     - '!node_modules/.cache/**'
@@ -113,6 +115,15 @@ package:
     - '!credentials.json'
 
 custom:
+  esbuild:
+    # plugins : ./plugins.js
+    packager: pnpm
+    bundle: true
+    minify: true
+    sourcemap: true
+    keepNames: true
+    # external:
+    #   - lodash
   apigwBinary: # Library to add support for api gateway binary types
     types:
       - '*/*'

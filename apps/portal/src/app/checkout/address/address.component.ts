@@ -29,9 +29,6 @@ export class AddressComponent implements OnInit, OnDestroy {
 	CountryISO = CountryISO;
   PhoneNumberFormat = PhoneNumberFormat.International;
 	preferredCountries: CountryISO[] = [CountryISO.Russia, CountryISO.Kazakhstan, CountryISO.Germany, CountryISO.Belarus, CountryISO.France, CountryISO.Poland, CountryISO.Singapore, CountryISO.Indonesia];
-	// phoneForm = new FormGroup({
-	// 	phone: new FormControl(undefined, [Validators.required])
-	// })
 
   public user?: User;
   public formAddress!: FormGroup;
@@ -68,18 +65,18 @@ export class AddressComponent implements OnInit, OnDestroy {
         });
         this.checkoutService.setPaymentMethod('card')
       }),
-      switchMap(_ => this.authService.user),
+      switchMap(() => this.authService.user),
       map(user => {
         this.user = user;
         this.initFormGroup();
       }),
-      switchMap(_ => this.checkoutService.orderInProgressChanged),
+      switchMap(() => this.checkoutService.orderInProgressChanged),
       map(order => {
         this.customer = order.customer;
         this.paymentMethod = order.paymentMethod;
         this.total = order.shippingMethod.fee + this.cart.totalAmount 
       })
-    ).subscribe(_ => {
+    ).subscribe(() => {
       this.cdr.detectChanges()
     })
     // this.formAddress.valueChanges.subscribe(e => console.log(e))
@@ -136,6 +133,7 @@ export class AddressComponent implements OnInit, OnDestroy {
     //   );
   }
   public onCompleteOrder() {
+    //TODO make purchasing available
     const customer = Customer.FromCustomerForm(this.formAddress.value)
     this.checkoutService.setCustomer(customer);
     const userUid = this.user?.uid;

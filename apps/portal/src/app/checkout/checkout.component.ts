@@ -20,8 +20,8 @@ export class CheckoutComponent implements OnInit, OnDestroy {
   constructor(
     private checkoutService: CheckoutService,
     private cdr: ChangeDetectorRef,
-    @Inject(DOCUMENT) private doc: any,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(DOCUMENT) private doc: Document,
+    @Inject(PLATFORM_ID) private platformId: typeof PLATFORM_ID
   ) {}
 
   ngOnInit() {

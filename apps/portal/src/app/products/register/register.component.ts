@@ -1,9 +1,9 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, OnInit, PLATFORM_ID } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, ElementRef, Inject, OnDestroy, PLATFORM_ID } from '@angular/core';
 import { SEOService } from '../../shared/seoservice.service';
 import { BehaviorSubject, catchError, map, of, pluck, Subject, switchMap, tap } from 'rxjs';
 import { environment } from '../../../environments/environment'
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import {Html5QrcodeScanner, Html5Qrcode, Html5QrcodeSupportedFormats} from "html5-qrcode"
+import {Html5QrcodeScanner, Html5Qrcode} from "html5-qrcode"
 import { ActivatedRoute } from '@angular/router';
 import { RxState } from '@rx-angular/state';
 import { CreateItemGQL, CreateItemMutation } from '@tribes/data-access';
@@ -38,7 +38,6 @@ export class ScanToRegisterComponent implements OnDestroy {
   barcodeInput$ = new Subject<string>()
   cameraStateInput$ = new BehaviorSubject<number>(0)
   cameraState$ = this.state.select('cameraState')
-  saveItem$ = new Subject<any>()
   item$ = this.state.select('item')
 
   constructor(

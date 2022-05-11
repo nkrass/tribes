@@ -1,131 +1,126 @@
-<h4>Оформление заказа</h4>
-<hr class="mt-2 mb-2">
-<form *ngIf="formAddress" [formGroup]="formAddress">
-  <div class="row">
-    <div class="col-sm-4">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('lastname')?.invalid && formAddress.get('lastname')?.touched}">
-        <label for="lastname">Фамилия (*)</label>
-        <input class="form-control" type="text" id="lastname" name="lastname" formControlName="lastname">
-        <div class="form-control-feedback" *ngIf="formAddress.get('lastname')?.invalid && formAddress.get('lastname')?.touched">Введите Вашу фамилию</div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('firstname')?.invalid && formAddress.get('firstname')?.touched}">
-        <label for="firstname">Имя (*)</label>
-        <input class="form-control" type="text" id="firstname" name="firstname" formControlName="firstname">
-        <div class="form-control-feedback" *ngIf="formAddress.get('firstname')?.invalid && formAddress.get('firstname')?.touched">Введите Ваше имя!</div>
-      </div>
-    </div>
-    <div class="col-sm-4">
-      <!-- <div class="form-group" [ngClass]="{'has-danger': formAddress.get('patronymic').invalid && formAddress.get('patronymic').touched}"> -->
-        <div class="form-group">
-        <label for="patronymic">Отчество</label>
-        <input class="form-control" type="text" id="patronymic" name="patronymic" formControlName="patronymic">
-        <!-- <div class="form-control-feedback" *ngIf="formAddress.get('patronymic').invalid && formAddress.get('patronymic').touched">Введите Ваше отчество</div> -->
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('address1')?.invalid && formAddress.get('address1')?.touched}">
-        <label for="address1">Улица, дом (*)</label>
-        <input class="form-control" type="text" id="address1" name="address1" formControlName="address1">
-        <div class="form-control-feedback" *ngIf="formAddress.get('address1')?.invalid && formAddress.get('address1')?.touched">
-          Введите адрес доставки
+<div class="card mt-2">
+  <div class="card-body">
+    <h5 class="card-title">Оформление заказа</h5>
+    <form *ngIf="formAddress" [formGroup]="formAddress">
+      <div class="row">
+        <div class="col-sm-4">
+          <div class="form-group" [ngClass]="{'has-danger': formAddress.get('lastname')?.invalid && formAddress.get('lastname')?.touched}">
+            <label for="lastname">Фамилия (*)</label>
+            <input class="form-control" type="text" id="lastname" name="lastname" formControlName="lastname">
+            <div class="form-text text-muted" *ngIf="formAddress.get('lastname')?.invalid && formAddress.get('lastname')?.touched">Введите Вашу фамилию</div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <div class="form-group" [ngClass]="{'has-danger': formAddress.get('firstname')?.invalid && formAddress.get('firstname')?.touched}">
+            <label for="firstname">Имя (*)</label>
+            <input class="form-control" type="text" id="firstname" name="firstname" formControlName="firstname">
+            <div class="form-text text-muted" *ngIf="formAddress.get('firstname')?.invalid && formAddress.get('firstname')?.touched">Введите Ваше имя!</div>
+          </div>
+        </div>
+        <div class="col-sm-4">
+          <!-- <div class="form-group" [ngClass]="{'has-danger': formAddress.get('patronymic').invalid && formAddress.get('patronymic').touched}"> -->
+            <div class="form-group">
+            <label for="patronymic">Отчество</label>
+            <input class="form-control" type="text" id="patronymic" name="patronymic" formControlName="patronymic">
+            <!-- <div class="form-control-feedback" *ngIf="formAddress.get('patronymic').invalid && formAddress.get('patronymic').touched">Введите Ваше отчество</div> -->
+          </div>
         </div>
       </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('address2')?.invalid && formAddress.get('address2')?.touched}">
-        <label for="address2">Квартира / офис (*)</label>
-        <input class="form-control" type="text" id="address2" name="address2" formControlName="address2">
-        <div class="form-control-feedback" *ngIf="formAddress.get('address2')?.invalid && formAddress.get('address2')?.touched">
-          Введите номер квартиры / офиса
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="{'has-danger': formAddress.get('address1')?.invalid && formAddress.get('address1')?.touched}">
+            <label for="address1">Улица, дом (*)</label>
+            <input class="form-control" type="text" id="address1" name="address1" formControlName="address1">
+            <div class="form-text text-muted" *ngIf="formAddress.get('address1')?.invalid && formAddress.get('address1')?.touched">
+              Введите адрес доставки
+            </div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="{'has-danger': formAddress.get('address2')?.invalid && formAddress.get('address2')?.touched}">
+            <label for="address2">Квартира / офис (*)</label>
+            <input class="form-control" type="text" id="address2" name="address2" formControlName="address2">
+            <div class="form-text text-muted" *ngIf="formAddress.get('address2')?.invalid && formAddress.get('address2')?.touched">
+              Введите номер квартиры / офиса
+            </div>
+          </div>
         </div>
       </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('city')?.invalid && formAddress.get('city')?.touched}">
-        <label for="city">Город (*)</label>
-        <input class="form-control" type="text" name="city" id="city" formControlName="city">
-        <div class="form-control-feedback" *ngIf="formAddress.get('city')?.invalid && formAddress.get('city')?.touched">Введите название города</div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="{'has-danger': formAddress.get('city')?.invalid && formAddress.get('city')?.touched}">
+            <label for="city">Город (*)</label>
+            <input class="form-control" type="text" name="city" id="city" formControlName="city">
+            <div class="form-text text-muted" *ngIf="formAddress.get('city')?.invalid && formAddress.get('city')?.touched">Введите название города</div>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="{'has-danger': formAddress.get('phone')?.invalid && formAddress.get('phone')?.touched}">
+            <label for="phone">Номер телефона для связи (*)</label>
+            <div class="wrapper">
+              <ngx-intl-tel-input 
+                [cssClass]="'form-control'" 
+                [preferredCountries]="preferredCountries"
+                [enableAutoCountrySelect]="true" 
+                [enablePlaceholder]="true" 
+                [searchCountryFlag]="true"
+                [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" 
+                [searchCountryPlaceholder]="'Выберите страну'"
+                [selectFirstCountry]="false"
+                [selectedCountryISO]="CountryISO.Russia" [maxLength]="15"
+                [phoneValidation]="true" 
+                [separateDialCode]="separateDialCode"
+                [enablePlaceholder]="true"
+    
+                [numberFormat]="PhoneNumberFormat" name="phone" formControlName="phone">
+              </ngx-intl-tel-input>
+            </div>
+            <!-- <input class="form-control" type="text" id="phone" name="phone" formControlName="phone"> -->
+            <div class="form-text text-muted" *ngIf="formAddress.get('phone')?.invalid && formAddress.get('phone')?.touched">Введите Ваш телефон</div>
+          </div>
+        </div>
       </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('phone')?.invalid && formAddress.get('phone')?.touched}">
-        <label for="phone">Номер телефона для связи (*)</label>
-        <div class="wrapper">
-          <ngx-intl-tel-input 
-            [cssClass]="'form-control'" 
-            [preferredCountries]="preferredCountries"
-            [enableAutoCountrySelect]="true" 
-            [enablePlaceholder]="true" 
-            [searchCountryFlag]="true"
-            [searchCountryField]="[SearchCountryField.Iso2, SearchCountryField.Name]" 
-            [searchCountryPlaceholder]="'Выберите страну'"
-            [selectFirstCountry]="false"
-            [selectedCountryISO]="CountryISO.Russia" [maxLength]="15"
-            [phoneValidation]="true" 
-            [separateDialCode]="separateDialCode"
-            [enablePlaceholder]="true"
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="country">Страна</label>
+            <select class="form-control" id="country" name="country" formControlName="country">
+              <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
+            </select>
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group" [ngClass]="{'has-danger': formAddress.get('email')?.invalid && formAddress.get('email')?.touched}">
+            <label for="email">E-mail (*)</label>
+            <input class="form-control" type="email" id="email" name="email" formControlName="email">
+            <div class="form-text text-muted" *ngIf="formAddress.get('email')?.invalid && formAddress.get('email')?.touched">Введите Ваш E-mail</div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="company">Компания</label>
+            <input class="form-control" type="text" id="company" name="company" formControlName="company">
+          </div>
+        </div>
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="zip">Индекс (для международных отправлений)</label>
+            <input class="form-control" type="text" name="zip" id="zip" formControlName="zip">
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12">
+          <p>(*) обязательные поля</p>
+        </div>
+      </div>
+    </form>
+    <hr class="mt-2 mb-2">
+    <tribes-checkout-footer [buttons]="['backToCart', 'completeOrder']" (completeOrder)="onCompleteOrder()" [continueEnabled]="formAddress.valid"></tribes-checkout-footer>
+  </div>
+</div>
 
-            [numberFormat]="PhoneNumberFormat" name="phone" formControlName="phone">
-          </ngx-intl-tel-input>
-        </div>
-        <!-- <input class="form-control" type="text" id="phone" name="phone" formControlName="phone"> -->
-        <div class="form-control-feedback" *ngIf="formAddress.get('phone')?.invalid && formAddress.get('phone')?.touched">Введите Ваш телефон</div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label for="country">Страна</label>
-        <select class="form-control" id="country" name="country" formControlName="country">
-          <option *ngFor="let country of countries" value="{{country}}">{{country}}</option>
-        </select>
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="form-group" [ngClass]="{'has-danger': formAddress.get('email')?.invalid && formAddress.get('email')?.touched}">
-        <label for="email">E-mail (*)</label>
-        <input class="form-control" type="email" id="email" name="email" formControlName="email">
-        <div class="form-control-feedback" *ngIf="formAddress.get('email')?.invalid && formAddress.get('email')?.touched">Введите Ваш E-mail</div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label for="company">Компания</label>
-        <input class="form-control" type="text" id="company" name="company" formControlName="company">
-      </div>
-    </div>
-    <div class="col-sm-6">
-      <div class="form-group">
-        <label for="zip">Индекс (для международных отправлений)</label>
-        <input class="form-control" type="text" name="zip" id="zip" formControlName="zip">
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-12">
-      <p>(*) обязательные поля</p>
-    </div>
-  </div>
-  <!-- <h4>Адрес доставки</h4>
-  <hr class="pb-1">
-  <div class="form-group">
-    <label class="custom-control custom-checkbox">
-      <input class="custom-control-input" type="checkbox" checked>
-      <span class="custom-control-indicator"></span>
-      <span class="custom-control-description">Такой же, как и выше</span>
-      
-    </label>
-  </div> -->
-  <!-- <a href="" (click)="onFillForm($event)">Debug: Fill out form</a> -->
-</form>
-<tribes-checkout-footer [buttons]="['backToCart', 'completeOrder']" (completeOrder)="onCompleteOrder()" [continueEnabled]="formAddress.valid"></tribes-checkout-footer>
-<!-- <tribes-checkout-footer [buttons]="['backToCart', 'continue']"  (continue)="onContinue()" [continueEnabled]="formAddress.valid"></tribes-checkout-footer> -->
+
+

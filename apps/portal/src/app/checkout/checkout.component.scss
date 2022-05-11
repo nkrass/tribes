@@ -1,9 +1,7 @@
 @import 'variables';
-@import 'mixins';
 
 .checkout-steps {
   margin-bottom: floor($grid-vertical-step * 1.7); // ~40px
-  @include clearfix;
 
   > a,
   > button {
