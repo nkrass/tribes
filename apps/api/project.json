@@ -27,7 +27,7 @@
       "options": {
         "commands": [
           {
-            "command": "cross-env NO_COLOR= cross-env IS_NOT_SLS= npx sls offline start"
+            "command": "sls offline start --allowCache"
           }
         ]
       }

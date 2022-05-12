@@ -1,7 +1,7 @@
 'use strict';
 require('source-map-support/register');
 const awsServerlessExpress = require('@vendia/serverless-express');
-const server = require('./dist/apps/portal/server/main.js');
+const server = require('dist/apps/portal/server/main.js');
 let serverlessExpressInstance;
 
 async function setup (event, context) {
@@ -13,6 +13,6 @@ function handler (event, context) {
   return setup(event, context);
 }
 
-module.exports.server = handler
+module.exports.handler = handler
 
 

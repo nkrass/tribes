@@ -1,4 +1,4 @@
-import {Subject, Subscription, filter} from "rxjs";
+import {Subject, Subscription} from "rxjs";
 import {ApolloQueryResult} from "@apollo/client/core";
 import * as Apollo from "apollo-angular";
 import {QueryRef} from "apollo-angular";

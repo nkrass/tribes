@@ -3,7 +3,7 @@ import { Product } from "../product/entities/product.model";
 import { google } from 'googleapis';
 import { Nomenclature, Material } from "../product/dto/create-product.input";
 import { v4 } from 'uuid';
-import { ConsoleLogger, Injectable } from "@nestjs/common";
+import { Injectable } from "@nestjs/common";
 import { Barcode } from "../product/entities/barcode.model";
 import { environment } from '../../environments/environment';
 import { Review } from "../review/entities/review.model";

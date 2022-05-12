@@ -5,7 +5,7 @@ import { SEOService } from '../shared/seoservice.service';
 import { Product as SchemaProduct, WithContext } from 'schema-dts';
 import { environment } from '../../../src/environments/environment'
 import { DOCUMENT, isPlatformBrowser } from '@angular/common';
-import { Meta, Title } from '@angular/platform-browser';
+import { Meta } from '@angular/platform-browser';
 
 import { RxState } from '@rx-angular/state';
 import { ProductGQL, ProductQuery } from '@tribes/data-access';

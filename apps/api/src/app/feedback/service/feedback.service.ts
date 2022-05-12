@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel, Model } from 'nestjs-dynamoose';
-import { CreateFeedbackInput, FeedbackType } from '../dto/create-feedback.input';
+import { CreateFeedbackInput } from '../dto/create-feedback.input';
 import { Feedback, FeedbackKey } from '../entities/feedback.model';
 import { v4 } from 'uuid'
 import { UpdateFeedbackInput } from '../dto/update-feedback.input';

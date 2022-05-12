@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 
 import { CheckoutService } from './shared/checkout.service';
 import { takeUntil } from 'rxjs';
-import { DOCUMENT, isPlatformBrowser } from '@angular/common';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'tribes-checkout',

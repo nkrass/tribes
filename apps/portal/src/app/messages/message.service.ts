@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ToastrService, IndividualConfig } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 import { BootstrapToast, BootstrapToastConfig } from './bootstrap.toast'
 
 @Injectable()

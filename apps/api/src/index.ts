@@ -9,6 +9,7 @@ import serverlessExpress from '@vendia/serverless-express';
 import { APIGatewayProxyHandler, Handler } from 'aws-lambda';
 import express = require('express');
 import { AppModule } from './app/app.module';
+// import { createServer, proxy, Response } from 'aws-serverless-express';
 
 let cachedServer: Handler;
 
@@ -25,14 +26,15 @@ const bootstrapServer = async (): Promise<Handler> => {
     app: expressApp,
   });
 };
-const server: APIGatewayProxyHandler = async (
+
+export async function handler (
   event,
   context,
   callback,
-) => {
+) {
+  console.log('we are here')
   if (!cachedServer) {
     cachedServer = await bootstrapServer();
   }
   return cachedServer(event, context, callback);
 };
-export default server;
