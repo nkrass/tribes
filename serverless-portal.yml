@@ -1,4 +1,4 @@
-service: api3bs
+service: portal3bs
 useDotenv: true
 
 provider:
@@ -7,11 +7,6 @@ provider:
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'eu-north-1'}
   timeout: 900
-  # webpack:
-  #   webpackConfig: 'webpack.config.js'
-  #   includeModules: true
-  #   packager: 'npm'
-  #   packExternalModulesMaxBuffer: 204800 
   environment:
     SERVICE: ${self:service}
     STAGE: ${self:provider.stage}
@@ -38,12 +33,18 @@ provider:
             - dynamodb:BatchWriteItem
             - dynamodb:BatchGetItem
           Resource: arn:aws:dynamodb:${self:provider.region}:*:*
+functions:
+  server:
+    handler: handler.handler
+    events:
+      - http:
+          cors: true
+          path: '{proxy+}'
+          method: any
+  environment:
+      NODE_ENV: production
 
 plugins:
-  - serverless-esbuild
-  # - serverless-plugin-typescript
-  # - serverless-plugin-optimize
-  - serverless-dynamodb-local
   - serverless-apigw-binary
   - serverless-api-cloudfront
   # - serverless-plugin-warmup
@@ -115,20 +116,13 @@ package:
     - '!credentials.json'
 
 custom:
-  esbuild:
-    # plugins : ./plugins.js
-    packager: pnpm
-    bundle: true
-    minify: true
-    sourcemap: true
-    keepNames: true
-    # external:
-    #   - lodash
   apigwBinary: # Library to add support for api gateway binary types
     types:
       - '*/*'
+  serverless-offline:
+    httpPort: 4200
   apiCloudFront:
-    domain: api.mytribes.ru
+    domain: mytribes.ru
     basePath: prod
     certificate: arn:aws:acm:us-east-1:221183097270:certificate/fcf98f33-59bc-498b-91a6-bc5e5593185d
     compress: true
@@ -182,15 +176,6 @@ custom:
       dbPath: './'
       migrate: true
       seed: false
-
-functions:
-  server:
-    handler: apps/api/src/index.default
-    events:
-      - http:
-          cors: true
-          path: '{proxy+}'
-          method: any
 
 resources:
   - ${file(apps/api/resource/dynamodb.yml)}

@@ -1,0 +1,39 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "allowJs": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "strictPropertyInitialization": false,
+    "strict": true,
+    "noImplicitAny": false,
+    "noImplicitOverride": false,
+    "importHelpers": true,
+    "target": "ES2020",
+    "module": "commonjs",
+    "lib": ["es2017", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": "./",
+    "paths": {
+      "@env/*": ["apps/portal/src/environments/*"],
+      "@tribes/analytics": ["libs/analytics/src/index.ts"],
+      "@tribes/api-interfaces": ["libs/api-interfaces/src/index.ts"],
+      "@tribes/cart": ["libs/cart/src/index.ts"],
+      "@tribes/colors-dictionary": ["libs/colors-dictionary/src/index.ts"],
+      "@tribes/data-access": ["libs/data-access/src/index.ts"],
+      "@tribes/global-state": ["libs/global-state/src/index.ts"],
+      "@tribes/seo": ["libs/seo/src/index.ts"],
+      "@tribes/storage": ["libs/storage/src/index.ts"],
+      "@tribes/ui": ["libs/ui/src/index.ts"],
+      "swiper_angular": ["node_modules/swiper/angular"]
+    }
+  },
+  "exclude": ["node_modules", "tmp", "**/*.spec.ts", "**/*.test.ts"]
+}

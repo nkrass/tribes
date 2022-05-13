@@ -1,0 +1,191 @@
+service: api3bs
+useDotenv: true
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  stage: ${opt:stage, 'dev'}
+  region: ${opt:region, 'eu-north-1'}
+  timeout: 900
+  # webpack:
+  #   webpackConfig: 'webpack.config.js'
+  #   includeModules: true
+  #   packager: 'npm'
+  #   packExternalModulesMaxBuffer: 204800 
+  environment:
+    SERVICE: ${self:service}
+    STAGE: ${self:provider.stage}
+    REGION: ${self:provider.region}
+    NO_COLOR: ${env:NO_COLOR, 'true'}
+    NODE_ENV: ${opt:stage, self:provider.stage}
+    JWT_SECRET: ${env:JWT_SECRET}
+    GOOGLE_CLIENT_EMAIL: ${env:GOOGLE_CLIENT_EMAIL}
+    GOOGLE_PRIVATE_KEY: ${env:GOOGLE_PRIVATE_KEY}
+  apiGateway:
+    shouldStartNameWithService: true
+  iam:
+    role:
+      statements:
+        - Effect: Allow
+          Action:
+            - dynamodb:DescribeTable
+            - dynamodb:Query
+            - dynamodb:Scan
+            - dynamodb:GetItem
+            - dynamodb:PutItem
+            - dynamodb:UpdateItem
+            - dynamodb:DeleteItem
+            - dynamodb:BatchWriteItem
+            - dynamodb:BatchGetItem
+          Resource: arn:aws:dynamodb:${self:provider.region}:*:*
+functions:
+  server:
+    handler: apps/api/src/index.handler
+    events:
+      - http:
+          cors: true
+          path: '{proxy+}'
+          method: any
+    environment:
+      NODE_ENV: production
+
+plugins:
+  - serverless-webpack
+  - serverless-apigw-binary
+  - serverless-api-cloudfront
+  # - serverless-plugin-warmup
+  # - serverless-dynamodb-local
+  # - serverless-offline
+
+# remove the unnecessary packages to keep small upload size
+package:
+  individually: true
+  patterns:  
+    - '!node_modules/.bin/**'
+    - '!node_modules/.cache/**'
+    - '!node_modules/**/README*'
+    - '!node_modules/**/readme*'
+    - '!node_modules/**/Readme*'
+    - '!node_modules/**/LICENSE*'
+    - '!node_modules/**/License*'
+    - '!node_modules/**/license*'
+    - '!node_modules/**/test/**'
+    - '!node_modules/**/Test/**'
+    - '!node_modules/**/TEST/**'
+    - '!node_modules/**/aws-sdk/**'
+    - '!node_modules/aws-sdk/**'
+    - '!node_modules/@angular/**'
+    - '!node_modules/@angular-devkit/**'
+    - '!node_modules/@babel/**'
+    - '!node_modules/browserify*/**'
+    - '!node_modules/**/*.css'
+    - '!node_modules/**/test/**'
+    - '!node_modules/**/example*/**'
+    - '!node_modules/**/Example*/**'
+    - '!node_modules/**/EXAMPLE*/**'
+    - '!node_modules/**/History*'
+    - '!node_modules/**/History*'
+    - '!node_modules/**/HISTORY*'
+    - '!node_modules/**/Changelog*'
+    - '!node_modules/**/changelog*'
+    - '!node_modules/**/CHANGELOG*'
+    - '!node_modules/**/CHANGES*'
+    - '!node_modules/**/Changes*'
+    - '!node_modules/**/changes*'
+    - '!node_modules/**/Makefile*'
+    - '!node_modules/**/makefile*'
+    - '!node_modules/**/SECURITY*'
+    - '!node_modules/**/Security*'
+    - '!node_modules/**/security*'
+    - '!node_modules/**/types.d.ts'
+    - '!node_modules/**/*.ts'
+    - '!.vscode/**'
+    - '!e2e/**'
+    - '!ux-testing/**'
+    - '!.gitignore'
+    - '!angular.json'
+    - '!README.md'
+    - '!karma.conf.js'
+    - '!protractor.conf.js'
+    - '!rename_images.js'
+    - '!SECURITY.md'
+    - '!server.ts'
+    - '!tsconfig.json'
+    - '!tslint.json'
+    - '!.cache/**'
+    - '!.gitattributes'
+    - '!.yarnclean'
+    - '!.DS_Store'
+    - '!tsconfig.base.json'
+    - '!package.json'
+    - '!package-lock.json'
+    - '!browserlist'
+    - '!credentials.json'
+
+custom:
+  webpack:
+    webpackConfig: 'webpack.config.js'
+    includeModules: true
+    packager: 'yarn'
+    packExternalModulesMaxBuffer: 204800 
+  apigwBinary: # Library to add support for api gateway binary types
+    types:
+      - '*/*'
+  apiCloudFront:
+    domain: api.mytribes.ru
+    basePath: prod
+    certificate: arn:aws:acm:us-east-1:221183097270:certificate/fcf98f33-59bc-498b-91a6-bc5e5593185d
+    compress: true
+    cookies: none
+    headers:
+      # - x-api-key
+      - Accept
+      - Authorization
+    querystring: all
+    priceClass: PriceClass_All
+    minimumProtocolVersion: TLSv1.2_2018
+  # warmup:
+  #   default:
+  #     enabled: true # Whether to warm up functions by default or not
+  #     folderName: '.warmup' # Name of the folder created for the generated warmup 
+  #     cleanFolder: false
+  #     memorySize: 256
+  #     name: warmer-default
+  #     role: IamRoleLambdaExecution
+  #     tags:
+  #       Project: tribes_api
+  #       Owner: tribes_llc
+  #     vpc: false
+  #     events:
+  #       - schedule: 'cron(0/3 1-23 ? * MON-FRI *)' # Run WarmUp every 5 minutes Mon-Fri between 8:00am and 5:55pm (UTC)
+  #     package:
+  #       individually: true
+  #       #exclude: # exclude additional binaries that are included at the serverless package level
+  #       #  - ../**
+  #       #  - ../../**
+  #       #include:
+  #       #  - ./**
+  #     timeout: 20
+  #     tracing: false
+  #     prewarm: true # Run WarmUp immediately after a deploymentlambda
+  #     #clientContext:
+  #     #  source: serverless-plugin-warmup
+  #     #  other: '20'
+  #     #payload: 
+  #     #  source: serverless-plugin-warmup
+  #     #  other: 20
+  #     #payloadRaw: true # Won't JSON.stringify() the payload, may be necessary for Go/AppSync deployments
+  #     concurrency: 1 # Warm up 5 concurrent instances
+
+  dynamodb:
+    stages:
+      - ${self:provider.stage}
+    start:
+      port: 8000
+      inMemory: false
+      dbPath: './'
+      migrate: true
+      seed: false
+
+resources:
+  - ${file(apps/api/resource/dynamodb.yml)}
