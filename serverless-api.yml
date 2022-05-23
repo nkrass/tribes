@@ -3,7 +3,9 @@ useDotenv: true
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs16.x
+  architecture: arm64
+  memorySize: 1536
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'eu-north-1'}
   timeout: 900
@@ -54,8 +56,8 @@ plugins:
   - serverless-apigw-binary
   - serverless-api-cloudfront
   # - serverless-plugin-warmup
-  # - serverless-dynamodb-local
-  # - serverless-offline
+  - serverless-dynamodb-local
+  - serverless-offline
 
 # remove the unnecessary packages to keep small upload size
 package:
@@ -132,9 +134,9 @@ custom:
     types:
       - '*/*'
   apiCloudFront:
-    domain: api.mytribes.ru
+    domain: api.3bs.store
     basePath: prod
-    certificate: arn:aws:acm:us-east-1:221183097270:certificate/fcf98f33-59bc-498b-91a6-bc5e5593185d
+    certificate: arn:aws:acm:us-east-1:221183097270:certificate/a63e96d1-cd28-45a1-8960-c5a9f740d59c
     compress: true
     cookies: none
     headers:

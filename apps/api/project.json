@@ -17,7 +17,7 @@
       "options": {
         "commands": [
           {
-            "command": "sls dynamodb start"
+            "command": "sls dynamodb start --config=serverless-api.yml"
           }
         ]
       }

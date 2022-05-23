@@ -1,4 +1,4 @@
-module.exports = {
+export default {
   displayName: 'global-state',
   preset: '../../jest.preset.ts',
   setupFilesAfterEnv: ['<rootDir>/src/test-setup.ts'],

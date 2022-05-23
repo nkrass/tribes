@@ -3,7 +3,9 @@ useDotenv: true
 
 provider:
   name: aws
-  runtime: nodejs14.x
+  runtime: nodejs16.x
+  architecture: arm64
+  memorySize: 1536
   stage: ${opt:stage, 'dev'}
   region: ${opt:region, 'eu-north-1'}
   timeout: 900
@@ -18,21 +20,6 @@ provider:
     GOOGLE_PRIVATE_KEY: ${env:GOOGLE_PRIVATE_KEY}
   apiGateway:
     shouldStartNameWithService: true
-  iam:
-    role:
-      statements:
-        - Effect: Allow
-          Action:
-            - dynamodb:DescribeTable
-            - dynamodb:Query
-            - dynamodb:Scan
-            - dynamodb:GetItem
-            - dynamodb:PutItem
-            - dynamodb:UpdateItem
-            - dynamodb:DeleteItem
-            - dynamodb:BatchWriteItem
-            - dynamodb:BatchGetItem
-          Resource: arn:aws:dynamodb:${self:provider.region}:*:*
 functions:
   server:
     handler: handler.handler
@@ -122,9 +109,9 @@ custom:
   serverless-offline:
     httpPort: 4200
   apiCloudFront:
-    domain: mytribes.ru
+    domain: 3bs.store
     basePath: prod
-    certificate: arn:aws:acm:us-east-1:221183097270:certificate/fcf98f33-59bc-498b-91a6-bc5e5593185d
+    certificate: arn:aws:acm:us-east-1:221183097270:certificate/a63e96d1-cd28-45a1-8960-c5a9f740d59c
     compress: true
     cookies: none
     headers:
@@ -166,16 +153,4 @@ custom:
   #     #  other: 20
   #     #payloadRaw: true # Won't JSON.stringify() the payload, may be necessary for Go/AppSync deployments
   #     concurrency: 1 # Warm up 5 concurrent instances
-
-  dynamodb:
-    stages:
-      - ${self:provider.stage}
-    start:
-      port: 8000
-      inMemory: false
-      dbPath: './'
-      migrate: true
-      seed: false
-
-resources:
-  - ${file(apps/api/resource/dynamodb.yml)}
+  
