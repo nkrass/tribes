@@ -27,7 +27,7 @@ export class BarcodeResolver {
   
   @ResolveField(() => Product)
   async product(@Parent() barcode: Barcode){
-    return this.productService.findOne({sku: barcode.sku});
+    return this.productService.findOne(barcode.sku);
   }
   
   @ResolveField(() => [Review])
@@ -44,15 +44,18 @@ export class BarcodeResolver {
   }
   @ResolveField(() => [String])
   async imagesSrc(@Parent() barcode: Barcode){
-    return barcode.images.map(s => `https://cdn.mytribes.ru/${barcode.sku}/${barcode.sku}-${s}.jpg`)
+    const product = await this.product(barcode);
+    return product.images.map(s => `https://cdn.mytribes.ru/${barcode.sku}/${barcode.sku}-${s}.jpg`)
   }
   @ResolveField(() => String)
   async coverImage(@Parent() barcode: Barcode){
-    return `https://cdn.mytribes.ru/${barcode.sku}/${barcode.sku}-${barcode.images[0]}.jpg`
+    const product = await this.product(barcode);
+    return `https://cdn.mytribes.ru/${barcode.sku}/${barcode.sku}-${product.images[0]}.jpg`
   }
   @ResolveField(() => [String])
   async videosSrc(@Parent() barcode: Barcode){
-    return barcode.videos.map(s => `https://cdn.mytribes.ru/${barcode.sku}/${barcode.sku}-${s}.mov`)
+    const product = await this.product(barcode);
+    return product.videos.map(s => `https://cdn.mytribes.ru/${barcode.sku}/${barcode.sku}-${s}.mov`)
   }
 
   @UseGuards(GqlAuthGuard)
@@ -97,8 +100,4 @@ export class BarcodeResolver {
   barcodes(@Args('input') input: FilterBarcodeInput) {
     return this.barcodeService.findByFilter(input);
   }
-  // @Query(() => [Barcode], { complexity: (options: ComplexityEstimatorArgs) => options.args.count * options.childComplexity })
-  // async cartBarcodes(@Args({ name: 'input', type: () => [GetBarcodeInput]}) input: [GetBarcodeInput]){
-  //   return this.barcodeService.getBatchBySkus(input);
-  // }
 }

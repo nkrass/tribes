@@ -1,56 +1,20 @@
-import { Field, InputType, InterfaceType, ObjectType } from '@nestjs/graphql';
+import { Field, InputType, InterfaceType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
-import { ProductCategory } from '../entities/product-category.enum';
-import { ProductGender } from '../entities/product-gender.enum';
-import { ProductStatus } from '../entities/product.enum';
+import { ProductCategory } from '../entities/types/product-category.enum';
+import { ProductStatus } from '../entities/types/product.enum';
+import { ExternalId } from '../entities/types/external-id.type';
+import { Material } from '../entities/types/material.type';
+import { Nomenclature } from '../entities/types/nomenclature.type';
+import { ProductGender } from '../entities/types/product-gender.enum';
+import { ProductRegion } from '../entities/types/product-region.enum';
 
-
-@ObjectType('MaterialType')
-@InputType('MaterialInput')
-export class Material {
-  @Field( () => String, {nullable: true})
-  @IsString()
-  @Transform((s) => s.value?.toLowerCase())
-  material: string;
-
-  @Field( () => Number, {nullable: true})
-  @IsNumber()
-  quantity: number;
-}
-
-@ObjectType('ExternalId')
-@InputType('ExternalIdInput')
-export class ExternalId {
-  @Field(() => String, {nullable: true})
-  @IsString()
-  @Transform((s) => s.value?.toLowerCase())
-  name: string;
-
-  @Field(() => String, {nullable: true})
-  @IsString()
-  @Transform((s) => s.value?.toLowerCase())
-  id: string;
-}
-@InputType("NomenclatureInput")
-@ObjectType("Nomenclature")
-export class Nomenclature {
-  @IsString()
-  @Field(() => String, {nullable: true})
-  name: string
-  @IsString()
-  @Field(() => String, {nullable: true})
-  tnvd: string
-  @IsNumber()
-  @Field(() => Number, {nullable: true})
-  cost: number
-  @IsNumber()
-  @Field(() => Number, {nullable: true})
-  price: number
-}
 @InputType()
 @InterfaceType('BaseProduct', {})
 export class CreateProductInput {
+  @Field(() => ProductRegion, {nullable: false})
+  region: ProductRegion;
+  
   @IsString()
   @Transform((s) => s.value?.toLowerCase())
   @Field(() => String)
@@ -141,17 +105,17 @@ export class CreateProductInput {
   @IsOptional()
   @Field(() => [String], {nullable: true})
   @IsArray()
-  images: [string];
+  images: string[];
 
   @IsOptional()
   @Field(() => [String], {nullable: true})
   @IsArray()
-  videos: [string];
+  videos: string[];
 
   @IsOptional()
   @IsString()
   @Field(()=> Number, {nullable: true})
-  wildberriesId: number;
+  orderIndex: number;
 
   @IsOptional()
   @IsArray()
@@ -162,7 +126,7 @@ export class CreateProductInput {
   @IsArray()
   @Transform((e) => e.value?.map((s: string) => s?.toLowerCase()))
   @Field(() => [String], {nullable: true})
-  crossSale: [string];
+  crossSale: string[];
 
   @IsOptional()
   @IsString()

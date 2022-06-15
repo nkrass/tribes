@@ -31,7 +31,7 @@ export class OrderResolver {
   @ResolveField(() => Product)
   async product(@Parent() { productBarcode }: Order){
     const { sku } = await this.barcodesService.findOne({barcode: productBarcode});
-    return this.productService.findOne({ sku });
+    return this.productService.findOne(sku);
   }
 
   @UseGuards(GqlAuthGuard)

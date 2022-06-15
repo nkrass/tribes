@@ -5,6 +5,13 @@ export const BarcodeSchema = new Schema({
     type: String,
     hashKey: true
   },
+  region: {
+    type: String,
+    index: {
+      global: true,
+      rangeKey: 'barcode',
+    }
+  },
   sku: { 
     type: String,
     index: {
@@ -19,14 +26,15 @@ export const BarcodeSchema = new Schema({
       rangeKey: 'barcode',
     },
   },
-  wildberriesId: { 
-    type: Number, 
-    index: { 
-      global: true, 
-      rangeKey: 'barcode'
-    }
-  },
-  size: {type: String,
+  // wildberriesId: { 
+  //   type: Number, 
+  //   index: { 
+  //     global: true, 
+  //     rangeKey: 'barcode'
+  //   }
+  // },
+  size: {
+    type: String,
     index: {
       global: true,
       rangeKey: 'stock',
@@ -35,7 +43,7 @@ export const BarcodeSchema = new Schema({
   stock: { type: Number},
   gender: {
     type: String,
-    enum: ["women", "men", "unisex", "unset"],
+    // enum: ["women", "men", "unisex", "unset"],
     index: {
       global: true,
       rangeKey: 'stock',
@@ -92,7 +100,7 @@ export const BarcodeSchema = new Schema({
   },
   category: {
     type: String,
-    enum: ["skirts", "shorts", "sundresses", "turtlenecks", "dresses", "hoodies", "blouses", "tops", "sweaters", "trousers", "costumes", "jackets", "tshirts", "unset" ],
+    // enum: ["skirts", "shorts", "sundresses", "turtlenecks", "dresses", "hoodies", "blouses", "tops", "sweaters", "trousers", "costumes", "jackets", "tshirts", "unset" ],
     index: {
       global: true,
       rangeKey: 'stock',
@@ -100,34 +108,34 @@ export const BarcodeSchema = new Schema({
   },
   status: {
     type: String,
-    enum: ["available", "soldout", "deleted", "draft"],
+    // enum: ["available", "soldout", "deleted", "draft"],
   },
 
-  title: { type: String },
-  titleFull: { type: String },
-  description: { type: String },
-  descriptionSeo: { type: String },
+  // title: { type: String },
+  // titleFull: { type: String },
+  // description: { type: String },
+  // descriptionSeo: { type: String },
   color: { type: String },
   colorGroup: { type: String },
-  materials: { 
-    type: Array, 
-    schema: [
-      {
-        type: Object,
-        schema: {
-          material: { type: String },
-          quantity: { type: Number }
-        }
-      }
-    ] },
+  // materials: { 
+  //   type: Array, 
+  //   schema: [
+  //     {
+  //       type: Object,
+  //       schema: {
+  //         material: { type: String },
+  //         quantity: { type: Number }
+  //       }
+  //     }
+  //   ] },
   priceBase: { type: Number },
   priceSale: { type: Number },
   tags: { type: String },
-  collection: { type: String },
-  images: {type: Array, schema: [{ type: String }]},
-  videos: {type: Array, schema: [{ type: String }]},
-  crossSale: {type: Array, schema: [{type: String}]},
-  manufactured: {type: String },
+  // collection: { type: String },
+  // images: {type: Array, schema: [{ type: String }]},
+  // videos: {type: Array, schema: [{ type: String }]},
+  // crossSale: {type: Array, schema: [{type: String}]},
+  manufactured: { type: String },
   notes: { type: String },
 
   externalId: {
@@ -146,12 +154,12 @@ export const BarcodeSchema = new Schema({
       }
     }]
   },
-  nomenclature: {type: Object, schema: {
-    name: { type: String },
-    tnvd: { type: String },
-    cost: { type: Number },
-    price: { type: Number },
-  }},
+  // nomenclature: {type: Object, schema: {
+  //   name: { type: String },
+  //   tnvd: { type: String },
+  //   cost: { type: Number },
+  //   price: { type: Number },
+  // }},
 
 
 

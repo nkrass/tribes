@@ -11,7 +11,7 @@ import { environment } from '../../../../../src/environments/environment'
 import { OffcanvasService } from '../../shared/offcanvas.service';
 import { AppGlobalState, APP_GLOBAL_STATE } from '@tribes/global-state';
 import { PlaceholderImage } from '../../../products/shared/product-placeholder.mock';
-import { ProductsListGQL, ProductsListQuery } from '@tribes/data-access';
+import { ProductRegion, ProductsListGQL, ProductsListQuery } from '@tribes/data-access';
 
 const staticAssetsUrl = environment.staticAssetsUrl
 
@@ -44,7 +44,7 @@ export class SearchComponent {
       debounceTime(700),
       distinctUntilChanged(),
       filter((term) => term.length > 2),
-      switchMap(str => this.productsGql.fetch({ input: { all: true, title: str } }).pipe(pluck('data', 'products')))
+      switchMap(str => this.productsGql.fetch({ input: { all: true, title: str, region: ProductRegion.Ru } }).pipe(pluck('data', 'products')))
     )
     this.globalState.connect('showSearch', this.toggleSearch$.asObservable())
     this.state.connect('products', products$)

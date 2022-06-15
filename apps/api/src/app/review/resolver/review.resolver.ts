@@ -24,7 +24,7 @@ export class ReviewResolver {
     ) {}
   @ResolveField('product', () => Product)
   async product(@Parent() review: Review){
-    return this.productService.findOne({sku: review.sku});
+    return this.productService.findOne(review.sku);
   }
   @UseGuards(GqlAuthGuard)
   @Mutation(() => Review)

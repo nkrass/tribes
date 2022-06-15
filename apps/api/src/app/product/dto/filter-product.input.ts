@@ -1,9 +1,9 @@
 import { Field, InputType, Int, InterfaceType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 import { IsString, IsOptional, IsNumber, IsBoolean } from 'class-validator';
-import { ProductCategory } from '../entities/product-category.enum';
-import { ProductGender } from '../entities/product-gender.enum';
-
+import { ProductCategory } from '../entities/types/product-category.enum';
+import { ProductGender } from '../entities/types/product-gender.enum';
+import { ProductRegion } from '../entities/types/product-region.enum';
 
 @InputType()
 @InterfaceType('GetProductInput')
@@ -22,21 +22,14 @@ class LimitArgs {
 
   @IsOptional()
   @Field(() => Int, {nullable: true})
-  limit = 20;
+  limit = 200;
 }
 
 @InputType()
 @InterfaceType('FilterProductInput')
 export class FilterProductInput extends LimitArgs{
-  // @Field({ nullable: true })
-  // @IsOptional()
-  // @IsString()
-  // id?: string;
-  // @Field({ nullable: true })
-  // @IsOptional()
-  // @IsString()
-  // @Transform((s) => s.value?.toLowerCase())
-  // barcode?: string;
+  @Field(()=> ProductRegion, { nullable: false })
+  region: ProductRegion;
 
   @Field(()=> String, { nullable: true })
   @IsOptional()
@@ -114,5 +107,5 @@ export class FilterProductInput extends LimitArgs{
   @IsOptional()
   @IsNumber()
   @Field(()=> Number, {nullable: true})
-  wildberriesId?: number;
+  orderIndex?: number;
 }

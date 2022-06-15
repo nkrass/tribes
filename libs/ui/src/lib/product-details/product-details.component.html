@@ -282,9 +282,9 @@
               <p><strong>Как сделать Заказ: {{product.title}} TRIBES</strong></p>
               <p><strong>На нашем сайте:</strong> выберите необходимый размер и цвет и нажмите кнопку "В КОРЗИНУ".</p>
               <p>На сайте партнеров: перейдите на сайт партнера в каталог бренда TRIBES и оформите заказ в соответствии с условиями на сайте партнера. Цена на сайте партнера может отличаться.</p>
-              <p>Артикул этого товара на сайте ООО «Вайлдберриз»: {{product.wildberriesId}}</p>
+              <p>Артикул этого товара на сайте ООО «Вайлдберриз»: {{product.externalId?.[0]?.id}}</p>
               <img src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg" data-src="{{staticAssetsUrl}}static/img/logo/logo_tribes_woodmark.svg" class="site-logo d-inline" alt="TRIBES — для ярких и смелых">
-              <a href="https://www.wildberries.ru/catalog/{{product.wildberriesId}}/detail.aspx" target="_blank" class="btn btn-primary btn-wb col-12 col-sm-12 col-md-6" >
+              <a href="https://www.wildberries.ru/catalog/{{product.externalId?.[0]?.id}}/detail.aspx" target="_blank" class="btn btn-primary btn-wb col-12 col-sm-12 col-md-6" >
                 <i class="icon-bag"></i> на сайте WILDBERRIES.RU
               </a>
           </div>

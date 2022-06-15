@@ -4,7 +4,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { environment } from '../../../../src/environments/environment'
 import { RxState } from '@rx-angular/state';
 import { PlaceholderImage, ProductMock } from '../shared/product-placeholder.mock';
-import { CategoriesListGQL, CategoriesListQuery, ProductCategory, ProductGender, ProductsListGQL, ProductsListQuery } from '@tribes/data-access';
+import { CategoriesListGQL, CategoriesListQuery, ProductCategory, ProductGender, ProductRegion, ProductsListGQL, ProductsListQuery } from '@tribes/data-access';
 import { ColorsDictionary } from '@tribes/colors-dictionary';
 import { OfferCatalog, WithContext } from 'schema-dts';
 
@@ -60,12 +60,14 @@ export class ProductsListComponent {
         gender: p.get('gender') as ProductGender || undefined,
         color: p.get('color') || undefined,
         size: p.get('size') || undefined,
+        region: ProductRegion.Ru
       }
     }).pipe(pluck('data', 'products'))
   }
   getCategories$ = (p: ParamMap): Observable<CategoriesListQuery['categories']> => {
     return this.categoriesList.fetch({
-      gender: p.get('gender') as ProductGender|| undefined
+      gender: p.get('gender') as ProductGender|| undefined,
+      region: ProductRegion.Ru
     }).pipe(pluck('data', 'categories'))
   }
   constructor(

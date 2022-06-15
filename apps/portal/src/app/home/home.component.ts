@@ -8,7 +8,7 @@ import { WithContext, WebSite} from "schema-dts";
 import { ActivatedRoute } from '@angular/router';
 import { environment } from '../../../src/environments/environment'
 import { SEOService, BrandDefaultMeta } from '../../app/shared/seoservice.service';
-import { ProductGender, ProductsListGQL, ProductsListQuery, ReviewsListGQL, ReviewsListQuery } from '@tribes/data-access';
+import { ProductGender, ProductRegion, ProductsListGQL, ProductsListQuery, ReviewsListGQL, ReviewsListQuery } from '@tribes/data-access';
 import { resizedImgUrl } from '../shared/utils/utils.utils';
 import { RxState } from '@rx-angular/state';
 
@@ -47,8 +47,8 @@ export class HomeComponent {
     private reviewsGql: ReviewsListGQL
   ) {
     this.state.connect(zip([
-      this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Women }}).pipe(pluck('data', 'products')),
-      this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Men }}).pipe(pluck('data', 'products'))
+      this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Women, region: ProductRegion.Ru }}).pipe(pluck('data', 'products')),
+      this.productsGql.fetch({input: {limit: 6, gender: ProductGender.Men, region: ProductRegion.Ru }}).pipe(pluck('data', 'products'))
     ]).pipe(
         map(([products_w, products_m]) => ([...products_w, ...products_m])),
         map((products) => ({products, isLoading: false})),

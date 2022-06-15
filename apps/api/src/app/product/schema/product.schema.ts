@@ -2,23 +2,19 @@ import { Schema } from 'dynamoose';
 
 export const ProductSchema = new Schema({
   
-  // barcode: {
-  //   type: String,
-  //   hashKey: true
-  //   // index: {
-  //   //   global: true,
-  //   //   rangeKey: 'sku',
-  //   // }
-  // },
+  region: {
+    type: String,
+    hashKey: true
+  },
   sku: { 
     type: String,
-    hashKey: true,
+    rangeKey: true
   },
   skuFamily: {
     type: String,
     index: {
       global: true,
-      rangeKey: 'wildberriesId',
+      rangeKey: 'orderIndex',
     },
   },
   skuIndex: {
@@ -28,7 +24,7 @@ export const ProductSchema = new Schema({
       rangeKey: 'stock'
     } 
   },
-  wildberriesId: { 
+  orderIndex: { 
     type: Number, 
     index: { 
       global: true, 
@@ -43,7 +39,6 @@ export const ProductSchema = new Schema({
   }},
   sizes: { type: String },
   stock: { type: Number },
-  // barcodes: {type: String},
   title: { type: String },
   titleFull: { type: String },
   description: { type: String },
@@ -65,11 +60,11 @@ export const ProductSchema = new Schema({
   priceSale: { type: Number },
   status: {
     type: String,
-    enum: ["available", "soldout", "deleted", "draft"],
+    // enum: ["available", "soldout", "deleted", "draft"],
   },
   category: {
     type: String,
-    enum: ["skirts", "shorts", "sundresses", "turtlenecks", "dresses", "hoodies", "blouses", "tops", "sweaters", "trousers", "costumes", "jackets", "tshirts", "unset" ],
+    // enum: ["skirts", "shorts", "sundresses", "turtlenecks", "dresses", "hoodies", "blouses", "tops", "sweaters", "trousers", "costumes", "jackets", "tshirts", "unset" ],
     index: {
       global: true,
       rangeKey: 'stockBySkuIndex',
@@ -77,7 +72,7 @@ export const ProductSchema = new Schema({
   },
   gender: {
     type: String,
-    enum: ["women", "men", "unisex", "unset"],
+    // enum: ["women", "men", "unisex", "unset"],
     index: {
       global: true,
       rangeKey: 'stockBySkuIndex',

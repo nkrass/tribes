@@ -1,10 +1,11 @@
 import { Field, InputType, InterfaceType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 import { IsArray, IsNotEmpty, IsNumber, IsOptional, IsString } from 'class-validator';
-import { ProductCategory } from '../entities/product-category.enum';
-import { ProductGender } from '../entities/product-gender.enum';
-import { ProductStatus } from '../entities/product.enum';
-import { ExternalId, Nomenclature, Material } from './create-product.input';
+import { ProductCategory } from '../entities/types/product-category.enum';
+import { ProductStatus } from '../entities/types/product.enum';
+import { ExternalId } from '../entities/types/external-id.type';
+import { ProductGender } from '../entities/types/product-gender.enum';
+import { ProductRegion } from '../entities/types/product-region.enum';
 
 @InputType()
 @InterfaceType('BaseBarcode')
@@ -16,47 +17,28 @@ export class CreateBarcodeInput {
 
   @IsString()
   @Transform((s) => s.value?.toLowerCase())
-  @Field()
+  @Field(() => ProductRegion)
+  region: ProductRegion
+
+  @IsString()
+  @Transform((s) => s.value?.toLowerCase())
+  @Field(() => String)
   sku: string;
 
   @IsString()
   @Transform((s) => s.value?.toLowerCase())
-  @Field()
+  @Field(() => String)
   skuFamily: string;
-
-  @IsOptional()
-  @Field(() => Nomenclature, {nullable: true})
-  nomenclature: Nomenclature
-  
-  @IsString()
-  @Field(() => String, {nullable: true})
-  title: string;
-
-  @IsString()
-  @Field(() => String, {nullable: true})
-  titleFull: string;
-
-  @Field(() => String, {nullable: true})
-  @Field()
-  description: string;
-
-  @IsString()
-  @Field(() => String, {nullable: true})
-  descriptionSeo: string;
 
   @IsString()
   @Transform((s) => s.value?.toLowerCase())
-  @Field(() => String, {nullable: true})
+  @Field(() => String)
   color: string;
 
   @IsString()
   @Transform((s) => s.value?.toLowerCase())
-  @Field(() => String, {nullable: true})
+  @Field(() => String)
   colorGroup: string;
-
-  @IsArray()
-  @Field(() => [Material], {nullable: true})
-  materials: [Material];
 
   @IsNumber()
   @Field(() => Number, {nullable: true})
@@ -78,21 +60,16 @@ export class CreateBarcodeInput {
   stock: number;
   
   @IsString()
-  @Field(() => ProductGender, {nullable: true})
+  @Field(() => ProductGender)
   gender: ProductGender;
 
   @IsString()
-  @Field( () => ProductCategory, {nullable: true})
+  @Field( () => ProductCategory)
   category: ProductCategory;
 
   @IsString()
-  @Field( () => ProductStatus, {nullable: true})
+  @Field( () => ProductStatus )
   status: ProductStatus;
-
-  @IsOptional()
-  @IsString()
-  @Field(()=> Number, {nullable: true})
-  wildberriesId: number;
 
   @IsOptional()
   @IsArray()
@@ -104,28 +81,6 @@ export class CreateBarcodeInput {
   @Transform((s) => s.value?.toLowerCase())
   @Field(() =>  String, {nullable: true})
   tags: string;
-
-  @IsOptional()
-  @IsString()
-  @Transform((s) => s.value?.toLowerCase())
-  @Field(() => String, {nullable: true})
-  collection: string;
-
-  @IsOptional()
-  @Field(() => [String], {nullable: true})
-  @IsArray()
-  images: [string];
-
-  @IsOptional()
-  @Field(() => [String], {nullable: true})
-  @IsArray()
-  videos: [string];
-
-  @IsOptional()
-  @IsArray()
-  @Transform((e) => e.value?.map((s: string) => s?.toLowerCase()))
-  @Field(() => [String], {nullable: true})
-  crossSale: [string];
 
   @IsOptional()
   @IsString()

@@ -43,14 +43,14 @@ export class BarcodeService {
   }
   async createBatch(){
     const barcodes = await this.googleServices.getBarcodes();
-    let unprocessed: Document<Barcode>[] = []
+    const unprocessed: Document<Barcode>[] = []
     for (let i = 0; i < barcodes.length; i += 25) {
-      let processed = await this.model.batchPut(barcodes.slice(i, i + 25))
+      const processed = await this.model.batchPut(barcodes.slice(i, i + 25))
       unprocessed.push(...processed.unprocessedItems);
     }
     if (unprocessed.length > 0){
       for (let i = 0; i < unprocessed.length; i += 25) {
-        let processed = await this.model.batchPut(unprocessed.slice(i, i + 25))
+        const processed = await this.model.batchPut(unprocessed.slice(i, i + 25))
         unprocessed.push(...processed.unprocessedItems);
       }
     }
@@ -64,7 +64,7 @@ export class BarcodeService {
     if (!model) throw new Error('Product not found');
     for (const prop in input) {
       if (prop !== "barcode"){
-        (model as any)[prop] = (input as any)[prop];
+        model[prop] = input[prop];
       }
     }
     model.categoryGenderColorSize = `${input.category}#${input.gender}#${input.colorGroup}#${input.size}`
@@ -101,9 +101,10 @@ export class BarcodeService {
     return this.model.query('category').eq(category).where('stock').gt(0).exec();
   }
   findByFilter(filter: FilterBarcodeInput) {
-    let { all, limit, category, gender, color, priceMin, priceMax, inStock = true, sku, skuFamily, wildberriesId, size } = filter;
+    const { region, limit, category, gender, color, priceMin, priceMax, inStock = true, sku, skuFamily, size } = filter;
+    let { all } = filter
     //Dynamodb supports only one Index at a time, so we need to distinguish which one to use in each case
-    const standardIndexes = (sku || skuFamily || wildberriesId)
+    const standardIndexes = (sku || skuFamily )
     const filterObject: { [string: string]: string|number|undefined }= {
       categoryGenderColorSize:  !standardIndexes && category && gender && color && size && `${category}#${gender}#${color}#${size}` || undefined,
       categoryGenderSize:       !(standardIndexes || color) && category && gender && size && `${category}#${gender}#${size}` || undefined,
@@ -114,11 +115,11 @@ export class BarcodeService {
       genderColor:              !(standardIndexes || category || size) && gender && color && `${gender}#${color}` || undefined,
       sku,
       skuFamily:            !(sku) && skuFamily || undefined,
-      wildberriesId:        !(sku) && wildberriesId || undefined,
+      region:               !(sku || skuFamily) && region || undefined,
       category:             !(standardIndexes || gender || color) && category || undefined,
       gender:               !(standardIndexes || category || color) && gender || undefined,
     }
-    const queryObj: {[string: string]: {}} = {}
+    const queryObj: {[string: string]: Record<string, unknown>} = {}
     for (const prop in omitBy(filterObject, isNil)) {
       queryObj[prop] = { 'eq': filterObject[prop] }
     }

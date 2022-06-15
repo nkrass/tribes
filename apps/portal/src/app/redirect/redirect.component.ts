@@ -12,7 +12,7 @@ import { ProductGQL, ProductQuery } from '@tribes/data-access';
 import { AnalyticsService } from '@tribes/analytics';
 
 const staticAssetsUrl = environment.staticAssetsUrl
-const cdnUrl = environment.cdnUrl
+// const cdnUrl = environment.cdnUrl
 
 interface ProductState {
   product: ProductQuery['product']
@@ -39,7 +39,7 @@ export class RedirectComponent implements OnInit, OnDestroy {
   public countdown: number = this.REDIRECT_TIMEOUT_SEC - 1
   public btn_disabled = true
   public get redirect_address(){
-    return 'https://www.wildberries.ru/catalog/'+ this.state.get('product').wildberriesId +'/detail.aspx?targetUrl=BP'
+    return 'https://www.wildberries.ru/catalog/'+ this.state.get('product').externalId?.[0].id +'/detail.aspx?targetUrl=BP'
   }
   public promotions = { marketplace: undefined, promocode: undefined, rate: undefined, redirect: false}
   
@@ -97,7 +97,7 @@ export class RedirectComponent implements OnInit, OnDestroy {
       interval(1000).pipe(take(this.REDIRECT_TIMEOUT_SEC), map(i => {
         this.countdown  = this.REDIRECT_TIMEOUT_SEC - (i as number);
         if (this.countdown < 1) { this.btn_disabled = false  }
-      })).subscribe(e => {
+      })).subscribe(() => {
         this.cdr.markForCheck()
       })
     }

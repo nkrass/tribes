@@ -13,11 +13,11 @@
       <div class="row border-top" *ngFor="let item of cart.cartItems; let i = index">
           <div class="row main align-items-center">
               <div class="col-4 col-sm-2 col-md-2 p-0">
-                <img class="img-fluid" [src]="item.barcode?.coverImage" [alt]="item.barcode?.title">
+                <img class="img-fluid" [src]="item.barcode?.coverImage" [alt]="item.barcode?.product?.title">
               </div>
               <div class="col-8 col-sm-10 col-md-4 col-lg-4">
                   <div class="row text-muted text-sm">Арт.: {{item.barcode?.sku}}</div>
-                  <div class="row">{{item.barcode?.title}}</div>
+                  <div class="row">{{item.barcode?.product?.title}}</div>
                   <!-- <div class="row">Цвет: {{item.barcode?.color}}</div> -->
                   <div class="row">Размер: {{item.barcode?.size}}</div>
               </div>

@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { SortOrder } from 'dynamoose/dist/General';
 import { omitBy, isNil } from 'lodash';
 import { InjectModel, Model, Document } from 'nestjs-dynamoose';
+import { RegionFromBarcode } from '../../shared/barcode-region-extractor';
 import { GoogleServices } from '../../shared/googledoc.service';
 import { CreateProductInput } from '../dto/create-product.input';
 import { FilterProductInput } from '../dto/filter-product.input';
@@ -46,15 +47,17 @@ export class ProductService {
     return products;
 
   }
-  delete(sku: ProductKey){
-    return this.model.delete(sku);
+  delete(sku: ProductKey["sku"]){
+    const region = RegionFromBarcode(sku)
+    return this.model.delete({region, sku});
   }
-  async update(key: ProductKey, input: UpdateProductInput) {
-    const model = await this.model.get(key);
+  async update(sku: ProductKey["sku"], input: UpdateProductInput) {
+    const region = RegionFromBarcode(sku)
+    const model = await this.model.get({region, sku});
     if (!model) throw new Error('Product not found');
     for (const prop in input) {
       if (prop !== "sku"){
-        (model as any)[prop] = (input as any)[prop];
+        model[prop] = input[prop];
       }
     }
     model.categoryGenderColor = `${input.category}#${input.gender}#${input.colorGroup}`
@@ -65,8 +68,9 @@ export class ProductService {
     return this.model.update(model);
   }
 
-  findOne(key: ProductKey) {
-    return this.model.get(key);
+  findOne(sku: ProductKey['sku']) {
+    const region = RegionFromBarcode(sku)
+    return this.model.get({region, sku});
   }
 
   findBySkuFamily(skuFamily: string) {
@@ -92,9 +96,9 @@ export class ProductService {
     return results;
   }
   async findByFilter(filter: FilterProductInput) {
-    const { limit, category, gender, color, priceMin, priceMax, inStock = true, sku, skuFamily, wildberriesId } = filter;
+    const { region, limit, category, gender, color, priceMin, priceMax, inStock = true, sku, skuFamily, orderIndex } = filter;
     let { all } = filter;
-    const standardIndexes = (sku || skuFamily || wildberriesId)
+    const standardIndexes = (sku || skuFamily || orderIndex)
     //Dynamodb supports only one Index at a time, so we need to distinguish which one to use in each case
     const filterObject: { [string: string]: string|number|undefined }= {
       categoryGenderColor:  !(standardIndexes) && category && gender && color && `${category}#${gender}#${color}` || undefined,
@@ -102,7 +106,7 @@ export class ProductService {
       genderColor:          !(standardIndexes || category) && gender && color && `${gender}#${color}` || undefined,
       sku,
       skuFamily:            !(sku) && skuFamily || undefined,
-      wildberriesId:        !(sku) && wildberriesId || undefined,
+      orderIndex:           !(sku) && orderIndex || undefined,
       category:             !(standardIndexes || gender || color) && category || undefined,
       gender:               !(standardIndexes || category || color) && gender || undefined,
     }
@@ -113,6 +117,8 @@ export class ProductService {
     inStock && (queryObj['stockBySkuIndex'] = { gt: 0 });
     //When filtering by price we need to search for the whole table
     priceMin && priceMax && (all = true) && (queryObj['priceSale'] = { between: [priceMin, priceMax] });
-    return !all? this.model.query(queryObj).sort(SortOrder.descending).limit(limit).exec() : this.model.query(queryObj).sort(SortOrder.descending).all(100).exec();
+    return !all ? 
+      this.model.query({region, ...queryObj}).sort(SortOrder.ascending).limit(limit).exec() 
+      : this.model.query({region, ...queryObj}).sort(SortOrder.ascending).all(100).exec();
   }
 }

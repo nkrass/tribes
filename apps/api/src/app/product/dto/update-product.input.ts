@@ -1,18 +1,22 @@
 import { Field, InputType } from '@nestjs/graphql';
 import { Transform } from 'class-transformer';
 import { IsArray, IsNumber, IsOptional, IsString } from 'class-validator';
-import { ProductCategory } from '../entities/product-category.enum';
-import { ProductGender } from '../entities/product-gender.enum';
-import { ProductStatus } from '../entities/product.enum';
-// import { IsEnum, IsIn } from 'class-validator';
-import { ExternalId, Nomenclature, Material } from './create-product.input';
+import { ExternalId } from '../entities/types/external-id.type';
+import { Material } from '../entities/types/material.type';
+import { Nomenclature } from '../entities/types/nomenclature.type';
+import { ProductCategory } from '../entities/types/product-category.enum';
+import { ProductGender } from '../entities/types/product-gender.enum';
+import { ProductRegion } from '../entities/types/product-region.enum';
+import { ProductStatus } from '../entities/types/product.enum';
 
 @InputType()
 export class UpdateProductInput {
-  @IsOptional()
+  @Field(() => ProductRegion, {nullable: true})
+  region?: ProductRegion;
+  
   @IsString()
   @Transform((s) => s.value?.toLowerCase())
-  @Field({nullable: true})
+  @Field({nullable: false})
   sku: string;
 
   @IsOptional()
@@ -101,17 +105,17 @@ export class UpdateProductInput {
   @IsOptional()
   @Field(() => [String], { nullable: true})
   @IsArray()
-  images: [string];
+  images: string[];
 
   @IsOptional()
   @Field(() => [String], { nullable: true})
   @IsArray()
-  videos: [string];
+  videos: string[];
 
   @IsOptional()
   @IsString()
   @Field(() => Number, {nullable: true})
-  wildberriesId: number;
+  orderIndex: number;
 
   @IsOptional()
   @IsArray()
@@ -123,7 +127,7 @@ export class UpdateProductInput {
   @IsArray()
   @Transform((s) => s.value?.map((e: string)=> e?.toLowerCase()))
   @Field(() => [String], {nullable: true})
-  crossSale: [string];
+  crossSale: string[];
 
   @IsOptional()
   @IsString()

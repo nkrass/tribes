@@ -6,7 +6,7 @@ mutation UpdateCart($input: UpdateCartInput!){
     status
     externalUserId
     cartItems {
-      barcode { barcode, coverImage, title, sku, category, priceBase, priceSale, stock, size }
+      barcode { barcode, coverImage, sku, category, priceBase, priceSale, stock, size, product { title, description }  }
       price,
       quantity
       currency

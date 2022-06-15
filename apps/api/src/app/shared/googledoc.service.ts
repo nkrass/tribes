@@ -1,15 +1,17 @@
 import { Product } from "../product/entities/product.model";
 // import * as creds from '../../../../../../credentials.json';
 import { google } from 'googleapis';
-import { Nomenclature, Material } from "../product/dto/create-product.input";
 import { v4 } from 'uuid';
 import { Injectable } from "@nestjs/common";
 import { Barcode } from "../product/entities/barcode.model";
 import { environment } from '../../environments/environment';
 import { Review } from "../review/entities/review.model";
 import { ColorsDictionary } from "@tribes/colors-dictionary";
-import { ProductGender } from "../product/entities/product-gender.enum";
-import { ProductCategory } from "../product/entities/product-category.enum";
+import { ProductCategory } from "../product/entities/types/product-category.enum";
+import { ProductGender } from "../product/entities/types/product-gender.enum";
+import { RegionFromBarcode } from "./barcode-region-extractor";
+import { Nomenclature } from "../product/entities/types/nomenclature.type";
+import { Material } from "../product/entities/types/material.type";
 
 const auth = new google.auth.JWT({
   email: Buffer.from(environment.GOOGLE_CLIENT_EMAIL as string, 'base64').toString('ascii'),
@@ -30,7 +32,7 @@ export class GoogleServices{
     })
     const rows = response.data.values
     if (!rows) throw new Error('Error in retrieving data')
-    const indexOfProduct = rows.map(r => r[2]).indexOf(String(product.wildberriesId))
+    const indexOfProduct = rows.map(r => r[2]).indexOf(String(product.sku))
     const rowToUpdate = rows[indexOfProduct]
       rowToUpdate[4] = product.description? product.description : rowToUpdate[4] //desc
       rowToUpdate[5] = product.description? product.description : rowToUpdate[5] //desc short
@@ -48,7 +50,7 @@ export class GoogleServices{
       rowToUpdate[19] = product.sizes? product.sizes : rowToUpdate[19] //sizes
     // try {
     rows[indexOfProduct] = rowToUpdate
-    const result = Sheets.spreadsheets.values.update({
+    await Sheets.spreadsheets.values.update({
         spreadsheetId: this.ProductsSheetId,
         // range: `db!A${indexOfProduct+1}:T${indexOfProduct+1}`,
         range: 'db!A:T',
@@ -81,6 +83,7 @@ export class GoogleServices{
           const color = barcode_key.slice(11,13)
           const colorGroup = ColorsDictionary.matchColorToGroup(color)
           const barcode = new Barcode();
+            barcode.region = RegionFromBarcode(barcode_key)
             barcode.sku = row[2].toLowerCase()
             barcode.barcode = barcode_key
             barcode.size = row[7]
@@ -88,7 +91,7 @@ export class GoogleServices{
             barcode.status = row[15];
             barcode.category = row[16].split(',').map((s: string) => (s.trim() === '#N/A' || s.trim() === '')? 'unset' : s.trim())[0]
             barcode.gender = row[17].split(',').map((s: string) => (s.trim() === '#N/A' || s.trim() === '')? 'unset' : s.trim())[0]
-            barcode.wildberriesId = row[22]? parseInt(row[22],10) : 0
+            // barcode.wildberriesId = row[22]? parseInt(row[22],10) : 0
             barcode.categoryGenderColorSize = `${barcode.category}#${barcode.gender}#${colorGroup}#${barcode.size}`
             barcode.categoryGenderSize = `${barcode.category}#${barcode.gender}#${barcode.size}`
             barcode.genderColorSize = `${barcode.gender}#${colorGroup}#${barcode.size}`
@@ -97,30 +100,30 @@ export class GoogleServices{
             barcode.categorySize = `${barcode.category}#${barcode.size}`
             barcode.categoryGender = `${barcode.category}#${barcode.gender}`
 
-            const title_full = row[9]
-            const title_full_arr = title_full?.split('/') || [title_full]
-            const title = String(title_full_arr[title_full_arr.length - 1]).trim() // take the last
+            // const title_full = row[9]
+            // const title_full_arr = title_full?.split('/') || [title_full]
+            // const title = String(title_full_arr[title_full_arr.length - 1]).trim() // take the last
             //filter out non categorized
             barcode.skuFamily = row[2].slice(0,11).toLowerCase()
-            barcode.nomenclature = {} as Nomenclature
-            barcode.nomenclature.name = row[3]
-            barcode.nomenclature.tnvd = row[4]
-            barcode.nomenclature.cost = parseInt(row[5], 10) || 0
-            barcode.nomenclature.price = parseInt(row[6], 10) || 0
-            barcode.title = title
-            barcode.titleFull = title_full
-            barcode.description = row[10]
-            barcode.descriptionSeo = row[10]
+            // barcode.nomenclature = {} as Nomenclature
+            // barcode.nomenclature.name = row[3]
+            // barcode.nomenclature.tnvd = row[4]
+            // barcode.nomenclature.cost = parseInt(row[5], 10) || 0
+            // barcode.nomenclature.price = parseInt(row[6], 10) || 0
+            // barcode.title = title
+            // barcode.titleFull = title_full
+            // barcode.description = row[10]
+            // barcode.descriptionSeo = row[10]
             barcode.color = color
             barcode.colorGroup = colorGroup
-            barcode.materials = row[12]?.split(',').map((s: string) => { const el = s.trim().split(" "); if (el[0]==='#N/A' || el[0]==='') { return } else return {material: el[0], quantity: parseInt(el[1],10) || 0} as Material }).filter((_: any) => !!_)
+            // barcode.materials = row[12]?.split(',').map((s: string) => { const el = s.trim().split(" "); if (el[0]==='#N/A' || el[0]==='') { return } else return {material: el[0], quantity: parseInt(el[1],10) || 0} as Material }).filter((_: any) => !!_)
             barcode.priceBase = parseInt(row[13],10) || 0;
             barcode.priceSale = parseInt(row[14],10) || 0;
             barcode.tags = row[18]
-            barcode.collection = row[19]
-            barcode.images = row[20]?.split(',').map((s: string) => s.trim()).filter((_: any) => !!_)
-            barcode.videos = row[21]?.split(',').map((s: string) => s.trim()).filter((_: any) => !!_)
-            barcode.crossSale = row[23]?.split(',').map((s: string) => s.trim()).filter((_: any) => !!_)
+            // barcode.collection = row[19]
+            // barcode.images = row[20]?.split(',').map((s: string) => s.trim()).filter((_: any) => !!_)
+            // barcode.videos = row[21]?.split(',').map((s: string) => s.trim()).filter((_: any) => !!_)
+            // barcode.crossSale = row[23]?.split(',').map((s: string) => s.trim()).filter((_: any) => !!_)
             barcode.manufactured = row[24]
             barcode.notes = row[25]
 
@@ -157,6 +160,7 @@ export class GoogleServices{
 
         if (!products.map(e => e.sku).includes(product_key)){
           const product = new Product();
+            product.region = RegionFromBarcode(product_key)
             product.sku = product_key
             product.skuFamily = row[2].slice(0,11).toLowerCase()
             product.nomenclature = {} as Nomenclature
@@ -170,7 +174,7 @@ export class GoogleServices{
             product.descriptionSeo = row[10]
             product.color = color//row[11]
             product.colorGroup = colorGroup
-            product.materials = row[12].split(',').map((s: string) => { const el = s.trim().split(" "); if (el[0]==='#N/A' || el[0]==='') { return } else return {material: el[0], quantity: parseInt(el[1],10) || 0} as Material }).filter((_: any) => !!_)
+            product.materials = row[12].split(',').map((s: string) => { const el = s.trim().split(" "); if (el[0]==='#N/A' || el[0]==='') { return } else return {material: el[0], quantity: parseInt(el[1],10) || 0} as Material }).filter((_) => !!_)
             product.priceBase = parseInt(row[13],10) || 0;
             product.priceSale = parseInt(row[14],10) || 0;
             product.status = row[15];
@@ -178,18 +182,19 @@ export class GoogleServices{
             product.gender = row[17]?.split(',').map((s: string) => (s.trim() === '#N/A' || s.trim() === '')? 'unset' : s.trim())[0]
             product.tags = row[18]
             product.collection = row[19]
-            product.images = row[20]?.split(',').map((s: string) => s.trim()).filter((_: any) => !!_)
-            product.videos = row[21]?.split(',').map((s: string) => s.trim()).filter((_: any) => !!_)
-            product.wildberriesId = row[22]? parseInt(row[22],10) : 0
-            product.crossSale = row[23]?.split(',').map((s: string) => s.trim()).filter((_: any) => !!_)
+            product.images = row[20]?.split(',').map((s: string) => s.trim()).filter(_ => !!_)
+            product.videos = row[21]?.split(',').map((s: string) => s.trim()).filter(_ => !!_)
+            // product.wildberriesId = row[22]? parseInt(row[22],10) : 0
+            product.orderIndex = i
+            product.crossSale = row[23]?.split(',').map((s: string) => s.trim()).filter(_ => !!_)
             product.manufactured = row[24]
             product.notes = row[25]
             product.createdAt = new Date()
-            
             product.categoryGenderColor = `${product.category}#${product.gender}#${colorGroup}`
             product.categoryGender = `${product.category}#${product.gender}`
             product.categoryColor = `${product.category}#${colorGroup}`
             product.genderColor = `${product.gender}#${colorGroup}`
+            if (row[22]) product.externalId = [ { name: 'wildberries', id: row[22] } ]
           products.push(product)
         }
       }
@@ -197,7 +202,7 @@ export class GoogleServices{
     products.forEach((e) => { 
       e.stock = stock_per_sku[e.sku]
       e.sizes = size_per_sku[e.sku]
-      e.skuIndex = e.wildberriesId
+      e.skuIndex = e.orderIndex
       e.stockBySkuIndex = e.stock? e.skuIndex : 0
     })
     return products

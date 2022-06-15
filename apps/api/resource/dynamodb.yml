@@ -210,12 +210,12 @@ Resources:
       AttributeDefinitions:
         - AttributeName: barcode
           AttributeType: S
+        - AttributeName: region
+          AttributeType: S
         - AttributeName: sku
           AttributeType: S
         - AttributeName: skuFamily
           AttributeType: S
-        - AttributeName: wildberriesId
-          AttributeType: 'N'
         - AttributeName: size
           AttributeType: S
         - AttributeName: gender
@@ -242,6 +242,14 @@ Resources:
         - AttributeName: barcode
           KeyType: HASH
       GlobalSecondaryIndexes:
+        - IndexName: regionGlobalIndex
+          KeySchema:
+            - AttributeName: region
+              KeyType: HASH
+            - AttributeName: barcode
+              KeyType: RANGE
+          Projection:
+            ProjectionType: ALL
         - IndexName: skuGlobalIndex
           KeySchema:
             - AttributeName: sku
@@ -253,14 +261,6 @@ Resources:
         - IndexName: skuFamilyGlobalIndex
           KeySchema:
             - AttributeName: skuFamily
-              KeyType: HASH
-            - AttributeName: barcode
-              KeyType: RANGE
-          Projection:
-            ProjectionType: ALL
-        - IndexName: wildberriesIdGlobalIndex
-          KeySchema:
-            - AttributeName: wildberriesId
               KeyType: HASH
             - AttributeName: barcode
               KeyType: RANGE
@@ -353,13 +353,15 @@ Resources:
       TableName: ${self:service}-${self:provider.stage}-product-table
       BillingMode: PAY_PER_REQUEST
       AttributeDefinitions:
+        - AttributeName: region
+          AttributeType: S
         - AttributeName: sku
           AttributeType: S
         - AttributeName: skuFamily
           AttributeType: S
         - AttributeName: skuIndex
           AttributeType: 'N'
-        - AttributeName: wildberriesId
+        - AttributeName: orderIndex
           AttributeType: 'N'
         - AttributeName: category
           AttributeType: S
@@ -378,14 +380,16 @@ Resources:
         - AttributeName: stockBySkuIndex
           AttributeType: 'N'
       KeySchema:
-        - AttributeName: sku
+        - AttributeName: region
           KeyType: HASH
+        - AttributeName: sku
+          KeyType: RANGE
       GlobalSecondaryIndexes:
         - IndexName: skuFamilyGlobalIndex
           KeySchema:
             - AttributeName: skuFamily
               KeyType: HASH
-            - AttributeName: wildberriesId
+            - AttributeName: orderIndex
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
@@ -397,9 +401,9 @@ Resources:
               KeyType: RANGE
           Projection:
             ProjectionType: ALL
-        - IndexName: wildberriesIdGlobalIndex
+        - IndexName: orderIndexGlobalIndex
           KeySchema:
-            - AttributeName: wildberriesId
+            - AttributeName: orderIndex
               KeyType: HASH
             - AttributeName: stock
               KeyType: RANGE

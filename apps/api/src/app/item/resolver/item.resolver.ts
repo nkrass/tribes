@@ -27,7 +27,7 @@ export class ItemResolver {
   @ResolveField(() => Product)
   async product(@Parent() item: Item){
     const { sku } = await this.barcodeService.findOne({barcode: item.productBarcode});
-    if (sku) return this.productService.findOne({ sku })
+    if (sku) return this.productService.findOne(sku)
     else return null
   }
   @ResolveField(() => Barcode)

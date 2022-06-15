@@ -34,7 +34,8 @@ export class ProductDetailComponent {
     this.promotions.rate = rt
     this.promotions.redirect = !!rd
     if (this.promotions.redirect === true) {
-      this.analytics.redirectTo('https://www.wildberries.ru/catalog/'+ (this.state.get('product') as any).wildberriesId +'/detail.aspx?targetUrl=BP')
+      const wbId = this.state.get('product')?.externalId?.find(e => e.name === 'wildberries')?.id
+      this.analytics.redirectTo('https://www.wildberries.ru/catalog/'+ wbId +'/detail.aspx?targetUrl=BP')
     }
   }
 

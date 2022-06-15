@@ -1,10 +1,8 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { IsOptional } from 'class-validator';
-import { ProductCategory } from './product-category.enum';
-import { ProductGender } from './product-gender.enum';
-// import { Barcode } from './barcode.model';
-// import { Product } from './product.model';
-// import { Product } from './product.model';
+import { ProductCategory } from './types/product-category.enum';
+import { ProductGender } from './types/product-gender.enum';
+import { ProductRegion } from './types/product-region.enum';
 
 export type BarcodeKey = {
   barcode: string
@@ -12,6 +10,9 @@ export type BarcodeKey = {
 
 @ObjectType("Category")
 export class Category {
+  @Field(() => ProductCategory, { nullable: false })
+  region: ProductRegion;
+
   @Field(() => ProductCategory, { nullable: true })
   name: ProductCategory;
 

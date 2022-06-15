@@ -1,16 +1,22 @@
 import { Field, ObjectType } from '@nestjs/graphql';
 import { Review } from '../../review/entities/review.model';
-import { ExternalId, Material, Nomenclature } from '../dto/create-product.input';
-import { ProductCategory } from './product-category.enum';
-import { ProductGender } from './product-gender.enum';
-import { ProductStatus } from './product.enum';
+import { ExternalId } from './types/external-id.type';
+import { Material } from './types/material.type';
+import { Nomenclature } from './types/nomenclature.type';
+import { ProductCategory } from './types/product-category.enum';
+import { ProductGender } from './types/product-gender.enum';
+import { ProductRegion } from './types/product-region.enum';
+import { ProductStatus } from './types/product.enum';
 
 export type ProductKey = {
+  region: ProductRegion,
   sku: string,
 };
 
 @ObjectType()
 export class Product {
+  @Field(() => ProductRegion, {nullable: true})
+  region: ProductRegion;
 
   @Field(() => String, {nullable: true})
   sku: string;
@@ -79,13 +85,13 @@ export class Product {
   videos: string[];
 
   @Field(()=> Number, {nullable: true})
-  wildberriesId: number;
+  orderIndex: number;
 
   @Field(() => [ExternalId], {nullable: true})
   externalId: [ExternalId];
 
   @Field(() => [String], {nullable: true})
-  crossSale: [string];
+  crossSale: string[];
 
   @Field(() => String, {nullable: true})
   manufactured: string;

@@ -27,40 +27,30 @@ export type Auth = {
 export type Barcode = {
   __typename?: 'Barcode';
   barcode: Scalars['String'];
-  category?: Maybe<ProductCategory>;
-  collection?: Maybe<Scalars['String']>;
-  color?: Maybe<Scalars['String']>;
-  colorGroup?: Maybe<Scalars['String']>;
+  category: ProductCategory;
+  color: Scalars['String'];
+  colorGroup: Scalars['String'];
   coverImage: Scalars['String'];
   createdAt?: Maybe<Scalars['Date']>;
-  crossSale?: Maybe<Array<Scalars['String']>>;
-  description?: Maybe<Scalars['String']>;
-  descriptionSeo?: Maybe<Scalars['String']>;
   externalId?: Maybe<Array<ExternalId>>;
-  gender?: Maybe<ProductGender>;
-  images?: Maybe<Array<Scalars['String']>>;
+  gender: ProductGender;
   imagesSrc: Array<Scalars['String']>;
   manufactured?: Maybe<Scalars['String']>;
-  materials?: Maybe<Array<MaterialType>>;
-  nomenclature?: Maybe<Nomenclature>;
   notes?: Maybe<Scalars['String']>;
   priceBase?: Maybe<Scalars['Float']>;
   priceSale?: Maybe<Scalars['Float']>;
   product: Product;
   rating: Scalars['Float'];
+  region: ProductRegion;
   reviews: Array<Review>;
   size: Scalars['String'];
   sku: Scalars['String'];
   skuFamily: Scalars['String'];
-  status?: Maybe<ProductStatus>;
+  status: ProductStatus;
   stock: Scalars['Float'];
   tags?: Maybe<Scalars['String']>;
-  title?: Maybe<Scalars['String']>;
-  titleFull?: Maybe<Scalars['String']>;
   updatedAt?: Maybe<Scalars['Date']>;
-  videos?: Maybe<Array<Scalars['String']>>;
   videosSrc: Array<Scalars['String']>;
-  wildberriesId?: Maybe<Scalars['Float']>;
 };
 
 export type BaseCartItemsInput = {
@@ -141,36 +131,27 @@ export type Category = {
   name?: Maybe<ProductCategory>;
   products: Array<Product>;
   productsCount?: Maybe<Scalars['Float']>;
+  region: ProductCategory;
 };
 
 export type CreateBarcodeInput = {
   barcode: Scalars['String'];
-  category?: InputMaybe<ProductCategory>;
-  collection?: InputMaybe<Scalars['String']>;
-  color?: InputMaybe<Scalars['String']>;
-  colorGroup?: InputMaybe<Scalars['String']>;
-  crossSale?: InputMaybe<Array<Scalars['String']>>;
-  description?: InputMaybe<Scalars['String']>;
-  descriptionSeo?: InputMaybe<Scalars['String']>;
+  category: ProductCategory;
+  color: Scalars['String'];
+  colorGroup: Scalars['String'];
   externalId?: InputMaybe<Array<ExternalIdInput>>;
-  gender?: InputMaybe<ProductGender>;
-  images?: InputMaybe<Array<Scalars['String']>>;
+  gender: ProductGender;
   manufactured?: InputMaybe<Scalars['String']>;
-  materials?: InputMaybe<Array<MaterialInput>>;
-  nomenclature?: InputMaybe<NomenclatureInput>;
   notes?: InputMaybe<Scalars['String']>;
   priceBase?: InputMaybe<Scalars['Float']>;
   priceSale?: InputMaybe<Scalars['Float']>;
+  region: ProductRegion;
   size: Scalars['String'];
   sku: Scalars['String'];
   skuFamily: Scalars['String'];
-  status?: InputMaybe<ProductStatus>;
+  status: ProductStatus;
   stock: Scalars['Float'];
   tags?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-  titleFull?: InputMaybe<Scalars['String']>;
-  videos?: InputMaybe<Array<Scalars['String']>>;
-  wildberriesId?: InputMaybe<Scalars['Float']>;
 };
 
 export type CreateCartInput = {
@@ -224,8 +205,10 @@ export type CreateProductInput = {
   materials?: InputMaybe<Array<MaterialInput>>;
   nomenclature?: InputMaybe<NomenclatureInput>;
   notes?: InputMaybe<Scalars['String']>;
+  orderIndex?: InputMaybe<Scalars['Float']>;
   priceBase?: InputMaybe<Scalars['Float']>;
   priceSale?: InputMaybe<Scalars['Float']>;
+  region: ProductRegion;
   sizes?: InputMaybe<Scalars['String']>;
   sku: Scalars['String'];
   skuFamily: Scalars['String'];
@@ -236,7 +219,6 @@ export type CreateProductInput = {
   title?: InputMaybe<Scalars['String']>;
   titleFull?: InputMaybe<Scalars['String']>;
   videos?: InputMaybe<Array<Scalars['String']>>;
-  wildberriesId?: InputMaybe<Scalars['Float']>;
 };
 
 export type CreateReviewInput = {
@@ -314,11 +296,11 @@ export type FilterBarcodeInput = {
   limit?: InputMaybe<Scalars['Int']>;
   priceMax?: InputMaybe<Scalars['Float']>;
   priceMin?: InputMaybe<Scalars['Float']>;
+  region: ProductRegion;
   size?: InputMaybe<Scalars['String']>;
   sku?: InputMaybe<Scalars['String']>;
   skuFamily?: InputMaybe<Scalars['String']>;
   stock?: InputMaybe<Scalars['Float']>;
-  wildberriesId?: InputMaybe<Scalars['Float']>;
 };
 
 export type FilterCartInput = {
@@ -364,14 +346,15 @@ export type FilterProductInput = {
   gender?: InputMaybe<ProductGender>;
   inStock?: InputMaybe<Scalars['Boolean']>;
   limit?: InputMaybe<Scalars['Int']>;
+  orderIndex?: InputMaybe<Scalars['Float']>;
   priceMax?: InputMaybe<Scalars['Float']>;
   priceMin?: InputMaybe<Scalars['Float']>;
+  region: ProductRegion;
   size?: InputMaybe<Scalars['String']>;
   sku?: InputMaybe<Scalars['String']>;
   skuFamily?: InputMaybe<Scalars['String']>;
   tags?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
-  wildberriesId?: InputMaybe<Scalars['Float']>;
 };
 
 export type FilterReviewInput = {
@@ -681,9 +664,11 @@ export type Product = {
   materials?: Maybe<Array<MaterialType>>;
   nomenclature?: Maybe<Nomenclature>;
   notes?: Maybe<Scalars['String']>;
+  orderIndex?: Maybe<Scalars['Float']>;
   priceBase?: Maybe<Scalars['Float']>;
   priceSale?: Maybe<Scalars['Float']>;
   rating?: Maybe<Scalars['Float']>;
+  region?: Maybe<ProductRegion>;
   reviews?: Maybe<Array<Review>>;
   sizes?: Maybe<Scalars['String']>;
   sku?: Maybe<Scalars['String']>;
@@ -698,7 +683,6 @@ export type Product = {
   variants: Array<Product>;
   videos?: Maybe<Array<Scalars['String']>>;
   videosSrc: Array<Scalars['String']>;
-  wildberriesId?: Maybe<Scalars['Float']>;
 };
 
 export enum ProductCategory {
@@ -723,6 +707,13 @@ export enum ProductGender {
   Unisex = 'unisex',
   Unset = 'unset',
   Women = 'women'
+}
+
+export enum ProductRegion {
+  Id = 'id',
+  Ru = 'ru',
+  Tr = 'tr',
+  Ww = 'ww'
 }
 
 export enum ProductStatus {
@@ -777,6 +768,7 @@ export type QueryCartsArgs = {
 
 export type QueryCategoriesArgs = {
   gender?: InputMaybe<ProductGender>;
+  region: ProductRegion;
 };
 
 
@@ -868,32 +860,22 @@ export type Review = {
 
 export type UpdateBarcodeInput = {
   barcode: Scalars['String'];
-  category?: InputMaybe<ProductCategory>;
-  collection?: InputMaybe<Scalars['String']>;
-  color?: InputMaybe<Scalars['String']>;
-  colorGroup?: InputMaybe<Scalars['String']>;
-  crossSale?: InputMaybe<Array<Scalars['String']>>;
-  description?: InputMaybe<Scalars['String']>;
-  descriptionSeo?: InputMaybe<Scalars['String']>;
+  category: ProductCategory;
+  color: Scalars['String'];
+  colorGroup: Scalars['String'];
   externalId?: InputMaybe<Array<ExternalIdInput>>;
-  gender?: InputMaybe<ProductGender>;
-  images?: InputMaybe<Array<Scalars['String']>>;
+  gender: ProductGender;
   manufactured?: InputMaybe<Scalars['String']>;
-  materials?: InputMaybe<Array<MaterialInput>>;
-  nomenclature?: InputMaybe<NomenclatureInput>;
   notes?: InputMaybe<Scalars['String']>;
   priceBase?: InputMaybe<Scalars['Float']>;
   priceSale?: InputMaybe<Scalars['Float']>;
+  region: ProductRegion;
   size: Scalars['String'];
   sku: Scalars['String'];
   skuFamily: Scalars['String'];
-  status?: InputMaybe<ProductStatus>;
+  status: ProductStatus;
   stock: Scalars['Float'];
   tags?: InputMaybe<Scalars['String']>;
-  title?: InputMaybe<Scalars['String']>;
-  titleFull?: InputMaybe<Scalars['String']>;
-  videos?: InputMaybe<Array<Scalars['String']>>;
-  wildberriesId?: InputMaybe<Scalars['Float']>;
 };
 
 export type UpdateCartInput = {
@@ -951,16 +933,17 @@ export type UpdateProductInput = {
   materials?: InputMaybe<Array<MaterialInput>>;
   nomenclature: NomenclatureInput;
   notes?: InputMaybe<Scalars['String']>;
+  orderIndex?: InputMaybe<Scalars['Float']>;
   priceBase?: InputMaybe<Scalars['Float']>;
   priceSale?: InputMaybe<Scalars['Float']>;
-  sku?: InputMaybe<Scalars['String']>;
+  region?: InputMaybe<ProductRegion>;
+  sku: Scalars['String'];
   skuFamily?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<ProductStatus>;
   tags?: InputMaybe<Scalars['String']>;
   title?: InputMaybe<Scalars['String']>;
   titleFull?: InputMaybe<Scalars['String']>;
   videos?: InputMaybe<Array<Scalars['String']>>;
-  wildberriesId?: InputMaybe<Scalars['Float']>;
 };
 
 export type UpdateReviewInput = {
@@ -1010,24 +993,25 @@ export type BarcodeQueryVariables = Exact<{
 }>;
 
 
-export type BarcodeQuery = { __typename?: 'Query', barcode: { __typename?: 'Barcode', barcode: string, sku: string, stock: number, size: string, coverImage: string, category?: ProductCategory | null, product: { __typename?: 'Product', sku?: string | null, color?: string | null, title?: string | null, category?: ProductCategory | null, coverImage: string, priceBase?: number | null, priceSale?: number | null } } };
+export type BarcodeQuery = { __typename?: 'Query', barcode: { __typename?: 'Barcode', barcode: string, sku: string, stock: number, size: string, coverImage: string, category: ProductCategory, product: { __typename?: 'Product', sku?: string | null, color?: string | null, title?: string | null, category?: ProductCategory | null, coverImage: string, priceBase?: number | null, priceSale?: number | null } } };
 
 export type CartFilterQueryVariables = Exact<{
   input: GetCartInput;
 }>;
 
 
-export type CartFilterQuery = { __typename?: 'Query', cart: { __typename?: 'Cart', id: string, userId?: string | null, orderId?: string | null, status: CartStatus, externalUserId?: string | null, createdAt?: any | null, updatedAt?: any | null, totalAmount: number, totalItemsCount: number, cartItems: Array<{ __typename?: 'CartItems', price?: number | null, quantity?: number | null, currency?: string | null, barcode?: { __typename?: 'Barcode', barcode: string, coverImage: string, title?: string | null, sku: string, category?: ProductCategory | null, priceBase?: number | null, priceSale?: number | null, stock: number, size: string } | null }> } };
+export type CartFilterQuery = { __typename?: 'Query', cart: { __typename?: 'Cart', id: string, userId?: string | null, orderId?: string | null, status: CartStatus, externalUserId?: string | null, createdAt?: any | null, updatedAt?: any | null, totalAmount: number, totalItemsCount: number, cartItems: Array<{ __typename?: 'CartItems', price?: number | null, quantity?: number | null, currency?: string | null, barcode?: { __typename?: 'Barcode', barcode: string, coverImage: string, sku: string, category: ProductCategory, priceBase?: number | null, priceSale?: number | null, stock: number, size: string, product: { __typename?: 'Product', title?: string | null, description?: string | null } } | null }> } };
 
 export type CartQueryVariables = Exact<{
   input: GetCartInput;
 }>;
 
 
-export type CartQuery = { __typename?: 'Query', cart: { __typename?: 'Cart', id: string, userId?: string | null, orderId?: string | null, status: CartStatus, externalUserId?: string | null, totalAmount: number, totalItemsCount: number, createdAt?: any | null, updatedAt?: any | null, cartItems: Array<{ __typename?: 'CartItems', price?: number | null, quantity?: number | null, currency?: string | null, barcode?: { __typename?: 'Barcode', barcode: string, coverImage: string, title?: string | null, sku: string, category?: ProductCategory | null, priceBase?: number | null, priceSale?: number | null, stock: number, size: string } | null }> } };
+export type CartQuery = { __typename?: 'Query', cart: { __typename?: 'Cart', id: string, userId?: string | null, orderId?: string | null, status: CartStatus, externalUserId?: string | null, totalAmount: number, totalItemsCount: number, createdAt?: any | null, updatedAt?: any | null, cartItems: Array<{ __typename?: 'CartItems', price?: number | null, quantity?: number | null, currency?: string | null, barcode?: { __typename?: 'Barcode', barcode: string, coverImage: string, sku: string, category: ProductCategory, priceBase?: number | null, priceSale?: number | null, stock: number, size: string, product: { __typename?: 'Product', title?: string | null, description?: string | null } } | null }> } };
 
 export type CategoriesListQueryVariables = Exact<{
   gender?: InputMaybe<ProductGender>;
+  region: ProductRegion;
 }>;
 
 
@@ -1038,7 +1022,7 @@ export type CreateCartMutationVariables = Exact<{
 }>;
 
 
-export type CreateCartMutation = { __typename?: 'Mutation', createCart: { __typename?: 'Cart', id: string, userId?: string | null, orderId?: string | null, status: CartStatus, externalUserId?: string | null, totalAmount: number, totalItemsCount: number, createdAt?: any | null, updatedAt?: any | null, cartItems: Array<{ __typename?: 'CartItems', price?: number | null, quantity?: number | null, currency?: string | null, barcode?: { __typename?: 'Barcode', barcode: string, coverImage: string, title?: string | null, sku: string, category?: ProductCategory | null, priceBase?: number | null, priceSale?: number | null, stock: number, size: string } | null }> } };
+export type CreateCartMutation = { __typename?: 'Mutation', createCart: { __typename?: 'Cart', id: string, userId?: string | null, orderId?: string | null, status: CartStatus, externalUserId?: string | null, totalAmount: number, totalItemsCount: number, createdAt?: any | null, updatedAt?: any | null, cartItems: Array<{ __typename?: 'CartItems', price?: number | null, quantity?: number | null, currency?: string | null, barcode?: { __typename?: 'Barcode', barcode: string, coverImage: string, sku: string, category: ProductCategory, priceBase?: number | null, priceSale?: number | null, stock: number, size: string, product: { __typename?: 'Product', title?: string | null, description?: string | null } } | null }> } };
 
 export type CreateFeedbackMutationVariables = Exact<{
   input: CreateFeedbackInput;
@@ -1066,14 +1050,14 @@ export type ProductQueryVariables = Exact<{
 }>;
 
 
-export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', sku?: string | null, title?: string | null, titleFull?: string | null, description?: string | null, descriptionSeo?: string | null, color?: string | null, colorGroup?: string | null, priceBase?: number | null, priceSale?: number | null, stock?: number | null, status?: ProductStatus | null, category?: ProductCategory | null, gender?: ProductGender | null, tags?: string | null, collection?: string | null, wildberriesId?: number | null, manufactured?: string | null, notes?: string | null, rating?: number | null, createdAt?: any | null, updatedAt?: any | null, coverImage: string, imagesSrc: Array<string>, videosSrc: Array<string>, sizes?: string | null, nomenclature?: { __typename?: 'Nomenclature', tnvd?: string | null } | null, materials?: Array<{ __typename?: 'MaterialType', material?: string | null, quantity?: number | null }> | null, crossSaleProducts?: Array<{ __typename?: 'Product', sku?: string | null, coverImage: string, title?: string | null }> | null, barcodes: Array<{ __typename?: 'Barcode', barcode: string, coverImage: string, title?: string | null, sku: string, category?: ProductCategory | null, priceBase?: number | null, priceSale?: number | null, stock: number, size: string }>, variants: Array<{ __typename?: 'Product', sku?: string | null, colorGroup?: string | null, coverImage: string, title?: string | null, priceBase?: number | null, priceSale?: number | null, color?: string | null }>, reviews?: Array<{ __typename?: 'Review', sku: string, reviewText: string, reviewAuthor: string, reviewRating: number, reviewDate: any, id?: string | null, skuFamily: string, product: { __typename?: 'Product', coverImage: string } }> | null } };
+export type ProductQuery = { __typename?: 'Query', product: { __typename?: 'Product', sku?: string | null, title?: string | null, titleFull?: string | null, description?: string | null, descriptionSeo?: string | null, color?: string | null, colorGroup?: string | null, priceBase?: number | null, priceSale?: number | null, stock?: number | null, status?: ProductStatus | null, category?: ProductCategory | null, gender?: ProductGender | null, tags?: string | null, collection?: string | null, manufactured?: string | null, notes?: string | null, rating?: number | null, createdAt?: any | null, updatedAt?: any | null, coverImage: string, imagesSrc: Array<string>, videosSrc: Array<string>, sizes?: string | null, nomenclature?: { __typename?: 'Nomenclature', tnvd?: string | null } | null, materials?: Array<{ __typename?: 'MaterialType', material?: string | null, quantity?: number | null }> | null, externalId?: Array<{ __typename?: 'ExternalId', name?: string | null, id?: string | null }> | null, crossSaleProducts?: Array<{ __typename?: 'Product', sku?: string | null, coverImage: string, title?: string | null }> | null, barcodes: Array<{ __typename?: 'Barcode', barcode: string, coverImage: string, sku: string, category: ProductCategory, priceBase?: number | null, priceSale?: number | null, stock: number, size: string, product: { __typename?: 'Product', title?: string | null, description?: string | null } }>, variants: Array<{ __typename?: 'Product', sku?: string | null, colorGroup?: string | null, coverImage: string, title?: string | null, priceBase?: number | null, priceSale?: number | null, color?: string | null }>, reviews?: Array<{ __typename?: 'Review', sku: string, reviewText: string, reviewAuthor: string, reviewRating: number, reviewDate: any, id?: string | null, skuFamily: string, product: { __typename?: 'Product', coverImage: string } }> | null } };
 
 export type ProductsListQueryVariables = Exact<{
   input: FilterProductInput;
 }>;
 
 
-export type ProductsListQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', sku?: string | null, skuFamily?: string | null, title?: string | null, titleFull?: string | null, description?: string | null, descriptionSeo?: string | null, color?: string | null, priceBase?: number | null, priceSale?: number | null, stock?: number | null, status?: ProductStatus | null, category?: ProductCategory | null, gender?: ProductGender | null, tags?: string | null, collection?: string | null, videos?: Array<string> | null, wildberriesId?: number | null, crossSale?: Array<string> | null, manufactured?: string | null, notes?: string | null, rating?: number | null, createdAt?: any | null, updatedAt?: any | null, coverImage: string, imagesSrc: Array<string>, sizes?: string | null, nomenclature?: { __typename?: 'Nomenclature', tnvd?: string | null } | null, materials?: Array<{ __typename?: 'MaterialType', material?: string | null, quantity?: number | null }> | null, barcodes: Array<{ __typename?: 'Barcode', size: string, stock: number }> }> };
+export type ProductsListQuery = { __typename?: 'Query', products: Array<{ __typename?: 'Product', sku?: string | null, skuFamily?: string | null, title?: string | null, titleFull?: string | null, description?: string | null, descriptionSeo?: string | null, color?: string | null, priceBase?: number | null, priceSale?: number | null, stock?: number | null, status?: ProductStatus | null, category?: ProductCategory | null, gender?: ProductGender | null, tags?: string | null, collection?: string | null, videos?: Array<string> | null, crossSale?: Array<string> | null, manufactured?: string | null, notes?: string | null, rating?: number | null, createdAt?: any | null, updatedAt?: any | null, coverImage: string, imagesSrc: Array<string>, sizes?: string | null, nomenclature?: { __typename?: 'Nomenclature', tnvd?: string | null } | null, materials?: Array<{ __typename?: 'MaterialType', material?: string | null, quantity?: number | null }> | null, externalId?: Array<{ __typename?: 'ExternalId', name?: string | null, id?: string | null }> | null, barcodes: Array<{ __typename?: 'Barcode', size: string, stock: number }> }> };
 
 export type RegisterUserMutationVariables = Exact<{
   input: RegisterAuthInput;
@@ -1094,7 +1078,7 @@ export type UpdateCartMutationVariables = Exact<{
 }>;
 
 
-export type UpdateCartMutation = { __typename?: 'Mutation', updateCart: { __typename?: 'Cart', id: string, userId?: string | null, orderId?: string | null, status: CartStatus, externalUserId?: string | null, totalAmount: number, totalItemsCount: number, createdAt?: any | null, updatedAt?: any | null, cartItems: Array<{ __typename?: 'CartItems', price?: number | null, quantity?: number | null, currency?: string | null, barcode?: { __typename?: 'Barcode', barcode: string, coverImage: string, title?: string | null, sku: string, category?: ProductCategory | null, priceBase?: number | null, priceSale?: number | null, stock: number, size: string } | null }> } };
+export type UpdateCartMutation = { __typename?: 'Mutation', updateCart: { __typename?: 'Cart', id: string, userId?: string | null, orderId?: string | null, status: CartStatus, externalUserId?: string | null, totalAmount: number, totalItemsCount: number, createdAt?: any | null, updatedAt?: any | null, cartItems: Array<{ __typename?: 'CartItems', price?: number | null, quantity?: number | null, currency?: string | null, barcode?: { __typename?: 'Barcode', barcode: string, coverImage: string, sku: string, category: ProductCategory, priceBase?: number | null, priceSale?: number | null, stock: number, size: string, product: { __typename?: 'Product', title?: string | null, description?: string | null } } | null }> } };
 
 export type UserQueryVariables = Exact<{
   input: Scalars['String'];
@@ -1149,13 +1133,16 @@ export const CartFilterDocument = gql`
       barcode {
         barcode
         coverImage
-        title
         sku
         category
         priceBase
         priceSale
         stock
         size
+        product {
+          title
+          description
+        }
       }
       price
       quantity
@@ -1189,13 +1176,16 @@ export const CartDocument = gql`
       barcode {
         barcode
         coverImage
-        title
         sku
         category
         priceBase
         priceSale
         stock
         size
+        product {
+          title
+          description
+        }
       }
       price
       quantity
@@ -1220,8 +1210,8 @@ export const CartDocument = gql`
     }
   }
 export const CategoriesListDocument = gql`
-    query CategoriesList($gender: ProductGender) {
-  categories(gender: $gender) {
+    query CategoriesList($gender: ProductGender, $region: ProductRegion!) {
+  categories(gender: $gender, region: $region) {
     name
   }
 }
@@ -1249,13 +1239,16 @@ export const CreateCartDocument = gql`
       barcode {
         barcode
         coverImage
-        title
         sku
         category
         priceBase
         priceSale
         stock
         size
+        product {
+          title
+          description
+        }
       }
       price
       quantity
@@ -1416,7 +1409,10 @@ export const ProductDocument = gql`
     gender
     tags
     collection
-    wildberriesId
+    externalId {
+      name
+      id
+    }
     crossSaleProducts {
       sku
       coverImage
@@ -1428,13 +1424,16 @@ export const ProductDocument = gql`
     barcodes {
       barcode
       coverImage
-      title
       sku
       category
       priceBase
       priceSale
       stock
       size
+      product {
+        title
+        description
+      }
     }
     createdAt
     updatedAt
@@ -1503,7 +1502,10 @@ export const ProductsListDocument = gql`
     tags
     collection
     videos
-    wildberriesId
+    externalId {
+      name
+      id
+    }
     crossSale
     manufactured
     notes
@@ -1601,13 +1603,16 @@ export const UpdateCartDocument = gql`
       barcode {
         barcode
         coverImage
-        title
         sku
         category
         priceBase
         priceSale
         stock
         size
+        product {
+          title
+          description
+        }
       }
       price
       quantity
@@ -1661,30 +1666,24 @@ export type AuthFieldPolicy = {
 	token?: FieldPolicy<any> | FieldReadFunction<any>,
 	user?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type BarcodeKeySpecifier = ('barcode' | 'category' | 'collection' | 'color' | 'colorGroup' | 'coverImage' | 'createdAt' | 'crossSale' | 'description' | 'descriptionSeo' | 'externalId' | 'gender' | 'images' | 'imagesSrc' | 'manufactured' | 'materials' | 'nomenclature' | 'notes' | 'priceBase' | 'priceSale' | 'product' | 'rating' | 'reviews' | 'size' | 'sku' | 'skuFamily' | 'status' | 'stock' | 'tags' | 'title' | 'titleFull' | 'updatedAt' | 'videos' | 'videosSrc' | 'wildberriesId' | BarcodeKeySpecifier)[];
+export type BarcodeKeySpecifier = ('barcode' | 'category' | 'color' | 'colorGroup' | 'coverImage' | 'createdAt' | 'externalId' | 'gender' | 'imagesSrc' | 'manufactured' | 'notes' | 'priceBase' | 'priceSale' | 'product' | 'rating' | 'region' | 'reviews' | 'size' | 'sku' | 'skuFamily' | 'status' | 'stock' | 'tags' | 'updatedAt' | 'videosSrc' | BarcodeKeySpecifier)[];
 export type BarcodeFieldPolicy = {
 	barcode?: FieldPolicy<any> | FieldReadFunction<any>,
 	category?: FieldPolicy<any> | FieldReadFunction<any>,
-	collection?: FieldPolicy<any> | FieldReadFunction<any>,
 	color?: FieldPolicy<any> | FieldReadFunction<any>,
 	colorGroup?: FieldPolicy<any> | FieldReadFunction<any>,
 	coverImage?: FieldPolicy<any> | FieldReadFunction<any>,
 	createdAt?: FieldPolicy<any> | FieldReadFunction<any>,
-	crossSale?: FieldPolicy<any> | FieldReadFunction<any>,
-	description?: FieldPolicy<any> | FieldReadFunction<any>,
-	descriptionSeo?: FieldPolicy<any> | FieldReadFunction<any>,
 	externalId?: FieldPolicy<any> | FieldReadFunction<any>,
 	gender?: FieldPolicy<any> | FieldReadFunction<any>,
-	images?: FieldPolicy<any> | FieldReadFunction<any>,
 	imagesSrc?: FieldPolicy<any> | FieldReadFunction<any>,
 	manufactured?: FieldPolicy<any> | FieldReadFunction<any>,
-	materials?: FieldPolicy<any> | FieldReadFunction<any>,
-	nomenclature?: FieldPolicy<any> | FieldReadFunction<any>,
 	notes?: FieldPolicy<any> | FieldReadFunction<any>,
 	priceBase?: FieldPolicy<any> | FieldReadFunction<any>,
 	priceSale?: FieldPolicy<any> | FieldReadFunction<any>,
 	product?: FieldPolicy<any> | FieldReadFunction<any>,
 	rating?: FieldPolicy<any> | FieldReadFunction<any>,
+	region?: FieldPolicy<any> | FieldReadFunction<any>,
 	reviews?: FieldPolicy<any> | FieldReadFunction<any>,
 	size?: FieldPolicy<any> | FieldReadFunction<any>,
 	sku?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -1692,12 +1691,8 @@ export type BarcodeFieldPolicy = {
 	status?: FieldPolicy<any> | FieldReadFunction<any>,
 	stock?: FieldPolicy<any> | FieldReadFunction<any>,
 	tags?: FieldPolicy<any> | FieldReadFunction<any>,
-	title?: FieldPolicy<any> | FieldReadFunction<any>,
-	titleFull?: FieldPolicy<any> | FieldReadFunction<any>,
 	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>,
-	videos?: FieldPolicy<any> | FieldReadFunction<any>,
-	videosSrc?: FieldPolicy<any> | FieldReadFunction<any>,
-	wildberriesId?: FieldPolicy<any> | FieldReadFunction<any>
+	videosSrc?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type BaseExternalCodeProviderKeySpecifier = ('code' | 'provider' | BaseExternalCodeProviderKeySpecifier)[];
 export type BaseExternalCodeProviderFieldPolicy = {
@@ -1748,14 +1743,15 @@ export type CartItemsFieldPolicy = {
 	price?: FieldPolicy<any> | FieldReadFunction<any>,
 	quantity?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type CategoryKeySpecifier = ('barcodesCount' | 'coverImage' | 'gender' | 'name' | 'products' | 'productsCount' | CategoryKeySpecifier)[];
+export type CategoryKeySpecifier = ('barcodesCount' | 'coverImage' | 'gender' | 'name' | 'products' | 'productsCount' | 'region' | CategoryKeySpecifier)[];
 export type CategoryFieldPolicy = {
 	barcodesCount?: FieldPolicy<any> | FieldReadFunction<any>,
 	coverImage?: FieldPolicy<any> | FieldReadFunction<any>,
 	gender?: FieldPolicy<any> | FieldReadFunction<any>,
 	name?: FieldPolicy<any> | FieldReadFunction<any>,
 	products?: FieldPolicy<any> | FieldReadFunction<any>,
-	productsCount?: FieldPolicy<any> | FieldReadFunction<any>
+	productsCount?: FieldPolicy<any> | FieldReadFunction<any>,
+	region?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type ExternalCodeProviderKeySpecifier = ('code' | 'provider' | ExternalCodeProviderKeySpecifier)[];
 export type ExternalCodeProviderFieldPolicy = {
@@ -1853,7 +1849,7 @@ export type OrderFieldPolicy = {
 	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>,
 	userId?: FieldPolicy<any> | FieldReadFunction<any>
 };
-export type ProductKeySpecifier = ('barcodes' | 'category' | 'collection' | 'color' | 'colorGroup' | 'coverImage' | 'createdAt' | 'crossSale' | 'crossSaleProducts' | 'description' | 'descriptionSeo' | 'externalId' | 'gender' | 'images' | 'imagesSrc' | 'manufactured' | 'materials' | 'nomenclature' | 'notes' | 'priceBase' | 'priceSale' | 'rating' | 'reviews' | 'sizes' | 'sku' | 'skuFamily' | 'skuIndex' | 'status' | 'stock' | 'tags' | 'title' | 'titleFull' | 'updatedAt' | 'variants' | 'videos' | 'videosSrc' | 'wildberriesId' | ProductKeySpecifier)[];
+export type ProductKeySpecifier = ('barcodes' | 'category' | 'collection' | 'color' | 'colorGroup' | 'coverImage' | 'createdAt' | 'crossSale' | 'crossSaleProducts' | 'description' | 'descriptionSeo' | 'externalId' | 'gender' | 'images' | 'imagesSrc' | 'manufactured' | 'materials' | 'nomenclature' | 'notes' | 'orderIndex' | 'priceBase' | 'priceSale' | 'rating' | 'region' | 'reviews' | 'sizes' | 'sku' | 'skuFamily' | 'skuIndex' | 'status' | 'stock' | 'tags' | 'title' | 'titleFull' | 'updatedAt' | 'variants' | 'videos' | 'videosSrc' | ProductKeySpecifier)[];
 export type ProductFieldPolicy = {
 	barcodes?: FieldPolicy<any> | FieldReadFunction<any>,
 	category?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -1874,9 +1870,11 @@ export type ProductFieldPolicy = {
 	materials?: FieldPolicy<any> | FieldReadFunction<any>,
 	nomenclature?: FieldPolicy<any> | FieldReadFunction<any>,
 	notes?: FieldPolicy<any> | FieldReadFunction<any>,
+	orderIndex?: FieldPolicy<any> | FieldReadFunction<any>,
 	priceBase?: FieldPolicy<any> | FieldReadFunction<any>,
 	priceSale?: FieldPolicy<any> | FieldReadFunction<any>,
 	rating?: FieldPolicy<any> | FieldReadFunction<any>,
+	region?: FieldPolicy<any> | FieldReadFunction<any>,
 	reviews?: FieldPolicy<any> | FieldReadFunction<any>,
 	sizes?: FieldPolicy<any> | FieldReadFunction<any>,
 	sku?: FieldPolicy<any> | FieldReadFunction<any>,
@@ -1890,8 +1888,7 @@ export type ProductFieldPolicy = {
 	updatedAt?: FieldPolicy<any> | FieldReadFunction<any>,
 	variants?: FieldPolicy<any> | FieldReadFunction<any>,
 	videos?: FieldPolicy<any> | FieldReadFunction<any>,
-	videosSrc?: FieldPolicy<any> | FieldReadFunction<any>,
-	wildberriesId?: FieldPolicy<any> | FieldReadFunction<any>
+	videosSrc?: FieldPolicy<any> | FieldReadFunction<any>
 };
 export type QueryKeySpecifier = ('barcode' | 'barcodes' | 'cart' | 'carts' | 'categories' | 'category' | 'feedback' | 'feedbacks' | 'item' | 'items' | 'me' | 'order' | 'orders' | 'product' | 'products' | 'review' | 'reviews' | 'user' | QueryKeySpecifier)[];
 export type QueryFieldPolicy = {

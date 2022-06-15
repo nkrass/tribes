@@ -59,12 +59,8 @@ export class ProductResolver {
   }
   @ResolveField(() => [Product], {nullable: true})
   async crossSaleProducts(@Parent() product: Product){
-    const queries = product.crossSale.map(async s => await this.productService.findBySkuFamily(s))
-    const results: any = []
-    for await (const res of queries) {
-      results.push(res)
-    }
-    return results.flat(1)
+    const queries = await Promise.all(product.crossSale.map(async s => this.productService.findBySkuFamily(s)))
+    return queries.flat(1)
   }
   @UseGuards(GqlAuthGuard)
   @Mutation(() => Product)
@@ -86,7 +82,7 @@ export class ProductResolver {
   updateProduct(@Args('input') input: UpdateProductInput, @CurrentUser() user: User) {
     const { sku } = input;
     const ability = this.access.createForUser(user);
-    if (ability.can(Action.Update, Product)) return this.productService.update({ sku }, input)
+    if (ability.can(Action.Update, Product)) return this.productService.update(sku, input)
     else throw new UnauthorizedException('Unauthorized');
   }
   @UseGuards(GqlAuthGuard)
@@ -94,24 +90,26 @@ export class ProductResolver {
   async deleteProduct(@Args('input') input: UpdateProductInput, @CurrentUser() user: User) {
     const { sku } = input;
     const ability = this.access.createForUser(user);
-    if (ability.can(Action.Delete, Product)) return this.productService.delete({ sku });
+    if (ability.can(Action.Delete, Product)) return this.productService.delete(sku);
     else throw new UnauthorizedException('Unauthorized');
   }
 
   @Query(() => Product, { complexity: (options: ComplexityEstimatorArgs) => options.args.count * options.childComplexity })
   product(@Args('input') input: GetProductInput) {
-    return this.productService.findOne(input);
+    const { sku } = input
+    return this.productService.findOne(sku);
   }
 
   @Query(() => [Product], { complexity: (options: ComplexityEstimatorArgs) => options.args.count * options.childComplexity })
   async products(@Args('input') input: FilterProductInput) {
     if (input.size) {
       const barcodes = await this.barcodesService.findByFilter({
+        region: input.region,
         size: input.size, 
         all: input.all, 
         inStock: input.inStock, limit: input.limit
       })
-      return this.productService.getBatchBySkus(barcodes.map(b => ({sku: b.sku})));
+      return this.productService.getBatchBySkus(barcodes.map(b => ({ sku: b.sku, region: b.region })));
     }
     return this.productService.findByFilter(input);
   }

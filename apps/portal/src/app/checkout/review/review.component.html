@@ -14,11 +14,11 @@
         <td>
           <div class="product-item">
             <a class="product-thumb" routerLink="/product/{{item.barcode?.sku}}">
-              <img [src]="item.barcode?.coverImage" alt="{{item.barcode?.title}}">
+              <img [src]="item.barcode?.coverImage" alt="{{item.barcode?.product?.title}}">
             </a>
             <div class="product-info">
               <h4 class="product-title">
-                <a routerLink="/product/{{item.barcode?.sku}}">{{item.barcode?.title}}
+                <a routerLink="/product/{{item.barcode?.sku}}">{{item.barcode?.product?.title}}
                   <small>x {{item.quantity}}</small>
                 </a>
               </h4>

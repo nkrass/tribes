@@ -8,7 +8,7 @@ query CartFilter($input: GetCartInput!){
     createdAt
     updatedAt
     cartItems {
-      barcode { barcode, coverImage, title, sku, category, priceBase, priceSale, stock, size }
+      barcode { barcode, coverImage, sku, category, priceBase, priceSale, stock, size, product { title, description }  }
       price,
       quantity
       currency

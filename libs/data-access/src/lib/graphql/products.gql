@@ -18,7 +18,7 @@ query ProductsList($input: FilterProductInput!){
     tags
     collection
     videos
-    wildberriesId
+    externalId { name, id }
     crossSale
     manufactured
     notes

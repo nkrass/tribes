@@ -1,5 +1,5 @@
-query CategoriesList($gender: ProductGender){
-  categories(gender: $gender){
+query CategoriesList($gender: ProductGender, $region: ProductRegion! ){
+  categories(gender: $gender, region: $region){
     name
   }
 }

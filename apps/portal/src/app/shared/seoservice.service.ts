@@ -180,7 +180,7 @@ export class SEOService {
           // sku, url: 'https://mytribes.ru/product/' + sku,
           offers: [
             { '@type': 'Offer',
-              url: 'https://www.wildberries.ru/catalog/'+ product.wildberriesId +'/detail.aspx?targetUrl=BP',
+              url: 'https://www.wildberries.ru/catalog/'+ product.externalId?.[0].id +'/detail.aspx?targetUrl=BP',
               availability: stock ? 'https://schema.org/InStock' : 'https://schema.org/LimitedAvailability',
             },
             { '@type': 'Offer',

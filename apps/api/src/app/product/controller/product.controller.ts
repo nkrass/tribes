@@ -1,18 +1,11 @@
 import {
   BadRequestException,
-  Body,
   Controller,
   Get,
   Param,
-  Patch,
-  Post,
-  Query,
 } from '@nestjs/common';
 import { GoogleServices } from '../../shared/googledoc.service';
 import { UploadMediaService } from '../../shared/upload-media.service';
-import { CreateProductInput } from '../dto/create-product.input';
-import { GetProductInput, FilterProductInput } from '../dto/filter-product.input';
-import { UpdateProductInput } from '../dto/update-product.input';
 import { ProductService } from '../service/product.service';
 
 @Controller('product')
@@ -47,16 +40,19 @@ export class ProductController {
   //   }
   //   throw new BadRequestException();
   // }
-  @Get('/upload/media/:id')
+  @Get('/upload/media/:sku')
   async uploadFromWb(@Param() params ) {
-    const {id} = params;
-    const [product] = await this.productService.findByFilter({ wildberriesId: Number(id), limit: 1, all: false});
+    const { sku } = params;
+    const product = await this.productService.findOne(sku);
     if (product) {
-      const result = await this.uploadService.uploadFromWbToS3(id.toString(), product.sku)
-      product.images = result.processed.images
-      product.videos = result.processed.videos
-      await this.googleService.updateProduct(product)
-      return this.productService.update({ sku: product.sku }, product as any)
+      const wbId = product.externalId.find(e => e.name === 'wildberries')?.id;
+      if (wbId){
+        const result = await this.uploadService.uploadFromWbToS3(wbId, product.sku)
+        product.images = result.processed.images
+        product.videos = result.processed.videos
+        await this.googleService.updateProduct(product)
+        return this.productService.update(sku, product)
+      } else throw new BadRequestException('Product not found')
     }
     throw new BadRequestException();
   }

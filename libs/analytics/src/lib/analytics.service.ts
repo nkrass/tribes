@@ -132,7 +132,7 @@ export class AnalyticsService implements OnDestroy {
             return {
               id: p.barcode?.barcode,
               sku: p.barcode?.sku,
-              name: p.barcode?.title,
+              name: p.barcode?.product.title,
               brand: 'tribes',
               category: p.barcode?.category,
               quantity: p.quantity,
@@ -156,7 +156,7 @@ export class AnalyticsService implements OnDestroy {
             return {
               id: p.barcode?.sku,
               sku: p.barcode?.sku,
-              name: p.barcode?.title,
+              name: p.barcode?.product?.title,
               brand: 'tribes',
               category: p.barcode?.category,
               quantity: p.quantity,
@@ -168,7 +168,7 @@ export class AnalyticsService implements OnDestroy {
     }
     this.gtmService.pushTag(gtmEvent)
     .then(() => {
-      window['fbq']?.('track', 'ViewContent', { content_ids: items.map(i=> i.barcode), content_name: items[0].barcode?.title, content_type: 'product' })
+      window['fbq']?.('track', 'ViewContent', { content_ids: items.map(i=> i.barcode), content_name: items[0].barcode?.product?.title, content_type: 'product' })
     })
     .catch(() => console.log('Error in loading GTM'));
   }
@@ -184,7 +184,7 @@ export class AnalyticsService implements OnDestroy {
             return {
               id: p.barcode?.barcode,
               sku: p.barcode?.sku,
-              name: p.barcode?.title,
+              name: p.barcode?.product?.title,
               brand: 'tribes',
               category: p.barcode?.category,
               quantity: p.quantity,
@@ -211,7 +211,7 @@ export class AnalyticsService implements OnDestroy {
             return {
               id: p.barcode?.barcode,
               sku: p.barcode?.sku,
-              name: p.barcode?.title,
+              name: p.barcode?.product?.title,
               brand: 'tribes',
               category: p.barcode?.category,
               quantity: p.quantity,
@@ -244,7 +244,7 @@ export class AnalyticsService implements OnDestroy {
             return {
               id: p.barcode?.barcode,
               sku: p.barcode?.sku,
-              name: p.barcode?.title,
+              name: p.barcode?.product.title,
               brand: 'tribes',
               category: p.barcode?.category,
               quantity: p.quantity,
@@ -289,7 +289,7 @@ export class AnalyticsService implements OnDestroy {
             return {
               id: p.barcode?.barcode,
               sku: p.barcode?.sku,
-              name: p.barcode?.title,
+              name: p.barcode?.product?.title,
               brand: 'tribes',
               category: p.barcode?.category,
               quantity: p.quantity,
