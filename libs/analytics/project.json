@@ -1,11 +1,14 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/analytics/src",
   "prefix": "tribes",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/analytics"],
+      "outputs": [
+        "coverage/libs/analytics"
+      ],
       "options": {
         "jestConfig": "libs/analytics/jest.config.ts",
         "passWithNoTests": true

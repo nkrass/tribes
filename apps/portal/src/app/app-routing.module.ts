@@ -1,4 +1,4 @@
-import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, NgModule, ViewContainerRef } from '@angular/core';
+import { Attribute, ChangeDetectorRef, ComponentFactoryResolver, Directive, EnvironmentInjector, NgModule, ViewContainerRef } from '@angular/core';
 import { ActivatedRoute, ChildrenOutletContexts, RouterModule, RouterOutlet } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { CartComponent } from './cart/cart.component';
@@ -16,11 +16,11 @@ export class RouterOutletDirective extends RouterOutlet {
   constructor(
     parentContexts: ChildrenOutletContexts,
     location: ViewContainerRef,
-    resolver: ComponentFactoryResolver,
     @Attribute('name') name: string,
-    private ref: ChangeDetectorRef
+    private ref: ChangeDetectorRef,
+    environmentInjector: EnvironmentInjector
   ) {
-    super(parentContexts, location, resolver, name, ref);
+    super(parentContexts, location, name, ref, environmentInjector);
   }
   override activateWith(
     activatedRoute: ActivatedRoute,
@@ -60,7 +60,7 @@ export const PortalRoutes = [
 
   new SEORoute({ path: 'cart', component: CartComponent, pathMatch: 'full', data: {
     ...BrandDefaultMeta,
-    title:"Корзина | 🛍 TRIBES ® - Больше своего времени",
+    title:"Корзина | 🛍 TRIBES ® - для Ярких и Смелых",
     description: "Ваши заказы одежды 🛍TRIBES® - стиль большого города, приятные материалы и забота о комфорте"
   }}),
   
@@ -99,13 +99,13 @@ export const PortalRoutes = [
   },
   new SEORoute({path: '404', component: PageNotFoundComponent, pathMatch: 'prefix', data: {
     ...BrandDefaultMeta,
-    title:"Страница не найдена | 🛍 TRIBES ® - Больше своего времени",
+    title:"Страница не найдена | 🛍 TRIBES ® - для Ярких и Смелых",
     description: "Страница не найдена | TRIBES - стиль большого города, приятные материалы и забота о комфорте",
   }}),
   // ALL OTHER 404
   new SEORoute({path: '**', component: PageNotFoundComponent, pathMatch: 'prefix', data: {
     ...BrandDefaultMeta,
-    title:"Страница не найдена | 🛍 TRIBES ® - Больше своего времени",
+    title:"Страница не найдена | 🛍 TRIBES ® - для Ярких и Смелых",
     description: "Страница не найдена | TRIBES - стиль большого города, приятные материалы и забота о комфорте",
   }}),
 ];

@@ -1,11 +1,14 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/storage/src",
   "prefix": "tribes",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/storage"],
+      "outputs": [
+        "coverage/libs/storage"
+      ],
       "options": {
         "jestConfig": "libs/storage/jest.config.ts",
         "passWithNoTests": true
@@ -14,7 +17,10 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/storage/**/*.ts", "libs/storage/**/*.html"]
+        "lintFilePatterns": [
+          "libs/storage/**/*.ts",
+          "libs/storage/**/*.html"
+        ]
       }
     }
   },

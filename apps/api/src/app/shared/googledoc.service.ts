@@ -6,12 +6,12 @@ import { Injectable } from "@nestjs/common";
 import { Barcode } from "../product/entities/barcode.model";
 import { environment } from '../../environments/environment';
 import { Review } from "../review/entities/review.model";
-import { ColorsDictionary } from "@tribes/colors-dictionary";
 import { ProductCategory } from "../product/entities/types/product-category.enum";
 import { ProductGender } from "../product/entities/types/product-gender.enum";
 import { RegionFromBarcode } from "./barcode-region-extractor";
 import { Nomenclature } from "../product/entities/types/nomenclature.type";
 import { Material } from "../product/entities/types/material.type";
+import { ColorsDictionary } from "../libs/colors-dictionary.module";
 
 const auth = new google.auth.JWT({
   email: Buffer.from(environment.GOOGLE_CLIENT_EMAIL as string, 'base64').toString('ascii'),

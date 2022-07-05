@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { GraphQLModule } from '@nestjs/graphql';
+import { GraphQLModule, GraphQLSchemaBuilderModule, GraphQLSchemaFactory } from '@nestjs/graphql';
 import { DynamooseModule } from 'nestjs-dynamoose';
 import { ItemModule } from './item/item.module';
 import { ProductModule } from './product/product.module';
@@ -16,27 +16,33 @@ import { DateScalar } from './shared/date.scalar';
 import { environment } from '../environments/environment';
 import { FeedbackModule } from './feedback/feedback.module';
 import { SharedModule } from './shared/shared.module';
+import { join } from 'path';
 
-
+const GQModule = function GQModule (){
+  return process.env.NODE_ENV !== 'production' ? GraphQLModule.forRoot<ApolloDriverConfig>({
+    autoSchemaFile: true,
+    cache: 'bounded',
+    driver: ApolloDriver,
+    playground: {
+      endpoint: '/graphql'
+    },
+  }) :
+  GraphQLModule.forRoot<ApolloDriverConfig>({
+    autoSchemaFile: true,
+    cache: 'bounded',
+    driver: ApolloDriver,
+    playground: {
+      endpoint: `/${process.env.STAGE}/graphql`,
+    },
+  }) 
+}
 @Module({
   imports: [
     ConfigModule.forRoot({
       isGlobal: true,
       load: [() => environment],
     }),
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      autoSchemaFile: true,
-      buildSchemaOptions: {
-        
-      },
-      driver: ApolloDriver,
-      playground: {
-        endpoint:
-          process.env.IS_NOT_SLS === 'true'
-            ? '/graphql'
-            : `/${process.env.STAGE}/graphql`,
-      },
-    }),
+    GQModule(),
     DynamooseModule.forRoot({
       local: process.env.IS_DDB_LOCAL === 'true',
       aws: { region: process.env.REGION },
@@ -50,3 +56,4 @@ import { SharedModule } from './shared/shared.module';
   ], providers: [ComplexityPlugin, DateScalar],
 })
 export class AppModule {}
+

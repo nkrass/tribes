@@ -15,7 +15,7 @@
     "noImplicitAny": false,
     "noImplicitOverride": false,
     "importHelpers": true,
-    "target": "ES2021",
+    "target": "es6",
     "module": "commonjs",
     "lib": ["es2017", "dom"],
     "skipLibCheck": true,

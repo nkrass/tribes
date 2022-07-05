@@ -1,11 +1,14 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "application",
   "sourceRoot": "apps/portal/src",
   "prefix": "tribes",
   "targets": {
     "build": {
       "executor": "@angular-devkit/build-angular:browser",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/portal/browser",
         "index": "apps/portal/src/index.html",
@@ -13,11 +16,18 @@
         "polyfills": "apps/portal/src/polyfills.ts",
         "tsConfig": "apps/portal/tsconfig.app.json",
         "inlineStyleLanguage": "scss",
-        "assets": ["apps/portal/src/favicon.ico", "apps/portal/src/assets"],
-        "styles": ["apps/portal/src/scss/styles.scss"],
+        "assets": [
+          "apps/portal/src/favicon.ico",
+          "apps/portal/src/assets"
+        ],
+        "styles": [
+          "apps/portal/src/scss/styles.scss"
+        ],
         "scripts": [],
         "stylePreprocessorOptions": {
-          "includePaths": ["libs/ui/src/lib/scss"]
+          "includePaths": [
+            "libs/ui/src/lib/scss"
+          ]
         }
       },
       "configurations": {
@@ -91,12 +101,16 @@
           "apps/portal/src/**/*.ts",
           "apps/portal/src/**/*.html"
         ],
-        "exclude": ["**/*generated.ts"]
+        "exclude": [
+          "**/*generated.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/portal"],
+      "outputs": [
+        "coverage/apps/portal"
+      ],
       "options": {
         "jestConfig": "apps/portal/jest.config.js",
         "passWithNoTests": true
@@ -126,7 +140,11 @@
       },
       "configurations": {
         "production": {
+          "optimization": true,
           "outputHashing": "media",
+          "sourceMap": true,
+          "namedChunks": false,
+          "extractLicenses": true,
           "fileReplacements": [
             {
               "replace": "apps/portal/src/environments/environment.ts",
@@ -134,7 +152,9 @@
             }
           ],
           "stylePreprocessorOptions": {
-            "includePaths": ["libs/ui/src/lib/scss"]
+            "includePaths": [
+              "libs/ui/src/lib/scss"
+            ]
           }
         },
         "development": {
@@ -142,7 +162,9 @@
           "sourceMap": true,
           "extractLicenses": false,
           "stylePreprocessorOptions": {
-            "includePaths": ["libs/ui/src/lib/scss"]
+            "includePaths": [
+              "libs/ui/src/lib/scss"
+            ]
           }
         }
       },

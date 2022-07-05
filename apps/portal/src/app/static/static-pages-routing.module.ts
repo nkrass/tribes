@@ -14,7 +14,7 @@ import { ReturnsAndRefundsComponent } from './returns-and-refunds/returns-and-re
 export const StaticPagesRoutes = [
   new SEORoute({ path: 'sizes', component: SizesPageComponent, pathMatch: 'full', data: {
     ...BrandDefaultMeta,
-    title: "Размерная сетка - Sizes table | 🛍 TRIBES ® - Больше своего времени",
+    title: "Размерная сетка - Sizes table | 🛍 TRIBES ® - для Ярких и Смелых",
     description: "Данные о всех размерах одежды бренда 🛍 TRIBES ® и измерения, на которые стоит ориентироваться при покупке."
   }}),
   new SEORoute({ path: 'about-tribes-brand', component: AboutTribesBrandComponent, pathMatch: 'full', data: {
@@ -24,22 +24,22 @@ export const StaticPagesRoutes = [
   }}),
   new SEORoute({path: 'support', component: SupportComponent, pathMatch: 'full', data: {
     ...BrandDefaultMeta,
-    title: "Поддержка клиентов | 🛍 TRIBES ® - Больше своего времени",
+    title: "Поддержка клиентов | 🛍 TRIBES ® - для Ярких и Смелых",
     description: "Связаться с нами по для получения помощи по вопросам заказов, качества и прочим ",
   }}),
   new SEORoute({ path: 'contacts', component: ContactsComponent, pathMatch: 'full', data: {
     ...BrandDefaultMeta,
-    title:"Связаться с нами | 🛍 TRIBES ® - Больше своего времени",
+    title:"Связаться с нами | 🛍 TRIBES ® - для Ярких и Смелых",
     description: "🤝Связаться с нами по поводу сотрудничества или по другим вопросам | 🛍TRIBES®"
   }}),
   new SEORoute({ path: 'policy', component: PolicyComponent, pathMatch: 'full', data: {
     ...BrandDefaultMeta,
-    title:"Политики | 🛍 TRIBES ® - Больше своего времени",
+    title:"Политики | 🛍 TRIBES ® - для Ярких и Смелых",
     description: "Политика конфиденциальности и Согласие с ПДН ООО Трайбс и Бренд TRIBES"
   }}),
   new SEORoute({ path: 'about-company', component: AboutCompanyComponent, pathMatch: 'full', data: {
     ...BrandDefaultMeta,
-    title:"О компании | 🛍 TRIBES ® - Больше своего времени",
+    title:"О компании | 🛍 TRIBES ® - для Ярких и Смелых",
     description: "Реквизиты ООО Трайбс и Бренд 🛍TRIBES® - стиль большого города, приятные материалы и забота о комфорте",
   }}),
   new SEORoute({ path: 'orders-payment-info', component: OrdersPaymentInfoComponent, pathMatch: 'full', data: {
@@ -61,11 +61,7 @@ export const StaticPagesRoutes = [
   new SEORoute({ path: 'v', pathMatch: 'full', redirectTo: 'about-tribes-brand', data: {
     ...BrandDefaultMeta
   }}),
-  {
-    path: '',
-    redirectTo: '',
-    pathMatch: 'full'
-  }
+  new SEORoute({ path: '', pathMatch: 'full', redirectTo: '', data: {...BrandDefaultMeta}}),
 ]
   
 

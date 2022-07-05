@@ -8,6 +8,9 @@
     "experimentalDecorators": true,
     "target": "ES2021",
   },
+  "ts-node": {
+    "require": ["tsconfig-paths/register"],
+  },
   "exclude": ["**/*.spec.ts", "**/*.test.ts"],
-  "include": ["**/*.ts"]
+  "include": ["**/*.ts"],
 }

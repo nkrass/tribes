@@ -1,4 +1,5 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "sourceRoot": "apps/api/src",
   "projectType": "application",
   "targets": {
@@ -37,7 +38,7 @@
       "options": {
         "commands": [
           {
-            "command": "NODE_ENV=production npx sls deploy --stage production --region eu-north-1 --verbose"
+            "command": "NODE_ENV=production IS_LOCAL=false npx sls deploy --stage production --region ap-southeast-1 --verbose --config serverless-api.yml"
           }
         ]
       }
@@ -54,16 +55,21 @@
     },
     "build": {
       "executor": "@nrwl/node:webpack",
-      "outputs": ["{options.outputPath}"],
+      "outputs": [
+        "{options.outputPath}"
+      ],
       "options": {
         "outputPath": "dist/apps/api",
         "main": "apps/api/src/main.ts",
         "tsConfig": "apps/api/tsconfig.app.json",
-        "assets": ["apps/api/src/assets"]
+        "assets": [
+          "apps/api/src/assets"
+        ]
       },
       "configurations": {
         "production": {
           "optimization": true,
+          "sourceMap": true,
           "extractLicenses": true,
           "inspect": false,
           "fileReplacements": [
@@ -83,14 +89,20 @@
     },
     "lint": {
       "executor": "@nrwl/linter:eslint",
-      "outputs": ["{options.outputFile}"],
+      "outputs": [
+        "{options.outputFile}"
+      ],
       "options": {
-        "lintFilePatterns": ["apps/api/**/*.ts"]
+        "lintFilePatterns": [
+          "apps/api/**/*.ts"
+        ]
       }
     },
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/apps/api"],
+      "outputs": [
+        "coverage/apps/api"
+      ],
       "options": {
         "jestConfig": "apps/api/jest.config.js",
         "passWithNoTests": true

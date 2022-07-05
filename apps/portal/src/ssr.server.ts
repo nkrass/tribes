@@ -132,10 +132,10 @@ export function app() {
           //   If you're serving files on temp url of api gateway you need to change the base href to your stage name
           //   html = html.replace('<base href="/', '<base href="/dev/');
           // }
-          html = html.replace('7iu1vb3wcj.execute-api.eu-north-1.amazonaws.com/', 'mytribes.ru/');
-          res.send(html);
+          html = html.replace('4o9gq75u1m.execute-api.ap-southeast-1.amazonaws.com/', '3bs.store/');
+          return res.send(html);
         } else {
-          res.send(err);
+          return res.send(err);
         }
       }
     );
@@ -152,19 +152,29 @@ function run() {
   });
 }
  
- // Webpack will replace 'require' with '__webpack_require__'
- // '__non_webpack_require__' is a proxy to Node 'require'
- // The below code is to ensure that the server is run only when not requiring the bundle.
- declare const __non_webpack_require__: NodeRequire;
- // const mainModule = __non_webpack_require__.main;
- const mainModule =
-   typeof __non_webpack_require__ !== 'undefined'
-     ? __non_webpack_require__.main
-     : require.main;
- const moduleFilename = mainModule && mainModule.filename || '';
- if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
-   run();
- }
+
+// Webpack will replace 'require' with '__webpack_require__'
+// '__non_webpack_require__' is a proxy to Node 'require'
+// The below code is to ensure that the server is run only when not requiring the bundle.
+declare const __non_webpack_require__: NodeRequire;
+const mainModule = __non_webpack_require__.main;
+const moduleFilename = mainModule && mainModule.filename || '';
+if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
+  run();
+}
+//  // Webpack will replace 'require' with '__webpack_require__'
+//  // '__non_webpack_require__' is a proxy to Node 'require'
+//  // The below code is to ensure that the server is run only when not requiring the bundle.
+//  declare const __non_webpack_require__: NodeRequire;
+//  // const mainModule = __non_webpack_require__.main;
+//  const mainModule =
+//    typeof __non_webpack_require__ !== 'undefined'
+//      ? __non_webpack_require__.main
+//      : require.main;
+//  const moduleFilename = mainModule && mainModule.filename || '';
+//  if (moduleFilename === __filename || moduleFilename.includes('iisnode')) {
+//    run();
+//  }
  
  export * from './main.server';
  

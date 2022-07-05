@@ -7,8 +7,8 @@ provider:
   architecture: arm64
   memorySize: 1536
   stage: ${opt:stage, 'dev'}
-  region: ${opt:region, 'eu-north-1'}
-  timeout: 900
+  region: ${opt:region, 'ap-southeast-1'}
+  timeout: 30
   environment:
     SERVICE: ${self:service}
     STAGE: ${self:provider.stage}
@@ -22,16 +22,20 @@ provider:
     shouldStartNameWithService: true
 functions:
   server:
+    # handler: dist/apps/portal/index.handler
     handler: handler.handler
     events:
       - http:
           cors: true
-          path: '{proxy+}'
+          path: '/'
           method: any
-  environment:
-      NODE_ENV: production
+      - http:
+          cors: true
+          path: '/{proxy+}'
+          method: any
 
 plugins:
+  - serverless-dotenv-plugin
   - serverless-apigw-binary
   - serverless-api-cloudfront
   # - serverless-plugin-warmup
@@ -39,68 +43,42 @@ plugins:
 
 # remove the unnecessary packages to keep small upload size
 package:
-  individually: true
-  patterns:  
-    - '!node_modules/.bin/**'
-    - '!node_modules/.cache/**'
-    - '!node_modules/**/README*'
-    - '!node_modules/**/readme*'
-    - '!node_modules/**/Readme*'
-    - '!node_modules/**/LICENSE*'
-    - '!node_modules/**/License*'
-    - '!node_modules/**/license*'
-    - '!node_modules/**/test/**'
-    - '!node_modules/**/Test/**'
-    - '!node_modules/**/TEST/**'
-    - '!node_modules/**/aws-sdk/**'
-    - '!node_modules/aws-sdk/**'
-    - '!node_modules/@angular/**'
-    - '!node_modules/@angular-devkit/**'
-    - '!node_modules/@babel/**'
-    - '!node_modules/browserify*/**'
-    - '!node_modules/**/*.css'
-    - '!node_modules/**/test/**'
-    - '!node_modules/**/example*/**'
-    - '!node_modules/**/Example*/**'
-    - '!node_modules/**/EXAMPLE*/**'
-    - '!node_modules/**/History*'
-    - '!node_modules/**/History*'
-    - '!node_modules/**/HISTORY*'
-    - '!node_modules/**/Changelog*'
-    - '!node_modules/**/changelog*'
-    - '!node_modules/**/CHANGELOG*'
-    - '!node_modules/**/CHANGES*'
-    - '!node_modules/**/Changes*'
-    - '!node_modules/**/changes*'
-    - '!node_modules/**/Makefile*'
-    - '!node_modules/**/makefile*'
-    - '!node_modules/**/SECURITY*'
-    - '!node_modules/**/Security*'
-    - '!node_modules/**/security*'
-    - '!node_modules/**/types.d.ts'
-    - '!node_modules/**/*.ts'
-    - '!.vscode/**'
-    - '!e2e/**'
-    - '!ux-testing/**'
-    - '!.gitignore'
-    - '!angular.json'
-    - '!README.md'
-    - '!karma.conf.js'
-    - '!protractor.conf.js'
-    - '!rename_images.js'
-    - '!SECURITY.md'
-    - '!server.ts'
-    - '!tsconfig.json'
-    - '!tslint.json'
-    - '!.cache/**'
-    - '!.gitattributes'
-    - '!.yarnclean'
-    - '!.DS_Store'
-    - '!tsconfig.base.json'
-    - '!package.json'
-    - '!package-lock.json'
-    - '!browserlist'
-    - '!credentials.json'
+  exclude:
+    - '!dist/apps/api/**'
+    - './dist/apps/api/**'
+    # - '!dist/apps/portal/server/**'
+    # - 'dist/apps/portal/server/**'
+    - '!node_modules/**'
+    - 'node_modules/**'
+    - '.angular/**'
+    - '.vscode/**'
+    - 'tools/**'
+    - './.yarnclean'
+    - './angular.json'
+    - 'package.json'
+    - 'README.md'
+    - 'tsconfig.*'
+    - '.dynamodb/**'
+    - '@types/**'
+    - 'apps/**'
+    - 'libs/**'
+    - 'tools'
+    - './.editorconfig'
+    - './.eslint*'
+    - './.prett*'
+    - './decorate*'
+    - './graphql.schema.json'
+    - './jest.config.js'
+    - './jest.preset.js'
+    - './migrations.json'
+    - './nx.json'
+    - './serverless*'
+    - './shared-local*'
+    - './webpack*'
+    - './yarn.lock'
+    - './yc-proxy.js'
+  include:
+    - 'node_modules/@vendia/serverless-express/**'
 
 custom:
   apigwBinary: # Library to add support for api gateway binary types

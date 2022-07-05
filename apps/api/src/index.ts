@@ -13,7 +13,7 @@ import { AppModule } from './app/app.module';
 
 let cachedServer: Handler;
 
-const bootstrapServer = async (): Promise<Handler> => {
+const bootstrapServer = async (): Promise<any> => {
   const expressApp = express();
   const app = await NestFactory.create(
     AppModule,
@@ -24,7 +24,7 @@ const bootstrapServer = async (): Promise<Handler> => {
   await app.init();
   return serverlessExpress({
     app: expressApp,
-  });
+  })
 };
 
 export async function handler (
@@ -32,7 +32,6 @@ export async function handler (
   context,
   callback,
 ) {
-  console.log('we are here')
   if (!cachedServer) {
     cachedServer = await bootstrapServer();
   }

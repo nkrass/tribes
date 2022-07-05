@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { S3 } from 'aws-sdk'
 import { promiseAllN } from '../shared/utils.utils' 
 import axios from 'axios'
-const s3 = new S3({region: 'eu-north-1'});
+const s3 = new S3({region: 'ap-southeast-1'});
 
 enum FileStatus {
   PROCESSED,

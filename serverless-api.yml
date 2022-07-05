@@ -7,13 +7,8 @@ provider:
   architecture: arm64
   memorySize: 1536
   stage: ${opt:stage, 'dev'}
-  region: ${opt:region, 'eu-north-1'}
-  timeout: 900
-  # webpack:
-  #   webpackConfig: 'webpack.config.js'
-  #   includeModules: true
-  #   packager: 'npm'
-  #   packExternalModulesMaxBuffer: 204800 
+  region: ${opt:region, 'ap-southeast-1'}
+  timeout: 30
   environment:
     SERVICE: ${self:service}
     STAGE: ${self:provider.stage}
@@ -42,7 +37,8 @@ provider:
           Resource: arn:aws:dynamodb:${self:provider.region}:*:*
 functions:
   server:
-    handler: apps/api/src/index.handler
+    # handler: apps/api/src/index.handler
+    handler: dist/apps/api/index.handler
     events:
       - http:
           cors: true
@@ -52,7 +48,7 @@ functions:
       NODE_ENV: production
 
 plugins:
-  - serverless-webpack
+  - serverless-dotenv-plugin
   - serverless-apigw-binary
   - serverless-api-cloudfront
   # - serverless-plugin-warmup
@@ -61,75 +57,143 @@ plugins:
 
 # remove the unnecessary packages to keep small upload size
 package:
-  individually: true
-  patterns:  
-    - '!node_modules/.bin/**'
-    - '!node_modules/.cache/**'
-    - '!node_modules/**/README*'
-    - '!node_modules/**/readme*'
-    - '!node_modules/**/Readme*'
-    - '!node_modules/**/LICENSE*'
-    - '!node_modules/**/License*'
-    - '!node_modules/**/license*'
-    - '!node_modules/**/test/**'
-    - '!node_modules/**/Test/**'
-    - '!node_modules/**/TEST/**'
-    - '!node_modules/**/aws-sdk/**'
-    - '!node_modules/aws-sdk/**'
-    - '!node_modules/@angular/**'
-    - '!node_modules/@angular-devkit/**'
-    - '!node_modules/@babel/**'
-    - '!node_modules/browserify*/**'
-    - '!node_modules/**/*.css'
-    - '!node_modules/**/test/**'
-    - '!node_modules/**/example*/**'
-    - '!node_modules/**/Example*/**'
-    - '!node_modules/**/EXAMPLE*/**'
-    - '!node_modules/**/History*'
-    - '!node_modules/**/History*'
-    - '!node_modules/**/HISTORY*'
-    - '!node_modules/**/Changelog*'
-    - '!node_modules/**/changelog*'
-    - '!node_modules/**/CHANGELOG*'
-    - '!node_modules/**/CHANGES*'
-    - '!node_modules/**/Changes*'
-    - '!node_modules/**/changes*'
-    - '!node_modules/**/Makefile*'
-    - '!node_modules/**/makefile*'
-    - '!node_modules/**/SECURITY*'
-    - '!node_modules/**/Security*'
-    - '!node_modules/**/security*'
-    - '!node_modules/**/types.d.ts'
-    - '!node_modules/**/*.ts'
-    - '!.vscode/**'
-    - '!e2e/**'
-    - '!ux-testing/**'
-    - '!.gitignore'
-    - '!angular.json'
-    - '!README.md'
-    - '!karma.conf.js'
-    - '!protractor.conf.js'
-    - '!rename_images.js'
-    - '!SECURITY.md'
-    - '!server.ts'
-    - '!tsconfig.json'
-    - '!tslint.json'
-    - '!.cache/**'
-    - '!.gitattributes'
-    - '!.yarnclean'
-    - '!.DS_Store'
-    - '!tsconfig.base.json'
-    - '!package.json'
-    - '!package-lock.json'
-    - '!browserlist'
-    - '!credentials.json'
+  exclude:
+    - node_modules/**
+    - .angular/**
+    - .vscode/**
+    - tools/**
+    - ./.yarnclean
+    - ./angular.json
+    - ./handler.js
+    - package.json
+    - README.md
+    - tsconfig.*
+    - .dynamodb/**
+    - '@types/**'
+    - apps/**
+    - libs/**
+    - tools
+    - ./.editorconfig
+    - ./.eslint*
+    - ./.prett*
+    - ./decorate*
+    - ./graphql.schema.json
+    - ./jest.config.js
+    - ./jest.preset.js
+    - ./migrations.json
+    - ./nx.json
+    - ./serverless*
+    - ./shared-local*
+    - ./webpack*
+    - ./yarn.lock
+    - ./yc-proxy.js
+  # individually: true
+  # exclude:
+  #   - .git/**
+  #   - src/**
+  #   - tests/**
+  #   - nodemon.json
+  #   - README.md
+  #   - node_modules/typescript/**
+  #   - node_modules/@types/**
+  #   - node_modules/.cache/**
+  #   - cypress/**
+  #   - ./*.e2e.*
+  # excludeDevDependencies: true
+  # individually: true
+  # patterns:  
+  #   - '!node_modules/.bin/**'
+  #   - '!node_modules/.cache/**'
+  #   - '!node_modules/**/README*'
+  #   - '!node_modules/**/readme*'
+  #   - '!node_modules/**/Readme*'
+  #   - '!node_modules/**/LICENSE*'
+  #   - '!node_modules/**/License*'
+  #   - '!node_modules/**/license*'
+  #   - '!node_modules/**/Test/**'
+  #   - '!node_modules/**/TEST/**'
+  #   - '!node_modules/**/aws-sdk/**'
+  #   - '!node_modules/aws-sdk/**'
+  #   - '!node_modules/@angular/**'
+  #   - '!node_modules/@angular-devkit/**'
+  #   - '!node_modules/@babel/**'
+  #   - '!node_modules/browserify*/**'
+  #   - '!node_modules/**/*.css'
+  #   - '!node_modules/**/example*/**'
+  #   - '!node_modules/**/Example*/**'
+  #   - '!node_modules/**/EXAMPLE*/**'
+  #   - '!node_modules/**/History*'
+  #   - '!node_modules/**/History*'
+  #   - '!node_modules/**/HISTORY*'
+  #   - '!node_modules/**/Changelog*'
+  #   - '!node_modules/**/changelog*'
+  #   - '!node_modules/**/CHANGELOG*'
+  #   - '!node_modules/**/CHANGES*'
+  #   - '!node_modules/**/Changes*'
+  #   - '!node_modules/**/changes*'
+  #   - '!node_modules/**/Makefile*'
+  #   - '!node_modules/**/makefile*'
+  #   - '!node_modules/**/SECURITY*'
+  #   - '!node_modules/**/Security*'
+  #   - '!node_modules/**/security*'
+  #   - '!node_modules/**/types.d.ts'
+  #   - '!node_modules/**/*.ts'
+  #   - '!.vscode/**'
+  #   - '!e2e/**'
+  #   - '!ux-testing/**'
+  #   - '!.gitignore'
+  #   - '!angular.json'
+  #   - '!README.md'
+  #   - '!karma.conf.js'
+  #   - '!protractor.conf.js'
+  #   - '!rename_images.js'
+  #   - '!SECURITY.md'
+  #   - '!server.ts'
+  #   - '!tsconfig.json'
+  #   - '!tslint.json'
+  #   - '!.cache/**'
+  #   - '!.gitattributes'
+  #   - '!.yarnclean'
+  #   - '!.DS_Store'
+  #   - '!tsconfig.base.json'
+  #   - '!package.json'
+  #   - '!package-lock.json'
+  #   - '!browserlist'
+  #   - '!credentials.json'
+  #   - '!*.ts'
+  #   - '!*.txt'
+  #   - '!*.mjs'
 
 custom:
-  webpack:
-    webpackConfig: 'webpack.config.js'
-    includeModules: true
-    packager: 'yarn'
-    packExternalModulesMaxBuffer: 204800 
+  # serverlessPluginTypescript:
+  #   tsConfigFileLocation: './apps/api/tsconfig.app.json'
+  # webpack:
+  #   webpackConfig: 'webpack.config.js'
+  #   packager: yarn
+  #   excludeFiles: '**/*test*'
+  #   includeModules:
+  #       forceExclude:
+  #           - 'aws-sdk'
+  #   keepOutputDirectory: true
+  #   concurrency: 1
+    # packExternalModulesMaxBuffer: 204800 
+  # bundle:
+  #   concurrency: 5
+  #   linting: false
+  #   disableForkTsChecker: true
+  #   packager: yarn
+  #   stats: true
+  #   generateStatsFiles: true
+  #   # tsConfig: "tsconfig.json"
+  #   externals: 
+  #     - '@nestjs/*'
+  #     - 'apollo-server-express'
+  #   forceInclude:                   # Optional list of NPM packages that need to be included
+  #     - '@apollo'
+  #     - '@apollographql'
+  #     - '@nestjs'
+  #     - 'ws'
+    # packExternalModulesMaxBuffer: 204800
   apigwBinary: # Library to add support for api gateway binary types
     types:
       - '*/*'

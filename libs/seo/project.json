@@ -1,11 +1,14 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/seo/src",
   "prefix": "tribes",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/seo"],
+      "outputs": [
+        "coverage/libs/seo"
+      ],
       "options": {
         "jestConfig": "libs/seo/jest.config.ts",
         "passWithNoTests": true
@@ -14,7 +17,10 @@
     "lint": {
       "executor": "@nrwl/linter:eslint",
       "options": {
-        "lintFilePatterns": ["libs/seo/**/*.ts", "libs/seo/**/*.html"]
+        "lintFilePatterns": [
+          "libs/seo/**/*.ts",
+          "libs/seo/**/*.html"
+        ]
       }
     }
   },

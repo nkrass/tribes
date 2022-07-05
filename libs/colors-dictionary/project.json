@@ -1,11 +1,14 @@
 {
+  "$schema": "../../node_modules/nx/schemas/project-schema.json",
   "projectType": "library",
   "sourceRoot": "libs/colors-dictionary/src",
   "prefix": "tribes",
   "targets": {
     "test": {
       "executor": "@nrwl/jest:jest",
-      "outputs": ["coverage/libs/colors-dictionary"],
+      "outputs": [
+        "coverage/libs/colors-dictionary"
+      ],
       "options": {
         "jestConfig": "libs/colors-dictionary/jest.config.js",
         "passWithNoTests": true

@@ -28,7 +28,7 @@ export class SocialLuckydayComponent implements OnInit, OnDestroy {
     this.seo.currentRouteData$
     .pipe(takeUntil(this.unsubscribe$))
     .subscribe(data => {
-      this.seo.setTitle('❤️Твой лучший день - сегодня! 🛍TRIBES ® - Больше своего времени')
+      this.seo.setTitle('❤️Твой лучший день - сегодня! 🛍TRIBES ® - для Ярких и Смелых')
       this.cdr.markForCheck()
     })
   }

@@ -6,8 +6,8 @@
 export const environment = {
   production: false,
   port: 4200,
-  apiUrl: "https://192.168.100.12/api/v1/",
-  graphqlUrl: "http://192.168.100.12/graphql",
+  apiUrl: "http://localhost/api/v1/",
+  graphqlUrl: "http://localhost/graphql",
   cdnUrl: "https://cdn.mytribes.ru",
   cdn2Url: "https://cdn2.mytribes.ru",
   cdnBucket: "cdn.mytribes.ru",

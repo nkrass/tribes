@@ -20,7 +20,6 @@ export async function handler (
   context,
   callback,
 ) {
-  console.log('we are here')
   if (!cachedServer) {
     cachedServer = await bootstrapServer();
   }
